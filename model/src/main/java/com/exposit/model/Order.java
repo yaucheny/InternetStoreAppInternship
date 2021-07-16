@@ -10,7 +10,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import java.time.LocalDate;
-import java.util.Map;
+import java.util.List;
 
 public class Order extends AEntity {
 
@@ -26,28 +26,26 @@ public class Order extends AEntity {
 
     private Integer priceOfPurchase;
     private Customer customer;
-
-    private Map<Product, Integer> mapOfGoods;
+    private List<OrderItem> orderItems;
     private Long days;
 
-    public Order(LocalDate dateOfOrder, LocalDate dateOfDelivery, Integer priceOfPurchase, Customer customer, Map<Product, Integer> mapOfGoods) {
+    public Order(LocalDate dateOfOrder, LocalDate dateOfDelivery, Integer priceOfPurchase, Customer customer, List<OrderItem> orderItems) {
         this.dateOfOrder = dateOfOrder;
         this.dateOfDelivery = dateOfDelivery;
         this.priceOfPurchase = priceOfPurchase;
         this.customer = customer;
-        this.mapOfGoods = mapOfGoods;
+        this.orderItems = orderItems;
     }
 
-    public Order(Long days, Customer customer, Map<Product, Integer> mapOfGoods) {
+    public Order(Long days, Customer customer, List<OrderItem> orderItems) {
         this.customer = customer;
-        this.mapOfGoods = mapOfGoods;
+        this.orderItems = orderItems;
         this.days = days;
     }
 
     @JsonCreator
     public Order(
-            @JsonProperty("id")
-                    Long id,
+            @JsonProperty("id") Long id,
             @JsonProperty("dateOfOrder")
                     LocalDate dateOfOrder,
             @JsonProperty("dateOfDelivery")
@@ -56,9 +54,8 @@ public class Order extends AEntity {
                     Integer priceOfPurchase,
             @JsonProperty("customer")
                     Customer customer,
-            @JsonDeserialize(keyUsing = MyProductDeserializer.class)
-            @JsonProperty("mapOfGoods")
-                    Map<Product, Integer> mapOfGoods,
+            @JsonProperty("orderItems")
+                   List <OrderItem> orderItems,
             @JsonProperty("Long days")
                     Long days) {
         super(id);
@@ -66,7 +63,7 @@ public class Order extends AEntity {
         this.dateOfDelivery = dateOfDelivery;
         this.priceOfPurchase = priceOfPurchase;
         this.customer = customer;
-        this.mapOfGoods = mapOfGoods;
+        this.orderItems = orderItems;
         this.days = days;
     }
 
@@ -105,12 +102,12 @@ public class Order extends AEntity {
         this.customer = customer;
     }
 
-    public Map<Product, Integer> getMapOfGoods() {
-        return mapOfGoods;
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
-    public void setMapOfGoods(Map<Product, Integer> mapOfGoods) {
-        this.mapOfGoods = mapOfGoods;
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
     public Long getDays() {
@@ -129,7 +126,7 @@ public class Order extends AEntity {
                 ", dateOfDelivery=" + dateOfDelivery +
                 ", priceOfPurchase=" + priceOfPurchase +
                 ", customer=" + customer +
-                ", mapOfGoods=" + mapOfGoods +
+                ", orderItems=" + orderItems +
                 '}';
     }
 }

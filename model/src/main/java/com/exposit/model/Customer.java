@@ -7,7 +7,7 @@ public class Customer extends AEntity {
 
     private String firstName;
     private String lastName;
-    private String customerAdress;
+    private String customerAddress;
     private String customerEmail;
     @JsonCreator
     public Customer(@JsonProperty("id")Long id,
@@ -18,14 +18,14 @@ public class Customer extends AEntity {
         super(id);
         this.firstName = firstName;
         this.lastName = lastName;
-        this.customerAdress = customerAddress;
+        this.customerAddress = customerAddress;
         this.customerEmail = customerEmail;
     }
 
-    public Customer(String firstName, String lastName, String customerAdress, String customerEmail) {
+    public Customer(String firstName, String lastName, String customerAddress, String customerEmail) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.customerAdress = customerAdress;
+        this.customerAddress = customerAddress;
         this.customerEmail = customerEmail;
     }
 
@@ -45,12 +45,12 @@ public class Customer extends AEntity {
         this.lastName = lastName;
     }
 
-    public String getCustomerAdress() {
-        return customerAdress;
+    public String getCustomerAddress() {
+        return customerAddress;
     }
 
-    public void setCustomerAdress(String customerAdress) {
-        this.customerAdress = customerAdress;
+    public void setCustomerAddress(String customerAddress) {
+        this.customerAddress = customerAddress;
     }
 
     public String getCustomerEmail() {
@@ -67,7 +67,7 @@ public class Customer extends AEntity {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", customerAdress='" + customerAdress + '\'' +
+                ", customerAdress='" + customerAddress + '\'' +
                 ", customerEmail='" + customerEmail + '\'' +
                                 '}';
     }
