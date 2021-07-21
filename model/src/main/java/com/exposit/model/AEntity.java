@@ -1,20 +1,12 @@
 package com.exposit.model;
 
-public class AEntity {
-    Long id;
+import lombok.*;
 
-    public AEntity(Long id) {
-        this.id = id;
-    }
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public abstract class AEntity {
+    protected Long id;
 
-    public AEntity() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

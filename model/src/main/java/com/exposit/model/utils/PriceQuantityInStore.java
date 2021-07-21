@@ -3,9 +3,10 @@ package com.exposit.model.utils;
 public class PriceQuantityInStore {
     private Integer goodsPrice;
     private Integer goodsQuantity;
-    private  String storeName;
+    private String storeName;
 
-    public PriceQuantityInStore(String storeName, Integer goodsQuantity,Integer goodsPrice ) {
+    public PriceQuantityInStore(String storeName,
+                                Integer goodsQuantity, Integer goodsPrice) {
         this.goodsPrice = goodsPrice;
         this.goodsQuantity = goodsQuantity;
         this.storeName = storeName;
@@ -13,8 +14,9 @@ public class PriceQuantityInStore {
 
     @Override
     public String toString() {
-        return  "storeName='" + storeName +
-                ", goodsQuantity=" + goodsQuantity +
-                ", goodsPrice=" + goodsPrice ;
+        return "storeName='"
+                + storeName + "\n"
+                + ", goodsQuantity=" + goodsQuantity + "\n"
+                + ", goodsPrice=" + goodsPrice;
     }
 }
