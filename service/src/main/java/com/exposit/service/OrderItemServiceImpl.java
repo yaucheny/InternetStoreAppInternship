@@ -16,7 +16,13 @@ import java.util.List;
 @Log4j
 public class OrderItemServiceImpl implements OrderItemService {
 
-    private static final String PROPERTY = DaoPropertiesHandler.getProperty("dao.serialization.config_dao_impl").orElseThrow(() -> new ServiceException("Serialization path not found"));;
+    private static final String PROPERTY;
+
+    static {
+        PROPERTY = DaoPropertiesHandler.getProperty("dao.serialization.config_dao_impl")
+                .orElseThrow(() -> new ServiceException("Serialization path not found"));
+    }
+
     private final OrderItemDao orderItemDao;
     private static OrderItemServiceImpl instance;
     private static final String CAN_NOT_DELETE_ORDER_ITEM

@@ -1,4 +1,4 @@
-package com.exposit.dao.daoJson;
+package com.exposit.dao.daojson;
 
 import com.exposit.api.dao.GenericDao;
 import com.exposit.exceptions.DaoException;

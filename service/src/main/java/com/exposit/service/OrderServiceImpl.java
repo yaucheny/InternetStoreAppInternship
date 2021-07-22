@@ -19,7 +19,13 @@ import java.util.List;
 @Log4j
 public class OrderServiceImpl implements OrderService {
 
-    private static final String PROPERTY = DaoPropertiesHandler.getProperty("dao.serialization.config_dao_impl").orElseThrow(() -> new ServiceException("Serialization path not found"));;
+    private static final String PROPERTY;
+
+    static {
+        PROPERTY = DaoPropertiesHandler.getProperty("dao.serialization.config_dao_impl")
+                .orElseThrow(() -> new ServiceException("Serialization path not found"));
+    }
+
     private final OrderDao orderDao;
     private static OrderServiceImpl instance;
     private static final String CAN_NOT_DELETE_ORDER = "can not delete order";
@@ -30,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
 
     private OrderServiceImpl() {
         orderDao = OrderDaoFactory.getOrderDaoFromProperties(PROPERTY);
-            }
+    }
 
     public static OrderServiceImpl getInstance() {
         if (instance == null) {
@@ -49,9 +55,9 @@ public class OrderServiceImpl implements OrderService {
             order.setDateOfDelivery(dateOfOrder.plusDays(days));
             order.setPriceOfPurchase(instance.priceOfBusket(orderItemList));
             order.setCustomer(customer);
-            if (checkQuantity(orderItemList)) {
-                order.setOrderItemList(orderItemList);
-            }
+            checkQuantity(orderItemList);
+            order.setOrderItemList(orderItemList);
+
             instance.changeQuantityAfterPurchase(orderItemList);
             orderDao.save(order);
             return order;
@@ -82,9 +88,9 @@ public class OrderServiceImpl implements OrderService {
                 order.setDateOfOrder(dateOfOrder);
                 order.setDateOfDelivery(dateOfOrder.plusDays(days));
                 order.setCustomer(customer);
-                if (checkQuantity(orderItemList)) {
-                    order.setOrderItemList(orderItemList);
-                }
+                checkQuantity(orderItemList);
+                order.setOrderItemList(orderItemList);
+
                 order.setPriceOfPurchase(instance.priceOfBusket(orderItemList));
                 instance.changeQuantityAfterPurchase(orderItemList);
                 orderDao.update(id, order);
@@ -123,7 +129,7 @@ public class OrderServiceImpl implements OrderService {
         return priceOfBusket;
     }
 
-    private boolean checkQuantity(List<OrderItemEntity> orderItemList) {
+    private void checkQuantity(List<OrderItemEntity> orderItemList) {
         for (OrderItemEntity orderItem : orderItemList) {
             Integer quantityList = orderItem.getQuantity();
             Integer quantityProduct = orderItem.getShopProduct().getQuantity();
@@ -132,7 +138,6 @@ public class OrderServiceImpl implements OrderService {
                 throw new ServiceException(NOT_ENOUGH_PRODUCTS);
             }
         }
-        return true;
     }
 
     private void changeQuantityAfterPurchase(List<OrderItemEntity> orderItemList) {

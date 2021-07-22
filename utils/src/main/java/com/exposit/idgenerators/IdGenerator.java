@@ -1,6 +1,6 @@
-package com.exposit.idGenerators;
+package com.exposit.idgenerators;
 
-public class IdGenerator {
+public final class IdGenerator {
 
     private static Long orderId = 1L;
     private static Long customerId = 1L;
@@ -9,6 +9,9 @@ public class IdGenerator {
     private static Long shopProductId = 1L;
     private static Long orderItemId = 1L;
     private static Long categoryId = 1L;
+
+    private IdGenerator() {
+    }
 
     public static Long generateOrderId() {
         return orderId++;

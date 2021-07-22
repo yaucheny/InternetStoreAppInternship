@@ -1,29 +1,28 @@
-package com.exposit.dao.daoJson;
+package com.exposit.dao.daoxml;
 
 import com.exposit.api.dao.OrderItemDao;
-import com.exposit.idGenerators.IdGenerator;
-import com.exposit.marshelling.json.MarshallingOrderItemJson;
+import com.exposit.idgenerators.IdGenerator;
+import com.exposit.marshelling.xml.MarshallingOrderItemXml;
 import com.exposit.model.OrderItemEntity;
 
 import java.util.List;
 
-public class OrderItemDaoJsonImpl extends AbstractDaoJsonImpl<OrderItemEntity>
+public class OrderItemDaoXmlImpl extends AbstractDaoXmlImpl<OrderItemEntity>
         implements OrderItemDao {
 
-    private static OrderItemDaoJsonImpl instance;
+    private static OrderItemDaoXmlImpl instance;
 
-    private OrderItemDaoJsonImpl() {
-        List<OrderItemEntity> orderItem = MarshallingOrderItemJson
+    private OrderItemDaoXmlImpl() {
+        List<OrderItemEntity> orderItem = MarshallingOrderItemXml
         .deSerializeOrderItem();
         for (OrderItemEntity entity : orderItem) {
- //           entity.setId(IdGenerator.generateOrderItemId());
             this.save(entity);
         }
     }
 
     public static OrderItemDao getInstance() {
         if (instance == null) {
-            instance = new OrderItemDaoJsonImpl();
+            instance = new OrderItemDaoXmlImpl();
         }
         return instance;
     }

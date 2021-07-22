@@ -18,6 +18,9 @@ public class MarshallingShopProductJson {
     private static final String PATH_TO_FILE
             = "utils/src/main/resources/shopProduct.json";
 
+    private MarshallingShopProductJson() {
+    }
+
     public static void serializeShopProduct(List<ShopProductEntity> entities) {
         try {
             MAPPER.writeValue(new File(

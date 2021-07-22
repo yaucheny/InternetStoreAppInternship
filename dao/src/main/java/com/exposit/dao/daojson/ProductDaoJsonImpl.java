@@ -1,32 +1,30 @@
-package com.exposit.dao.daoXml;
+package com.exposit.dao.daojson;
 
 import com.exposit.api.dao.ProductDao;
-import com.exposit.idGenerators.IdGenerator;
-import com.exposit.marshelling.Xml.MarshallingProductXml;
+import com.exposit.idgenerators.IdGenerator;
 import com.exposit.marshelling.json.MarshallingProductJson;
-import com.exposit.model.ProductEntity;
+import com.exposit.model.*;
 import lombok.extern.log4j.Log4j;
 
 import java.util.List;
 
 @Log4j
-public class ProductDaoXmlImpl extends AbstractDaoXmlImpl<ProductEntity>
+public class ProductDaoJsonImpl extends AbstractDaoJsonImpl<ProductEntity>
         implements ProductDao {
 
     private static ProductDao instance;
 
-    private ProductDaoXmlImpl() {
-        List<ProductEntity> product = MarshallingProductXml
+    private ProductDaoJsonImpl() {
+        List<ProductEntity> product = MarshallingProductJson
         .deSerializeProduct();
         for (ProductEntity entity : product) {
-  //          entity.setId(IdGenerator.generateProductId());
             this.save(entity);
         }
     }
 
     public static ProductDao getInstance() {
         if (instance == null) {
-            instance = new ProductDaoXmlImpl();
+            instance = new ProductDaoJsonImpl();
         }
         return instance;
     }

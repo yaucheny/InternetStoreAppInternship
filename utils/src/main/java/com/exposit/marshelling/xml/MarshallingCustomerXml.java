@@ -1,7 +1,6 @@
-package com.exposit.marshelling.Xml;
+package com.exposit.marshelling.xml;
 
 import com.exposit.model.CustomerEntity;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import java.io.File;
@@ -18,6 +17,9 @@ public final class MarshallingCustomerXml {
     private static final XmlMapper MAPPER = new XmlMapper();
     private static final String PATH_TO_FILE
             = "utils/src/main/resources/customer.xml";
+
+    private MarshallingCustomerXml() {
+    }
 
     public static void serializeCustomer(List<CustomerEntity> entities) {
         try {

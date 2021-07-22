@@ -16,7 +16,12 @@ import java.util.List;
 @Log4j
 public class StoreServiceImpl implements IStoreService {
 
-    private static final String PROPERTY = DaoPropertiesHandler.getProperty("dao.serialization.config_dao_impl").orElseThrow(() -> new ServiceException("Serialization path not found"));;
+    private static final String PROPERTY;
+
+    static {
+        PROPERTY = DaoPropertiesHandler.getProperty("dao.serialization.config_dao_impl")
+                .orElseThrow(() -> new ServiceException("Serialization path not found"));
+    }
     private final StoreDao storeDao;
     private static StoreServiceImpl instance;
     private static final String CAN_NOT_DELETE_STORE

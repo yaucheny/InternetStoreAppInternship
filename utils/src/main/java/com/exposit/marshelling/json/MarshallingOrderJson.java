@@ -18,6 +18,9 @@ public class MarshallingOrderJson {
     private static final String PATH_TO_FILE
             = "utils/src/main/resources/order.json";
 
+    private MarshallingOrderJson() {
+    }
+
     public static void serializeOrder(List<OrderEntity> entities) {
         try {
             MAPPER.writeValue(new File(

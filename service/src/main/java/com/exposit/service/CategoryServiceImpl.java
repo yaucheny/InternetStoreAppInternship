@@ -12,14 +12,18 @@ import lombok.extern.log4j.Log4j;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Log4j
 public class CategoryServiceImpl implements CategoryService {
 
-    private static final String PROPERTY = DaoPropertiesHandler.getProperty("dao.serialization.config_dao_impl")
-            .orElseThrow(() -> new ServiceException("Serialization path not found"));
-    ;
+    private static final String PROPERTY;
+
+    static {
+        PROPERTY = DaoPropertiesHandler
+                .getProperty("dao.serialization.config_dao_impl")
+                .orElseThrow(() -> new ServiceException("Serialization path not found"));
+    }
+
     private final CategoryDao categoryDao;
     private static CategoryServiceImpl instance;
     private static final String CAN_NOT_DELETE_CATEGORY

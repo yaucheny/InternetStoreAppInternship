@@ -14,15 +14,14 @@ public final class DaoPropertiesHandler {
 
     private static final String FAILED_READ_PROPERTIES_ERROR_MESSAGE = " Failed to read properties";
     private static Properties properties;
-    private static final String PROPERTIES_FILE_PATH ="utils/src/main/resources/dao.properties";
-
+    private static final String PROPERTIES_FILE_PATH = "utils/src/main/resources/dao.properties";
 
     private DaoPropertiesHandler() {
 
     }
 
-    public static Optional<String>getProperty(String key){
-        if (properties==null){
+    public static Optional<String> getProperty(String key) {
+        if (properties == null) {
             loadProperties();
         }
         return Optional.ofNullable(properties.getProperty(key));

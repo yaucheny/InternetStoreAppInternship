@@ -1,7 +1,7 @@
-package com.exposit.dao.daoJson;
+package com.exposit.dao.daojson;
 
 import com.exposit.api.dao.CustomerDao;
-import com.exposit.idGenerators.IdGenerator;
+import com.exposit.idgenerators.IdGenerator;
 import com.exposit.marshelling.json.MarshallingCustomerJson;
 import com.exposit.model.CustomerEntity;
 
@@ -16,7 +16,6 @@ public class CustomerDaoJsonImpl extends AbstractDaoJsonImpl<CustomerEntity> imp
         List<CustomerEntity> customer = MarshallingCustomerJson
         .deSerializeCustomer();
         for (CustomerEntity entity : customer) {
- //           entity.setId(IdGenerator.generateCustomerId());
             this.save(entity);
         }
     }

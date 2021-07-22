@@ -1,30 +1,28 @@
-package com.exposit.dao.daoXml;
+package com.exposit.dao.daojson;
 
 import com.exposit.api.dao.StoreDao;
-import com.exposit.idGenerators.IdGenerator;
-import com.exposit.marshelling.Xml.MarshallingStoreXml;
+import com.exposit.idgenerators.IdGenerator;
 import com.exposit.marshelling.json.MarshallingStoreJson;
 import com.exposit.model.StoreEntity;
 
 import java.util.List;
 
 
-public class StoreDaoXmlImpl extends AbstractDaoXmlImpl<StoreEntity> implements StoreDao {
+public class StoreDaoJsonImpl extends AbstractDaoJsonImpl<StoreEntity> implements StoreDao {
 
     private static StoreDao instance;
 
-    private StoreDaoXmlImpl() {
+    private StoreDaoJsonImpl() {
 
-        List<StoreEntity> store = MarshallingStoreXml.deSerializeStore();
+    List<StoreEntity> store = MarshallingStoreJson.deSerializeStore();
         for (StoreEntity entity : store) {
- //           entity.setId(IdGenerator.generateStoreId());
             this.save(entity);
         }
     }
 
     public static StoreDao getInstance() {
         if (instance == null) {
-            instance = new StoreDaoXmlImpl();
+            instance = new StoreDaoJsonImpl();
         }
         return instance;
     }

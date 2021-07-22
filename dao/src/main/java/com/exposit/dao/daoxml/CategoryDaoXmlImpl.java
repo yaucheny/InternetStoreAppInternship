@@ -1,28 +1,27 @@
-package com.exposit.dao.daoJson;
+package com.exposit.dao.daoxml;
 
 import com.exposit.api.dao.CategoryDao;
-import com.exposit.idGenerators.IdGenerator;
-import com.exposit.marshelling.json.MarshallingCategoryJson;
+import com.exposit.idgenerators.IdGenerator;
+import com.exposit.marshelling.xml.MarshallingCategoryXml;
 import com.exposit.model.CategoryEntity;
 
 import java.util.List;
 
-public class CategoryDaoJsonImpl extends AbstractDaoJsonImpl<CategoryEntity> implements CategoryDao {
+public class CategoryDaoXmlImpl extends AbstractDaoXmlImpl<CategoryEntity> implements CategoryDao {
 
     private static CategoryDao instance;
 
-    private CategoryDaoJsonImpl() {
-        List<CategoryEntity> category = MarshallingCategoryJson
+    private CategoryDaoXmlImpl() {
+        List<CategoryEntity> category = MarshallingCategoryXml
         .deSerializeCategory();
         for (CategoryEntity entity : category) {
-  //          entity.setId(IdGenerator.generateCategoryId());
             this.save(entity);
         }
     }
 
     public static CategoryDao getInstance() {
         if (instance == null) {
-            instance = new CategoryDaoJsonImpl();
+            instance = new CategoryDaoXmlImpl();
         }
         return instance;
     }

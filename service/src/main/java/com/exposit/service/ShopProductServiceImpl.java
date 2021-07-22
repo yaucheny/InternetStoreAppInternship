@@ -24,12 +24,26 @@ import java.util.stream.Collectors;
 @Log4j
 public class ShopProductServiceImpl implements ShopProductService {
 
-    private static final String PROPERTY = DaoPropertiesHandler.getProperty("dao.serialization.config_dao_impl").orElseThrow(() -> new ServiceException("Serialization path not found"));;
+    private static final String PROPERTY;
+    private static final String NAME = "name";
+    private static final String PRODUCER = "producer";
+    private static final String PRICE = "price";
+    private static final String QUANTITY = "quantity";
+    private static final String STORE = "store";
+    private static final String DESCRIPTION = "description";
+
+    static {
+        PROPERTY = DaoPropertiesHandler.getProperty("dao.serialization.config_dao_impl")
+                .orElseThrow(() -> new ServiceException("Serialization path not found"));
+    }
+
     private final ShopProductDao shopProductDao;
     private final CategoryDao categoryDao;
     private static ShopProductServiceImpl instance;
     private static final String FALSE_CATEGORY_NAME
             = "False category name";
+    private static final String FALSE_ATTRIBUTE_NAME
+            = "False attribute name";
     private static final String CAN_NOT_DELETE_SHOP_PRODUCT
             = "can not delete shopProduct";
     private static final String CAN_NOT_UPDATE_SHOP_PRODUCT
@@ -105,16 +119,16 @@ public class ShopProductServiceImpl implements ShopProductService {
     @Override
     public List<ShopProductEntity> getGoodsFromCategory(String category) {
         List<CategoryEntity> categories = categoryDao.getAll();
-        CategoryEntity cat = categories.stream()
+        CategoryEntity categoryEntity = categories.stream()
                 .filter(p -> p.getName().equals(category)).findAny()
                 .orElse(null);
         List<ShopProductEntity> shopProducts = shopProductDao.getAll();
-        if (cat != null) {
+        if (categoryEntity != null) {
             return shopProducts.stream()
-                    .filter(p -> p.getProduct().getCategoryList().contains(cat))
+                    .filter(p -> p.getProduct().getCategoryList().contains(categoryEntity))
                     .collect(Collectors.toList());
         }
-        throw new ServiceException("No such category");
+        throw new ServiceException(FALSE_CATEGORY_NAME);
     }
 
     @Override
@@ -122,31 +136,35 @@ public class ShopProductServiceImpl implements ShopProductService {
     findByOneAttribute(String value, String attribute) {
         List<ShopProductEntity> goods = shopProductDao.getAll();
         switch (attribute) {
-            case ("productName"):
+            case (NAME):
                 return goods.stream()
                         .filter(p -> p.getProduct().getName().equals(value))
                         .collect(Collectors.toList());
-            case ("productProducer"):
+            case (PRODUCER):
                 return goods.stream()
                         .filter(p -> p.getProduct().getProducer().equals(value))
                         .collect(Collectors.toList());
-            case ("productPrice"):
+            case (PRICE):
                 return goods.stream()
                         .filter(p -> p.getPrice()
                                 .equals(java.lang.Integer.parseInt(value)))
                         .collect(Collectors.toList());
-            case ("productQuantity"):
+            case (QUANTITY):
                 return goods.stream()
                         .filter(p -> p.getQuantity()
                                 .equals(java.lang.Integer.parseInt(value)))
                         .collect(Collectors.toList());
-            case ("storeName"):
+            case (STORE):
                 return goods.stream()
                         .filter(p -> p.getStore().getName().equals(value))
                         .collect(Collectors.toList());
+            case (DESCRIPTION):
+                return goods.stream()
+                        .filter(p -> p.getDescription().equals(value))
+                        .collect(Collectors.toList());
             default:
-                log.warn(FALSE_CATEGORY_NAME);
-                throw new DaoException(FALSE_CATEGORY_NAME);
+                log.warn(FALSE_ATTRIBUTE_NAME);
+                throw new DaoException(FALSE_ATTRIBUTE_NAME);
         }
     }
 
@@ -156,180 +174,256 @@ public class ShopProductServiceImpl implements ShopProductService {
             String value2, String attribute2) {
         List<ShopProductEntity> goods = shopProductDao.getAll();
         switch (attribute2) {
-            case ("productName"):
+            case (NAME):
                 switch (attribute1) {
-                    case ("productProducer"):
+                    case (PRODUCER):
                         return goods.stream()
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value1))
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value2))
                                 .collect(Collectors.toList());
-                    case ("productPrice"):
+                    case (PRICE):
                         return goods.stream()
                                 .filter(p -> p.getPrice().equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value2))
                                 .collect(Collectors.toList());
-                    case ("productQuantity"):
+                    case (QUANTITY):
                         return goods.stream()
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value2))
                                 .collect(Collectors.toList());
-                    case ("storeName"):
+                    case (STORE):
                         return goods.stream()
                                 .filter(p -> p.getStore().getName()
                                         .equals(value1))
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                    case (DESCRIPTION):
+                        return goods.stream()
+                                .filter(p -> p.getDescription()
+                                        .equals(value1))
+                                .filter(p -> p.getProduct().getName()
+                                        .equals(value2))
+                                .collect(Collectors.toList());
                     default:
-                        log.warn(FALSE_CATEGORY_NAME);
-                        throw new DaoException(FALSE_CATEGORY_NAME);
+                        log.warn(FALSE_ATTRIBUTE_NAME);
+                        throw new DaoException(FALSE_ATTRIBUTE_NAME);
                 }
-            case ("productProducer"):
+            case (PRODUCER):
                 switch (attribute1) {
-                    case ("productName"):
+                    case (NAME):
                         return goods.stream()
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value1))
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value2))
                                 .collect(Collectors.toList());
-                    case ("productPrice"):
+                    case (PRICE):
                         return goods.stream()
                                 .filter(p -> p.getPrice().equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value2))
                                 .collect(Collectors.toList());
-                    case ("productQuantity"):
+                    case (QUANTITY):
                         return goods.stream()
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value2))
                                 .collect(Collectors.toList());
-                    case ("storeName"):
+                    case (STORE):
                         return goods.stream()
                                 .filter(p -> p.getStore().getName()
                                         .equals(value1))
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                    case (DESCRIPTION):
+                        return goods.stream()
+                                .filter(p -> p.getDescription()
+                                        .equals(value1))
+                                .filter(p -> p.getProduct().getProducer()
+                                        .equals(value2))
+                                .collect(Collectors.toList());
                     default:
-                        log.warn(FALSE_CATEGORY_NAME);
-                        throw new DaoException(FALSE_CATEGORY_NAME);
+                        log.warn(FALSE_ATTRIBUTE_NAME);
+                        throw new DaoException(FALSE_ATTRIBUTE_NAME);
                 }
-            case ("productPrice"):
+            case (PRICE):
                 switch (attribute1) {
-                    case ("productProducer"):
+                    case (PRODUCER):
                         return goods.stream()
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value1))
                                 .filter(p -> p.getPrice().equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
-                    case ("productName"):
+                    case (NAME):
                         return goods.stream()
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value1))
                                 .filter(p -> p.getPrice().equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
-                    case ("productQuantity"):
+                    case (QUANTITY):
                         return goods.stream()
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getPrice().equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
-                    case ("storeName"):
+                    case (STORE):
                         return goods.stream()
                                 .filter(p -> p.getStore().getName()
                                         .equals(value1))
                                 .filter(p -> p.getPrice().equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
+                    case (DESCRIPTION):
+                        return goods.stream()
+                                .filter(p -> p.getDescription()
+                                        .equals(value1))
+                                .filter(p -> p.getPrice().equals(java.lang.Integer
+                                        .parseInt(value2)))
+                                .collect(Collectors.toList());
                     default:
-                        log.warn(FALSE_CATEGORY_NAME);
-                        throw new DaoException(FALSE_CATEGORY_NAME);
+                        log.warn(FALSE_ATTRIBUTE_NAME);
+                        throw new DaoException(FALSE_ATTRIBUTE_NAME);
                 }
-            case ("productQuantity"):
+            case (QUANTITY):
                 switch (attribute1) {
-                    case ("productProducer"):
+                    case (PRODUCER):
                         return goods.stream()
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value1))
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
-                    case ("productPrice"):
+                    case (PRICE):
                         return goods.stream()
                                 .filter(p -> p.getPrice().equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
-                    case ("productQuantity"):
+                    case (NAME):
                         return goods.stream()
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value1))
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
-                    case ("storeName"):
+                    case (STORE):
                         return goods.stream()
                                 .filter(p -> p.getStore().getName()
                                         .equals(value1))
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
+                    case (DESCRIPTION):
+                        return goods.stream()
+                                .filter(p -> p.getDescription()
+                                        .equals(value1))
+                                .filter(p -> p.getQuantity().equals(java.lang.Integer
+                                        .parseInt(value2)))
+                                .collect(Collectors.toList());
                     default:
-                        log.warn(FALSE_CATEGORY_NAME);
-                        throw new DaoException(FALSE_CATEGORY_NAME);
+                        log.warn(FALSE_ATTRIBUTE_NAME);
+                        throw new DaoException(FALSE_ATTRIBUTE_NAME);
                 }
-            case ("storeName"):
+            case (STORE):
                 switch (attribute1) {
-                    case ("productProducer"):
+                    case (PRODUCER):
                         return goods.stream()
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value1))
                                 .filter(p -> p.getStore().getName()
                                         .equals(value2))
                                 .collect(Collectors.toList());
-                    case ("productPrice"):
+                    case (PRICE):
                         return goods.stream()
                                 .filter(p -> p.getPrice().equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getStore().getName()
                                         .equals(value2))
                                 .collect(Collectors.toList());
-                    case ("productQuantity"):
+                    case (QUANTITY):
                         return goods.stream()
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getStore().getName()
-                                        .equals(value1))
+                                        .equals(value2))
                                 .collect(Collectors.toList());
-                    case ("storeName"):
+                    case (NAME):
                         return goods.stream()
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value1))
                                 .filter(p -> p.getStore().getName()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                    case (DESCRIPTION):
+                        return goods.stream()
+                                .filter(p -> p.getDescription()
+                                        .equals(value1))
+                                .filter(p -> p.getStore().getName()
+                                        .equals(value2))
+                                .collect(Collectors.toList());
                     default:
-                        log.warn(FALSE_CATEGORY_NAME);
-                        throw new DaoException(FALSE_CATEGORY_NAME);
+                        log.warn(FALSE_ATTRIBUTE_NAME);
+                        throw new DaoException(FALSE_ATTRIBUTE_NAME);
+                }
+            case (DESCRIPTION):
+                switch (attribute1) {
+                    case (PRODUCER):
+                        return goods.stream()
+                                .filter(p -> p.getProduct().getProducer()
+                                        .equals(value1))
+                                .filter(p -> p.getDescription()
+                                        .equals(value2))
+                                .collect(Collectors.toList());
+                    case (STORE):
+                        return goods.stream()
+                                .filter(p -> p.getStore().getName()
+                                        .equals(value1))
+                                .filter(p -> p.getDescription()
+                                        .equals(value2))
+                                .collect(Collectors.toList());
+                    case (NAME):
+                        return goods.stream()
+                                .filter(p -> p.getProduct().getName()
+                                        .equals(value1))
+                                .filter(p -> p.getDescription()
+                                        .equals(value2))
+                                .collect(Collectors.toList());
+                    case (PRICE):
+                        return goods.stream()
+                                .filter(p -> p.getPrice().equals(java.lang.Integer
+                                        .parseInt(value1)))
+                                .filter(p -> p.getDescription()
+                                        .equals(value2))
+                                .collect(Collectors.toList());
+                    case (QUANTITY):
+                        return goods.stream()
+                                .filter(p -> p.getQuantity().equals(java.lang.Integer
+                                        .parseInt(value1)))
+                                .filter(p -> p.getDescription()
+                                        .equals(value2))
+                                .collect(Collectors.toList());
+                    default:
+                        log.warn(FALSE_ATTRIBUTE_NAME);
+                        throw new DaoException(FALSE_ATTRIBUTE_NAME);
                 }
 
             default:
-                log.warn(FALSE_CATEGORY_NAME);
-                throw new DaoException(FALSE_CATEGORY_NAME);
+                log.warn(FALSE_ATTRIBUTE_NAME);
+                throw new DaoException(FALSE_ATTRIBUTE_NAME);
         }
     }
 

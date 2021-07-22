@@ -15,7 +15,13 @@ import java.util.List;
 @Log4j
 public class CustomerServiceImpl implements CustomerService {
 
-    private static final String PROPERTY = DaoPropertiesHandler.getProperty("dao.serialization.config_dao_impl").orElseThrow(() -> new ServiceException("Serialization path not found"));;
+    private static final String PROPERTY;
+
+    static {
+        PROPERTY = DaoPropertiesHandler.getProperty("dao.serialization.config_dao_impl")
+                .orElseThrow(() -> new ServiceException("Serialization path not found"));
+    }
+
     private final CustomerDao customerDao;
     private static CustomerServiceImpl instance;
     private static final String CAN_NOT_DELETE_CUSTOMER

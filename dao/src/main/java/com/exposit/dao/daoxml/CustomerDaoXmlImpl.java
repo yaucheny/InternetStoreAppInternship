@@ -1,9 +1,8 @@
-package com.exposit.dao.daoXml;
+package com.exposit.dao.daoxml;
 
 import com.exposit.api.dao.CustomerDao;
-import com.exposit.idGenerators.IdGenerator;
-import com.exposit.marshelling.Xml.MarshallingCustomerXml;
-import com.exposit.marshelling.json.MarshallingCustomerJson;
+import com.exposit.idgenerators.IdGenerator;
+import com.exposit.marshelling.xml.MarshallingCustomerXml;
 import com.exposit.model.CustomerEntity;
 
 import java.util.List;
@@ -17,7 +16,6 @@ public class CustomerDaoXmlImpl extends AbstractDaoXmlImpl<CustomerEntity> imple
         List<CustomerEntity> customer = MarshallingCustomerXml
         .deSerializeCustomer();
         for (CustomerEntity entity : customer) {
-  //          entity.setId(IdGenerator.generateCustomerId());
             this.save(entity);
         }
     }

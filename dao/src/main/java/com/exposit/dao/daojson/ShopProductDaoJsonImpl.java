@@ -1,8 +1,7 @@
-package com.exposit.dao.daoXml;
+package com.exposit.dao.daojson;
 
 import com.exposit.api.dao.ShopProductDao;
-import com.exposit.idGenerators.IdGenerator;
-import com.exposit.marshelling.Xml.MarshallingShopProductXml;
+import com.exposit.idgenerators.IdGenerator;
 import com.exposit.marshelling.json.MarshallingShopProductJson;
 import com.exposit.model.ShopProductEntity;
 
@@ -10,23 +9,22 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductEntity>
+public class ShopProductDaoJsonImpl extends AbstractDaoJsonImpl<ShopProductEntity>
         implements ShopProductDao {
 
     private static ShopProductDao instance;
 
-    private ShopProductDaoXmlImpl() {
-        List<ShopProductEntity> product = MarshallingShopProductXml
+    private ShopProductDaoJsonImpl() {
+        List<ShopProductEntity> product = MarshallingShopProductJson
                 .deSerializeShopProduct();
         for (ShopProductEntity entity : product) {
-   //         entity.setId(IdGenerator.generateShopProductId());
             this.save(entity);
         }
     }
 
     public static ShopProductDao getInstance() {
         if (instance == null) {
-            instance = new ShopProductDaoXmlImpl();
+            instance = new ShopProductDaoJsonImpl();
         }
         return instance;
     }

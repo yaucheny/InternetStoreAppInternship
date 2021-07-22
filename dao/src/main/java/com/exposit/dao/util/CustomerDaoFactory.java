@@ -1,8 +1,8 @@
 package com.exposit.dao.util;
 
 import com.exposit.api.dao.CustomerDao;
-import com.exposit.dao.daoJson.CustomerDaoJsonImpl;
-import com.exposit.dao.daoXml.CustomerDaoXmlImpl;
+import com.exposit.dao.daojson.CustomerDaoJsonImpl;
+import com.exposit.dao.daoxml.CustomerDaoXmlImpl;
 import com.exposit.exceptions.DaoException;
 import lombok.extern.log4j.Log4j;
 

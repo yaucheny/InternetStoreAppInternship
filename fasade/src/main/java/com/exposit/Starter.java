@@ -1,13 +1,9 @@
 package com.exposit;
 
 import com.exposit.api.service.*;
-import com.exposit.marshelling.Xml.*;
-import com.exposit.marshelling.json.*;
 import com.exposit.model.*;
 import com.exposit.model.CategoryEntity;
 import com.exposit.service.*;
-
-import java.util.List;
 
 public class Starter {
     private static final IStoreService STORE_SERVICE

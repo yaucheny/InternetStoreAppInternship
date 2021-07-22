@@ -1,7 +1,6 @@
-package com.exposit.marshelling.Xml;
+package com.exposit.marshelling.xml;
 
-import com.exposit.model.ProductEntity;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.exposit.model.OrderEntity;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import java.io.File;
@@ -13,13 +12,16 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public final class MarshallingProductXml {
+public final class MarshallingOrderXml {
 
     private static final XmlMapper MAPPER = new XmlMapper();
     private static final String PATH_TO_FILE
-            = "utils/src/main/resources/product.xml";
+            = "utils/src/main/resources/order.xml";
 
-    public static void serializeProduct(List<ProductEntity> entities) {
+    private MarshallingOrderXml() {
+    }
+
+    public static void serializeOrder(List<OrderEntity> entities) {
         try {
             MAPPER.writeValue(new File(
                     PATH_TO_FILE), entities);
@@ -33,15 +35,15 @@ public final class MarshallingProductXml {
         }
     }
 
-    public static List<ProductEntity> deSerializeProduct() {
+    public static List<OrderEntity> deSerializeOrder() {
         try {
             String json = Files.readString(Path.of(
                     PATH_TO_FILE),
                     StandardCharsets.US_ASCII);
-            List<ProductEntity> product
-                    = Arrays.asList(MAPPER.readValue(json, ProductEntity[].class));
-            if (!product.isEmpty()) {
-                return product;
+            List<OrderEntity> orders
+                    = Arrays.asList(MAPPER.readValue(json, OrderEntity[].class));
+            if (!orders.isEmpty()) {
+                return orders;
             }
         } catch (IOException e) {
             e.printStackTrace();

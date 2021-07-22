@@ -18,6 +18,9 @@ public final class MarshallingCategoryJson {
     private static final String PATH_TO_FILE
             = "utils/src/main/resources/category.json";
 
+    private MarshallingCategoryJson() {
+    }
+
     public static void serializeCategory(List<CategoryEntity> entities) {
         try {
             MAPPER.writeValue(new File(

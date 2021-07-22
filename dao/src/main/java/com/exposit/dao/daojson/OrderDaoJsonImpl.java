@@ -1,7 +1,7 @@
-package com.exposit.dao.daoJson;
+package com.exposit.dao.daojson;
 
 import com.exposit.api.dao.OrderDao;
-import com.exposit.idGenerators.IdGenerator;
+import com.exposit.idgenerators.IdGenerator;
 import com.exposit.marshelling.json.MarshallingOrderJson;
 import com.exposit.model.OrderEntity;
 
@@ -15,7 +15,6 @@ public class OrderDaoJsonImpl extends AbstractDaoJsonImpl<OrderEntity> implement
     private OrderDaoJsonImpl() {
         List<OrderEntity> order = MarshallingOrderJson.deSerializeOrder();
         for (OrderEntity entity : order) {
-  //          entity.setId(IdGenerator.generateOrderId());
             this.save(entity);
         }
     }

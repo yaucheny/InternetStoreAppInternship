@@ -1,4 +1,4 @@
-package com.exposit.marshelling.Xml;
+package com.exposit.marshelling.xml;
 
 import com.exposit.model.CategoryEntity;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -17,6 +17,9 @@ public final class MarshallingCategoryXml {
     private static final XmlMapper MAPPER = new XmlMapper();
     private static final String PATH_TO_FILE
             = "utils/src/main/resources/category.xml";
+
+    private MarshallingCategoryXml() {
+    }
 
     public static void serializeCategory(List<CategoryEntity> entities) {
         try {
