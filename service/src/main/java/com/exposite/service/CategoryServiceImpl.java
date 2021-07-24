@@ -1,4 +1,4 @@
-package com.exposit.service;
+package com.exposite.service;
 
 import com.exposit.api.dao.CategoryDao;
 import com.exposit.api.service.CategoryService;
@@ -9,11 +9,15 @@ import com.exposit.exceptions.ServiceException;
 import com.exposit.marshelling.json.MarshallingCategoryJson;
 import com.exposit.model.CategoryEntity;
 import lombok.extern.log4j.Log4j;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Log4j
+@Service
 public class CategoryServiceImpl implements CategoryService {
 
     private static final String PROPERTY;
@@ -45,7 +49,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryEntity addCategory(String name, Long parentId) {
         CategoryEntity category = new CategoryEntity(name, parentId);
-             categoryDao.save(category);
+        categoryDao.save(category);
         if (parentId != null) {
             CategoryEntity parent = categoryDao.getById(parentId);
             if (parent.getChildList() == null) {

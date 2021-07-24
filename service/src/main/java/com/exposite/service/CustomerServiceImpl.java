@@ -1,4 +1,4 @@
-package com.exposit.service;
+package com.exposite.service;
 
 import com.exposit.api.dao.CustomerDao;
 import com.exposit.api.service.CustomerService;
@@ -9,16 +9,19 @@ import com.exposit.exceptions.ServiceException;
 import com.exposit.marshelling.json.MarshallingCustomerJson;
 import com.exposit.model.CustomerEntity;
 import lombok.extern.log4j.Log4j;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Log4j
+@Service
 public class CustomerServiceImpl implements CustomerService {
 
     private static final String PROPERTY;
 
     static {
-        PROPERTY = DaoPropertiesHandler.getProperty("dao.serialization.config_dao_impl")
+        PROPERTY = DaoPropertiesHandler
+                .getProperty("dao.serialization.config_dao_impl")
                 .orElseThrow(() -> new ServiceException("Serialization path not found"));
     }
 

@@ -4,10 +4,12 @@ import com.exposit.api.dao.CustomerDao;
 import com.exposit.idgenerators.IdGenerator;
 import com.exposit.marshelling.xml.MarshallingCustomerXml;
 import com.exposit.model.CustomerEntity;
+import org.springframework.stereotype.Repository;
+
 
 import java.util.List;
 
-
+@Repository
 public class CustomerDaoXmlImpl extends AbstractDaoXmlImpl<CustomerEntity> implements CustomerDao {
 
     private static CustomerDao instance;

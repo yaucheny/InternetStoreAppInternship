@@ -4,10 +4,12 @@ import com.exposit.api.dao.OrderDao;
 import com.exposit.idgenerators.IdGenerator;
 import com.exposit.marshelling.xml.MarshallingOrderXml;
 import com.exposit.model.OrderEntity;
+import org.springframework.stereotype.Repository;
+
 
 import java.util.List;
 
-
+@Repository
 public class OrderDaoXmlImpl extends AbstractDaoXmlImpl<OrderEntity> implements OrderDao {
 
     private static OrderDao instance;

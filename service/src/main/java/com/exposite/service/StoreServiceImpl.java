@@ -1,4 +1,4 @@
-package com.exposit.service;
+package com.exposite.service;
 
 import com.exposit.api.dao.StoreDao;
 import com.exposit.api.service.IStoreService;
@@ -10,16 +10,19 @@ import com.exposit.exceptions.ServiceException;
 import com.exposit.marshelling.json.MarshallingStoreJson;
 import com.exposit.model.StoreEntity;
 import lombok.extern.log4j.Log4j;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Log4j
+@Service
 public class StoreServiceImpl implements IStoreService {
 
     private static final String PROPERTY;
 
     static {
-        PROPERTY = DaoPropertiesHandler.getProperty("dao.serialization.config_dao_impl")
+        PROPERTY = DaoPropertiesHandler
+                .getProperty("dao.serialization.config_dao_impl")
                 .orElseThrow(() -> new ServiceException("Serialization path not found"));
     }
     private final StoreDao storeDao;
@@ -30,7 +33,8 @@ public class StoreServiceImpl implements IStoreService {
             = "can not update store";
 
     private StoreServiceImpl() {
-        storeDao = StoreDaoFactory.getStoreDaoFromProperties(PROPERTY);
+        storeDao = StoreDaoFactory
+                .getStoreDaoFromProperties(PROPERTY);
     }
 
     public static StoreServiceImpl getInstance() {
@@ -73,7 +77,7 @@ public class StoreServiceImpl implements IStoreService {
 
     @Override
     public StoreEntity getStoreById(Long id) {
-      return   storeDao.getById(id);
+        return   storeDao.getById(id);
     }
 
     @Override

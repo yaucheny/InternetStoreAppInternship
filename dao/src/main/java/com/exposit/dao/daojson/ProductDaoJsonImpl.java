@@ -4,11 +4,13 @@ import com.exposit.api.dao.ProductDao;
 import com.exposit.idgenerators.IdGenerator;
 import com.exposit.marshelling.json.MarshallingProductJson;
 import com.exposit.model.*;
-import lombok.extern.log4j.Log4j;
+import org.springframework.stereotype.Repository;
+
 
 import java.util.List;
 
-@Log4j
+
+@Repository
 public class ProductDaoJsonImpl extends AbstractDaoJsonImpl<ProductEntity>
         implements ProductDao {
 

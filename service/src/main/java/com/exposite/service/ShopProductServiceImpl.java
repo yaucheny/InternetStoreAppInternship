@@ -1,4 +1,4 @@
-package com.exposit.service;
+package com.exposite.service;
 
 import com.exposit.api.dao.CategoryDao;
 import com.exposit.api.dao.ShopProductDao;
@@ -16,12 +16,14 @@ import com.exposit.model.ShopProductEntity;
 import com.exposit.model.StoreEntity;
 import com.exposit.model.utils.PriceQuantityInStore;
 import lombok.extern.log4j.Log4j;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Log4j
+@Service
 public class ShopProductServiceImpl implements ShopProductService {
 
     private static final String PROPERTY;
@@ -33,7 +35,8 @@ public class ShopProductServiceImpl implements ShopProductService {
     private static final String DESCRIPTION = "description";
 
     static {
-        PROPERTY = DaoPropertiesHandler.getProperty("dao.serialization.config_dao_impl")
+        PROPERTY = DaoPropertiesHandler
+                .getProperty("dao.serialization.config_dao_impl")
                 .orElseThrow(() -> new ServiceException("Serialization path not found"));
     }
 

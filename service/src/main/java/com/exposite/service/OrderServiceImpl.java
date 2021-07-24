@@ -1,4 +1,4 @@
-package com.exposit.service;
+package com.exposite.service;
 
 import com.exposit.api.dao.OrderDao;
 import com.exposit.api.service.OrderService;
@@ -12,11 +12,13 @@ import com.exposit.model.OrderEntity;
 import com.exposit.model.OrderItemEntity;
 import com.exposit.model.ShopProductEntity;
 import lombok.extern.log4j.Log4j;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Log4j
+@Service
 public class OrderServiceImpl implements OrderService {
 
     private static final String PROPERTY;
@@ -35,7 +37,8 @@ public class OrderServiceImpl implements OrderService {
             = "Not enough quantity of product in this store ";
 
     private OrderServiceImpl() {
-        orderDao = OrderDaoFactory.getOrderDaoFromProperties(PROPERTY);
+        orderDao = OrderDaoFactory
+                .getOrderDaoFromProperties(PROPERTY);
     }
 
     public static OrderServiceImpl getInstance() {

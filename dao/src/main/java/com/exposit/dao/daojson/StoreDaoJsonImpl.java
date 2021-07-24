@@ -4,10 +4,11 @@ import com.exposit.api.dao.StoreDao;
 import com.exposit.idgenerators.IdGenerator;
 import com.exposit.marshelling.json.MarshallingStoreJson;
 import com.exposit.model.StoreEntity;
+import org.springframework.stereotype.Repository;
+
 
 import java.util.List;
-
-
+@Repository
 public class StoreDaoJsonImpl extends AbstractDaoJsonImpl<StoreEntity> implements StoreDao {
 
     private static StoreDao instance;

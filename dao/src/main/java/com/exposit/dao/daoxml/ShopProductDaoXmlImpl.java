@@ -4,11 +4,14 @@ import com.exposit.api.dao.ShopProductDao;
 import com.exposit.idgenerators.IdGenerator;
 import com.exposit.marshelling.xml.MarshallingShopProductXml;
 import com.exposit.model.ShopProductEntity;
+import org.springframework.stereotype.Repository;
+
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Repository
 public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductEntity>
         implements ShopProductDao {
 

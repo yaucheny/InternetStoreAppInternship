@@ -4,9 +4,12 @@ import com.exposit.api.dao.OrderItemDao;
 import com.exposit.idgenerators.IdGenerator;
 import com.exposit.marshelling.json.MarshallingOrderItemJson;
 import com.exposit.model.OrderItemEntity;
+import org.springframework.stereotype.Repository;
+
 
 import java.util.List;
 
+@Repository
 public class OrderItemDaoJsonImpl extends AbstractDaoJsonImpl<OrderItemEntity>
         implements OrderItemDao {
 

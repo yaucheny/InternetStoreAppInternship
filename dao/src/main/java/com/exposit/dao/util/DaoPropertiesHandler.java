@@ -2,13 +2,14 @@ package com.exposit.dao.util;
 
 import com.exposit.exceptions.ServiceException;
 import lombok.extern.log4j.Log4j;
+import org.springframework.stereotype.Component;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
 import java.util.Properties;
-
+@Component
 @Log4j
 public final class DaoPropertiesHandler {
 

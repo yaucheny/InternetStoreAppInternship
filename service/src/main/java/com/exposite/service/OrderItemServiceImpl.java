@@ -1,4 +1,4 @@
-package com.exposit.service;
+package com.exposite.service;
 
 import com.exposit.api.dao.OrderItemDao;
 import com.exposit.api.service.OrderItemService;
@@ -10,10 +10,12 @@ import com.exposit.marshelling.json.MarshallingOrderItemJson;
 import com.exposit.model.OrderItemEntity;
 import com.exposit.model.ShopProductEntity;
 import lombok.extern.log4j.Log4j;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Log4j
+@Service
 public class OrderItemServiceImpl implements OrderItemService {
 
     private static final String PROPERTY;
@@ -31,7 +33,8 @@ public class OrderItemServiceImpl implements OrderItemService {
             = "can not update orderItem";
 
     public OrderItemServiceImpl() {
-        orderItemDao = OrderItemDaoFactory.getOrderItemDaoFromProperties(PROPERTY);
+        orderItemDao = OrderItemDaoFactory
+                .getOrderItemDaoFromProperties(PROPERTY);
     }
 
     public static OrderItemServiceImpl getInstance() {

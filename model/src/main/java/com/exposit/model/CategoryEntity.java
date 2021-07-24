@@ -1,6 +1,5 @@
 package com.exposit.model;
 
-import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import java.util.List;
@@ -9,7 +8,6 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class CategoryEntity extends AEntity {
     private String name;
     private Long parentId;

@@ -5,7 +5,9 @@ import com.exposit.dao.daojson.ShopProductDaoJsonImpl;
 import com.exposit.dao.daoxml.ShopProductDaoXmlImpl;
 import com.exposit.exceptions.DaoException;
 import lombok.extern.log4j.Log4j;
+import org.springframework.stereotype.Component;
 
+@Component
 @Log4j
 public final class ShopProductDaoFactory {
 

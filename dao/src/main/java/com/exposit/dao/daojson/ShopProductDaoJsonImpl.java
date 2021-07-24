@@ -4,11 +4,14 @@ import com.exposit.api.dao.ShopProductDao;
 import com.exposit.idgenerators.IdGenerator;
 import com.exposit.marshelling.json.MarshallingShopProductJson;
 import com.exposit.model.ShopProductEntity;
+import org.springframework.stereotype.Repository;
+
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Repository
 public class ShopProductDaoJsonImpl extends AbstractDaoJsonImpl<ShopProductEntity>
         implements ShopProductDao {
 

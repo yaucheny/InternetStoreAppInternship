@@ -5,7 +5,9 @@ import com.exposit.dao.daojson.CategoryDaoJsonImpl;
 import com.exposit.dao.daoxml.CategoryDaoXmlImpl;
 import com.exposit.exceptions.DaoException;
 import lombok.extern.log4j.Log4j;
+import org.springframework.stereotype.Component;
 
+@Component
 @Log4j
 public final class CategoryDaoFactory {
 
@@ -24,5 +26,6 @@ public final class CategoryDaoFactory {
         log.warn(String.format(GET_DAO_TYPE_ERROR_MESSAGE, property));
         throw new DaoException(String
                 .format(GET_DAO_TYPE_ERROR_MESSAGE, property));
+
     }
 }
