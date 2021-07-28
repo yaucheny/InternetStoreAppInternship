@@ -1,9 +1,7 @@
-package com.exposite.service;
+package com.exposit.service;
 
 import com.exposit.api.dao.CategoryDao;
 import com.exposit.api.service.CategoryService;
-import com.exposit.dao.util.CategoryDaoFactory;
-import com.exposit.dao.util.DaoPropertiesHandler;
 import com.exposit.dto.CategoryDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
@@ -13,6 +11,7 @@ import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
@@ -20,7 +19,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 @Log4j
-@Service
+@Component
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private ModelMapper mapper;

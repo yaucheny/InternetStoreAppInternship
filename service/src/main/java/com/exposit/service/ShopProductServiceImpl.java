@@ -1,11 +1,9 @@
-package com.exposite.service;
+package com.exposit.service;
 
 import com.exposit.api.dao.CategoryDao;
 import com.exposit.api.dao.ShopProductDao;
 import com.exposit.api.service.ShopProductService;
 
-import com.exposit.dao.util.CategoryDaoFactory;
-import com.exposit.dao.util.ShopProductDaoFactory;
 import com.exposit.dto.ShopProductDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
@@ -18,7 +16,6 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.exposit.dao.util.DaoPropertiesHandler;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

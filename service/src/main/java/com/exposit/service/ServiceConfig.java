@@ -1,4 +1,4 @@
-package com.exposite.service;
+package com.exposit.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

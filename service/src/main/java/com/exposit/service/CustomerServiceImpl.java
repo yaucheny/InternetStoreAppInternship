@@ -1,9 +1,7 @@
-package com.exposite.service;
+package com.exposit.service;
 
 import com.exposit.api.dao.CustomerDao;
 import com.exposit.api.service.CustomerService;
-import com.exposit.dao.util.CustomerDaoFactory;
-import com.exposit.dao.util.DaoPropertiesHandler;
 import com.exposit.dto.CustomerDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
@@ -13,13 +11,14 @@ import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
 @Log4j
-@Service
+@Component
 public class CustomerServiceImpl implements CustomerService {
     private final ModelMapper mapper;
     private final CustomerDao customerDao;

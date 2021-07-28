@@ -1,8 +1,7 @@
-package com.exposite.service;
+package com.exposit.service;
 
 import com.exposit.api.dao.OrderDao;
 import com.exposit.api.service.OrderService;
-import com.exposit.dao.util.OrderDaoFactory;
 import com.exposit.dto.OrderDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
@@ -13,7 +12,6 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.exposit.dao.util.DaoPropertiesHandler;
 
 import java.lang.reflect.Type;
 import java.time.LocalDate;

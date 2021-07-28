@@ -1,9 +1,7 @@
-package com.exposite.service;
+package com.exposit.service;
 
 import com.exposit.api.dao.OrderItemDao;
 import com.exposit.api.service.OrderItemService;
-import com.exposit.dao.util.DaoPropertiesHandler;
-import com.exposit.dao.util.OrderItemDaoFactory;
 
 import com.exposit.dto.OrderItemDto;
 import com.exposit.exceptions.DaoException;
@@ -20,7 +18,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 @Log4j
-@Service
+//@Service
 public class OrderItemServiceImpl implements OrderItemService {
     private final ModelMapper mapper;
     private final OrderItemDao orderItemDao;

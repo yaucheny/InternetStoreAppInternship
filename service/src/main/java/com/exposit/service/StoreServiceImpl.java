@@ -1,4 +1,4 @@
-package com.exposite.service;
+package com.exposit.service;
 
 import com.exposit.api.dao.StoreDao;
 
