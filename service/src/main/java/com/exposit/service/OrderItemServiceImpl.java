@@ -18,7 +18,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 @Log4j
-//@Service
+@Service
 public class OrderItemServiceImpl implements OrderItemService {
     private final ModelMapper mapper;
     private final OrderItemDao orderItemDao;
