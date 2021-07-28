@@ -8,25 +8,19 @@ import org.springframework.stereotype.Repository;
 
 
 import java.util.List;
-@Repository
+
+@Repository("storeDaoJson")
 public class StoreDaoJsonImpl extends AbstractDaoJsonImpl<StoreEntity> implements StoreDao {
 
-    private static StoreDao instance;
+    private StoreDao storeDao;
 
     private StoreDaoJsonImpl() {
-
-    List<StoreEntity> store = MarshallingStoreJson.deSerializeStore();
+        List<StoreEntity> store = MarshallingStoreJson.deSerializeStore();
         for (StoreEntity entity : store) {
             this.save(entity);
         }
     }
 
-    public static StoreDao getInstance() {
-        if (instance == null) {
-            instance = new StoreDaoJsonImpl();
-        }
-        return instance;
-    }
 
     @Override
     public void save(StoreEntity entity) {

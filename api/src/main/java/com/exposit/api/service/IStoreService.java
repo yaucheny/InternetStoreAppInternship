@@ -1,21 +1,19 @@
 package com.exposit.api.service;
 
-import com.exposit.model.StoreEntity;
+import com.exposit.dto.StoreDto;
 
 import java.util.List;
 
 public interface IStoreService {
-
-    StoreEntity addStore(String name, String internetPage, String phoneNumber);
+    void addStore(StoreDto storeDto);
 
     void deleteStore(Long id);
 
-    void updateStore(Long id, String name,
-                     String internetPage, String phoneNumber);
+    void updateStore(Long id, StoreDto storeDto);
 
-    StoreEntity getStoreById(Long id);
+    StoreDto getStoreById(Long id);
 
-    List<StoreEntity> getAllStore();
+    List<StoreDto> getAllStore();
 
     void saveStoreToFile();
 }

@@ -4,52 +4,50 @@ import com.exposit.api.dao.OrderItemDao;
 import com.exposit.api.service.OrderItemService;
 import com.exposit.dao.util.DaoPropertiesHandler;
 import com.exposit.dao.util.OrderItemDaoFactory;
+
+import com.exposit.dto.OrderItemDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
 import com.exposit.marshelling.json.MarshallingOrderItemJson;
 import com.exposit.model.OrderItemEntity;
-import com.exposit.model.ShopProductEntity;
 import lombok.extern.log4j.Log4j;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 @Log4j
 @Service
 public class OrderItemServiceImpl implements OrderItemService {
-
-    private static final String PROPERTY;
-
-    static {
-        PROPERTY = DaoPropertiesHandler.getProperty("dao.serialization.config_dao_impl")
-                .orElseThrow(() -> new ServiceException("Serialization path not found"));
-    }
-
+    private final ModelMapper mapper;
     private final OrderItemDao orderItemDao;
-    private static OrderItemServiceImpl instance;
+
+
     private static final String CAN_NOT_DELETE_ORDER_ITEM
             = "can not delete orderItem";
     private static final String CAN_NOT_UPDATE_ORDER_ITEM
             = "can not update orderItem";
+    private static final String CAN_NOT_ADD_ORDER_ITEM
+            = "can not add orderItem";
 
-    public OrderItemServiceImpl() {
-        orderItemDao = OrderItemDaoFactory
-                .getOrderItemDaoFromProperties(PROPERTY);
-    }
-
-    public static OrderItemServiceImpl getInstance() {
-        if (instance == null) {
-            instance = new OrderItemServiceImpl();
-        }
-        return instance;
+    @Autowired
+    public OrderItemServiceImpl(ModelMapper mapper, OrderItemDao orderItemDao) {
+        this.mapper = mapper;
+        this.orderItemDao = orderItemDao;
     }
 
     @Override
-    public OrderItemEntity addOrderItem(ShopProductEntity shopProduct,
-                                        Integer quantityInOrder) {
-        OrderItemEntity orderItem = new OrderItemEntity(shopProduct, quantityInOrder);
-        orderItemDao.save(orderItem);
-        return orderItem;
+    public void addOrderItem(OrderItemDto orderItemDto) {
+        if (orderItemDto.getId() == null) {
+            OrderItemEntity orderItem = mapper.map(orderItemDto, OrderItemEntity.class);
+            orderItemDao.save(orderItem);
+        } else {
+            log.warn(CAN_NOT_ADD_ORDER_ITEM);
+            throw new DaoException(CAN_NOT_ADD_ORDER_ITEM);
+        }
     }
 
     @Override
@@ -63,11 +61,9 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
     @Override
-    public void updateOrderItem(Long id, ShopProductEntity shopProduct,
-                                Integer quantityInOrder) {
+    public void updateOrderItem(Long id, OrderItemDto orderItemDto) {
         if (orderItemDao.getById(id) != null) {
-            OrderItemEntity orderItem = new OrderItemEntity(id,
-                    shopProduct, quantityInOrder);
+            OrderItemEntity orderItem = mapper.map(orderItemDto, OrderItemEntity.class);
             orderItem.setId(id);
             orderItemDao.update(id, orderItem);
         } else {
@@ -77,13 +73,17 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
     @Override
-    public OrderItemEntity getOrderItemById(Long id) {
-        return orderItemDao.getById(id);
+    public OrderItemDto getOrderItemById(Long id) {
+        OrderItemEntity orderItem = orderItemDao.getById(id);
+        return mapper.map(orderItem, OrderItemDto.class);
     }
 
     @Override
-    public List<OrderItemEntity> getAllOrderItem() {
-        return orderItemDao.getAll();
+    public List<OrderItemDto> getAllOrderItem() {
+        List<OrderItemEntity> orderItemEntityList = orderItemDao.getAll();
+        Type listType = new TypeToken<List<OrderItemDto>>() {
+        }.getType();
+        return mapper.map(orderItemEntityList, listType);
     }
 
     @Override

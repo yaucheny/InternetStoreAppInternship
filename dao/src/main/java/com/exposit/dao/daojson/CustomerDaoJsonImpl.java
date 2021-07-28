@@ -9,24 +9,17 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository("customerDaoJson")
 public class CustomerDaoJsonImpl extends AbstractDaoJsonImpl<CustomerEntity> implements CustomerDao {
 
-    private static CustomerDao instance;
+    private CustomerDao customerDao;
 
     private CustomerDaoJsonImpl() {
         List<CustomerEntity> customer = MarshallingCustomerJson
-        .deSerializeCustomer();
+                .deSerializeCustomer();
         for (CustomerEntity entity : customer) {
             this.save(entity);
         }
-    }
-
-    public static CustomerDao getInstance() {
-        if (instance == null) {
-            instance = new CustomerDaoJsonImpl();
-        }
-        return instance;
     }
 
     @Override

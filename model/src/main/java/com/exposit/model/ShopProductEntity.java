@@ -1,12 +1,14 @@
 package com.exposit.model;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
 public class ShopProductEntity extends AEntity {
 
     private ProductEntity product;
@@ -14,16 +16,6 @@ public class ShopProductEntity extends AEntity {
     private Integer quantity;
     private StoreEntity store;
     private String description;
-
-    public ShopProductEntity(Long id, ProductEntity product, Integer price,
-                             Integer quantity, StoreEntity store, String description) {
-        super(id);
-        this.product = product;
-        this.price = price;
-        this.quantity = quantity;
-        this.store = store;
-        this.description = description;
-    }
 
     @Override
     public String toString() {

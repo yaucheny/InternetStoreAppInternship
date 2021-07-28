@@ -1,23 +1,19 @@
 package com.exposit.model;
 
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
 public class OrderItemEntity extends AEntity {
 
     private ShopProductEntity shopProduct;
     private Integer quantity;
-
-    public OrderItemEntity(Long id, ShopProductEntity shopProduct, Integer quantity) {
-        super(id);
-        this.shopProduct = shopProduct;
-        this.quantity = quantity;
-    }
 
     @Override
     public String toString() {

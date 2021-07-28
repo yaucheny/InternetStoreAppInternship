@@ -1,22 +1,20 @@
 package com.exposit.api.service;
 
-import com.exposit.model.CategoryEntity;
-
+import com.exposit.dto.CategoryDto;
 
 import java.util.List;
 
 public interface CategoryService {
 
-    CategoryEntity addCategory(String name, Long parentId);
+    void addCategory(CategoryDto categoryDto);
 
     void deleteCategory(Long id);
 
-    void updateCategory(Long id, String name,
-                        Long parentId);
+    void updateCategory(Long id, CategoryDto categoryDto);
 
-    CategoryEntity getCategoryById(Long id);
+    CategoryDto getCategoryById(Long id);
 
-    List<CategoryEntity> getAllCategory();
+    List<CategoryDto> getAllCategory();
 
     void saveCategoryToFile();
 }

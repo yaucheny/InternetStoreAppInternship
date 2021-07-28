@@ -12,21 +12,13 @@ import java.util.List;
 @Repository
 public class StoreDaoXmlImpl extends AbstractDaoXmlImpl<StoreEntity> implements StoreDao {
 
-    private static StoreDao instance;
+    private StoreDao storeDao;
 
-    private StoreDaoXmlImpl() {
-
+    private StoreDaoXmlImpl(StoreDao storeDao) {
         List<StoreEntity> store = MarshallingStoreXml.deSerializeStore();
         for (StoreEntity entity : store) {
             this.save(entity);
         }
-    }
-
-    public static StoreDao getInstance() {
-        if (instance == null) {
-            instance = new StoreDaoXmlImpl();
-        }
-        return instance;
     }
 
     @Override

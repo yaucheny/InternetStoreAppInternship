@@ -8,26 +8,19 @@ import org.springframework.stereotype.Repository;
 
 
 import java.util.List;
-@Repository
+
+@Repository("categoryDaoJson")
 public class CategoryDaoJsonImpl extends AbstractDaoJsonImpl<CategoryEntity> implements CategoryDao {
 
-    private static CategoryDao instance;
+    private CategoryDao categoryDao;
 
     private CategoryDaoJsonImpl() {
         List<CategoryEntity> category = MarshallingCategoryJson
-        .deSerializeCategory();
+                .deSerializeCategory();
         for (CategoryEntity entity : category) {
             this.save(entity);
         }
     }
-
-    public static CategoryDao getInstance() {
-        if (instance == null) {
-            instance = new CategoryDaoJsonImpl();
-        }
-        return instance;
-    }
-
 
     @Override
     public void save(CategoryEntity entity) {

@@ -5,6 +5,7 @@ import com.exposit.dao.daojson.StoreDaoJsonImpl;
 import com.exposit.dao.daoxml.StoreDaoXmlImpl;
 import com.exposit.exceptions.DaoException;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,15 +14,16 @@ public final class StoreDaoFactory {
 
     private static final String GET_DAO_TYPE_ERROR_MESSAGE
             = "can not find dao by property: %p";
-
-    private StoreDaoFactory() {
-    }
+    @Autowired
+    private static StoreDaoJsonImpl storeDaoJson;
+    @Autowired
+    private static StoreDaoXmlImpl storeDaoXml;
 
     public static StoreDao getStoreDaoFromProperties(String property) {
         if (property.equalsIgnoreCase("json")) {
-            return StoreDaoJsonImpl.getInstance();
+            return storeDaoJson;
         } else if (property.equalsIgnoreCase("xml")) {
-            return StoreDaoXmlImpl.getInstance();
+            return storeDaoXml;
         }
         log.warn(String.format(GET_DAO_TYPE_ERROR_MESSAGE, property));
         throw new DaoException(String

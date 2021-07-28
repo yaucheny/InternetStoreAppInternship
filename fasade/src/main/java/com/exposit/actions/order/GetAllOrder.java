@@ -8,10 +8,10 @@ import lombok.extern.log4j.Log4j;
 public class GetAllOrder  extends AbstractAction implements IAction {
     @Override
     public void execute() {
-        try {
-            System.out.println(fasade.getAllOrder());
-        } catch (Exception e) {
-            log.warn(e.getLocalizedMessage());
-        }
+//        try {
+//            System.out.println(fasade.getAllOrder());
+//        } catch (Exception e) {
+//            log.warn(e.getLocalizedMessage());
+//        }
     }
 }

@@ -3,12 +3,13 @@ package com.exposit.dao.daoxml;
 import com.exposit.api.dao.GenericDao;
 import com.exposit.exceptions.DaoException;
 import com.exposit.model.AEntity;
+import lombok.extern.log4j.Log4j;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Log4j
 public class AbstractDaoXmlImpl<T extends AEntity> implements GenericDao<T> {
 
     private static final String GET_BY_ID_ERROR_MESSAGE
@@ -22,7 +23,7 @@ public class AbstractDaoXmlImpl<T extends AEntity> implements GenericDao<T> {
                 return entity;
             }
         }
- //       log.warn(String.format(GET_BY_ID_ERROR_MESSAGE, id));
+        log.warn(String.format(GET_BY_ID_ERROR_MESSAGE, id));
         throw new DaoException(String.format(GET_BY_ID_ERROR_MESSAGE, id));
     }
 

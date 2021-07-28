@@ -5,7 +5,10 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -30,34 +33,6 @@ public class OrderEntity extends AEntity {
     private CustomerEntity customer;
     private List<OrderItemEntity> orderItemList;
     private Long days;
-
-    public OrderEntity(LocalDate dateOfOrder, LocalDate dateOfDelivery, Integer priceOfPurchase,
-                       CustomerEntity customer, List<OrderItemEntity> orderItemList) {
-        this.dateOfOrder = dateOfOrder;
-        this.dateOfDelivery = dateOfDelivery;
-        this.priceOfPurchase = priceOfPurchase;
-        this.customer = customer;
-        this.orderItemList = orderItemList;
-    }
-
-    public OrderEntity(Long days, CustomerEntity customer, List<OrderItemEntity> orderItemList) {
-        this.customer = customer;
-        this.orderItemList = orderItemList;
-        this.days = days;
-    }
-
-
-    public OrderEntity(Long id, LocalDate dateOfOrder, LocalDate dateOfDelivery,
-                       Integer priceOfPurchase, CustomerEntity customer,
-                       List<OrderItemEntity> orderItemList, Long days) {
-        super(id);
-        this.dateOfOrder = dateOfOrder;
-        this.dateOfDelivery = dateOfDelivery;
-        this.priceOfPurchase = priceOfPurchase;
-        this.customer = customer;
-        this.orderItemList = orderItemList;
-        this.days = days;
-    }
 
     @Override
     public String toString() {
