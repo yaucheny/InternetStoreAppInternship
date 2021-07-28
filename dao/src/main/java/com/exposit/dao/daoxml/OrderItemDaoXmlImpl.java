@@ -2,10 +2,11 @@ package com.exposit.dao.daoxml;
 
 import com.exposit.api.dao.OrderItemDao;
 import com.exposit.idgenerators.IdGenerator;
+import com.exposit.marshelling.xml.MarshallingCategoryXml;
 import com.exposit.marshelling.xml.MarshallingOrderItemXml;
+import com.exposit.model.CategoryEntity;
 import com.exposit.model.OrderItemEntity;
 import org.springframework.stereotype.Repository;
-
 
 import java.util.List;
 
@@ -13,21 +14,14 @@ import java.util.List;
 public class OrderItemDaoXmlImpl extends AbstractDaoXmlImpl<OrderItemEntity>
         implements OrderItemDao {
 
-    private static OrderItemDaoXmlImpl instance;
+    private OrderItemDao orderItemDao;
 
-    private OrderItemDaoXmlImpl() {
-        List<OrderItemEntity> orderItem = MarshallingOrderItemXml
-        .deSerializeOrderItem();
-        for (OrderItemEntity entity : orderItem) {
+    public OrderItemDaoXmlImpl() {
+        List<OrderItemEntity> category = MarshallingOrderItemXml
+                .deSerializeOrderItem();
+        for (OrderItemEntity entity : category) {
             this.save(entity);
         }
-    }
-
-    public static OrderItemDao getInstance() {
-        if (instance == null) {
-            instance = new OrderItemDaoXmlImpl();
-        }
-        return instance;
     }
 
     @Override

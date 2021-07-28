@@ -1,23 +1,20 @@
 package com.exposit.api.service;
 
-import com.exposit.model.*;
-import com.exposit.model.CategoryEntity;
+import com.exposit.dto.ProductDto;
 
 import java.util.List;
 
 public interface ProductService {
 
-    ProductEntity addProduct(String name, String producer,
-                             List<CategoryEntity> categoryList);
+     void addProduct(ProductDto productDto);
 
     void deleteProduct(Long id);
 
-    void updateProduct(Long id, String name, String producer,
-                       List<CategoryEntity> categoryList);
+    void updateProduct(Long id, ProductDto productDto);
 
-    ProductEntity getProductById(Long id);
+    ProductDto getProductById(Long id);
 
-    List<ProductEntity> getAllProducts();
+    List<ProductDto> getAllProducts();
 
     void saveProductToFile();
 

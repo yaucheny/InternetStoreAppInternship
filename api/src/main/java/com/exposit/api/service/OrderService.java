@@ -1,24 +1,21 @@
 package com.exposit.api.service;
 
-import com.exposit.model.CustomerEntity;
-import com.exposit.model.OrderItemEntity;
-import com.exposit.model.OrderEntity;
+import com.exposit.dto.OrderDto;
 
 import java.util.List;
 
 public interface OrderService {
 
-    OrderEntity addOrder(Long days, CustomerEntity customer, List<OrderItemEntity> orderItems);
+    void addOrder(OrderDto orderDto);
 
     void deleteOrder(Long id);
 
-    void updateOrder(Long id, Long days,
-                     CustomerEntity customer, List<OrderItemEntity> orderItems);
+    void updateOrder(Long id, OrderDto orderDto);
 
 
-    OrderEntity getOrderById(Long id);
+    OrderDto getOrderById(Long id);
 
-    List<OrderEntity> getAllOrder();
+    List<OrderDto> getAllOrder();
 
     void saveOrderToFile();
 }

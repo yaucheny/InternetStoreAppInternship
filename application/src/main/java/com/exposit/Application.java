@@ -1,4 +1,4 @@
-package com.exposit.app;
+package com.exposit;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 import java.util.Arrays;
 
-@ComponentScan({"com/exposit/controller","com/exposite/service","com/exposit/dao"})
+
 @SpringBootApplication
 public class Application
 {

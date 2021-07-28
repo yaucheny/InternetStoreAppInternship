@@ -2,7 +2,9 @@ package com.exposit.dao.daoxml;
 
 import com.exposit.api.dao.ShopProductDao;
 import com.exposit.idgenerators.IdGenerator;
+import com.exposit.marshelling.xml.MarshallingCategoryXml;
 import com.exposit.marshelling.xml.MarshallingShopProductXml;
+import com.exposit.model.CategoryEntity;
 import com.exposit.model.ShopProductEntity;
 import org.springframework.stereotype.Repository;
 
@@ -15,21 +17,14 @@ import java.util.stream.Collectors;
 public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductEntity>
         implements ShopProductDao {
 
-    private static ShopProductDao instance;
+    private ShopProductDao shopProductDao;
 
-    private ShopProductDaoXmlImpl() {
-        List<ShopProductEntity> product = MarshallingShopProductXml
+    public ShopProductDaoXmlImpl() {
+        List<ShopProductEntity> category = MarshallingShopProductXml
                 .deSerializeShopProduct();
-        for (ShopProductEntity entity : product) {
+        for (ShopProductEntity entity : category) {
             this.save(entity);
         }
-    }
-
-    public static ShopProductDao getInstance() {
-        if (instance == null) {
-            instance = new ShopProductDaoXmlImpl();
-        }
-        return instance;
     }
 
     @Override
@@ -40,7 +35,7 @@ public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductEntity>
 
     @Override
     public List<ShopProductEntity> sortByPrice() {
-        List<ShopProductEntity> productList=instance.getAll();
+        List<ShopProductEntity> productList = shopProductDao.getAll();
         return productList.stream().sorted(Comparator
                 .comparingInt(ShopProductEntity::getPrice))
                 .collect(Collectors.toList());

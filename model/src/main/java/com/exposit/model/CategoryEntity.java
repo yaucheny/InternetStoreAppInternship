@@ -1,6 +1,9 @@
 package com.exposit.model;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -12,28 +15,6 @@ public class CategoryEntity extends AEntity {
     private String name;
     private Long parentId;
     private List<CategoryEntity> childList;
-
-    public CategoryEntity(String name, Long parentId) {
-        this.name = name;
-        this.parentId = parentId;
-    }
-
-    public CategoryEntity(Long id, String name, Long parentId) {
-        super(id);
-        this.name = name;
-        this.parentId = parentId;
-    }
-
-    public CategoryEntity(
-            Long id,
-            String name,
-            Long parentId,
-            List<CategoryEntity> childList) {
-        super(id);
-        this.name = name;
-        this.parentId = parentId;
-        this.childList = childList;
-    }
 
     @Override
     public String toString() {

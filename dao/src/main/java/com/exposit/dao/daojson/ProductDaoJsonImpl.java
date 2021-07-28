@@ -3,32 +3,25 @@ package com.exposit.dao.daojson;
 import com.exposit.api.dao.ProductDao;
 import com.exposit.idgenerators.IdGenerator;
 import com.exposit.marshelling.json.MarshallingProductJson;
-import com.exposit.model.*;
+import com.exposit.model.ProductEntity;
 import org.springframework.stereotype.Repository;
 
 
 import java.util.List;
 
 
-@Repository
+@Repository("productDaoJson")
 public class ProductDaoJsonImpl extends AbstractDaoJsonImpl<ProductEntity>
         implements ProductDao {
 
-    private static ProductDao instance;
+    private ProductDao productDao;
 
     private ProductDaoJsonImpl() {
         List<ProductEntity> product = MarshallingProductJson
-        .deSerializeProduct();
+                .deSerializeProduct();
         for (ProductEntity entity : product) {
             this.save(entity);
         }
-    }
-
-    public static ProductDao getInstance() {
-        if (instance == null) {
-            instance = new ProductDaoJsonImpl();
-        }
-        return instance;
     }
 
     @Override

@@ -1,25 +1,20 @@
 package com.exposit;
 
-import com.exposit.api.service.*;
-import com.exposit.model.*;
-import com.exposit.model.CategoryEntity;
-import com.exposit.service.*;
-
 public class Starter {
-    private static final IStoreService STORE_SERVICE
-            = StoreServiceImpl.getInstance();
-    private static final CustomerService CUSTOMER_SERVICE
-            = CustomerServiceImpl.getInstance();
-    private static final ProductService PRODUCT_SERVICE
-            = ProductServiceImpl.getInstance();
-    private static final OrderService ORDER_SERVICE
-            = OrderServiceImpl.getInstance();
-    private static final OrderItemService ORDER_ITEM_SERVICE
-            = OrderItemServiceImpl.getInstance();
-    private static final ShopProductService SHOP_PRODUCT_SERVICE
-            = ShopProductServiceImpl.getInstance();
-    private static final CategoryService CATEGORY_SERVICE
-            = CategoryServiceImpl.getInstance();
+//    private static final StoreService STORE_SERVICE
+//            = StoreServiceImpl.getInstance();
+//    private static final CustomerService CUSTOMER_SERVICE
+//            = CustomerServiceImpl.getInstance();
+//    private static final ProductService PRODUCT_SERVICE
+//            = ProductServiceImpl.getInstance();
+//    private static final OrderService ORDER_SERVICE
+//            = OrderServiceImpl.getInstance();
+//    private static final OrderItemService ORDER_ITEM_SERVICE
+//            = OrderItemServiceImpl.getInstance();
+//    private static final ShopProductService SHOP_PRODUCT_SERVICE
+//            = ShopProductServiceImpl.getInstance();
+//    private static final CategoryService CATEGORY_SERVICE
+//            = CategoryServiceImpl.getInstance();
 
     public static void main(String[] args) {
 //
@@ -44,8 +39,8 @@ public class Starter {
 //                "Repina 4 , 4", "nesterov@gmail.com");
 //        CUSTOMER_SERVICE.addCustomer("Alina", "Alinova",
 //                "Gaya 5 , 5", "alinova@gmail.com");
-        System.out.println(CUSTOMER_SERVICE.getAllCustomer());
-        System.out.println(STORE_SERVICE.getAllStore());
+//        System.out.println(CUSTOMER_SERVICE.getAllCustomer());
+//        System.out.println(STORE_SERVICE.getAllStore());
 //
 ////        CATEGORY_SERVICE.addCategory("industrial", null); //1
 ////        CATEGORY_SERVICE.addCategory("nutrition", null);  //2
@@ -260,9 +255,9 @@ public class Starter {
 //
 //        CATEGORY_SERVICE.addCategory("less_litre", 30L);   //73
 //        CATEGORY_SERVICE.addCategory("more_litre", 30L);   //74
-        for (CategoryEntity category : CATEGORY_SERVICE.getAllCategory()) {
-            System.out.println(category);
-        }
+//        for (CategoryEntity category : CATEGORY_SERVICE.getAllCategory()) {
+//            System.out.println(category);
+//        }
 //
 //        List<CategoryEntity> list1 = List.of(CATEGORY_SERVICE.getCategoryById(33L), CATEGORY_SERVICE.getCategoryById(35L));
 //        List<CategoryEntity> list2 = List.of(CATEGORY_SERVICE.getCategoryById(34L), CATEGORY_SERVICE.getCategoryById(35L));
@@ -378,9 +373,9 @@ public class Starter {
 //        List<CategoryEntity> list54 = List.of(CATEGORY_SERVICE.getCategoryById(69L), CATEGORY_SERVICE.getCategoryById(72L), CATEGORY_SERVICE.getCategoryById(73L));
 //        PRODUCT_SERVICE.addProduct("vodka", "mmk", list53);
 //        PRODUCT_SERVICE.addProduct("vodka", "goot", list54);
-        for (ProductEntity product : PRODUCT_SERVICE.getAllProducts()) {
-            System.out.println(product);
-        }
+//        for (ProductEntity product : PRODUCT_SERVICE.getAllProducts()) {
+//            System.out.println(product);
+//        }
 //        SHOP_PRODUCT_SERVICE.addShopProduct(PRODUCT_SERVICE.getProductById(1L), 250, 5, STORE_SERVICE.getStoreById(1L), "none");
 //        SHOP_PRODUCT_SERVICE.addShopProduct(PRODUCT_SERVICE.getProductById(1L), 300, 5, STORE_SERVICE.getStoreById(2L), "none");
 //        SHOP_PRODUCT_SERVICE.addShopProduct(PRODUCT_SERVICE.getProductById(2L), 350, 5, STORE_SERVICE.getStoreById(3L), "none");
@@ -489,9 +484,9 @@ public class Starter {
 //        SHOP_PRODUCT_SERVICE.addShopProduct(PRODUCT_SERVICE.getProductById(53L), 15, 5, STORE_SERVICE.getStoreById(2L), "none");
 //        SHOP_PRODUCT_SERVICE.addShopProduct(PRODUCT_SERVICE.getProductById(54L), 11, 5, STORE_SERVICE.getStoreById(3L), "none");
 //        SHOP_PRODUCT_SERVICE.addShopProduct(PRODUCT_SERVICE.getProductById(54L), 12, 5, STORE_SERVICE.getStoreById(4L), "none");
-        for (ShopProductEntity shopProduct : SHOP_PRODUCT_SERVICE.getAllShopProduct()) {
-            System.out.println(shopProduct);
-        }
+//        for (ShopProductEntity shopProduct : SHOP_PRODUCT_SERVICE.getAllShopProduct()) {
+//            System.out.println(shopProduct);
+//        }
 //
 //        ORDER_ITEM_SERVICE.addOrderItem(SHOP_PRODUCT_SERVICE.getShopProductById(1L), 1);
 //        ORDER_ITEM_SERVICE.addOrderItem(SHOP_PRODUCT_SERVICE.getShopProductById(2L), 2);
@@ -523,9 +518,9 @@ public class Starter {
 //        ORDER_ITEM_SERVICE.addOrderItem(SHOP_PRODUCT_SERVICE.getShopProductById(91L), 2);
 //        ORDER_ITEM_SERVICE.addOrderItem(SHOP_PRODUCT_SERVICE.getShopProductById(92L), 1);
 //        ORDER_ITEM_SERVICE.addOrderItem(SHOP_PRODUCT_SERVICE.getShopProductById(93L), 5);
-        for (OrderItemEntity orderItem : ORDER_ITEM_SERVICE.getAllOrderItem()) {
-            System.out.println(orderItem);
-        }
+//        for (OrderItemEntity orderItem : ORDER_ITEM_SERVICE.getAllOrderItem()) {
+//            System.out.println(orderItem);
+//        }
 //        List<OrderItemEntity> listOrder1 = List.of(ORDER_ITEM_SERVICE.getOrderItemById(1L),
 //                ORDER_ITEM_SERVICE.getOrderItemById(4L), ORDER_ITEM_SERVICE.getOrderItemById(8L),
 //                ORDER_ITEM_SERVICE.getOrderItemById(12L), ORDER_ITEM_SERVICE.getOrderItemById(16L),
@@ -546,9 +541,9 @@ public class Starter {
 //                ORDER_ITEM_SERVICE.getOrderItemById(22L), ORDER_ITEM_SERVICE.getOrderItemById(26L),
 //                ORDER_ITEM_SERVICE.getOrderItemById(30L));
 //        ORDER_SERVICE.addOrder(3L, CUSTOMER_SERVICE.getCustomerById(3L), listOrder3);
-        for (OrderEntity order : ORDER_SERVICE.getAllOrder()) {
-            System.out.println(order);
-        }
+//        for (OrderEntity order : ORDER_SERVICE.getAllOrder()) {
+//            System.out.println(order);
+//        }
 //        CUSTOMER_SERVICE.saveCustomerToFile();
 //        STORE_SERVICE.saveStoreToFile();
 //        PRODUCT_SERVICE.saveProductToFile();

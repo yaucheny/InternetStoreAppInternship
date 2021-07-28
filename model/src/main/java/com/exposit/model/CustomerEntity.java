@@ -1,28 +1,20 @@
 package com.exposit.model;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
 public class CustomerEntity extends AEntity {
 
     private String firstName;
     private String lastName;
     private String address;
     private String email;
-
-
-    public CustomerEntity(Long id, String firstName, String lastName,
-                          String address, String email) {
-        super(id);
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.email = email;
-    }
 
     @Override
     public String toString() {

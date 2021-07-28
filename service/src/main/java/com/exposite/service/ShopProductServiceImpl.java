@@ -5,19 +5,22 @@ import com.exposit.api.dao.ShopProductDao;
 import com.exposit.api.service.ShopProductService;
 
 import com.exposit.dao.util.CategoryDaoFactory;
-import com.exposit.dao.util.DaoPropertiesHandler;
 import com.exposit.dao.util.ShopProductDaoFactory;
+import com.exposit.dto.ShopProductDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
 import com.exposit.marshelling.json.MarshallingShopProductJson;
 import com.exposit.model.CategoryEntity;
-import com.exposit.model.ProductEntity;
 import com.exposit.model.ShopProductEntity;
-import com.exposit.model.StoreEntity;
 import com.exposit.model.utils.PriceQuantityInStore;
 import lombok.extern.log4j.Log4j;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.exposit.dao.util.DaoPropertiesHandler;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,24 +28,10 @@ import java.util.stream.Collectors;
 @Log4j
 @Service
 public class ShopProductServiceImpl implements ShopProductService {
-
-    private static final String PROPERTY;
-    private static final String NAME = "name";
-    private static final String PRODUCER = "producer";
-    private static final String PRICE = "price";
-    private static final String QUANTITY = "quantity";
-    private static final String STORE = "store";
-    private static final String DESCRIPTION = "description";
-
-    static {
-        PROPERTY = DaoPropertiesHandler
-                .getProperty("dao.serialization.config_dao_impl")
-                .orElseThrow(() -> new ServiceException("Serialization path not found"));
-    }
-
+    private final ModelMapper mapper;
     private final ShopProductDao shopProductDao;
     private final CategoryDao categoryDao;
-    private static ShopProductServiceImpl instance;
+
     private static final String FALSE_CATEGORY_NAME
             = "False category name";
     private static final String FALSE_ATTRIBUTE_NAME
@@ -51,27 +40,37 @@ public class ShopProductServiceImpl implements ShopProductService {
             = "can not delete shopProduct";
     private static final String CAN_NOT_UPDATE_SHOP_PRODUCT
             = "can not update shopProduct";
+    private static final String CAN_NOT_ADD_SHOP_PRODUCT
+            = "can not add shopProduct";
+    private static final String NAME = "name";
+    private static final String PRODUCER = "producer";
+    private static final String PRICE = "price";
+    private static final String QUANTITY = "quantity";
+    private static final String STORE = "store";
+    private static final String DESCRIPTION = "description";
 
-    private ShopProductServiceImpl() {
-        this.shopProductDao = ShopProductDaoFactory.getShopProductDaoFromProperties(PROPERTY);
-        this.categoryDao = CategoryDaoFactory.getCategoryDaoFromProperties(PROPERTY);
-    }
+    Type listType = new TypeToken<List<ShopProductDto>>() {
+    }.getType();
 
-    public static ShopProductServiceImpl getInstance() {
-        if (instance == null) {
-            instance = new ShopProductServiceImpl();
-        }
-        return instance;
+    @Autowired
+    public ShopProductServiceImpl(ModelMapper mapper, ShopProductDao shopProductDao, CategoryDao categoryDao) {
+        this.mapper = mapper;
+
+        this.shopProductDao = shopProductDao;
+        this.categoryDao = categoryDao;
+
     }
 
     @Override
-    public ShopProductEntity addShopProduct(ProductEntity product, java.lang.Integer price,
-                                            java.lang.Integer quantity, StoreEntity store,
-                                            String description) {
-        ShopProductEntity shopProduct = new ShopProductEntity(product, price,
-                quantity, store, description);
-        shopProductDao.save(shopProduct);
-        return shopProduct;
+    public void addShopProduct(ShopProductDto shopProductDto) {
+        if (shopProductDto.getId() == null) {
+            ShopProductEntity shopProduct = mapper.map(shopProductDto, ShopProductEntity.class);
+            shopProductDao.save(shopProduct);
+
+        } else {
+            log.warn(CAN_NOT_ADD_SHOP_PRODUCT);
+            throw new DaoException(CAN_NOT_ADD_SHOP_PRODUCT);
+        }
     }
 
     @Override
@@ -85,11 +84,9 @@ public class ShopProductServiceImpl implements ShopProductService {
     }
 
     @Override
-    public void updateShopProduct(Long id, ProductEntity product, java.lang.Integer price,
-                                  java.lang.Integer quantity, StoreEntity store, String description) {
+    public void updateShopProduct(Long id, ShopProductDto shopProductDto) {
         if (shopProductDao.getById(id) != null) {
-            ShopProductEntity shopProduct = new ShopProductEntity(product, price,
-                    quantity, store, description);
+            ShopProductEntity shopProduct = new ShopProductEntity();
             shopProduct.setId(id);
             shopProductDao.update(id, shopProduct);
         } else {
@@ -99,13 +96,17 @@ public class ShopProductServiceImpl implements ShopProductService {
     }
 
     @Override
-    public ShopProductEntity getShopProductById(Long id) {
-        return shopProductDao.getById(id);
+    public ShopProductDto getShopProductById(Long id) {
+        ShopProductEntity shopProductEntity = shopProductDao.getById(id);
+        return mapper.map(shopProductEntity, ShopProductDto.class);
     }
 
     @Override
-    public List<ShopProductEntity> getAllShopProduct() {
-        return shopProductDao.getAll();
+    public List<ShopProductDto> getAllShopProduct() {
+        List<ShopProductEntity> shopProductEntityList = shopProductDao.getAll();
+        Type listType = new TypeToken<List<ShopProductDto>>() {
+        }.getType();
+        return mapper.map(shopProductEntityList, listType);
     }
 
     @Override
@@ -115,56 +116,66 @@ public class ShopProductServiceImpl implements ShopProductService {
     }
 
     @Override
-    public List<ShopProductEntity> sortByPrice() {
-        return shopProductDao.sortByPrice();
+    public List<ShopProductDto> sortByPrice() {
+        List<ShopProductEntity> shopProductEntityList = shopProductDao.sortByPrice();
+        return mapper.map(shopProductEntityList, listType);
     }
 
     @Override
-    public List<ShopProductEntity> getGoodsFromCategory(String category) {
+    public List<ShopProductDto> getGoodsFromCategory(String category) {
         List<CategoryEntity> categories = categoryDao.getAll();
         CategoryEntity categoryEntity = categories.stream()
                 .filter(p -> p.getName().equals(category)).findAny()
                 .orElse(null);
         List<ShopProductEntity> shopProducts = shopProductDao.getAll();
         if (categoryEntity != null) {
-            return shopProducts.stream()
+            List<ShopProductEntity> shopProductEntityList = shopProducts.stream()
                     .filter(p -> p.getProduct().getCategoryList().contains(categoryEntity))
                     .collect(Collectors.toList());
+
+            return mapper.map(shopProductEntityList, listType);
         }
         throw new ServiceException(FALSE_CATEGORY_NAME);
     }
 
     @Override
-    public List<ShopProductEntity>
+    public List<ShopProductDto>
     findByOneAttribute(String value, String attribute) {
         List<ShopProductEntity> goods = shopProductDao.getAll();
+        List<ShopProductEntity> shopProductEntityList;
         switch (attribute) {
             case (NAME):
-                return goods.stream()
+                shopProductEntityList = shopProductDao.getAll().stream()
                         .filter(p -> p.getProduct().getName().equals(value))
                         .collect(Collectors.toList());
+                return mapper.map(shopProductEntityList, listType);
             case (PRODUCER):
-                return goods.stream()
+                shopProductEntityList = goods.stream()
                         .filter(p -> p.getProduct().getProducer().equals(value))
                         .collect(Collectors.toList());
+                return mapper.map(shopProductEntityList, listType);
             case (PRICE):
-                return goods.stream()
+                shopProductEntityList = goods.stream()
                         .filter(p -> p.getPrice()
                                 .equals(java.lang.Integer.parseInt(value)))
                         .collect(Collectors.toList());
+                return mapper.map(shopProductEntityList, listType);
             case (QUANTITY):
-                return goods.stream()
+                shopProductEntityList = goods.stream()
                         .filter(p -> p.getQuantity()
                                 .equals(java.lang.Integer.parseInt(value)))
                         .collect(Collectors.toList());
+                return mapper.map(shopProductEntityList, listType);
             case (STORE):
-                return goods.stream()
+                shopProductEntityList = goods.stream()
                         .filter(p -> p.getStore().getName().equals(value))
                         .collect(Collectors.toList());
+                return mapper.map(shopProductEntityList, listType);
             case (DESCRIPTION):
-                return goods.stream()
+                shopProductEntityList = goods.stream()
                         .filter(p -> p.getDescription().equals(value))
                         .collect(Collectors.toList());
+                return mapper.map(shopProductEntityList, listType);
             default:
                 log.warn(FALSE_ATTRIBUTE_NAME);
                 throw new DaoException(FALSE_ATTRIBUTE_NAME);
@@ -172,48 +183,54 @@ public class ShopProductServiceImpl implements ShopProductService {
     }
 
     @Override
-    public List<ShopProductEntity> findByTwoAttribute(
+    public List<ShopProductDto> findByTwoAttribute(
             String value1, String attribute1,
             String value2, String attribute2) {
         List<ShopProductEntity> goods = shopProductDao.getAll();
+        List<ShopProductEntity> shopProductEntityList;
         switch (attribute2) {
             case (NAME):
                 switch (attribute1) {
                     case (PRODUCER):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value1))
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (PRICE):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getPrice().equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (QUANTITY):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (STORE):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getStore().getName()
                                         .equals(value1))
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (DESCRIPTION):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getDescription()
                                         .equals(value1))
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     default:
                         log.warn(FALSE_ATTRIBUTE_NAME);
                         throw new DaoException(FALSE_ATTRIBUTE_NAME);
@@ -221,40 +238,45 @@ public class ShopProductServiceImpl implements ShopProductService {
             case (PRODUCER):
                 switch (attribute1) {
                     case (NAME):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value1))
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (PRICE):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getPrice().equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (QUANTITY):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (STORE):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getStore().getName()
                                         .equals(value1))
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (DESCRIPTION):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getDescription()
                                         .equals(value1))
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     default:
                         log.warn(FALSE_ATTRIBUTE_NAME);
                         throw new DaoException(FALSE_ATTRIBUTE_NAME);
@@ -262,40 +284,45 @@ public class ShopProductServiceImpl implements ShopProductService {
             case (PRICE):
                 switch (attribute1) {
                     case (PRODUCER):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value1))
                                 .filter(p -> p.getPrice().equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (NAME):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value1))
                                 .filter(p -> p.getPrice().equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (QUANTITY):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getPrice().equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (STORE):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getStore().getName()
                                         .equals(value1))
                                 .filter(p -> p.getPrice().equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (DESCRIPTION):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getDescription()
                                         .equals(value1))
                                 .filter(p -> p.getPrice().equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     default:
                         log.warn(FALSE_ATTRIBUTE_NAME);
                         throw new DaoException(FALSE_ATTRIBUTE_NAME);
@@ -303,40 +330,45 @@ public class ShopProductServiceImpl implements ShopProductService {
             case (QUANTITY):
                 switch (attribute1) {
                     case (PRODUCER):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value1))
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (PRICE):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getPrice().equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (NAME):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value1))
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (STORE):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getStore().getName()
                                         .equals(value1))
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (DESCRIPTION):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getDescription()
                                         .equals(value1))
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     default:
                         log.warn(FALSE_ATTRIBUTE_NAME);
                         throw new DaoException(FALSE_ATTRIBUTE_NAME);
@@ -344,40 +376,45 @@ public class ShopProductServiceImpl implements ShopProductService {
             case (STORE):
                 switch (attribute1) {
                     case (PRODUCER):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value1))
                                 .filter(p -> p.getStore().getName()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (PRICE):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getPrice().equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getStore().getName()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (QUANTITY):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getStore().getName()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (NAME):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value1))
                                 .filter(p -> p.getStore().getName()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (DESCRIPTION):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getDescription()
                                         .equals(value1))
                                 .filter(p -> p.getStore().getName()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     default:
                         log.warn(FALSE_ATTRIBUTE_NAME);
                         throw new DaoException(FALSE_ATTRIBUTE_NAME);
@@ -385,40 +422,45 @@ public class ShopProductServiceImpl implements ShopProductService {
             case (DESCRIPTION):
                 switch (attribute1) {
                     case (PRODUCER):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value1))
                                 .filter(p -> p.getDescription()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (STORE):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getStore().getName()
                                         .equals(value1))
                                 .filter(p -> p.getDescription()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (NAME):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value1))
                                 .filter(p -> p.getDescription()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (PRICE):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getPrice().equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getDescription()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     case (QUANTITY):
-                        return goods.stream()
+                        shopProductEntityList = goods.stream()
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getDescription()
                                         .equals(value2))
                                 .collect(Collectors.toList());
+                        return mapper.map(shopProductEntityList, listType);
                     default:
                         log.warn(FALSE_ATTRIBUTE_NAME);
                         throw new DaoException(FALSE_ATTRIBUTE_NAME);

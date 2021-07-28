@@ -1,55 +1,53 @@
 package com.exposite.service;
 
 import com.exposit.api.dao.StoreDao;
-import com.exposit.api.service.IStoreService;
 
-import com.exposit.dao.util.DaoPropertiesHandler;
-import com.exposit.dao.util.StoreDaoFactory;
+
+import com.exposit.api.service.IStoreService;
+import com.exposit.dto.StoreDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
 import com.exposit.marshelling.json.MarshallingStoreJson;
 import com.exposit.model.StoreEntity;
 import lombok.extern.log4j.Log4j;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 @Log4j
 @Service
 public class StoreServiceImpl implements IStoreService {
-
-    private static final String PROPERTY;
-
-    static {
-        PROPERTY = DaoPropertiesHandler
-                .getProperty("dao.serialization.config_dao_impl")
-                .orElseThrow(() -> new ServiceException("Serialization path not found"));
-    }
+    private final ModelMapper mapper;
     private final StoreDao storeDao;
-    private static StoreServiceImpl instance;
+
+
     private static final String CAN_NOT_DELETE_STORE
             = "can not delete store";
     private static final String CAN_NOT_UPDATE_STORE
             = "can not update store";
+    private static final String CAN_NOT_ADD_STORE
+            = "can not add store";
 
-    private StoreServiceImpl() {
-        storeDao = StoreDaoFactory
-                .getStoreDaoFromProperties(PROPERTY);
+    @Autowired
+    public StoreServiceImpl(ModelMapper mapper, StoreDao storeDao) {
+        this.mapper = mapper;
+        this.storeDao = storeDao;
     }
 
-    public static StoreServiceImpl getInstance() {
-        if (instance == null) {
-            instance = new StoreServiceImpl();
-        }
-        return instance;
-    }
 
     @Override
-    public StoreEntity addStore(String name, String internetPage,
-                                String phoneNumber) {
-        StoreEntity store = new StoreEntity(name, internetPage, phoneNumber);
-        storeDao.save(store);
-        return store;
+    public void addStore(StoreDto storeDto) {
+        if (storeDto.getId() == null) {
+            StoreEntity store = mapper.map(storeDto, StoreEntity.class);
+            storeDao.save(store);
+        } else {
+            log.warn(CAN_NOT_ADD_STORE);
+            throw new DaoException(CAN_NOT_ADD_STORE);
+        }
     }
 
     @Override
@@ -63,10 +61,9 @@ public class StoreServiceImpl implements IStoreService {
     }
 
     @Override
-    public void updateStore(Long id, String name, String internetPage,
-                            String phoneNumber) {
+    public void updateStore(Long id, StoreDto storeDto) {
         if (storeDao.getById(id) != null) {
-            StoreEntity store = new StoreEntity(name, internetPage, phoneNumber);
+            StoreEntity store = new StoreEntity();
             store.setId(id);
             storeDao.update(id, store);
         } else {
@@ -76,13 +73,17 @@ public class StoreServiceImpl implements IStoreService {
     }
 
     @Override
-    public StoreEntity getStoreById(Long id) {
-        return   storeDao.getById(id);
+    public StoreDto getStoreById(Long id) {
+        StoreEntity storeEntity = storeDao.getById(id);
+        return mapper.map(storeEntity, StoreDto.class);
     }
 
     @Override
-    public List<StoreEntity> getAllStore() {
-        return storeDao.getAll();
+    public List<StoreDto> getAllStore() {
+        List<StoreEntity> storeEntityList = storeDao.getAll();
+        Type listType = new TypeToken<List<StoreDto>>() {
+        }.getType();
+        return mapper.map(storeEntityList, listType);
     }
 
     @Override

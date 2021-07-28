@@ -2,10 +2,11 @@ package com.exposit.dao.daoxml;
 
 import com.exposit.api.dao.ProductDao;
 import com.exposit.idgenerators.IdGenerator;
+import com.exposit.marshelling.xml.MarshallingCategoryXml;
 import com.exposit.marshelling.xml.MarshallingProductXml;
+import com.exposit.model.CategoryEntity;
 import com.exposit.model.ProductEntity;
 import org.springframework.stereotype.Repository;
-
 
 import java.util.List;
 
@@ -13,21 +14,14 @@ import java.util.List;
 public class ProductDaoXmlImpl extends AbstractDaoXmlImpl<ProductEntity>
         implements ProductDao {
 
-    private static ProductDao instance;
+    private ProductDao productDao;
 
-    private ProductDaoXmlImpl() {
-        List<ProductEntity> product = MarshallingProductXml
-        .deSerializeProduct();
-        for (ProductEntity entity : product) {
+    public ProductDaoXmlImpl() {
+        List<ProductEntity> category = MarshallingProductXml
+                .deSerializeProduct();
+        for (ProductEntity entity : category) {
             this.save(entity);
         }
-    }
-
-    public static ProductDao getInstance() {
-        if (instance == null) {
-            instance = new ProductDaoXmlImpl();
-        }
-        return instance;
     }
 
     @Override

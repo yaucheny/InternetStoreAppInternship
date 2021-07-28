@@ -1,25 +1,19 @@
 package com.exposit.model;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
 public class StoreEntity extends AEntity {
 
     private String name;
     private String internetPage;
     private String phoneNumber;
-
-    public StoreEntity(Long id, String name, String internetPage,
-                       String phoneNumber) {
-        super(id);
-        this.name = name;
-        this.internetPage = internetPage;
-        this.phoneNumber = phoneNumber;
-    }
 
     @Override
     public String toString() {

@@ -9,26 +9,18 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository("categoryDaoXml")
 public class CategoryDaoXmlImpl extends AbstractDaoXmlImpl<CategoryEntity> implements CategoryDao {
 
-    private static CategoryDao instance;
+    private CategoryDao categoryDao;
 
-    private CategoryDaoXmlImpl() {
+    public CategoryDaoXmlImpl() {
         List<CategoryEntity> category = MarshallingCategoryXml
-        .deSerializeCategory();
+                .deSerializeCategory();
         for (CategoryEntity entity : category) {
             this.save(entity);
         }
     }
-
-    public static CategoryDao getInstance() {
-        if (instance == null) {
-            instance = new CategoryDaoXmlImpl();
-        }
-        return instance;
-    }
-
 
     @Override
     public void save(CategoryEntity entity) {

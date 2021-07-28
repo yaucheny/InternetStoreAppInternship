@@ -2,14 +2,13 @@ package com.exposit.actions.product;
 
 import com.exposit.actions.AbstractAction;
 import com.exposit.actions.IAction;
-import com.exposit.api.service.IStoreService;
-import com.exposit.service.StoreServiceImpl;
+
 import lombok.extern.log4j.Log4j;
 
 @Log4j
 public class AddProduct extends AbstractAction implements IAction {
-    private static final IStoreService STORE_SERVICE
-            = StoreServiceImpl.getInstance();
+//    private static final StoreService STORE_SERVICE
+//            = StoreServiceImpl.getInstance();
 
     @Override
     public void execute() {
