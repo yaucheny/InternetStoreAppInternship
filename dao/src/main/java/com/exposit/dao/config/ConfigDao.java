@@ -1,7 +1,6 @@
 package com.exposit.dao.config;
 
 import com.exposit.api.dao.*;
-import com.exposit.dto.ShopProductDto;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,42 +21,42 @@ public class ConfigDao {
     @Bean
     @Primary
     public CategoryDao categoryDao() {
-        return beanFactory.getBean("categoryDaoJson", CategoryDao.class);
+        return beanFactory.getBean("categoryJson", CategoryDao.class);
     }
 
     @Bean
     @Primary
     public ProductDao productDao() {
-        return beanFactory.getBean("productDaoJson", ProductDao.class);
+        return beanFactory.getBean("productJson", ProductDao.class);
     }
 
     @Bean
     @Primary
     public ShopProductDao shopProductDao() {
-        return beanFactory.getBean("shopProduct", ShopProductDao.class);
+        return beanFactory.getBean("shopProductJson", ShopProductDao.class);
     }
 
     @Bean
     @Primary
     public OrderDao orderDao() {
-        return beanFactory.getBean("orderDaoJson", OrderDao.class);
+        return beanFactory.getBean("orderJson", OrderDao.class);
     }
 
     @Bean
     @Primary
     public OrderItemDao orderItemDao() {
-        return beanFactory.getBean("orderItemDaoJson", OrderItemDao.class);
+        return beanFactory.getBean("orderItemJson", OrderItemDao.class);
     }
 
     @Bean
     @Primary
     public StoreDao storeDao() {
-        return beanFactory.getBean("storeDaoJson", StoreDao.class);
+        return beanFactory.getBean("storeJson", StoreDao.class);
     }
 
     @Bean
     @Primary
     public CustomerDao customerDao() {
-        return beanFactory.getBean("customerDaoJson", CustomerDao.class);
+        return beanFactory.getBean("customerJson", CustomerDao.class);
     }
 }

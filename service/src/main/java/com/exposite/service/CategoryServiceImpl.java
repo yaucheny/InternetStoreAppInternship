@@ -22,10 +22,10 @@ import java.util.List;
 @Log4j
 @Service
 public class CategoryServiceImpl implements CategoryService {
-
-    private final ModelMapper mapper;
-    private final CategoryDao categoryDao;
-
+    @Autowired
+    private ModelMapper mapper;
+    @Autowired
+    private CategoryDao categoryDao;
 
     private static final String CAN_NOT_DELETE_CATEGORY
             = "can not delete category";
@@ -34,10 +34,6 @@ public class CategoryServiceImpl implements CategoryService {
     private static final String CAN_NOT_UPDATE_CATEGORY
             = "can not update category";
 
-    public CategoryServiceImpl(ModelMapper mapper, CategoryDao categoryDao) {
-        this.mapper = mapper;
-        this.categoryDao = categoryDao;
-    }
 
     @Override
     public void addCategory(CategoryDto categoryDto) {

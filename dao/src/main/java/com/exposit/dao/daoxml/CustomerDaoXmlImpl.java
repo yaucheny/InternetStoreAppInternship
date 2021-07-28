@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("customerDaoXml")
+@Repository("customerXml")
 public class CustomerDaoXmlImpl extends AbstractDaoXmlImpl<CustomerEntity> implements CustomerDao {
 
 

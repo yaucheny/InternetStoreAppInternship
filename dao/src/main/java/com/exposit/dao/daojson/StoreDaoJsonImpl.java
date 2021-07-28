@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("storeDaoJson")
+@Repository("storeJson")
 public class StoreDaoJsonImpl extends AbstractDaoJsonImpl<StoreEntity> implements StoreDao {
 
     private StoreDao storeDao;

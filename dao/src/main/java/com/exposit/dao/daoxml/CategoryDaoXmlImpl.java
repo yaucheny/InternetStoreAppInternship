@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("categoryDaoXml")
+@Repository("categoryXml")
 public class CategoryDaoXmlImpl extends AbstractDaoXmlImpl<CategoryEntity> implements CategoryDao {
 
     private CategoryDao categoryDao;

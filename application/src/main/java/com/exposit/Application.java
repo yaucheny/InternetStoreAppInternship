@@ -9,8 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 
 import java.util.Arrays;
 
-
 @SpringBootApplication
+@ComponentScan(basePackages = "com/exposit/dao")
 public class Application
 {
     public static void main(String[] args)
