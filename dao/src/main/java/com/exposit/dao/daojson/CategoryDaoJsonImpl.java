@@ -20,6 +20,7 @@ public class CategoryDaoJsonImpl extends AbstractDaoJsonImpl<CategoryEntity> imp
         for (CategoryEntity entity : category) {
             this.save(entity);
         }
+        IdGenerator.setCategoryId((long) category.size()+1);
     }
 
     @Override

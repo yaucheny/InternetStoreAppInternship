@@ -70,7 +70,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto getCategoryById(Long id) {
-        CategoryEntity categoryEntity = new CategoryEntity();
+        CategoryEntity categoryEntity = categoryDao.getById(id);
         return mapper.map(categoryEntity, CategoryDto.class);
     }
 

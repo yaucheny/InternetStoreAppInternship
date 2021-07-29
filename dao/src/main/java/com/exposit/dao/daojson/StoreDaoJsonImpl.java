@@ -6,7 +6,6 @@ import com.exposit.marshelling.json.MarshallingStoreJson;
 import com.exposit.model.StoreEntity;
 import org.springframework.stereotype.Repository;
 
-
 import java.util.List;
 
 @Repository("storeJson")
@@ -19,6 +18,7 @@ public class StoreDaoJsonImpl extends AbstractDaoJsonImpl<StoreEntity> implement
         for (StoreEntity entity : store) {
             this.save(entity);
         }
+        IdGenerator.setStoreId((long) store.size()+1);
     }
 
 
@@ -26,5 +26,12 @@ public class StoreDaoJsonImpl extends AbstractDaoJsonImpl<StoreEntity> implement
     public void save(StoreEntity entity) {
         entity.setId(IdGenerator.generateStoreId());
         repository.add(entity);
+    }
+
+    public void loadDataFromFile(){
+        List<StoreEntity> store = MarshallingStoreJson.deSerializeStore();
+        for (StoreEntity entity : store) {
+            this.save(entity);
+        }
     }
 }

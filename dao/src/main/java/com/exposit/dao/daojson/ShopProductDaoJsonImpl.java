@@ -18,11 +18,12 @@ public class ShopProductDaoJsonImpl extends AbstractDaoJsonImpl<ShopProductEntit
     private ShopProductDao shopProductDao;
 
     private ShopProductDaoJsonImpl() {
-        List<ShopProductEntity> product = MarshallingShopProductJson
+        List<ShopProductEntity> shopProduct = MarshallingShopProductJson
                 .deSerializeShopProduct();
-        for (ShopProductEntity entity : product) {
+        for (ShopProductEntity entity : shopProduct) {
             this.save(entity);
         }
+        IdGenerator.setShopProductId((long) shopProduct.size()+1);
     }
 
     @Override

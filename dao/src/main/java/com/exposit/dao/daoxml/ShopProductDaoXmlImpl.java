@@ -2,9 +2,7 @@ package com.exposit.dao.daoxml;
 
 import com.exposit.api.dao.ShopProductDao;
 import com.exposit.idgenerators.IdGenerator;
-import com.exposit.marshelling.xml.MarshallingCategoryXml;
 import com.exposit.marshelling.xml.MarshallingShopProductXml;
-import com.exposit.model.CategoryEntity;
 import com.exposit.model.ShopProductEntity;
 import org.springframework.stereotype.Repository;
 
@@ -20,11 +18,12 @@ public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductEntity>
     private ShopProductDao shopProductDao;
 
     public ShopProductDaoXmlImpl() {
-        List<ShopProductEntity> category = MarshallingShopProductXml
+        List<ShopProductEntity> shopProduct = MarshallingShopProductXml
                 .deSerializeShopProduct();
-        for (ShopProductEntity entity : category) {
+        for (ShopProductEntity entity : shopProduct) {
             this.save(entity);
         }
+        IdGenerator.setShopProductId((long) shopProduct.size()+1);
     }
 
     @Override

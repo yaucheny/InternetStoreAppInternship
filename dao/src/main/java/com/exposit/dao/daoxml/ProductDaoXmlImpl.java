@@ -2,9 +2,7 @@ package com.exposit.dao.daoxml;
 
 import com.exposit.api.dao.ProductDao;
 import com.exposit.idgenerators.IdGenerator;
-import com.exposit.marshelling.xml.MarshallingCategoryXml;
 import com.exposit.marshelling.xml.MarshallingProductXml;
-import com.exposit.model.CategoryEntity;
 import com.exposit.model.ProductEntity;
 import org.springframework.stereotype.Repository;
 
@@ -17,11 +15,12 @@ public class ProductDaoXmlImpl extends AbstractDaoXmlImpl<ProductEntity>
     private ProductDao productDao;
 
     public ProductDaoXmlImpl() {
-        List<ProductEntity> category = MarshallingProductXml
+        List<ProductEntity> product = MarshallingProductXml
                 .deSerializeProduct();
-        for (ProductEntity entity : category) {
+        for (ProductEntity entity : product) {
             this.save(entity);
         }
+        IdGenerator.setProductId((long) product.size()+1);
     }
 
     @Override

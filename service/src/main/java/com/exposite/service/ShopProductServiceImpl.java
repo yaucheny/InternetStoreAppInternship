@@ -86,7 +86,7 @@ public class ShopProductServiceImpl implements ShopProductService {
     @Override
     public void updateShopProduct(Long id, ShopProductDto shopProductDto) {
         if (shopProductDao.getById(id) != null) {
-            ShopProductEntity shopProduct = new ShopProductEntity();
+            ShopProductEntity shopProduct = mapper.map(shopProductDto, ShopProductEntity.class);
             shopProduct.setId(id);
             shopProductDao.update(id, shopProduct);
         } else {

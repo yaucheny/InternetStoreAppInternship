@@ -62,7 +62,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void updateProduct(Long id, ProductDto productDto) {
         if (productDao.getById(id) != null) {
-            ProductEntity product = new ProductEntity();
+            ProductEntity product = mapper.map(productDto, ProductEntity.class);
             product.setId(id);
             productDao.update(id, product);
         } else {

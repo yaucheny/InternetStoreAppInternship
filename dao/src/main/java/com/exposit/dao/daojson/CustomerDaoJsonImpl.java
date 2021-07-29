@@ -15,11 +15,11 @@ public class CustomerDaoJsonImpl extends AbstractDaoJsonImpl<CustomerEntity> imp
     private CustomerDao customerDao;
 
     private CustomerDaoJsonImpl() {
-        List<CustomerEntity> customer = MarshallingCustomerJson
-                .deSerializeCustomer();
+        List<CustomerEntity> customer = MarshallingCustomerJson.deSerializeCustomer();
         for (CustomerEntity entity : customer) {
             this.save(entity);
         }
+        IdGenerator.setCustomerId((long) customer.size() + 1);
     }
 
     @Override

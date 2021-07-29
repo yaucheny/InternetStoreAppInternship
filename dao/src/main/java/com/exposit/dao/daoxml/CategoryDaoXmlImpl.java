@@ -20,6 +20,7 @@ public class CategoryDaoXmlImpl extends AbstractDaoXmlImpl<CategoryEntity> imple
         for (CategoryEntity entity : category) {
             this.save(entity);
         }
+        IdGenerator.setCategoryId((long) category.size()+1);
     }
 
     @Override

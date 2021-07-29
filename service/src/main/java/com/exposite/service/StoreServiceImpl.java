@@ -63,7 +63,7 @@ public class StoreServiceImpl implements IStoreService {
     @Override
     public void updateStore(Long id, StoreDto storeDto) {
         if (storeDao.getById(id) != null) {
-            StoreEntity store = new StoreEntity();
+            StoreEntity store = mapper.map(storeDto, StoreEntity.class);
             store.setId(id);
             storeDao.update(id, store);
         } else {

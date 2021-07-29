@@ -6,7 +6,6 @@ import com.exposit.marshelling.xml.MarshallingStoreXml;
 import com.exposit.model.StoreEntity;
 import org.springframework.stereotype.Repository;
 
-
 import java.util.List;
 
 @Repository("storeXml")
@@ -19,6 +18,7 @@ public class StoreDaoXmlImpl extends AbstractDaoXmlImpl<StoreEntity> implements 
         for (StoreEntity entity : store) {
             this.save(entity);
         }
+        IdGenerator.setStoreId((long) store.size() + 1);
     }
 
     @Override
@@ -26,4 +26,5 @@ public class StoreDaoXmlImpl extends AbstractDaoXmlImpl<StoreEntity> implements 
         entity.setId(IdGenerator.generateStoreId());
         repository.add(entity);
     }
+
 }

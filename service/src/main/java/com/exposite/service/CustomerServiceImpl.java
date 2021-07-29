@@ -62,7 +62,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void updateCustomer(Long id, CustomerDto customerDto) {
         if (customerDao.getById(id) != null) {
-            CustomerEntity customer = new CustomerEntity();
+            CustomerEntity customer = mapper.map(customerDto, CustomerEntity.class);
             customer.setId(id);
             customerDao.update(id, customer);
         } else {

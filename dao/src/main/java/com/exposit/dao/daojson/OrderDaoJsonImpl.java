@@ -19,6 +19,7 @@ public class OrderDaoJsonImpl extends AbstractDaoJsonImpl<OrderEntity> implement
         for (OrderEntity entity : order) {
             this.save(entity);
         }
+        IdGenerator.setOrderId((long) order.size()+1);
     }
 
     @Override

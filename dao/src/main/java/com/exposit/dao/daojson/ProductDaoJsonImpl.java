@@ -22,6 +22,7 @@ public class ProductDaoJsonImpl extends AbstractDaoJsonImpl<ProductEntity>
         for (ProductEntity entity : product) {
             this.save(entity);
         }
+        IdGenerator.setProductId((long) product.size()+1);
     }
 
     @Override

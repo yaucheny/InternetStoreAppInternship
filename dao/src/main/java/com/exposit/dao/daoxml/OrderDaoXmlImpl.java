@@ -2,9 +2,7 @@ package com.exposit.dao.daoxml;
 
 import com.exposit.api.dao.OrderDao;
 import com.exposit.idgenerators.IdGenerator;
-import com.exposit.marshelling.xml.MarshallingCategoryXml;
 import com.exposit.marshelling.xml.MarshallingOrderXml;
-import com.exposit.model.CategoryEntity;
 import com.exposit.model.OrderEntity;
 import org.springframework.stereotype.Repository;
 
@@ -16,11 +14,12 @@ public class OrderDaoXmlImpl extends AbstractDaoXmlImpl<OrderEntity> implements 
     private OrderDao orderDao;
 
     public OrderDaoXmlImpl() {
-        List<OrderEntity> category = MarshallingOrderXml
+        List<OrderEntity> order = MarshallingOrderXml
                 .deSerializeOrder();
-        for (OrderEntity entity : category) {
+        for (OrderEntity entity : order) {
             this.save(entity);
         }
+        IdGenerator.setOrderId((long) order.size()+1);
     }
 
     @Override
