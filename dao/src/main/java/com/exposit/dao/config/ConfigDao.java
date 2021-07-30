@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.PropertySource;
 
 @Configuration
+@PropertySource("classpath:dao.properties")
 public class ConfigDao {
 
-    @Value("$(dao.serialization.config_dao_impl)")
+    @Value( "${dao.serialization.config_dao_impl}" )
     private String valueDao;
 
 
@@ -21,42 +23,42 @@ public class ConfigDao {
     @Bean
     @Primary
     public CategoryDao categoryDao() {
-        return beanFactory.getBean("categoryJson", CategoryDao.class);
+        return beanFactory.getBean("category"+valueDao, CategoryDao.class);
     }
 
     @Bean
     @Primary
     public ProductDao productDao() {
-        return beanFactory.getBean("productJson", ProductDao.class);
+        return beanFactory.getBean("product"+valueDao, ProductDao.class);
     }
 
     @Bean
     @Primary
     public ShopProductDao shopProductDao() {
-        return beanFactory.getBean("shopProductJson", ShopProductDao.class);
+        return beanFactory.getBean("shopProduct"+valueDao, ShopProductDao.class);
     }
 
     @Bean
     @Primary
     public OrderDao orderDao() {
-        return beanFactory.getBean("orderJson", OrderDao.class);
+        return beanFactory.getBean("order"+valueDao, OrderDao.class);
     }
 
     @Bean
     @Primary
     public OrderItemDao orderItemDao() {
-        return beanFactory.getBean("orderItemJson", OrderItemDao.class);
+        return beanFactory.getBean("orderItem"+valueDao, OrderItemDao.class);
     }
 
     @Bean
     @Primary
     public StoreDao storeDao() {
-        return beanFactory.getBean("storeJson", StoreDao.class);
+        return beanFactory.getBean("store"+valueDao, StoreDao.class);
     }
 
     @Bean
     @Primary
     public CustomerDao customerDao() {
-        return beanFactory.getBean("customerJson", CustomerDao.class);
+        return beanFactory.getBean("customer"+valueDao, CustomerDao.class);
     }
 }

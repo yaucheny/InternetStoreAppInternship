@@ -11,7 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Repository("shopProductJson")
+@Repository("shopProductjson")
 public class ShopProductDaoJsonImpl extends AbstractDaoJsonImpl<ShopProductEntity>
         implements ShopProductDao {
 
