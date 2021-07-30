@@ -46,12 +46,12 @@ public class OrderServiceImpl implements OrderService {
                 LocalDate dateOfOrder = LocalDate.now();
                 order.setDateOfOrder(dateOfOrder);
                 order.setDateOfDelivery(dateOfOrder.plusDays(orderDto.getDays()));
-                order.setPriceOfPurchase(orderService.priceOfBusket(orderDto.getOrderItemList()));
                 order.setCustomer(orderDto.getCustomer());
                 checkQuantity(orderDto.getOrderItemList());
                 order.setOrderItemList(orderDto.getOrderItemList());
-
-                orderService.changeQuantityAfterPurchase(orderDto.getOrderItemList());
+                order.setDays(orderDto.getDays());
+                order.setPriceOfPurchase(priceOfBusket(orderDto.getOrderItemList()));
+                changeQuantityAfterPurchase(orderDto.getOrderItemList());
                 orderDao.save(order);
 
                 mapper.map(orderDto, OrderEntity.class);
@@ -79,17 +79,16 @@ public class OrderServiceImpl implements OrderService {
     public void updateOrder(Long id, OrderDto orderDto) {
         if (orderDao.getById(id) != null) {
             try {
-                OrderEntity order = new OrderEntity();
+                OrderEntity order = orderDao.getById(id);
                 LocalDate dateOfOrder = LocalDate.now();
-                order.setId(id);
                 order.setDateOfOrder(dateOfOrder);
                 order.setDateOfDelivery(dateOfOrder.plusDays(orderDto.getDays()));
                 order.setCustomer(orderDto.getCustomer());
                 checkQuantity(orderDto.getOrderItemList());
                 order.setOrderItemList(orderDto.getOrderItemList());
-
-                order.setPriceOfPurchase(orderService.priceOfBusket(orderDto.getOrderItemList()));
-                orderService.changeQuantityAfterPurchase(orderDto.getOrderItemList());
+                order.setDays(orderDto.getDays());
+                order.setPriceOfPurchase(priceOfBusket(orderDto.getOrderItemList()));
+                changeQuantityAfterPurchase(orderDto.getOrderItemList());
                 orderDao.update(id, order);
             } catch (ServiceException e) {
                 log.warn(CAN_NOT_UPDATE_ORDER, e);

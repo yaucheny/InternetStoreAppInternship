@@ -58,7 +58,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void updateCategory(Long id, CategoryDto categoryDto) {
-        if (categoryDto.getId() != null) {
+        if (categoryDao.getById(id) != null) {
             CategoryEntity category = mapper.map(categoryDto, CategoryEntity.class);
             category.setId(id);
             categoryDao.update(id, category);

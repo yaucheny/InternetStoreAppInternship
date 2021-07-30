@@ -3,6 +3,7 @@ package com.exposit.controller;
 
 import com.exposit.api.service.CategoryService;
 import com.exposit.dto.CategoryDto;
+import com.exposit.dto.CustomerDto;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

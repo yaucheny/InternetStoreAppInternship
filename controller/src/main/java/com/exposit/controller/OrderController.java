@@ -18,7 +18,7 @@ public class OrderController {
     private final OrderService orderService;
     private static final String REQUEST = "receive request: /order/ ";
 
-@Autowired
+    @Autowired
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
