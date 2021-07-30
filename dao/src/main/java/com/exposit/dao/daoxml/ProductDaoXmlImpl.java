@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("productXml")
+@Repository("productxml")
 public class ProductDaoXmlImpl extends AbstractDaoXmlImpl<ProductEntity>
         implements ProductDao {
 

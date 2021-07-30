@@ -8,12 +8,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("storeXml")
+@Repository("storexml")
 public class StoreDaoXmlImpl extends AbstractDaoXmlImpl<StoreEntity> implements StoreDao {
 
     private StoreDao storeDao;
 
-    private StoreDaoXmlImpl(StoreDao storeDao) {
+    private StoreDaoXmlImpl() {
         List<StoreEntity> store = MarshallingStoreXml.deSerializeStore();
         for (StoreEntity entity : store) {
             this.save(entity);

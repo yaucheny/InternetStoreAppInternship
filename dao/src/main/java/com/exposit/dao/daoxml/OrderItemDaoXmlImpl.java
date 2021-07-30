@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("orderXml")
+@Repository("orderItemxml")
 public class OrderItemDaoXmlImpl extends AbstractDaoXmlImpl<OrderItemEntity>
         implements OrderItemDao {
 
