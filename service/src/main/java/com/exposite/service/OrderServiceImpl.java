@@ -2,7 +2,6 @@ package com.exposite.service;
 
 import com.exposit.api.dao.OrderDao;
 import com.exposit.api.service.OrderService;
-import com.exposit.dao.util.OrderDaoFactory;
 import com.exposit.dto.OrderDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
@@ -13,7 +12,6 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.exposit.dao.util.DaoPropertiesHandler;
 
 import java.lang.reflect.Type;
 import java.time.LocalDate;
@@ -24,7 +22,6 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     private final ModelMapper mapper;
     private final OrderDao orderDao;
-    private OrderServiceImpl orderService;
 
     private static final String CAN_NOT_DELETE_ORDER = "can not delete order";
     private static final String CAN_NOT_UPDATE_ORDER = "can not update order";
@@ -45,12 +42,14 @@ public class OrderServiceImpl implements OrderService {
                 OrderEntity order = new OrderEntity();
                 LocalDate dateOfOrder = LocalDate.now();
                 order.setDateOfOrder(dateOfOrder);
-                order.setDateOfDelivery(dateOfOrder.plusDays(orderDto.getDays()));
+                order.setDateOfDelivery(dateOfOrder
+                        .plusDays(orderDto.getDays()));
                 order.setCustomer(orderDto.getCustomer());
                 checkQuantity(orderDto.getOrderItemList());
                 order.setOrderItemList(orderDto.getOrderItemList());
                 order.setDays(orderDto.getDays());
-                order.setPriceOfPurchase(priceOfBusket(orderDto.getOrderItemList()));
+                order.setPriceOfPurchase(priceOfBusket(orderDto
+                        .getOrderItemList()));
                 changeQuantityAfterPurchase(orderDto.getOrderItemList());
                 orderDao.save(order);
 
@@ -82,12 +81,14 @@ public class OrderServiceImpl implements OrderService {
                 OrderEntity order = orderDao.getById(id);
                 LocalDate dateOfOrder = LocalDate.now();
                 order.setDateOfOrder(dateOfOrder);
-                order.setDateOfDelivery(dateOfOrder.plusDays(orderDto.getDays()));
+                order.setDateOfDelivery(dateOfOrder
+                        .plusDays(orderDto.getDays()));
                 order.setCustomer(orderDto.getCustomer());
                 checkQuantity(orderDto.getOrderItemList());
                 order.setOrderItemList(orderDto.getOrderItemList());
                 order.setDays(orderDto.getDays());
-                order.setPriceOfPurchase(priceOfBusket(orderDto.getOrderItemList()));
+                order.setPriceOfPurchase(priceOfBusket(orderDto
+                        .getOrderItemList()));
                 changeQuantityAfterPurchase(orderDto.getOrderItemList());
                 orderDao.update(id, order);
             } catch (ServiceException e) {
@@ -141,7 +142,8 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-    private void changeQuantityAfterPurchase(List<OrderItemEntity> orderItemList) {
+    private void changeQuantityAfterPurchase(
+            List<OrderItemEntity> orderItemList) {
         for (OrderItemEntity orderItem : orderItemList) {
             Integer quantityList = orderItem.getQuantity();
             ShopProductEntity shopProduct = orderItem.getShopProduct();

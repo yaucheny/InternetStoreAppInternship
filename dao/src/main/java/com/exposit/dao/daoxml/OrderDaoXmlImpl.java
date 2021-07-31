@@ -9,9 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository("orderxml")
-public class OrderDaoXmlImpl extends AbstractDaoXmlImpl<OrderEntity> implements OrderDao {
-
-    private OrderDao orderDao;
+public class OrderDaoXmlImpl
+        extends AbstractDaoXmlImpl<OrderEntity> implements OrderDao {
 
     public OrderDaoXmlImpl() {
         List<OrderEntity> order = MarshallingOrderXml
@@ -19,7 +18,7 @@ public class OrderDaoXmlImpl extends AbstractDaoXmlImpl<OrderEntity> implements 
         for (OrderEntity entity : order) {
             this.save(entity);
         }
-        IdGenerator.setOrderId((long) order.size()+1);
+        IdGenerator.setOrderId((long) order.size() + 1);
     }
 
     @Override

@@ -41,7 +41,8 @@ public final class MarshallingCustomerXml {
                     PATH_TO_FILE),
                     StandardCharsets.US_ASCII);
             List<CustomerEntity> customers
-                    = Arrays.asList(MAPPER.readValue(json, CustomerEntity[].class));
+                    = Arrays.asList(MAPPER
+                    .readValue(json, CustomerEntity[].class));
             if (!customers.isEmpty()) {
                 return customers;
             }

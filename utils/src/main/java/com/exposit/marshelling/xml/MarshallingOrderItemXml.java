@@ -40,7 +40,8 @@ public final class MarshallingOrderItemXml {
             String json = Files.readString(Path.of(
                     PATH_TO_FILE),
                     StandardCharsets.US_ASCII);
-            List<OrderItemEntity> orderItem = Arrays.asList(MAPPER.readValue(json,
+            List<OrderItemEntity> orderItem = Arrays
+                    .asList(MAPPER.readValue(json,
                     OrderItemEntity[].class));
             if (!orderItem.isEmpty()) {
                 return orderItem;

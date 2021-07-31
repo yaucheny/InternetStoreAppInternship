@@ -14,15 +14,13 @@ import java.util.List;
 public class ProductDaoJsonImpl extends AbstractDaoJsonImpl<ProductEntity>
         implements ProductDao {
 
-    private ProductDao productDao;
-
     private ProductDaoJsonImpl() {
         List<ProductEntity> product = MarshallingProductJson
                 .deSerializeProduct();
         for (ProductEntity entity : product) {
             this.save(entity);
         }
-        IdGenerator.setProductId((long) product.size()+1);
+        IdGenerator.setProductId((long) product.size() + 1);
     }
 
     @Override

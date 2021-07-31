@@ -40,7 +40,8 @@ public final class MarshallingCategoryJson {
             String json = Files.readString(Path.of(PATH_TO_FILE),
                     StandardCharsets.US_ASCII);
             List<CategoryEntity> category
-                    = Arrays.asList(MAPPER.readValue(json, CategoryEntity[].class));
+                    = Arrays.asList(MAPPER
+                    .readValue(json, CategoryEntity[].class));
             if (!category.isEmpty()) {
                 return category;
             }

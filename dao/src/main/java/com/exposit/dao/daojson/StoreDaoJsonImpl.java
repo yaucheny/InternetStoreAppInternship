@@ -11,14 +11,12 @@ import java.util.List;
 @Repository("storejson")
 public class StoreDaoJsonImpl extends AbstractDaoJsonImpl<StoreEntity> implements StoreDao {
 
-    private StoreDao storeDao;
-
     private StoreDaoJsonImpl() {
         List<StoreEntity> store = MarshallingStoreJson.deSerializeStore();
         for (StoreEntity entity : store) {
             this.save(entity);
         }
-        IdGenerator.setStoreId((long) store.size()+1);
+        IdGenerator.setStoreId((long) store.size() + 1);
     }
 
 
@@ -28,7 +26,7 @@ public class StoreDaoJsonImpl extends AbstractDaoJsonImpl<StoreEntity> implement
         repository.add(entity);
     }
 
-    public void loadDataFromFile(){
+    public void loadDataFromFile() {
         List<StoreEntity> store = MarshallingStoreJson.deSerializeStore();
         for (StoreEntity entity : store) {
             this.save(entity);

@@ -2,8 +2,6 @@ package com.exposite.service;
 
 import com.exposit.api.dao.CustomerDao;
 import com.exposit.api.service.CustomerService;
-import com.exposit.dao.util.CustomerDaoFactory;
-import com.exposit.dao.util.DaoPropertiesHandler;
 import com.exposit.dto.CustomerDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
@@ -41,7 +39,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void addCustomer(CustomerDto customerDto) {
         if (customerDto.getId() == null) {
-            CustomerEntity customer = mapper.map(customerDto, CustomerEntity.class);
+            CustomerEntity customer = mapper
+                    .map(customerDto, CustomerEntity.class);
             customerDao.save(customer);
         } else {
             log.warn(CAN_NOT_ADD_CUSTOMER);
@@ -62,7 +61,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void updateCustomer(Long id, CustomerDto customerDto) {
         if (customerDao.getById(id) != null) {
-            CustomerEntity customer = mapper.map(customerDto, CustomerEntity.class);
+            CustomerEntity customer = mapper
+                    .map(customerDto, CustomerEntity.class);
             customer.setId(id);
             customerDao.update(id, customer);
         } else {

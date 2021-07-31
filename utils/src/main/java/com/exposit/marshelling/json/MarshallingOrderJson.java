@@ -41,7 +41,8 @@ public class MarshallingOrderJson {
                     PATH_TO_FILE),
                     StandardCharsets.US_ASCII);
             List<OrderEntity> orders
-                    = Arrays.asList(MAPPER.readValue(json, OrderEntity[].class));
+                    = Arrays.asList(MAPPER
+                    .readValue(json, OrderEntity[].class));
             if (!orders.isEmpty()) {
                 return orders;
             }

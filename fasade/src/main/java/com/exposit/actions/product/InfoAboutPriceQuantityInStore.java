@@ -12,7 +12,8 @@ public class InfoAboutPriceQuantityInStore extends AbstractAction
 //        try {
 //            System.out.println("Enter store name to get info");
 //            String storeName = reader.readLine();
-//            System.out.println(fasade.infoAboutPriceQuantityInStore(storeName));
+//            System.out.println(fasade
+//            .infoAboutPriceQuantityInStore(storeName));
 //        } catch (Exception e) {
 //            log.warn(e.getLocalizedMessage());
 //        }

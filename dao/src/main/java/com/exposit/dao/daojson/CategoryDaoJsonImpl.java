@@ -10,9 +10,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository("categoryjson")
-public class CategoryDaoJsonImpl extends AbstractDaoJsonImpl<CategoryEntity> implements CategoryDao {
-
-    private CategoryDao categoryDao;
+public class CategoryDaoJsonImpl
+        extends AbstractDaoJsonImpl<CategoryEntity> implements CategoryDao {
 
     private CategoryDaoJsonImpl() {
         List<CategoryEntity> category = MarshallingCategoryJson
@@ -20,7 +19,7 @@ public class CategoryDaoJsonImpl extends AbstractDaoJsonImpl<CategoryEntity> imp
         for (CategoryEntity entity : category) {
             this.save(entity);
         }
-        IdGenerator.setCategoryId((long) category.size()+1);
+        IdGenerator.setCategoryId((long) category.size() + 1);
     }
 
     @Override

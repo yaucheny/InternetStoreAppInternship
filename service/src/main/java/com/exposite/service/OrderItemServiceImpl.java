@@ -2,9 +2,6 @@ package com.exposite.service;
 
 import com.exposit.api.dao.OrderItemDao;
 import com.exposit.api.service.OrderItemService;
-import com.exposit.dao.util.DaoPropertiesHandler;
-import com.exposit.dao.util.OrderItemDaoFactory;
-
 import com.exposit.dto.OrderItemDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
@@ -42,7 +39,8 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Override
     public void addOrderItem(OrderItemDto orderItemDto) {
         if (orderItemDto.getId() == null) {
-            OrderItemEntity orderItem = mapper.map(orderItemDto, OrderItemEntity.class);
+            OrderItemEntity orderItem = mapper
+                    .map(orderItemDto, OrderItemEntity.class);
             orderItemDao.save(orderItem);
         } else {
             log.warn(CAN_NOT_ADD_ORDER_ITEM);
@@ -63,7 +61,8 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Override
     public void updateOrderItem(Long id, OrderItemDto orderItemDto) {
         if (orderItemDao.getById(id) != null) {
-            OrderItemEntity orderItem = mapper.map(orderItemDto, OrderItemEntity.class);
+            OrderItemEntity orderItem = mapper
+                    .map(orderItemDto, OrderItemEntity.class);
             orderItem.setId(id);
             orderItemDao.update(id, orderItem);
         } else {

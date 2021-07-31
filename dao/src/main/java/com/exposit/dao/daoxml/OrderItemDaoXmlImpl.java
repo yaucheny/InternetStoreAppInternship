@@ -12,15 +12,13 @@ import java.util.List;
 public class OrderItemDaoXmlImpl extends AbstractDaoXmlImpl<OrderItemEntity>
         implements OrderItemDao {
 
-    private OrderItemDao orderItemDao;
-
     public OrderItemDaoXmlImpl() {
         List<OrderItemEntity> orderItem = MarshallingOrderItemXml
                 .deSerializeOrderItem();
         for (OrderItemEntity entity : orderItem) {
             this.save(entity);
         }
-        IdGenerator.setOrderItemId((long) orderItem.size()+1);
+        IdGenerator.setOrderItemId((long) orderItem.size() + 1);
     }
 
     @Override
