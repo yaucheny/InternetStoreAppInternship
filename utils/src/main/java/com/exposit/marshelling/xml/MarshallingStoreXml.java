@@ -41,7 +41,8 @@ public final class MarshallingStoreXml {
                     PATH_TO_FILE),
                     StandardCharsets.US_ASCII);
             List<StoreEntity> store
-                    = Arrays.asList(MAPPER.readValue(json, StoreEntity[].class));
+                    = Arrays.asList(MAPPER
+                    .readValue(json, StoreEntity[].class));
             if (!store.isEmpty()) {
                 return store;
             }

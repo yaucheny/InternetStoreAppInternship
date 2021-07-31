@@ -42,7 +42,8 @@ public class MarshallingShopProductJson {
                     PATH_TO_FILE),
                     StandardCharsets.US_ASCII);
             List<ShopProductEntity> shopProduct
-                    = Arrays.asList(MAPPER.readValue(json, ShopProductEntity[].class));
+                    = Arrays.asList(MAPPER
+                    .readValue(json, ShopProductEntity[].class));
             if (!shopProduct.isEmpty()) {
                 return shopProduct;
             }

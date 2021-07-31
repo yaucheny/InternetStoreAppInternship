@@ -10,9 +10,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository("categoryxml")
-public class CategoryDaoXmlImpl extends AbstractDaoXmlImpl<CategoryEntity> implements CategoryDao {
-
-    private CategoryDao categoryDao;
+public class CategoryDaoXmlImpl
+        extends AbstractDaoXmlImpl<CategoryEntity> implements CategoryDao {
 
     public CategoryDaoXmlImpl() {
         List<CategoryEntity> category = MarshallingCategoryXml
@@ -20,7 +19,7 @@ public class CategoryDaoXmlImpl extends AbstractDaoXmlImpl<CategoryEntity> imple
         for (CategoryEntity entity : category) {
             this.save(entity);
         }
-        IdGenerator.setCategoryId((long) category.size()+1);
+        IdGenerator.setCategoryId((long) category.size() + 1);
     }
 
     @Override

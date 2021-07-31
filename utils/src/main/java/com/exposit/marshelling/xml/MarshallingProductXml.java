@@ -41,7 +41,8 @@ public final class MarshallingProductXml {
                     PATH_TO_FILE),
                     StandardCharsets.US_ASCII);
             List<ProductEntity> product
-                    = Arrays.asList(MAPPER.readValue(json, ProductEntity[].class));
+                    = Arrays.asList(MAPPER
+                    .readValue(json, ProductEntity[].class));
             if (!product.isEmpty()) {
                 return product;
             }

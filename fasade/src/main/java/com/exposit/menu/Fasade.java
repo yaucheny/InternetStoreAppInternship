@@ -67,15 +67,17 @@ public class Fasade {
 //        PRODUCT_SERVICE.deleteProduct(id);
 //    }
 //
-//    public void updateProduct(Long id, String name, String producer, List<CategoryEntity> categoryList) {
+//    public void updateProduct(Long id, String name, String producer,
+//    List<CategoryEntity> categoryList) {
 //        PRODUCT_SERVICE.updateProduct(id, name, producer, categoryList);
 //    }
 //
-//    public List<ShopProductEntity> findByTwoAttribute(String value1, String attribute1,
-//                                                      String value2, String attribute2) {
-//        return SHOP_PRODUCT_SERVICE.findByTwoAttribute(value1,
-//                attribute1, value2, attribute2);
-//    }
+//public List<ShopProductEntity>
+//findByTwoAttribute(String value1, String attribute1,
+//                   String value2, String attribute2) {
+//    return SHOP_PRODUCT_SERVICE.findByTwoAttribute(value1,
+//            attribute1, value2, attribute2);
+//}
 //
 //    public List<ShopProductEntity> findByOneAttribute(String value,
 //                                                      String attribute) {

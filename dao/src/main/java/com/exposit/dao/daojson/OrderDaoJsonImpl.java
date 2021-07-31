@@ -10,16 +10,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository("orderjson")
-public class OrderDaoJsonImpl extends AbstractDaoJsonImpl<OrderEntity> implements OrderDao {
-
-    private OrderDao orderDao;
+public class OrderDaoJsonImpl
+        extends AbstractDaoJsonImpl<OrderEntity> implements OrderDao {
 
     private OrderDaoJsonImpl() {
         List<OrderEntity> order = MarshallingOrderJson.deSerializeOrder();
         for (OrderEntity entity : order) {
             this.save(entity);
         }
-        IdGenerator.setOrderId((long) order.size()+1);
+        IdGenerator.setOrderId((long) order.size() + 1);
     }
 
     @Override

@@ -11,16 +11,13 @@ import java.util.List;
 @Repository("customerxml")
 public class CustomerDaoXmlImpl extends AbstractDaoXmlImpl<CustomerEntity> implements CustomerDao {
 
-
-    private CustomerDao customerDao;
-
     public CustomerDaoXmlImpl() {
         List<CustomerEntity> customer = MarshallingCustomerXml
                 .deSerializeCustomer();
         for (CustomerEntity entity : customer) {
             this.save(entity);
         }
-        IdGenerator.setCustomerId((long) customer.size()+1);
+        IdGenerator.setCustomerId((long) customer.size() + 1);
     }
 
     @Override

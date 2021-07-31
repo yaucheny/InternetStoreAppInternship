@@ -7,7 +7,8 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 public class UpdateProduct extends AbstractAction implements IAction {
-//    private static final StoreService storeService = StoreServiceImpl.getInstance();
+//    private static final StoreService storeService
+//    = StoreServiceImpl.getInstance();
 
     @Override
     public void execute() {
@@ -46,7 +47,8 @@ public class UpdateProduct extends AbstractAction implements IAction {
 //            String catThree = reader.readLine();
 //            CategoryThree categoryThree=CategoryThree.valueOf(catThree);
 //
-//           StoreEntity store = storeService.getStoreById(storeId);
+//           StoreEntity store
+//           = storeService.getStoreById(storeId);
 //            fasade.updateProduct(productId, productName, productProducer, productPrice,
 //            //                  productQuantity, store, categories);
 //            System.out.println("product id :" + productId + " updated");

@@ -2,8 +2,6 @@ package com.exposite.service;
 
 import com.exposit.api.dao.CategoryDao;
 import com.exposit.api.service.CategoryService;
-import com.exposit.dao.util.CategoryDaoFactory;
-import com.exposit.dao.util.DaoPropertiesHandler;
 import com.exposit.dto.CategoryDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
@@ -38,7 +36,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void addCategory(CategoryDto categoryDto) {
         if (categoryDto.getId() == null) {
-            CategoryEntity category = mapper.map(categoryDto, CategoryEntity.class);
+            CategoryEntity category = mapper
+                    .map(categoryDto, CategoryEntity.class);
             categoryDao.save(category);
         } else {
             log.warn(CAN_NOT_ADD_CATEGORY);
@@ -59,7 +58,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void updateCategory(Long id, CategoryDto categoryDto) {
         if (categoryDao.getById(id) != null) {
-            CategoryEntity category = mapper.map(categoryDto, CategoryEntity.class);
+            CategoryEntity category = mapper
+                    .map(categoryDto, CategoryEntity.class);
             category.setId(id);
             categoryDao.update(id, category);
         } else {

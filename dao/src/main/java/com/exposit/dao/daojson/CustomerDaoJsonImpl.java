@@ -10,12 +10,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository("customerjson")
-public class CustomerDaoJsonImpl extends AbstractDaoJsonImpl<CustomerEntity> implements CustomerDao {
-
-    private CustomerDao customerDao;
+public class CustomerDaoJsonImpl
+        extends AbstractDaoJsonImpl<CustomerEntity> implements CustomerDao {
 
     private CustomerDaoJsonImpl() {
-        List<CustomerEntity> customer = MarshallingCustomerJson.deSerializeCustomer();
+        List<CustomerEntity> customer
+                = MarshallingCustomerJson.deSerializeCustomer();
         for (CustomerEntity entity : customer) {
             this.save(entity);
         }

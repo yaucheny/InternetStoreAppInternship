@@ -1,4 +1,4 @@
-package com.exposit.actions.save.saveToXml;
+package com.exposit.actions.save.savetoxml;
 
 import com.exposit.actions.AbstractAction;
 import com.exposit.actions.IAction;

@@ -24,7 +24,6 @@ public class StoreServiceImpl implements IStoreService {
     private final ModelMapper mapper;
     private final StoreDao storeDao;
 
-
     private static final String CAN_NOT_DELETE_STORE
             = "can not delete store";
     private static final String CAN_NOT_UPDATE_STORE
@@ -37,7 +36,6 @@ public class StoreServiceImpl implements IStoreService {
         this.mapper = mapper;
         this.storeDao = storeDao;
     }
-
 
     @Override
     public void addStore(StoreDto storeDto) {

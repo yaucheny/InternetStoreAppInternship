@@ -3,11 +3,17 @@ package com.exposit.controller;
 
 import com.exposit.api.service.CategoryService;
 import com.exposit.dto.CategoryDto;
-import com.exposit.dto.CustomerDto;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 
@@ -41,7 +47,8 @@ public class CategoryController {
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
         categoryService.deleteCategory(id);
         log.info(REQUEST + id);
-        return ResponseEntity.ok().body(String.format("category %s successfully deleted", id));
+        return ResponseEntity.ok().body(String
+                .format("category %s successfully deleted", id));
     }
 
     @PostMapping(value = "/")
@@ -52,9 +59,11 @@ public class CategoryController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> update(@PathVariable Long id, @RequestBody CategoryDto categoryDto) {
+    public ResponseEntity<String> update(@PathVariable Long id,
+                                         @RequestBody CategoryDto categoryDto) {
         categoryService.updateCategory(id, categoryDto);
         log.info(REQUEST);
-        return ResponseEntity.ok().body(String.format("category %s successfully updated", id));
+        return ResponseEntity.ok().body(String
+                .format("category %s successfully updated", id));
     }
 }

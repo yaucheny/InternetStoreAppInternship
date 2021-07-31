@@ -3,9 +3,6 @@ package com.exposite.service;
 import com.exposit.api.dao.CategoryDao;
 import com.exposit.api.dao.ShopProductDao;
 import com.exposit.api.service.ShopProductService;
-
-import com.exposit.dao.util.CategoryDaoFactory;
-import com.exposit.dao.util.ShopProductDaoFactory;
 import com.exposit.dto.ShopProductDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
@@ -18,7 +15,6 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.exposit.dao.util.DaoPropertiesHandler;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -53,7 +49,9 @@ public class ShopProductServiceImpl implements ShopProductService {
     }.getType();
 
     @Autowired
-    public ShopProductServiceImpl(ModelMapper mapper, ShopProductDao shopProductDao, CategoryDao categoryDao) {
+    public ShopProductServiceImpl(ModelMapper mapper,
+                                  ShopProductDao shopProductDao,
+                                  CategoryDao categoryDao) {
         this.mapper = mapper;
 
         this.shopProductDao = shopProductDao;
@@ -64,7 +62,8 @@ public class ShopProductServiceImpl implements ShopProductService {
     @Override
     public void addShopProduct(ShopProductDto shopProductDto) {
         if (shopProductDto.getId() == null) {
-            ShopProductEntity shopProduct = mapper.map(shopProductDto, ShopProductEntity.class);
+            ShopProductEntity shopProduct = mapper
+                    .map(shopProductDto, ShopProductEntity.class);
             shopProductDao.save(shopProduct);
 
         } else {
@@ -86,7 +85,8 @@ public class ShopProductServiceImpl implements ShopProductService {
     @Override
     public void updateShopProduct(Long id, ShopProductDto shopProductDto) {
         if (shopProductDao.getById(id) != null) {
-            ShopProductEntity shopProduct = mapper.map(shopProductDto, ShopProductEntity.class);
+            ShopProductEntity shopProduct = mapper
+                    .map(shopProductDto, ShopProductEntity.class);
             shopProduct.setId(id);
             shopProductDao.update(id, shopProduct);
         } else {
@@ -104,8 +104,6 @@ public class ShopProductServiceImpl implements ShopProductService {
     @Override
     public List<ShopProductDto> getAllShopProduct() {
         List<ShopProductEntity> shopProductEntityList = shopProductDao.getAll();
-        Type listType = new TypeToken<List<ShopProductDto>>() {
-        }.getType();
         return mapper.map(shopProductEntityList, listType);
     }
 
@@ -117,7 +115,8 @@ public class ShopProductServiceImpl implements ShopProductService {
 
     @Override
     public List<ShopProductDto> sortByPrice() {
-        List<ShopProductEntity> shopProductEntityList = shopProductDao.sortByPrice();
+        List<ShopProductEntity> shopProductEntityList
+                = shopProductDao.sortByPrice();
         return mapper.map(shopProductEntityList, listType);
     }
 
@@ -129,8 +128,10 @@ public class ShopProductServiceImpl implements ShopProductService {
                 .orElse(null);
         List<ShopProductEntity> shopProducts = shopProductDao.getAll();
         if (categoryEntity != null) {
-            List<ShopProductEntity> shopProductEntityList = shopProducts.stream()
-                    .filter(p -> p.getProduct().getCategoryList().contains(categoryEntity))
+            List<ShopProductEntity> shopProductEntityList
+                    = shopProducts.stream()
+                    .filter(p -> p.getProduct()
+                            .getCategoryList().contains(categoryEntity))
                     .collect(Collectors.toList());
 
             return mapper.map(shopProductEntityList, listType);
@@ -201,7 +202,8 @@ public class ShopProductServiceImpl implements ShopProductService {
                         return mapper.map(shopProductEntityList, listType);
                     case (PRICE):
                         shopProductEntityList = goods.stream()
-                                .filter(p -> p.getPrice().equals(java.lang.Integer
+                                .filter(p -> p.getPrice()
+                                        .equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value2))
@@ -209,7 +211,8 @@ public class ShopProductServiceImpl implements ShopProductService {
                         return mapper.map(shopProductEntityList, listType);
                     case (QUANTITY):
                         shopProductEntityList = goods.stream()
-                                .filter(p -> p.getQuantity().equals(java.lang.Integer
+                                .filter(p -> p.getQuantity()
+                                        .equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value2))
@@ -247,7 +250,8 @@ public class ShopProductServiceImpl implements ShopProductService {
                         return mapper.map(shopProductEntityList, listType);
                     case (PRICE):
                         shopProductEntityList = goods.stream()
-                                .filter(p -> p.getPrice().equals(java.lang.Integer
+                                .filter(p -> p.getPrice()
+                                        .equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value2))
@@ -255,7 +259,8 @@ public class ShopProductServiceImpl implements ShopProductService {
                         return mapper.map(shopProductEntityList, listType);
                     case (QUANTITY):
                         shopProductEntityList = goods.stream()
-                                .filter(p -> p.getQuantity().equals(java.lang.Integer
+                                .filter(p -> p.getQuantity()
+                                        .equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value2))
@@ -287,7 +292,8 @@ public class ShopProductServiceImpl implements ShopProductService {
                         shopProductEntityList = goods.stream()
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value1))
-                                .filter(p -> p.getPrice().equals(java.lang.Integer
+                                .filter(p -> p.getPrice()
+                                        .equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductEntityList, listType);
@@ -295,15 +301,18 @@ public class ShopProductServiceImpl implements ShopProductService {
                         shopProductEntityList = goods.stream()
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value1))
-                                .filter(p -> p.getPrice().equals(java.lang.Integer
+                                .filter(p -> p.getPrice()
+                                        .equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductEntityList, listType);
                     case (QUANTITY):
                         shopProductEntityList = goods.stream()
-                                .filter(p -> p.getQuantity().equals(java.lang.Integer
+                                .filter(p -> p.getQuantity()
+                                        .equals(java.lang.Integer
                                         .parseInt(value1)))
-                                .filter(p -> p.getPrice().equals(java.lang.Integer
+                                .filter(p -> p.getPrice()
+                                        .equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductEntityList, listType);
@@ -311,7 +320,8 @@ public class ShopProductServiceImpl implements ShopProductService {
                         shopProductEntityList = goods.stream()
                                 .filter(p -> p.getStore().getName()
                                         .equals(value1))
-                                .filter(p -> p.getPrice().equals(java.lang.Integer
+                                .filter(p -> p.getPrice()
+                                        .equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductEntityList, listType);
@@ -319,7 +329,8 @@ public class ShopProductServiceImpl implements ShopProductService {
                         shopProductEntityList = goods.stream()
                                 .filter(p -> p.getDescription()
                                         .equals(value1))
-                                .filter(p -> p.getPrice().equals(java.lang.Integer
+                                .filter(p -> p.getPrice()
+                                        .equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductEntityList, listType);
@@ -333,15 +344,18 @@ public class ShopProductServiceImpl implements ShopProductService {
                         shopProductEntityList = goods.stream()
                                 .filter(p -> p.getProduct().getProducer()
                                         .equals(value1))
-                                .filter(p -> p.getQuantity().equals(java.lang.Integer
+                                .filter(p -> p.getQuantity()
+                                        .equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductEntityList, listType);
                     case (PRICE):
                         shopProductEntityList = goods.stream()
-                                .filter(p -> p.getPrice().equals(java.lang.Integer
+                                .filter(p -> p.getPrice()
+                                        .equals(java.lang.Integer
                                         .parseInt(value1)))
-                                .filter(p -> p.getQuantity().equals(java.lang.Integer
+                                .filter(p -> p.getQuantity()
+                                        .equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductEntityList, listType);
@@ -349,7 +363,8 @@ public class ShopProductServiceImpl implements ShopProductService {
                         shopProductEntityList = goods.stream()
                                 .filter(p -> p.getProduct().getName()
                                         .equals(value1))
-                                .filter(p -> p.getQuantity().equals(java.lang.Integer
+                                .filter(p -> p.getQuantity()
+                                        .equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductEntityList, listType);
@@ -357,7 +372,8 @@ public class ShopProductServiceImpl implements ShopProductService {
                         shopProductEntityList = goods.stream()
                                 .filter(p -> p.getStore().getName()
                                         .equals(value1))
-                                .filter(p -> p.getQuantity().equals(java.lang.Integer
+                                .filter(p -> p.getQuantity()
+                                        .equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductEntityList, listType);
@@ -365,7 +381,8 @@ public class ShopProductServiceImpl implements ShopProductService {
                         shopProductEntityList = goods.stream()
                                 .filter(p -> p.getDescription()
                                         .equals(value1))
-                                .filter(p -> p.getQuantity().equals(java.lang.Integer
+                                .filter(p -> p.getQuantity()
+                                        .equals(java.lang.Integer
                                         .parseInt(value2)))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductEntityList, listType);
@@ -385,7 +402,8 @@ public class ShopProductServiceImpl implements ShopProductService {
                         return mapper.map(shopProductEntityList, listType);
                     case (PRICE):
                         shopProductEntityList = goods.stream()
-                                .filter(p -> p.getPrice().equals(java.lang.Integer
+                                .filter(p -> p.getPrice()
+                                        .equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getStore().getName()
                                         .equals(value2))
@@ -393,7 +411,8 @@ public class ShopProductServiceImpl implements ShopProductService {
                         return mapper.map(shopProductEntityList, listType);
                     case (QUANTITY):
                         shopProductEntityList = goods.stream()
-                                .filter(p -> p.getQuantity().equals(java.lang.Integer
+                                .filter(p -> p.getQuantity()
+                                        .equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getStore().getName()
                                         .equals(value2))
@@ -447,7 +466,8 @@ public class ShopProductServiceImpl implements ShopProductService {
                         return mapper.map(shopProductEntityList, listType);
                     case (PRICE):
                         shopProductEntityList = goods.stream()
-                                .filter(p -> p.getPrice().equals(java.lang.Integer
+                                .filter(p -> p.getPrice()
+                                        .equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getDescription()
                                         .equals(value2))
@@ -455,7 +475,8 @@ public class ShopProductServiceImpl implements ShopProductService {
                         return mapper.map(shopProductEntityList, listType);
                     case (QUANTITY):
                         shopProductEntityList = goods.stream()
-                                .filter(p -> p.getQuantity().equals(java.lang.Integer
+                                .filter(p -> p.getQuantity()
+                                        .equals(java.lang.Integer
                                         .parseInt(value1)))
                                 .filter(p -> p.getDescription()
                                         .equals(value2))

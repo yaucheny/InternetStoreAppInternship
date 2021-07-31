@@ -23,7 +23,7 @@ public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductEntity>
         for (ShopProductEntity entity : shopProduct) {
             this.save(entity);
         }
-        IdGenerator.setShopProductId((long) shopProduct.size()+1);
+        IdGenerator.setShopProductId((long) shopProduct.size() + 1);
     }
 
     @Override

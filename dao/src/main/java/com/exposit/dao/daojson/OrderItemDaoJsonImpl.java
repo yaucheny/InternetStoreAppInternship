@@ -13,15 +13,13 @@ import java.util.List;
 public class OrderItemDaoJsonImpl extends AbstractDaoJsonImpl<OrderItemEntity>
         implements OrderItemDao {
 
-    private OrderItemDao orderItemDao;
-
     private OrderItemDaoJsonImpl() {
         List<OrderItemEntity> orderItem = MarshallingOrderItemJson
                 .deSerializeOrderItem();
         for (OrderItemEntity entity : orderItem) {
             this.save(entity);
         }
-        IdGenerator.setOrderItemId((long) orderItem.size()+1);
+        IdGenerator.setOrderItemId((long) orderItem.size() + 1);
     }
 
     @Override

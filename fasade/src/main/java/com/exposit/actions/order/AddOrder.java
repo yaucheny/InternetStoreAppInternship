@@ -20,7 +20,8 @@ public class AddOrder extends AbstractAction implements IAction {
 //
 //            System.out.println("Enter id Of customer");
 //            Long customerId = Long.parseLong(reader.readLine());
-//            CustomerEntity customer = CUSTOMER_SERVICE.getCustomerById(customerId);
+//            CustomerEntity customer = CUSTOMER_SERVICE
+//            .getCustomerById(customerId);
 //            int i = 1;
 //            List<OrderItemEntity> orderItems = new ArrayList<>();
 //            Map<ShopProductEntity, Integer> mapOfGoods = new HashMap<>();

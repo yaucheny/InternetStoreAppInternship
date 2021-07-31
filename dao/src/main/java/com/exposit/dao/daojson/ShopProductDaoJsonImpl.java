@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository("shopProductjson")
-public class ShopProductDaoJsonImpl extends AbstractDaoJsonImpl<ShopProductEntity>
+public class ShopProductDaoJsonImpl
+        extends AbstractDaoJsonImpl<ShopProductEntity>
         implements ShopProductDao {
 
     private ShopProductDao shopProductDao;
@@ -23,7 +24,7 @@ public class ShopProductDaoJsonImpl extends AbstractDaoJsonImpl<ShopProductEntit
         for (ShopProductEntity entity : shopProduct) {
             this.save(entity);
         }
-        IdGenerator.setShopProductId((long) shopProduct.size()+1);
+        IdGenerator.setShopProductId((long) shopProduct.size() + 1);
     }
 
     @Override

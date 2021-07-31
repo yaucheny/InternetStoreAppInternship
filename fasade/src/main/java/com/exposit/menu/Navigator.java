@@ -10,7 +10,7 @@ public class Navigator {
     private static Navigator instance;
     private Menu currentMenu;
 
-    public Navigator() {
+    private Navigator() {
 
     }
 
