@@ -14,7 +14,7 @@ import java.util.List;
 public class ProductDaoJsonImpl extends AbstractDaoJsonImpl<ProductEntity>
         implements ProductDao {
 
-    private ProductDaoJsonImpl() {
+    public ProductDaoJsonImpl() {
         List<ProductEntity> product = MarshallingProductJson
                 .deSerializeProduct();
         for (ProductEntity entity : product) {

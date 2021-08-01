@@ -13,7 +13,7 @@ import java.util.List;
 public class OrderDaoJsonImpl
         extends AbstractDaoJsonImpl<OrderEntity> implements OrderDao {
 
-    private OrderDaoJsonImpl() {
+    public OrderDaoJsonImpl() {
         List<OrderEntity> order = MarshallingOrderJson.deSerializeOrder();
         for (OrderEntity entity : order) {
             this.save(entity);

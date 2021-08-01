@@ -20,7 +20,7 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("classpath:dao.properties")
 public class ConfigDao {
 
-    @Value("${dao.serialization.config_dao_impl}")
+//    @Value("${dao.serialization.config_dao_impl}")
     private String valueDao;
 
 

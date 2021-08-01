@@ -13,7 +13,7 @@ import java.util.List;
 public class CustomerDaoJsonImpl
         extends AbstractDaoJsonImpl<CustomerEntity> implements CustomerDao {
 
-    private CustomerDaoJsonImpl() {
+    public CustomerDaoJsonImpl() {
         List<CustomerEntity> customer
                 = MarshallingCustomerJson.deSerializeCustomer();
         for (CustomerEntity entity : customer) {

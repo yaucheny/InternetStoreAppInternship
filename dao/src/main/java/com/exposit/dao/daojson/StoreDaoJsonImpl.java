@@ -11,7 +11,7 @@ import java.util.List;
 @Repository("storejson")
 public class StoreDaoJsonImpl extends AbstractDaoJsonImpl<StoreEntity> implements StoreDao {
 
-    private StoreDaoJsonImpl() {
+    public StoreDaoJsonImpl() {
         List<StoreEntity> store = MarshallingStoreJson.deSerializeStore();
         for (StoreEntity entity : store) {
             this.save(entity);

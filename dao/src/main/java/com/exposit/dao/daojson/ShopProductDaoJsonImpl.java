@@ -18,7 +18,7 @@ public class ShopProductDaoJsonImpl
 
     private ShopProductDao shopProductDao;
 
-    private ShopProductDaoJsonImpl() {
+    public ShopProductDaoJsonImpl() {
         List<ShopProductEntity> shopProduct = MarshallingShopProductJson
                 .deSerializeShopProduct();
         for (ShopProductEntity entity : shopProduct) {

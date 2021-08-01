@@ -11,7 +11,7 @@ import java.util.List;
 @Repository("storexml")
 public class StoreDaoXmlImpl extends AbstractDaoXmlImpl<StoreEntity> implements StoreDao {
 
-    private StoreDaoXmlImpl() {
+    public StoreDaoXmlImpl() {
         List<StoreEntity> store = MarshallingStoreXml.deSerializeStore();
         for (StoreEntity entity : store) {
             this.save(entity);

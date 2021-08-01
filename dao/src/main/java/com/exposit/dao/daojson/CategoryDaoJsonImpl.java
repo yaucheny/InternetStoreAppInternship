@@ -13,7 +13,7 @@ import java.util.List;
 public class CategoryDaoJsonImpl
         extends AbstractDaoJsonImpl<CategoryEntity> implements CategoryDao {
 
-    private CategoryDaoJsonImpl() {
+    public CategoryDaoJsonImpl() {
         List<CategoryEntity> category = MarshallingCategoryJson
                 .deSerializeCategory();
         for (CategoryEntity entity : category) {

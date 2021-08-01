@@ -5,30 +5,37 @@ import com.exposit.dao.daojson.ShopProductDaoJsonImpl;
 import com.exposit.dao.daoxml.ShopProductDaoXmlImpl;
 import com.exposit.exceptions.DaoException;
 import lombok.extern.log4j.Log4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.annotation.Value;
 
 @Log4j
-public final class ShopProductDaoFactory {
-
+public final class ShopProductDaoFactory implements FactoryBean<ShopProductDao> {
+    @Value("${dao.serialization.config_dao_impl}")
+    private String valueDao;
     private static final String GET_DAO_TYPE_ERROR_MESSAGE
-            = "can not find dao by property: %p";
-    @Autowired
-    private static ShopProductDaoJsonImpl shopProductDaoJson;
-    @Autowired
-    private static ShopProductDaoXmlImpl shopProductDaoXml;
+            = "can not find dao by property: ";
 
-    private ShopProductDaoFactory() {
+    @Override
+    public ShopProductDao getObject() throws Exception {
+        if (valueDao.equalsIgnoreCase("json")) {
+            log.info("Get data from file category.json");
+            return new ShopProductDaoJsonImpl();
+        } else if (valueDao.equalsIgnoreCase("xml")) {
+            log.info("Get data from file category.xml");
+            return new ShopProductDaoXmlImpl();
+        }
+        log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
+        throw new DaoException(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
     }
 
-    public static ShopProductDao
-    getShopProductDaoFromProperties(String property) {
-        if (property.equalsIgnoreCase("json")) {
-            return shopProductDaoJson;
-        } else if (property.equalsIgnoreCase("xml")) {
-            return shopProductDaoXml;
+    @Override
+    public Class<?> getObjectType() {
+        if (valueDao.equalsIgnoreCase("json")) {
+            return ShopProductDaoJsonImpl.class;
+        } else if (valueDao.equalsIgnoreCase("xml")) {
+            return ShopProductDaoXmlImpl.class;
         }
-        log.warn(String.format(GET_DAO_TYPE_ERROR_MESSAGE, property));
-        throw new DaoException(String
-                .format(GET_DAO_TYPE_ERROR_MESSAGE, property));
+        log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
+        throw new DaoException(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
     }
 }
