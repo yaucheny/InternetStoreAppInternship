@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Log4j
@@ -48,7 +49,7 @@ public class ProductController {
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity<String> save(@RequestBody ProductDto productDto) {
+    public ResponseEntity<String> save(@Valid @RequestBody ProductDto productDto) {
         productService.addProduct(productDto);
         log.info(REQUEST);
         return ResponseEntity.ok().body("new product added");
@@ -56,7 +57,7 @@ public class ProductController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<String> update(@PathVariable Long id,
-                                         @RequestBody ProductDto productDto) {
+                                         @Valid @RequestBody ProductDto productDto) {
         productService.updateProduct(id, productDto);
         log.info(REQUEST);
         return ResponseEntity.ok().body(String

@@ -4,12 +4,9 @@ import com.exposit.api.dao.CategoryDao;
 import com.exposit.idgenerators.IdGenerator;
 import com.exposit.marshelling.xml.MarshallingCategoryXml;
 import com.exposit.model.CategoryEntity;
-import org.springframework.stereotype.Repository;
-
 
 import java.util.List;
 
-@Repository("categoryxml")
 public class CategoryDaoXmlImpl
         extends AbstractDaoXmlImpl<CategoryEntity> implements CategoryDao {
 
@@ -17,14 +14,17 @@ public class CategoryDaoXmlImpl
         List<CategoryEntity> category = MarshallingCategoryXml
                 .deSerializeCategory();
         for (CategoryEntity entity : category) {
-            this.save(entity);
+            this.autoLoad(entity);
         }
-        IdGenerator.setCategoryId((long) category.size() + 1);
     }
 
     @Override
     public void save(CategoryEntity entity) {
         entity.setId(IdGenerator.generateCategoryId());
+        repository.add(entity);
+    }
+
+    private void autoLoad(CategoryEntity entity){
         repository.add(entity);
     }
 }

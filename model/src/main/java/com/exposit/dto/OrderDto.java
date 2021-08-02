@@ -5,6 +5,7 @@ import com.exposit.model.OrderItemEntity;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Min;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,5 +19,6 @@ public class OrderDto {
     private Integer priceOfPurchase;
     private CustomerEntity customer;
     private List<OrderItemEntity> orderItemList;
+    @Min(0)
     private Long days;
 }

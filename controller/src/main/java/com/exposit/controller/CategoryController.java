@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Log4j
@@ -52,7 +53,7 @@ public class CategoryController {
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity<String> save(@RequestBody CategoryDto categoryDto) {
+    public ResponseEntity<String> save(@Valid @RequestBody CategoryDto categoryDto) {
         categoryService.addCategory(categoryDto);
         log.info(REQUEST);
         return ResponseEntity.ok().body("new category added");
@@ -60,7 +61,7 @@ public class CategoryController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<String> update(@PathVariable Long id,
-                                         @RequestBody CategoryDto categoryDto) {
+                                         @Valid @RequestBody CategoryDto categoryDto) {
         categoryService.updateCategory(id, categoryDto);
         log.info(REQUEST);
         return ResponseEntity.ok().body(String

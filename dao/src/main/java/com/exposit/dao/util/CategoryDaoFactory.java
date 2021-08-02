@@ -6,15 +6,15 @@ import com.exposit.dao.daoxml.CategoryDaoXmlImpl;
 import com.exposit.exceptions.DaoException;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Configuration;
 
 @Log4j
-@PropertySource("classpath:dao.properties")
-public final class CategoryDaoFactory implements FactoryBean<CategoryDao> {
+@Configuration
+//@PropertySource("classpath:dao.properties")
+public class CategoryDaoFactory implements FactoryBean<CategoryDao> {
 
-    @Value("${dao.serialization.config_dao_impl}")
-    private String valueDao;
+ //   @Value("${config_dao_impl}")
+    private String valueDao=DaoPropertiesHandler.getProperty("config_dao_impl").orElse(null);
     private static final String GET_DAO_TYPE_ERROR_MESSAGE
             = "can not find dao by property: ";
 

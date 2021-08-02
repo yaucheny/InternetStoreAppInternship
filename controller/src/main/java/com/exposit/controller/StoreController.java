@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Log4j
@@ -50,7 +51,7 @@ public class StoreController {
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity<String> save(@RequestBody StoreDto storeDto) {
+    public ResponseEntity<String> save(@Valid @RequestBody StoreDto storeDto) {
         storeService.addStore(storeDto);
         log.info(REQUEST);
         return ResponseEntity.ok().body("new store added");
@@ -58,7 +59,7 @@ public class StoreController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<String> update(@PathVariable Long id,
-                                         @RequestBody StoreDto storeDto) {
+                                         @Valid @RequestBody StoreDto storeDto) {
         storeService.updateStore(id, storeDto);
         log.info(REQUEST);
         return ResponseEntity.ok().body(String

@@ -1,19 +1,20 @@
 package com.exposit.dao.util;
 
 import com.exposit.api.dao.ProductDao;
-import com.exposit.dao.daojson.CategoryDaoJsonImpl;
 import com.exposit.dao.daojson.ProductDaoJsonImpl;
-import com.exposit.dao.daoxml.CategoryDaoXmlImpl;
 import com.exposit.dao.daoxml.ProductDaoXmlImpl;
 import com.exposit.exceptions.DaoException;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 
 @Log4j
-public final class ProductDaoFactory implements FactoryBean<ProductDao> {
-    @Value("${dao.serialization.config_dao_impl}")
-    private String valueDao;
+@Configuration
+//@PropertySource("classpath:dao.properties")
+public class ProductDaoFactory implements FactoryBean<ProductDao> {
+
+//    @Value("${config_dao_impl}")
+    private String valueDao=DaoPropertiesHandler.getProperty("config_dao_impl").orElse(null);
     private static final String GET_DAO_TYPE_ERROR_MESSAGE
             = "can not find dao by property: ";
 
@@ -33,9 +34,9 @@ public final class ProductDaoFactory implements FactoryBean<ProductDao> {
     @Override
     public Class<?> getObjectType() {
         if (valueDao.equalsIgnoreCase("json")) {
-            return CategoryDaoJsonImpl.class;
+            return ProductDaoJsonImpl.class;
         } else if (valueDao.equalsIgnoreCase("xml")) {
-            return CategoryDaoXmlImpl.class;
+            return ProductDaoXmlImpl.class;
         }
         log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
         throw new DaoException(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);

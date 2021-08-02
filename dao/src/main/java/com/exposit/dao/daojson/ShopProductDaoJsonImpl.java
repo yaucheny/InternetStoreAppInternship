@@ -4,14 +4,11 @@ import com.exposit.api.dao.ShopProductDao;
 import com.exposit.idgenerators.IdGenerator;
 import com.exposit.marshelling.json.MarshallingShopProductJson;
 import com.exposit.model.ShopProductEntity;
-import org.springframework.stereotype.Repository;
-
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Repository("shopProductjson")
 public class ShopProductDaoJsonImpl
         extends AbstractDaoJsonImpl<ShopProductEntity>
         implements ShopProductDao {
@@ -22,14 +19,17 @@ public class ShopProductDaoJsonImpl
         List<ShopProductEntity> shopProduct = MarshallingShopProductJson
                 .deSerializeShopProduct();
         for (ShopProductEntity entity : shopProduct) {
-            this.save(entity);
+            this.autoLoad(entity);
         }
-        IdGenerator.setShopProductId((long) shopProduct.size() + 1);
     }
 
     @Override
     public void save(ShopProductEntity entity) {
         entity.setId(IdGenerator.generateShopProductId());
+        repository.add(entity);
+    }
+
+    private void autoLoad(ShopProductEntity entity){
         repository.add(entity);
     }
 
