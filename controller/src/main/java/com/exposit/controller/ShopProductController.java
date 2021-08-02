@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Log4j
@@ -50,7 +51,7 @@ public class ShopProductController {
 
     @PostMapping(value = "/")
     public ResponseEntity<String> save(
-            @RequestBody ShopProductDto shopProductDto) {
+            @Valid @RequestBody ShopProductDto shopProductDto) {
         shopProductService.addShopProduct(shopProductDto);
         log.info(REQUEST);
         return ResponseEntity.ok().body("new category added");
@@ -58,7 +59,7 @@ public class ShopProductController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<String> update(@PathVariable Long id,
-                                         @RequestBody ShopProductDto shopProductDto) {
+                                         @Valid @RequestBody ShopProductDto shopProductDto) {
         shopProductService.updateShopProduct(id, shopProductDto);
         log.info(REQUEST);
         return ResponseEntity.ok().body(String

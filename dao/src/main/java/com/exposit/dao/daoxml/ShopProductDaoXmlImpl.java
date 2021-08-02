@@ -4,14 +4,11 @@ import com.exposit.api.dao.ShopProductDao;
 import com.exposit.idgenerators.IdGenerator;
 import com.exposit.marshelling.xml.MarshallingShopProductXml;
 import com.exposit.model.ShopProductEntity;
-import org.springframework.stereotype.Repository;
-
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Repository("shopProductxml")
 public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductEntity>
         implements ShopProductDao {
 
@@ -21,9 +18,8 @@ public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductEntity>
         List<ShopProductEntity> shopProduct = MarshallingShopProductXml
                 .deSerializeShopProduct();
         for (ShopProductEntity entity : shopProduct) {
-            this.save(entity);
+            this.autoLoad(entity);
         }
-        IdGenerator.setShopProductId((long) shopProduct.size() + 1);
     }
 
     @Override
@@ -38,5 +34,9 @@ public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductEntity>
         return productList.stream().sorted(Comparator
                 .comparingInt(ShopProductEntity::getPrice))
                 .collect(Collectors.toList());
+    }
+
+    private void autoLoad(ShopProductEntity entity){
+        repository.add(entity);
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Log4j
@@ -42,7 +43,7 @@ public class OrderController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable Long id) {
+    public ResponseEntity<String> deleteById(@Valid @PathVariable Long id) {
         orderService.deleteOrder(id);
         log.info(REQUEST + id);
         return ResponseEntity.ok().body(String
@@ -50,7 +51,7 @@ public class OrderController {
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity<String> save(@RequestBody OrderDto orderDto) {
+    public ResponseEntity<String> save(@Valid @RequestBody OrderDto orderDto) {
         orderService.addOrder(orderDto);
         log.info(REQUEST);
         return ResponseEntity.ok().body("new order added");

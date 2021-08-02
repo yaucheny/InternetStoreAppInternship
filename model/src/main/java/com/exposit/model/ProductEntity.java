@@ -12,6 +12,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class ProductEntity extends AEntity {
+
     private String name;
     private String producer;
     private List<CategoryEntity> categoryList;

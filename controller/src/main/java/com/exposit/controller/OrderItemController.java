@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Log4j
@@ -48,7 +49,7 @@ public class OrderItemController {
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity<String> save(@RequestBody OrderItemDto orderItemDto) {
+    public ResponseEntity<String> save(@Valid @RequestBody OrderItemDto orderItemDto) {
         orderItemService.addOrderItem(orderItemDto);
         log.info(REQUEST);
         return ResponseEntity.ok().body("new orderItem added");
@@ -56,7 +57,7 @@ public class OrderItemController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<String> update(@PathVariable Long id,
-                                         @RequestBody OrderItemDto orderItemDto) {
+                                         @Valid @RequestBody OrderItemDto orderItemDto) {
         orderItemService.updateOrderItem(id, orderItemDto);
         log.info(REQUEST);
         return ResponseEntity.ok().body(String

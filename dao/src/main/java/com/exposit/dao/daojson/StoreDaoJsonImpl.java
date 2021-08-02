@@ -4,21 +4,17 @@ import com.exposit.api.dao.StoreDao;
 import com.exposit.idgenerators.IdGenerator;
 import com.exposit.marshelling.json.MarshallingStoreJson;
 import com.exposit.model.StoreEntity;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("storejson")
 public class StoreDaoJsonImpl extends AbstractDaoJsonImpl<StoreEntity> implements StoreDao {
 
     public StoreDaoJsonImpl() {
         List<StoreEntity> store = MarshallingStoreJson.deSerializeStore();
         for (StoreEntity entity : store) {
-            this.save(entity);
+            this.autoLoad(entity);
         }
-        IdGenerator.setStoreId((long) store.size() + 1);
     }
-
 
     @Override
     public void save(StoreEntity entity) {
@@ -26,10 +22,7 @@ public class StoreDaoJsonImpl extends AbstractDaoJsonImpl<StoreEntity> implement
         repository.add(entity);
     }
 
-    public void loadDataFromFile() {
-        List<StoreEntity> store = MarshallingStoreJson.deSerializeStore();
-        for (StoreEntity entity : store) {
-            this.save(entity);
-        }
+    private void autoLoad(StoreEntity entity){
+        repository.add(entity);
     }
 }
