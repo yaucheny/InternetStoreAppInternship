@@ -4,17 +4,11 @@ package com.exposit.controller;
 import com.exposit.api.service.CategoryService;
 import com.exposit.dto.CategoryDto;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -22,7 +16,7 @@ import java.util.List;
 @Log4j
 @RestController
 @RequestMapping("/category")
-
+@Tag(name="Category", description="interaction with category")
 public class CategoryController {
 
     private static final String REQUEST = "receive request: /category/";
@@ -32,18 +26,21 @@ public class CategoryController {
     public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
+
     @ApiOperation(value ="Return category by id" )
     @GetMapping(value = "/{id}")
     public ResponseEntity<CategoryDto> getById(@PathVariable Long id) {
         log.info(REQUEST + id);
         return ResponseEntity.ok().body(categoryService.getCategoryById(id));
     }
+
     @ApiOperation(value ="Return all categories" )
     @GetMapping(value = "/")
     public ResponseEntity<List<CategoryDto>> getAll() {
         log.info(REQUEST);
         return ResponseEntity.ok().body(categoryService.getAllCategory());
     }
+
     @ApiOperation(value ="Delete category by id" )
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
@@ -52,6 +49,7 @@ public class CategoryController {
         return ResponseEntity.ok().body(String
                 .format("category %s successfully deleted", id));
     }
+
     @ApiOperation(value ="Create new category" )
     @PostMapping(value = "/")
     public ResponseEntity<String> save(@Valid @RequestBody CategoryDto categoryDto) {
@@ -59,6 +57,7 @@ public class CategoryController {
         log.info(REQUEST);
         return ResponseEntity.ok().body("new category added");
     }
+
     @ApiOperation(value ="Update category by id" )
     @PutMapping(value = "/{id}")
     public ResponseEntity<String> update(@PathVariable Long id,

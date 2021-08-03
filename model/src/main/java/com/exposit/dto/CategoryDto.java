@@ -1,6 +1,7 @@
 package com.exposit.dto;
 
 import com.exposit.model.CategoryEntity;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@Schema(description = "Entity category")
 public class CategoryDto {
 
     private Long id;
