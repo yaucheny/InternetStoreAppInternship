@@ -6,24 +6,31 @@ import com.exposit.dao.daoxml.StoreDaoXmlImpl;
 import com.exposit.exceptions.DaoException;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 @Log4j
 @Configuration
-//@PropertySource("classpath:dao.properties")
+@PropertySource("classpath:application.properties")
 public class StoreDaoFactory implements FactoryBean<StoreDao> {
 
-//    @Value("${config_dao_impl}")
-    private String valueDao=DaoPropertiesHandler.getProperty("config_dao_impl").orElse(null);
+
+    private String valueDao;
+ //       =DaoPropertiesHandler.getProperty("config_dao_impl").orElse(null);
     private static final String GET_DAO_TYPE_ERROR_MESSAGE
             = "can not find dao by property: ";
 
+    public StoreDaoFactory(@Value( "${dao.config}" )String valueDao) {
+        this.valueDao = valueDao;
+    }
+
     @Override
     public StoreDao getObject() throws Exception {
-        if (valueDao.equalsIgnoreCase("json")) {
+        if ("json".equalsIgnoreCase(valueDao)) {
             log.info("Get data from file category.json");
             return new StoreDaoJsonImpl();
-        } else if (valueDao.equalsIgnoreCase("xml")) {
+        } else if ("xml".equalsIgnoreCase(valueDao)) {
             log.info("Get data from file category.xml");
             return new StoreDaoXmlImpl();
         }
@@ -33,9 +40,9 @@ public class StoreDaoFactory implements FactoryBean<StoreDao> {
 
     @Override
     public Class<?> getObjectType() {
-        if (valueDao.equalsIgnoreCase("json")) {
+        if ("json".equalsIgnoreCase(valueDao)) {
             return StoreDaoJsonImpl.class;
-        } else if (valueDao.equalsIgnoreCase("xml")) {
+        } else if ("xml".equalsIgnoreCase(valueDao)) {
             return StoreDaoXmlImpl.class;
         }
         log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);

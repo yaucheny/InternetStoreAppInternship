@@ -6,24 +6,32 @@ import com.exposit.dao.daoxml.CategoryDaoXmlImpl;
 import com.exposit.exceptions.DaoException;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
 @Log4j
-@Configuration
-//@PropertySource("classpath:dao.properties")
+@Component
+@PropertySource("classpath:application.properties")
 public class CategoryDaoFactory implements FactoryBean<CategoryDao> {
 
- //   @Value("${config_dao_impl}")
-    private String valueDao=DaoPropertiesHandler.getProperty("config_dao_impl").orElse(null);
+
+    private String valueDao;
+
+    public CategoryDaoFactory(@Value( "${dao.config}" )String valueDao) {
+        this.valueDao = valueDao;
+    }
+
+    // =DaoPropertiesHandler.getProperty("config_dao_impl").orElse(null);
     private static final String GET_DAO_TYPE_ERROR_MESSAGE
             = "can not find dao by property: ";
 
     @Override
     public CategoryDao getObject() throws Exception {
-        if (valueDao.equalsIgnoreCase("json")) {
+        if ("json".equalsIgnoreCase(valueDao)) {
             log.info("Get data from file category.json");
             return new CategoryDaoJsonImpl();
-        } else if (valueDao.equalsIgnoreCase("xml")) {
+        } else if ("xml".equalsIgnoreCase(valueDao)) {
             log.info("Get data from file category.xml");
             return new CategoryDaoXmlImpl();
         }
@@ -33,12 +41,11 @@ public class CategoryDaoFactory implements FactoryBean<CategoryDao> {
 
     @Override
     public Class<?> getObjectType() {
-        if (valueDao.equalsIgnoreCase("json")) {
+             if ("json".equalsIgnoreCase(valueDao)) {
             return CategoryDaoJsonImpl.class;
-        } else if (valueDao.equalsIgnoreCase("xml")) {
-            return CategoryDaoXmlImpl.class;
-        }
-        log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
+        } else if ("xml".equalsIgnoreCase(valueDao)) {
+            return CategoryDaoXmlImpl.class;}
+              log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
         throw new DaoException(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
     }
 }
