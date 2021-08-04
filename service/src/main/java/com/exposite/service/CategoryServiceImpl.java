@@ -20,24 +20,20 @@ import java.util.List;
 @Log4j
 @Service
 public class CategoryServiceImpl implements CategoryService {
+
     @Autowired
     private ModelMapper mapper;
     @Autowired
     private CategoryDao categoryDao;
-
-    private static final String CAN_NOT_DELETE_CATEGORY
-            = "can not delete category";
-    private static final String CAN_NOT_ADD_CATEGORY
-            = "can not add category";
-    private static final String CAN_NOT_UPDATE_CATEGORY
-            = "can not update category";
+    private static final String CAN_NOT_DELETE_CATEGORY = "can not delete category";
+    private static final String CAN_NOT_ADD_CATEGORY = "can not add category";
+    private static final String CAN_NOT_UPDATE_CATEGORY = "can not update category";
 
 
     @Override
     public void addCategory(CategoryDto categoryDto) {
         if (categoryDto.getId() == null) {
-            CategoryEntity category = mapper
-                    .map(categoryDto, CategoryEntity.class);
+            CategoryEntity category = mapper.map(categoryDto, CategoryEntity.class);
             categoryDao.save(category);
         } else {
             log.warn(CAN_NOT_ADD_CATEGORY);
@@ -58,8 +54,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void updateCategory(Long id, CategoryDto categoryDto) {
         if (categoryDao.getById(id) != null) {
-            CategoryEntity category = mapper
-                    .map(categoryDto, CategoryEntity.class);
+            CategoryEntity category = mapper.map(categoryDto, CategoryEntity.class);
             category.setId(id);
             categoryDao.update(id, category);
         } else {

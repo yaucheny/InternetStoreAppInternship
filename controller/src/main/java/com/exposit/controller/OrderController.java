@@ -46,8 +46,7 @@ public class OrderController {
     public ResponseEntity<String> deleteById(@Valid @PathVariable Long id) {
         orderService.deleteOrder(id);
         log.info(REQUEST + id);
-        return ResponseEntity.ok().body(String
-                .format("order %s successfully deleted", id));
+        return ResponseEntity.ok().body(String.format("order %s successfully deleted", id));
     }
 
     @PostMapping(value = "/")
@@ -58,11 +57,9 @@ public class OrderController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> update(@PathVariable Long id,
-                                         @RequestBody OrderDto orderDto) {
+    public ResponseEntity<String> update(@PathVariable Long id, @RequestBody OrderDto orderDto) {
         orderService.updateOrder(id, orderDto);
         log.info(REQUEST);
-        return ResponseEntity.ok().body(String
-                .format("order %s successfully updated", id));
+        return ResponseEntity.ok().body(String.format("order %s successfully updated", id));
     }
 }

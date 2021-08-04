@@ -21,15 +21,12 @@ import java.util.List;
 @Log4j
 @Service
 public class StoreServiceImpl implements IStoreService {
+
     private final ModelMapper mapper;
     private final StoreDao storeDao;
-
-    private static final String CAN_NOT_DELETE_STORE
-            = "can not delete store";
-    private static final String CAN_NOT_UPDATE_STORE
-            = "can not update store";
-    private static final String CAN_NOT_ADD_STORE
-            = "can not add store";
+    private static final String CAN_NOT_DELETE_STORE = "can not delete store";
+    private static final String CAN_NOT_UPDATE_STORE = "can not update store";
+    private static final String CAN_NOT_ADD_STORE = "can not add store";
 
     @Autowired
     public StoreServiceImpl(ModelMapper mapper, StoreDao storeDao) {
@@ -86,7 +83,6 @@ public class StoreServiceImpl implements IStoreService {
 
     @Override
     public void saveStoreToFile() {
-        MarshallingStoreJson
-                .serializeStore(storeDao.getAll());
+        MarshallingStoreJson.serializeStore(storeDao.getAll());
     }
 }

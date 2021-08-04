@@ -7,12 +7,10 @@ import com.exposit.model.CategoryEntity;
 
 import java.util.List;
 
-public class CategoryDaoXmlImpl
-        extends AbstractDaoXmlImpl<CategoryEntity> implements CategoryDao {
+public class CategoryDaoXmlImpl extends AbstractDaoXmlImpl<CategoryEntity> implements CategoryDao {
 
     public CategoryDaoXmlImpl() {
-        List<CategoryEntity> category = MarshallingCategoryXml
-                .deSerializeCategory();
+        List<CategoryEntity> category = MarshallingCategoryXml.deSerializeCategory();
         for (CategoryEntity entity : category) {
             this.autoLoad(entity);
         }
@@ -24,7 +22,7 @@ public class CategoryDaoXmlImpl
         repository.add(entity);
     }
 
-    private void autoLoad(CategoryEntity entity){
+    private void autoLoad(CategoryEntity entity) {
         repository.add(entity);
     }
 }

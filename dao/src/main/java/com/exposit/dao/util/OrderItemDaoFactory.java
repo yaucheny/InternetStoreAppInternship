@@ -17,11 +17,9 @@ public class OrderItemDaoFactory implements FactoryBean<OrderItemDao> {
 
 
     private String valueDao;
-//         =DaoPropertiesHandler.getProperty("config_dao_impl").orElse(null);
-    private static final String GET_DAO_TYPE_ERROR_MESSAGE
-            = "can not find dao by property: ";
+    private static final String GET_DAO_TYPE_ERROR_MESSAGE = "can not find dao by property: ";
 
-    public OrderItemDaoFactory(@Value( "${dao.config}" )String valueDao) {
+    public OrderItemDaoFactory(@Value("${dao.config}") String valueDao) {
         this.valueDao = valueDao;
     }
 

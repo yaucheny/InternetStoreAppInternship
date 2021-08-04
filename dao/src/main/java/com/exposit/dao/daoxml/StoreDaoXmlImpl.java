@@ -22,7 +22,7 @@ public class StoreDaoXmlImpl extends AbstractDaoXmlImpl<StoreEntity> implements 
         repository.add(entity);
     }
 
-    private void autoLoad(StoreEntity entity){
+    private void autoLoad(StoreEntity entity) {
         repository.add(entity);
     }
 }

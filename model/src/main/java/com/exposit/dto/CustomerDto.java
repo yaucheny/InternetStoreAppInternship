@@ -13,15 +13,15 @@ public class CustomerDto {
 
     private Long id;
     @NotEmpty
-    @Size(min = 2, message ="firstname should be at least 2 characters" )
+    @Size(min = 2, message = "firstname should be at least 2 characters")
     private String firstName;
     @NotEmpty
-    @Size(min = 2, message ="lastname should be at least 2 characters" )
+    @Size(min = 2, message = "lastname should be at least 2 characters")
     private String lastName;
     @NotEmpty
-    @Size(min = 2, message ="address should be at least 2 characters" )
+    @Size(min = 2, message = "address should be at least 2 characters")
     private String address;
     @Email(message = "email should be a valid email format")
     @NotEmpty
-     private String email;
+    private String email;
 }

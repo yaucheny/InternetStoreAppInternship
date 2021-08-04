@@ -7,8 +7,7 @@ import com.exposit.model.OrderEntity;
 
 import java.util.List;
 
-public class OrderDaoJsonImpl
-        extends AbstractDaoJsonImpl<OrderEntity> implements OrderDao {
+public class OrderDaoJsonImpl extends AbstractDaoJsonImpl<OrderEntity> implements OrderDao {
 
     public OrderDaoJsonImpl() {
         List<OrderEntity> order = MarshallingOrderJson.deSerializeOrder();
@@ -23,7 +22,7 @@ public class OrderDaoJsonImpl
         repository.add(entity);
     }
 
-    private void autoLoad(OrderEntity entity){
+    private void autoLoad(OrderEntity entity) {
         repository.add(entity);
     }
 }

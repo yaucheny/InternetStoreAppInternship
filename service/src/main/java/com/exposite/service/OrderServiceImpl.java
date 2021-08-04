@@ -20,14 +20,13 @@ import java.util.List;
 @Log4j
 @Service
 public class OrderServiceImpl implements OrderService {
+
     private final ModelMapper mapper;
     private final OrderDao orderDao;
-
     private static final String CAN_NOT_DELETE_ORDER = "can not delete order";
     private static final String CAN_NOT_UPDATE_ORDER = "can not update order";
     private static final String CAN_NOT_ADD_ORDER = "can not add order ";
-    private static final String NOT_ENOUGH_PRODUCTS
-            = "Not enough quantity of product in this store ";
+    private static final String NOT_ENOUGH_PRODUCTS = "Not enough quantity of product in this store ";
 
     @Autowired
     public OrderServiceImpl(ModelMapper mapper, OrderDao orderDao) {
@@ -42,17 +41,14 @@ public class OrderServiceImpl implements OrderService {
                 OrderEntity order = new OrderEntity();
                 LocalDate dateOfOrder = LocalDate.now();
                 order.setDateOfOrder(dateOfOrder);
-                order.setDateOfDelivery(dateOfOrder
-                        .plusDays(orderDto.getDays()));
+                order.setDateOfDelivery(dateOfOrder.plusDays(orderDto.getDays()));
                 order.setCustomer(orderDto.getCustomer());
                 checkQuantity(orderDto.getOrderItemList());
                 order.setOrderItemList(orderDto.getOrderItemList());
                 order.setDays(orderDto.getDays());
-                order.setPriceOfPurchase(priceOfBusket(orderDto
-                        .getOrderItemList()));
+                order.setPriceOfPurchase(priceOfBusket(orderDto.getOrderItemList()));
                 changeQuantityAfterPurchase(orderDto.getOrderItemList());
                 orderDao.save(order);
-
                 mapper.map(orderDto, OrderEntity.class);
             } catch (ServiceException e) {
                 log.warn(CAN_NOT_UPDATE_ORDER, e);
@@ -81,14 +77,12 @@ public class OrderServiceImpl implements OrderService {
                 OrderEntity order = orderDao.getById(id);
                 LocalDate dateOfOrder = LocalDate.now();
                 order.setDateOfOrder(dateOfOrder);
-                order.setDateOfDelivery(dateOfOrder
-                        .plusDays(orderDto.getDays()));
+                order.setDateOfDelivery(dateOfOrder.plusDays(orderDto.getDays()));
                 order.setCustomer(orderDto.getCustomer());
                 checkQuantity(orderDto.getOrderItemList());
                 order.setOrderItemList(orderDto.getOrderItemList());
                 order.setDays(orderDto.getDays());
-                order.setPriceOfPurchase(priceOfBusket(orderDto
-                        .getOrderItemList()));
+                order.setPriceOfPurchase(priceOfBusket(orderDto.getOrderItemList()));
                 changeQuantityAfterPurchase(orderDto.getOrderItemList());
                 orderDao.update(id, order);
             } catch (ServiceException e) {
@@ -103,7 +97,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto getOrderById(Long id) {
-
         OrderEntity orderEntity = orderDao.getById(id);
         return mapper.map(orderEntity, OrderDto.class);
     }
@@ -124,8 +117,7 @@ public class OrderServiceImpl implements OrderService {
     private Integer priceOfBusket(List<OrderItemEntity> orderItemList) {
         int priceOfBusket = 0;
         for (OrderItemEntity orderItem : orderItemList) {
-            int price = orderItem.getShopProduct().getPrice()
-                    * orderItem.getQuantity();
+            int price = orderItem.getShopProduct().getPrice() * orderItem.getQuantity();
             priceOfBusket = priceOfBusket + price;
         }
         return priceOfBusket;

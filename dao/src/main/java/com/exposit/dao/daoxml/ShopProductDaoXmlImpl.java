@@ -9,14 +9,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductEntity>
-        implements ShopProductDao {
+public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductEntity> implements ShopProductDao {
 
     private ShopProductDao shopProductDao;
 
     public ShopProductDaoXmlImpl() {
-        List<ShopProductEntity> shopProduct = MarshallingShopProductXml
-                .deSerializeShopProduct();
+        List<ShopProductEntity> shopProduct = MarshallingShopProductXml.deSerializeShopProduct();
         for (ShopProductEntity entity : shopProduct) {
             this.autoLoad(entity);
         }
@@ -36,7 +34,7 @@ public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductEntity>
                 .collect(Collectors.toList());
     }
 
-    private void autoLoad(ShopProductEntity entity){
+    private void autoLoad(ShopProductEntity entity) {
         repository.add(entity);
     }
 }

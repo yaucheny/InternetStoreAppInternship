@@ -19,15 +19,12 @@ import java.util.List;
 @Log4j
 @Service
 public class CustomerServiceImpl implements CustomerService {
+
     private final ModelMapper mapper;
     private final CustomerDao customerDao;
-
-    private static final String CAN_NOT_DELETE_CUSTOMER
-            = "can not delete customer";
-    private static final String CAN_NOT_UPDATE_CUSTOMER
-            = "can not update customer";
-    private static final String CAN_NOT_ADD_CUSTOMER
-            = "can not add customer";
+    private static final String CAN_NOT_DELETE_CUSTOMER = "can not delete customer";
+    private static final String CAN_NOT_UPDATE_CUSTOMER = "can not update customer";
+    private static final String CAN_NOT_ADD_CUSTOMER = "can not add customer";
 
     @Autowired
     public CustomerServiceImpl(ModelMapper mapper, CustomerDao customerDao) {
@@ -35,12 +32,10 @@ public class CustomerServiceImpl implements CustomerService {
         this.customerDao = customerDao;
     }
 
-
     @Override
     public void addCustomer(CustomerDto customerDto) {
         if (customerDto.getId() == null) {
-            CustomerEntity customer = mapper
-                    .map(customerDto, CustomerEntity.class);
+            CustomerEntity customer = mapper.map(customerDto, CustomerEntity.class);
             customerDao.save(customer);
         } else {
             log.warn(CAN_NOT_ADD_CUSTOMER);
@@ -61,8 +56,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void updateCustomer(Long id, CustomerDto customerDto) {
         if (customerDao.getById(id) != null) {
-            CustomerEntity customer = mapper
-                    .map(customerDto, CustomerEntity.class);
+            CustomerEntity customer = mapper.map(customerDto, CustomerEntity.class);
             customer.setId(id);
             customerDao.update(id, customer);
         } else {
@@ -87,7 +81,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void saveCustomerToFile() {
-        MarshallingCustomerJson
-                .serializeCustomer(customerDao.getAll());
+        MarshallingCustomerJson.serializeCustomer(customerDao.getAll());
     }
 }

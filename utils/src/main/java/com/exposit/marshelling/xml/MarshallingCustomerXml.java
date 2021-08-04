@@ -15,20 +15,17 @@ import java.util.List;
 public final class MarshallingCustomerXml {
 
     private static final XmlMapper MAPPER = new XmlMapper();
-    private static final String PATH_TO_FILE
-            = "utils/src/main/resources/customer.xml";
+    private static final String PATH_TO_FILE = "utils/src/main/resources/customer.xml";
 
     private MarshallingCustomerXml() {
     }
 
     public static void serializeCustomer(List<CustomerEntity> entities) {
         try {
-            MAPPER.writeValue(new File(
-                    PATH_TO_FILE), entities);
+            MAPPER.writeValue(new File(PATH_TO_FILE), entities);
             String jsonString = MAPPER.writeValueAsString(entities);
             System.out.println(jsonString);
-            String jsonInString2 = MAPPER.writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(entities);
+            String jsonInString2 = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(entities);
             System.out.println(jsonInString2);
         } catch (IOException e) {
             e.printStackTrace();
@@ -37,12 +34,8 @@ public final class MarshallingCustomerXml {
 
     public static List<CustomerEntity> deSerializeCustomer() {
         try {
-            String json = Files.readString(Path.of(
-                    PATH_TO_FILE),
-                    StandardCharsets.US_ASCII);
-            List<CustomerEntity> customers
-                    = Arrays.asList(MAPPER
-                    .readValue(json, CustomerEntity[].class));
+            String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.US_ASCII);
+            List<CustomerEntity> customers = Arrays.asList(MAPPER.readValue(json, CustomerEntity[].class));
             if (!customers.isEmpty()) {
                 return customers;
             }

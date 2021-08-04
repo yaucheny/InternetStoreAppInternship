@@ -9,6 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public abstract class AEntity {
-    protected Long id;
 
+    protected Long id;
 }

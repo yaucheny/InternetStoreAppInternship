@@ -5,6 +5,7 @@ import com.exposit.model.AEntity;
 import java.util.List;
 
 public interface GenericDao<T extends AEntity> {
+
     T getById(Long id);
 
     void delete(T entity);

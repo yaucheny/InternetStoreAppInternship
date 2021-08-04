@@ -11,8 +11,7 @@ public class OrderDaoXmlImpl
         extends AbstractDaoXmlImpl<OrderEntity> implements OrderDao {
 
     public OrderDaoXmlImpl() {
-        List<OrderEntity> order = MarshallingOrderXml
-                .deSerializeOrder();
+        List<OrderEntity> order = MarshallingOrderXml.deSerializeOrder();
         for (OrderEntity entity : order) {
             this.autoLoad(entity);
         }
@@ -24,7 +23,7 @@ public class OrderDaoXmlImpl
         repository.add(entity);
     }
 
-    private void autoLoad(OrderEntity entity){
+    private void autoLoad(OrderEntity entity) {
         repository.add(entity);
     }
 }

@@ -15,16 +15,12 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("classpath:application.properties")
 public class CustomerDaoFactory implements FactoryBean<CustomerDao> {
 
-
     private String valueDao;
+    private static final String GET_DAO_TYPE_ERROR_MESSAGE = "can not find dao by property: ";
 
-    public CustomerDaoFactory(@Value( "${dao.config}" )String valueDao) {
+    public CustomerDaoFactory(@Value("${dao.config}") String valueDao) {
         this.valueDao = valueDao;
     }
-
-    //        =DaoPropertiesHandler.getProperty("config_dao_impl").orElse(null);
-    private static final String GET_DAO_TYPE_ERROR_MESSAGE
-            = "can not find dao by property: ";
 
     @Override
     public CustomerDao getObject() throws Exception {

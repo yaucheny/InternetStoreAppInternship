@@ -9,15 +9,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ShopProductDaoJsonImpl
-        extends AbstractDaoJsonImpl<ShopProductEntity>
-        implements ShopProductDao {
+public class ShopProductDaoJsonImpl extends AbstractDaoJsonImpl<ShopProductEntity> implements ShopProductDao {
 
     private ShopProductDao shopProductDao;
 
     public ShopProductDaoJsonImpl() {
-        List<ShopProductEntity> shopProduct = MarshallingShopProductJson
-                .deSerializeShopProduct();
+        List<ShopProductEntity> shopProduct = MarshallingShopProductJson.deSerializeShopProduct();
         for (ShopProductEntity entity : shopProduct) {
             this.autoLoad(entity);
         }
@@ -29,15 +26,14 @@ public class ShopProductDaoJsonImpl
         repository.add(entity);
     }
 
-    private void autoLoad(ShopProductEntity entity){
+    private void autoLoad(ShopProductEntity entity) {
         repository.add(entity);
     }
 
     @Override
     public List<ShopProductEntity> sortByPrice() {
         List<ShopProductEntity> productList = shopProductDao.getAll();
-        return productList.stream().sorted(Comparator
-                .comparingInt(ShopProductEntity::getPrice))
+        return productList.stream().sorted(Comparator.comparingInt(ShopProductEntity::getPrice))
                 .collect(Collectors.toList());
     }
 }

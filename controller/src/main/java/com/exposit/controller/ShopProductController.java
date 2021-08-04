@@ -31,8 +31,7 @@ public class ShopProductController {
     @GetMapping("/{id}")
     public ResponseEntity<ShopProductDto> getById(@PathVariable Long id) {
         log.info(REQUEST + id);
-        return ResponseEntity.ok()
-                .body(shopProductService.getShopProductById(id));
+        return ResponseEntity.ok().body(shopProductService.getShopProductById(id));
     }
 
     @GetMapping("/")
@@ -45,8 +44,7 @@ public class ShopProductController {
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
         shopProductService.deleteShopProduct(id);
         log.info(REQUEST + id);
-        return ResponseEntity.ok().body(String
-                .format("shopProduct %s successfully deleted", id));
+        return ResponseEntity.ok().body(String.format("shopProduct %s successfully deleted", id));
     }
 
     @PostMapping(value = "/")
@@ -62,7 +60,6 @@ public class ShopProductController {
                                          @Valid @RequestBody ShopProductDto shopProductDto) {
         shopProductService.updateShopProduct(id, shopProductDto);
         log.info(REQUEST);
-        return ResponseEntity.ok().body(String
-                .format("shopProduct %s successfully updated", id));
+        return ResponseEntity.ok().body(String.format("shopProduct %s successfully updated", id));
     }
 }

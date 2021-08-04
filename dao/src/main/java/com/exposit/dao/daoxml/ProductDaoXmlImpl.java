@@ -7,12 +7,10 @@ import com.exposit.model.ProductEntity;
 
 import java.util.List;
 
-public class ProductDaoXmlImpl extends AbstractDaoXmlImpl<ProductEntity>
-        implements ProductDao {
+public class ProductDaoXmlImpl extends AbstractDaoXmlImpl<ProductEntity> implements ProductDao {
 
     public ProductDaoXmlImpl() {
-        List<ProductEntity> product = MarshallingProductXml
-                .deSerializeProduct();
+        List<ProductEntity> product = MarshallingProductXml.deSerializeProduct();
         for (ProductEntity entity : product) {
             this.autoLoad(entity);
         }
@@ -24,7 +22,7 @@ public class ProductDaoXmlImpl extends AbstractDaoXmlImpl<ProductEntity>
         repository.add(entity);
     }
 
-    private void autoLoad(ProductEntity entity){
+    private void autoLoad(ProductEntity entity) {
         repository.add(entity);
     }
 }

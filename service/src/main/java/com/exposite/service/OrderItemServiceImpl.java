@@ -19,16 +19,12 @@ import java.util.List;
 @Log4j
 @Service
 public class OrderItemServiceImpl implements OrderItemService {
+
     private final ModelMapper mapper;
     private final OrderItemDao orderItemDao;
-
-
-    private static final String CAN_NOT_DELETE_ORDER_ITEM
-            = "can not delete orderItem";
-    private static final String CAN_NOT_UPDATE_ORDER_ITEM
-            = "can not update orderItem";
-    private static final String CAN_NOT_ADD_ORDER_ITEM
-            = "can not add orderItem";
+    private static final String CAN_NOT_DELETE_ORDER_ITEM = "can not delete orderItem";
+    private static final String CAN_NOT_UPDATE_ORDER_ITEM = "can not update orderItem";
+    private static final String CAN_NOT_ADD_ORDER_ITEM = "can not add orderItem";
 
     @Autowired
     public OrderItemServiceImpl(ModelMapper mapper, OrderItemDao orderItemDao) {
@@ -39,8 +35,7 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Override
     public void addOrderItem(OrderItemDto orderItemDto) {
         if (orderItemDto.getId() == null) {
-            OrderItemEntity orderItem = mapper
-                    .map(orderItemDto, OrderItemEntity.class);
+            OrderItemEntity orderItem = mapper.map(orderItemDto, OrderItemEntity.class);
             orderItemDao.save(orderItem);
         } else {
             log.warn(CAN_NOT_ADD_ORDER_ITEM);
@@ -61,8 +56,7 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Override
     public void updateOrderItem(Long id, OrderItemDto orderItemDto) {
         if (orderItemDao.getById(id) != null) {
-            OrderItemEntity orderItem = mapper
-                    .map(orderItemDto, OrderItemEntity.class);
+            OrderItemEntity orderItem = mapper.map(orderItemDto, OrderItemEntity.class);
             orderItem.setId(id);
             orderItemDao.update(id, orderItem);
         } else {
@@ -87,7 +81,6 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     @Override
     public void saveOrderItemToFile() {
-        MarshallingOrderItemJson
-                .serializeOrderItem(orderItemDao.getAll());
+        MarshallingOrderItemJson.serializeOrderItem(orderItemDao.getAll());
     }
 }

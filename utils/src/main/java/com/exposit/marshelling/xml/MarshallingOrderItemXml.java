@@ -23,12 +23,10 @@ public final class MarshallingOrderItemXml {
 
     public static void serializeOrderItem(List<OrderItemEntity> entities) {
         try {
-            MAPPER.writeValue(new File(
-                    PATH_TO_FILE), entities);
+            MAPPER.writeValue(new File(PATH_TO_FILE), entities);
             String jsonString = MAPPER.writeValueAsString(entities);
             System.out.println(jsonString);
-            String jsonInString2 = MAPPER.writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(entities);
+            String jsonInString2 = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(entities);
             System.out.println(jsonInString2);
         } catch (IOException e) {
             e.printStackTrace();
@@ -37,12 +35,8 @@ public final class MarshallingOrderItemXml {
 
     public static List<OrderItemEntity> deSerializeOrderItem() {
         try {
-            String json = Files.readString(Path.of(
-                    PATH_TO_FILE),
-                    StandardCharsets.US_ASCII);
-            List<OrderItemEntity> orderItem = Arrays
-                    .asList(MAPPER.readValue(json,
-                    OrderItemEntity[].class));
+            String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.US_ASCII);
+            List<OrderItemEntity> orderItem = Arrays.asList(MAPPER.readValue(json, OrderItemEntity[].class));
             if (!orderItem.isEmpty()) {
                 return orderItem;
             }

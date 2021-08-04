@@ -15,16 +15,12 @@ import org.springframework.stereotype.Component;
 @PropertySource("classpath:application.properties")
 public class CategoryDaoFactory implements FactoryBean<CategoryDao> {
 
-
     private String valueDao;
+    private static final String GET_DAO_TYPE_ERROR_MESSAGE = "can not find dao by property: ";
 
-    public CategoryDaoFactory(@Value( "${dao.config}" )String valueDao) {
+    public CategoryDaoFactory(@Value("${dao.config}") String valueDao) {
         this.valueDao = valueDao;
     }
-
-    // =DaoPropertiesHandler.getProperty("config_dao_impl").orElse(null);
-    private static final String GET_DAO_TYPE_ERROR_MESSAGE
-            = "can not find dao by property: ";
 
     @Override
     public CategoryDao getObject() throws Exception {
@@ -41,11 +37,12 @@ public class CategoryDaoFactory implements FactoryBean<CategoryDao> {
 
     @Override
     public Class<?> getObjectType() {
-             if ("json".equalsIgnoreCase(valueDao)) {
+        if ("json".equalsIgnoreCase(valueDao)) {
             return CategoryDaoJsonImpl.class;
         } else if ("xml".equalsIgnoreCase(valueDao)) {
-            return CategoryDaoXmlImpl.class;}
-              log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
+            return CategoryDaoXmlImpl.class;
+        }
+        log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
         throw new DaoException(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
     }
 }

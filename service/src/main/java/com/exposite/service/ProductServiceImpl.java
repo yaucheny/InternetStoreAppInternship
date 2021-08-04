@@ -19,15 +19,12 @@ import java.util.List;
 @Log4j
 @Service
 public class ProductServiceImpl implements ProductService {
+
     private final ModelMapper mapper;
     private final ProductDao productDao;
-
-    private static final String CAN_NOT_DELETE_PRODUCT
-            = "can not delete product";
-    private static final String CAN_NOT_UPDATE_PRODUCT
-            = "can not update product";
-    private static final String CAN_NOT_ADD_PRODUCT
-            = "can not add product";
+    private static final String CAN_NOT_DELETE_PRODUCT = "can not delete product";
+    private static final String CAN_NOT_UPDATE_PRODUCT = "can not update product";
+    private static final String CAN_NOT_ADD_PRODUCT = "can not add product";
 
     @Autowired
     public ProductServiceImpl(ModelMapper mapper, ProductDao productDao) {
@@ -40,7 +37,6 @@ public class ProductServiceImpl implements ProductService {
         if (productDto.getId() == null) {
             ProductEntity product = mapper.map(productDto, ProductEntity.class);
             productDao.save(product);
-
         } else {
             log.warn(CAN_NOT_ADD_PRODUCT);
             throw new DaoException(CAN_NOT_ADD_PRODUCT);
@@ -72,7 +68,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto getProductById(Long id) {
         ProductEntity productEntity = productDao.getById(id);
-
         return mapper.map(productEntity, ProductDto.class);
     }
 
@@ -86,9 +81,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void saveProductToFile() {
-        MarshallingProductJson
-                .serializeProduct(productDao.getAll());
+        MarshallingProductJson.serializeProduct(productDao.getAll());
     }
-
-
 }

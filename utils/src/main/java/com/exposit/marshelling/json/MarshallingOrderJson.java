@@ -15,20 +15,17 @@ import java.util.List;
 public class MarshallingOrderJson {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
-    private static final String PATH_TO_FILE
-            = "utils/src/main/resources/order.json";
+    private static final String PATH_TO_FILE = "utils/src/main/resources/order.json";
 
     private MarshallingOrderJson() {
     }
 
     public static void serializeOrder(List<OrderEntity> entities) {
         try {
-            MAPPER.writeValue(new File(
-                    PATH_TO_FILE), entities);
+            MAPPER.writeValue(new File(PATH_TO_FILE), entities);
             String jsonString = MAPPER.writeValueAsString(entities);
             System.out.println(jsonString);
-            String jsonInString2 = MAPPER.writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(entities);
+            String jsonInString2 = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(entities);
             System.out.println(jsonInString2);
         } catch (IOException e) {
             e.printStackTrace();
@@ -37,12 +34,8 @@ public class MarshallingOrderJson {
 
     public static List<OrderEntity> deSerializeOrder() {
         try {
-            String json = Files.readString(Path.of(
-                    PATH_TO_FILE),
-                    StandardCharsets.US_ASCII);
-            List<OrderEntity> orders
-                    = Arrays.asList(MAPPER
-                    .readValue(json, OrderEntity[].class));
+            String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.US_ASCII);
+            List<OrderEntity> orders = Arrays.asList(MAPPER.readValue(json, OrderEntity[].class));
             if (!orders.isEmpty()) {
                 return orders;
             }
