@@ -1,6 +1,7 @@
 package com.exposit.dao.util;
 
 import com.exposit.api.dao.ProductDao;
+import com.exposit.dao.daohibernate.ProductDaoHiberImpl;
 import com.exposit.dao.daojson.ProductDaoJsonImpl;
 import com.exposit.dao.daoxml.ProductDaoXmlImpl;
 import com.exposit.exceptions.DaoException;
@@ -30,6 +31,9 @@ public class ProductDaoFactory implements FactoryBean<ProductDao> {
         } else if ("xml".equalsIgnoreCase(valueDao)) {
             log.info("Get data from file category.xml");
             return new ProductDaoXmlImpl();
+        } else if ("hibernate".equalsIgnoreCase(valueDao)) {
+            log.info("Get data from postgres database");
+            return new ProductDaoHiberImpl();
         }
         log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
         throw new DaoException(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
@@ -41,6 +45,8 @@ public class ProductDaoFactory implements FactoryBean<ProductDao> {
             return ProductDaoJsonImpl.class;
         } else if ("xml".equalsIgnoreCase(valueDao)) {
             return ProductDaoXmlImpl.class;
+        } else if ("hibernate".equalsIgnoreCase(valueDao)) {
+            return ProductDaoHiberImpl.class;
         }
         log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
         throw new DaoException(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);

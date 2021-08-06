@@ -18,7 +18,7 @@ public class Starter {
 
     public static void main(String[] args) {
 //
-//
+
 //        STORE_SERVICE.addStore("21vek", "21vek.by",
 //                "+375293333333");
 //        STORE_SERVICE.addStore("ozon", "ozon.ru",
@@ -41,115 +41,115 @@ public class Starter {
 //                "Gaya 5 , 5", "alinova@gmail.com");
 //        System.out.println(CUSTOMER_SERVICE.getAllCustomer());
 //        System.out.println(STORE_SERVICE.getAllStore());
+
+//        CATEGORY_SERVICE.addCategory("industrial", null); //1
+//        CATEGORY_SERVICE.addCategory("nutrition", null);  //2
 //
-////        CATEGORY_SERVICE.addCategory("industrial", null); //1
-////        CATEGORY_SERVICE.addCategory("nutrition", null);  //2
-////
-////        CATEGORY_SERVICE.addCategory("technics", CATEGORY_SERVICE.getCategoryById(1L)); //3
-////        CATEGORY_SERVICE.addCategory("clothes", CATEGORY_SERVICE.getCategoryById(1L));  //4
-////        CATEGORY_SERVICE.addCategory("toys", CATEGORY_SERVICE.getCategoryById(1L));     //5
-////        CATEGORY_SERVICE.addCategory("animal_feed", CATEGORY_SERVICE.getCategoryById(2L));//6
-////        CATEGORY_SERVICE.addCategory("baby_food", CATEGORY_SERVICE.getCategoryById(2L));   //7
-////        CATEGORY_SERVICE.addCategory("food", CATEGORY_SERVICE.getCategoryById(2L));        //8
-////        CATEGORY_SERVICE.addCategory("drinks", CATEGORY_SERVICE.getCategoryById(2L));      //9
-////
-////        CATEGORY_SERVICE.addCategory("type_of_control", CATEGORY_SERVICE.getCategoryById(3L));      //10
-////        CATEGORY_SERVICE.addCategory("installation_type", CATEGORY_SERVICE.getCategoryById(3L));      //11
-////        CATEGORY_SERVICE.addCategory("dimensions", CATEGORY_SERVICE.getCategoryById(3L));      //12
-////
-////        CATEGORY_SERVICE.addCategory("age_clothes", CATEGORY_SERVICE.getCategoryById(4L));      //13
-////        CATEGORY_SERVICE.addCategory("season", CATEGORY_SERVICE.getCategoryById(4L));      //14
-////        CATEGORY_SERVICE.addCategory("class_of_price", CATEGORY_SERVICE.getCategoryById(4L));      //15
-////
-////        CATEGORY_SERVICE.addCategory("age_toys", CATEGORY_SERVICE.getCategoryById(5L));      //16
-////        CATEGORY_SERVICE.addCategory("material", CATEGORY_SERVICE.getCategoryById(5L));      //17
-////        CATEGORY_SERVICE.addCategory("development", CATEGORY_SERVICE.getCategoryById(5L));   //18
-////
-////        CATEGORY_SERVICE.addCategory("type_of_meat", CATEGORY_SERVICE.getCategoryById(6L));   //19
-////        CATEGORY_SERVICE.addCategory("type_of_animal", CATEGORY_SERVICE.getCategoryById(6L));   //20
-////        CATEGORY_SERVICE.addCategory("age_of_animal", CATEGORY_SERVICE.getCategoryById(6L));   //21
-////
-////        CATEGORY_SERVICE.addCategory("type_of_mix", CATEGORY_SERVICE.getCategoryById(7L));   //22
-////        CATEGORY_SERVICE.addCategory("type_of_instant", CATEGORY_SERVICE.getCategoryById(7L));   //23
-////        CATEGORY_SERVICE.addCategory("age_in_month", CATEGORY_SERVICE.getCategoryById(7L));   //24
-////
-////        CATEGORY_SERVICE.addCategory("age_food", CATEGORY_SERVICE.getCategoryById(8L));   //25
-////        CATEGORY_SERVICE.addCategory("health_or_not", CATEGORY_SERVICE.getCategoryById(8L));   //26
-////        CATEGORY_SERVICE.addCategory("frozen_or_not", CATEGORY_SERVICE.getCategoryById(8L));   //27
-////
-////        CATEGORY_SERVICE.addCategory("type_alcohol", CATEGORY_SERVICE.getCategoryById(9L));   //28
-////        CATEGORY_SERVICE.addCategory("volume", CATEGORY_SERVICE.getCategoryById(9L));   //29
-////        CATEGORY_SERVICE.addCategory("made_in", CATEGORY_SERVICE.getCategoryById(9L));   //30
-////
-//////----------------
-////        CATEGORY_SERVICE.addCategory("build_in", CATEGORY_SERVICE.getCategoryById(10L));   //31
-////        CATEGORY_SERVICE.addCategory("free_standing", CATEGORY_SERVICE.getCategoryById(10L));   //32
-////
-////        CATEGORY_SERVICE.addCategory("sensor", CATEGORY_SERVICE.getCategoryById(11L));   //33
-////        CATEGORY_SERVICE.addCategory("button", CATEGORY_SERVICE.getCategoryById(11L));   //34
-////
-////        CATEGORY_SERVICE.addCategory("small", CATEGORY_SERVICE.getCategoryById(12L));   //35
-////        CATEGORY_SERVICE.addCategory("big", CATEGORY_SERVICE.getCategoryById(12L));   //36
-////
-////        //------------
-////        CATEGORY_SERVICE.addCategory("children", CATEGORY_SERVICE.getCategoryById(13L));   //37
-////        CATEGORY_SERVICE.addCategory("adult", CATEGORY_SERVICE.getCategoryById(13L));   //38
-////        CATEGORY_SERVICE.addCategory("animal", CATEGORY_SERVICE.getCategoryById(13L));   //39
-////
-////        CATEGORY_SERVICE.addCategory("summer", CATEGORY_SERVICE.getCategoryById(14L));   //40
-////        CATEGORY_SERVICE.addCategory("winter", CATEGORY_SERVICE.getCategoryById(14L));   //41
-////        CATEGORY_SERVICE.addCategory("demi", CATEGORY_SERVICE.getCategoryById(14L));   //42
-////
-////        CATEGORY_SERVICE.addCategory("premium", CATEGORY_SERVICE.getCategoryById(15L));   //43
-////        CATEGORY_SERVICE.addCategory("low_cost", CATEGORY_SERVICE.getCategoryById(15L));   //44
-////        //-----------
-////        CATEGORY_SERVICE.addCategory("children", CATEGORY_SERVICE.getCategoryById(16L));   //45
-////        CATEGORY_SERVICE.addCategory("animal", CATEGORY_SERVICE.getCategoryById(16L));   //46
-////
-////        CATEGORY_SERVICE.addCategory("wood", CATEGORY_SERVICE.getCategoryById(17L));   //47
-////        CATEGORY_SERVICE.addCategory("plastic", CATEGORY_SERVICE.getCategoryById(17L));   //48
-////
-////        CATEGORY_SERVICE.addCategory("develop", CATEGORY_SERVICE.getCategoryById(18L));   //49
-////        CATEGORY_SERVICE.addCategory("not_develop", CATEGORY_SERVICE.getCategoryById(18L));   //50
-////        //-----------
-////        CATEGORY_SERVICE.addCategory("pig", CATEGORY_SERVICE.getCategoryById(19L));   //51
-////        CATEGORY_SERVICE.addCategory("chicken", CATEGORY_SERVICE.getCategoryById(19L));   //52
-////
-////        CATEGORY_SERVICE.addCategory("dog", CATEGORY_SERVICE.getCategoryById(20L));   //53
-////        CATEGORY_SERVICE.addCategory("cat", CATEGORY_SERVICE.getCategoryById(20L));   //54
-////
-////        CATEGORY_SERVICE.addCategory("young", CATEGORY_SERVICE.getCategoryById(21L));   //55
-////        CATEGORY_SERVICE.addCategory("old", CATEGORY_SERVICE.getCategoryById(21L));   //56
-////        //--------
-////        CATEGORY_SERVICE.addCategory("milk", CATEGORY_SERVICE.getCategoryById(22L));   //57
-////        CATEGORY_SERVICE.addCategory("not_milk", CATEGORY_SERVICE.getCategoryById(22L));   //58
-////
-////        CATEGORY_SERVICE.addCategory("instant", CATEGORY_SERVICE.getCategoryById(23L));   //59
-////        CATEGORY_SERVICE.addCategory("not_instant", CATEGORY_SERVICE.getCategoryById(23L));   //60
-////
-////        CATEGORY_SERVICE.addCategory("before_year", CATEGORY_SERVICE.getCategoryById(24L));   //61
-////        CATEGORY_SERVICE.addCategory("after_year", CATEGORY_SERVICE.getCategoryById(24L));   //62
-////        //--------
-////        CATEGORY_SERVICE.addCategory("food_child", CATEGORY_SERVICE.getCategoryById(25L));   //63
-////        CATEGORY_SERVICE.addCategory("food_adult", CATEGORY_SERVICE.getCategoryById(25L));   //64
-////
-////        CATEGORY_SERVICE.addCategory("sport_food", CATEGORY_SERVICE.getCategoryById(26L));   //65
-////        CATEGORY_SERVICE.addCategory("not_sport_food", CATEGORY_SERVICE.getCategoryById(26L));   //66
-////
-////        CATEGORY_SERVICE.addCategory("frozen", CATEGORY_SERVICE.getCategoryById(27L));   //67
-////        CATEGORY_SERVICE.addCategory("not_frozen", CATEGORY_SERVICE.getCategoryById(27L));   //68
-////        //--------
-////        CATEGORY_SERVICE.addCategory("alcohol", CATEGORY_SERVICE.getCategoryById(28L));   //69
-////        CATEGORY_SERVICE.addCategory("alcohol_free", CATEGORY_SERVICE.getCategoryById(28L));   //70
-////
-////        CATEGORY_SERVICE.addCategory("made_in", CATEGORY_SERVICE.getCategoryById(29L));   //71
-////        CATEGORY_SERVICE.addCategory("made_out", CATEGORY_SERVICE.getCategoryById(29L));   //72
-////
-////        CATEGORY_SERVICE.addCategory("less_litre", CATEGORY_SERVICE.getCategoryById(30L));   //73
-////        CATEGORY_SERVICE.addCategory("more_litre", CATEGORY_SERVICE.getCategoryById(30L));   //74
+//        CATEGORY_SERVICE.addCategory("technics", CATEGORY_SERVICE.getCategoryById(1L)); //3
+//        CATEGORY_SERVICE.addCategory("clothes", CATEGORY_SERVICE.getCategoryById(1L));  //4
+//        CATEGORY_SERVICE.addCategory("toys", CATEGORY_SERVICE.getCategoryById(1L));     //5
+//        CATEGORY_SERVICE.addCategory("animal_feed", CATEGORY_SERVICE.getCategoryById(2L));//6
+//        CATEGORY_SERVICE.addCategory("baby_food", CATEGORY_SERVICE.getCategoryById(2L));   //7
+//        CATEGORY_SERVICE.addCategory("food", CATEGORY_SERVICE.getCategoryById(2L));        //8
+//        CATEGORY_SERVICE.addCategory("drinks", CATEGORY_SERVICE.getCategoryById(2L));      //9
 //
+//        CATEGORY_SERVICE.addCategory("type_of_control", CATEGORY_SERVICE.getCategoryById(3L));      //10
+//        CATEGORY_SERVICE.addCategory("installation_type", CATEGORY_SERVICE.getCategoryById(3L));      //11
+//        CATEGORY_SERVICE.addCategory("dimensions", CATEGORY_SERVICE.getCategoryById(3L));      //12
 //
+//        CATEGORY_SERVICE.addCategory("age_clothes", CATEGORY_SERVICE.getCategoryById(4L));      //13
+//        CATEGORY_SERVICE.addCategory("season", CATEGORY_SERVICE.getCategoryById(4L));      //14
+//        CATEGORY_SERVICE.addCategory("class_of_price", CATEGORY_SERVICE.getCategoryById(4L));      //15
 //
+//        CATEGORY_SERVICE.addCategory("age_toys", CATEGORY_SERVICE.getCategoryById(5L));      //16
+//        CATEGORY_SERVICE.addCategory("material", CATEGORY_SERVICE.getCategoryById(5L));      //17
+//        CATEGORY_SERVICE.addCategory("development", CATEGORY_SERVICE.getCategoryById(5L));   //18
+//
+//        CATEGORY_SERVICE.addCategory("type_of_meat", CATEGORY_SERVICE.getCategoryById(6L));   //19
+//        CATEGORY_SERVICE.addCategory("type_of_animal", CATEGORY_SERVICE.getCategoryById(6L));   //20
+//        CATEGORY_SERVICE.addCategory("age_of_animal", CATEGORY_SERVICE.getCategoryById(6L));   //21
+//
+//        CATEGORY_SERVICE.addCategory("type_of_mix", CATEGORY_SERVICE.getCategoryById(7L));   //22
+//        CATEGORY_SERVICE.addCategory("type_of_instant", CATEGORY_SERVICE.getCategoryById(7L));   //23
+//        CATEGORY_SERVICE.addCategory("age_in_month", CATEGORY_SERVICE.getCategoryById(7L));   //24
+//
+//        CATEGORY_SERVICE.addCategory("age_food", CATEGORY_SERVICE.getCategoryById(8L));   //25
+//        CATEGORY_SERVICE.addCategory("health_or_not", CATEGORY_SERVICE.getCategoryById(8L));   //26
+//        CATEGORY_SERVICE.addCategory("frozen_or_not", CATEGORY_SERVICE.getCategoryById(8L));   //27
+//
+//        CATEGORY_SERVICE.addCategory("type_alcohol", CATEGORY_SERVICE.getCategoryById(9L));   //28
+//        CATEGORY_SERVICE.addCategory("volume", CATEGORY_SERVICE.getCategoryById(9L));   //29
+//        CATEGORY_SERVICE.addCategory("made_in", CATEGORY_SERVICE.getCategoryById(9L));   //30
+//
+////----------------
+//        CATEGORY_SERVICE.addCategory("build_in", CATEGORY_SERVICE.getCategoryById(10L));   //31
+//        CATEGORY_SERVICE.addCategory("free_standing", CATEGORY_SERVICE.getCategoryById(10L));   //32
+//
+//        CATEGORY_SERVICE.addCategory("sensor", CATEGORY_SERVICE.getCategoryById(11L));   //33
+//        CATEGORY_SERVICE.addCategory("button", CATEGORY_SERVICE.getCategoryById(11L));   //34
+//
+//        CATEGORY_SERVICE.addCategory("small", CATEGORY_SERVICE.getCategoryById(12L));   //35
+//        CATEGORY_SERVICE.addCategory("big", CATEGORY_SERVICE.getCategoryById(12L));   //36
+//
+//        //------------
+//        CATEGORY_SERVICE.addCategory("children", CATEGORY_SERVICE.getCategoryById(13L));   //37
+//        CATEGORY_SERVICE.addCategory("adult", CATEGORY_SERVICE.getCategoryById(13L));   //38
+//        CATEGORY_SERVICE.addCategory("animal", CATEGORY_SERVICE.getCategoryById(13L));   //39
+//
+//        CATEGORY_SERVICE.addCategory("summer", CATEGORY_SERVICE.getCategoryById(14L));   //40
+//        CATEGORY_SERVICE.addCategory("winter", CATEGORY_SERVICE.getCategoryById(14L));   //41
+//        CATEGORY_SERVICE.addCategory("demi", CATEGORY_SERVICE.getCategoryById(14L));   //42
+//
+//        CATEGORY_SERVICE.addCategory("premium", CATEGORY_SERVICE.getCategoryById(15L));   //43
+//        CATEGORY_SERVICE.addCategory("low_cost", CATEGORY_SERVICE.getCategoryById(15L));   //44
+//        //-----------
+//        CATEGORY_SERVICE.addCategory("children", CATEGORY_SERVICE.getCategoryById(16L));   //45
+//        CATEGORY_SERVICE.addCategory("animal", CATEGORY_SERVICE.getCategoryById(16L));   //46
+//
+//        CATEGORY_SERVICE.addCategory("wood", CATEGORY_SERVICE.getCategoryById(17L));   //47
+//        CATEGORY_SERVICE.addCategory("plastic", CATEGORY_SERVICE.getCategoryById(17L));   //48
+//
+//        CATEGORY_SERVICE.addCategory("develop", CATEGORY_SERVICE.getCategoryById(18L));   //49
+//        CATEGORY_SERVICE.addCategory("not_develop", CATEGORY_SERVICE.getCategoryById(18L));   //50
+//        //-----------
+//        CATEGORY_SERVICE.addCategory("pig", CATEGORY_SERVICE.getCategoryById(19L));   //51
+//        CATEGORY_SERVICE.addCategory("chicken", CATEGORY_SERVICE.getCategoryById(19L));   //52
+//
+//        CATEGORY_SERVICE.addCategory("dog", CATEGORY_SERVICE.getCategoryById(20L));   //53
+//        CATEGORY_SERVICE.addCategory("cat", CATEGORY_SERVICE.getCategoryById(20L));   //54
+//
+//        CATEGORY_SERVICE.addCategory("young", CATEGORY_SERVICE.getCategoryById(21L));   //55
+//        CATEGORY_SERVICE.addCategory("old", CATEGORY_SERVICE.getCategoryById(21L));   //56
+//        //--------
+//        CATEGORY_SERVICE.addCategory("milk", CATEGORY_SERVICE.getCategoryById(22L));   //57
+//        CATEGORY_SERVICE.addCategory("not_milk", CATEGORY_SERVICE.getCategoryById(22L));   //58
+//
+//        CATEGORY_SERVICE.addCategory("instant", CATEGORY_SERVICE.getCategoryById(23L));   //59
+//        CATEGORY_SERVICE.addCategory("not_instant", CATEGORY_SERVICE.getCategoryById(23L));   //60
+//
+//        CATEGORY_SERVICE.addCategory("before_year", CATEGORY_SERVICE.getCategoryById(24L));   //61
+//        CATEGORY_SERVICE.addCategory("after_year", CATEGORY_SERVICE.getCategoryById(24L));   //62
+//        //--------
+//        CATEGORY_SERVICE.addCategory("food_child", CATEGORY_SERVICE.getCategoryById(25L));   //63
+//        CATEGORY_SERVICE.addCategory("food_adult", CATEGORY_SERVICE.getCategoryById(25L));   //64
+//
+//        CATEGORY_SERVICE.addCategory("sport_food", CATEGORY_SERVICE.getCategoryById(26L));   //65
+//        CATEGORY_SERVICE.addCategory("not_sport_food", CATEGORY_SERVICE.getCategoryById(26L));   //66
+//
+//        CATEGORY_SERVICE.addCategory("frozen", CATEGORY_SERVICE.getCategoryById(27L));   //67
+//        CATEGORY_SERVICE.addCategory("not_frozen", CATEGORY_SERVICE.getCategoryById(27L));   //68
+//        //--------
+//        CATEGORY_SERVICE.addCategory("alcohol", CATEGORY_SERVICE.getCategoryById(28L));   //69
+//        CATEGORY_SERVICE.addCategory("alcohol_free", CATEGORY_SERVICE.getCategoryById(28L));   //70
+//
+//        CATEGORY_SERVICE.addCategory("made_in", CATEGORY_SERVICE.getCategoryById(29L));   //71
+//        CATEGORY_SERVICE.addCategory("made_out", CATEGORY_SERVICE.getCategoryById(29L));   //72
+//
+//        CATEGORY_SERVICE.addCategory("less_litre", CATEGORY_SERVICE.getCategoryById(30L));   //73
+//        CATEGORY_SERVICE.addCategory("more_litre", CATEGORY_SERVICE.getCategoryById(30L));   //74
+
+
+
 //        CATEGORY_SERVICE.addCategory("industrial", null); //1
 //        CATEGORY_SERVICE.addCategory("nutrition", null);  //2
 //

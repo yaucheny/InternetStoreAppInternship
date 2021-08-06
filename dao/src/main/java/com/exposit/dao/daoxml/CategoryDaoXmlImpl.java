@@ -22,6 +22,11 @@ public class CategoryDaoXmlImpl extends AbstractDaoXmlImpl<CategoryEntity> imple
         repository.add(entity);
     }
 
+    @Override
+    public void saveToFile(List<CategoryEntity> entity) {
+
+    }
+
     private void autoLoad(CategoryEntity entity) {
         repository.add(entity);
     }

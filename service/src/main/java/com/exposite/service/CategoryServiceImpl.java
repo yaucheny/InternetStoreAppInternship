@@ -5,14 +5,12 @@ import com.exposit.api.service.CategoryService;
 import com.exposit.dto.CategoryDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
-import com.exposit.marshelling.json.MarshallingCategoryJson;
 import com.exposit.model.CategoryEntity;
 import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -79,6 +77,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void saveCategoryToFile() {
-        MarshallingCategoryJson.serializeCategory(categoryDao.getAll());
+        categoryDao.saveToFile(categoryDao.getAll());
     }
 }

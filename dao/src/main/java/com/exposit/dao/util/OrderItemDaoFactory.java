@@ -1,6 +1,7 @@
 package com.exposit.dao.util;
 
 import com.exposit.api.dao.OrderItemDao;
+import com.exposit.dao.daohibernate.OrderItemDaoHiberImpl;
 import com.exposit.dao.daojson.OrderItemDaoJsonImpl;
 import com.exposit.dao.daoxml.OrderItemDaoXmlImpl;
 import com.exposit.exceptions.DaoException;
@@ -31,6 +32,9 @@ public class OrderItemDaoFactory implements FactoryBean<OrderItemDao> {
         } else if ("xml".equalsIgnoreCase(valueDao)) {
             log.info("Get data from file category.xml");
             return new OrderItemDaoXmlImpl();
+        } else if ("hibernate".equalsIgnoreCase(valueDao)) {
+            log.info("Get data from postgres database");
+            return new OrderItemDaoHiberImpl();
         }
         log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
         throw new DaoException(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
@@ -42,6 +46,8 @@ public class OrderItemDaoFactory implements FactoryBean<OrderItemDao> {
             return OrderItemDaoJsonImpl.class;
         } else if ("xml".equalsIgnoreCase(valueDao)) {
             return OrderItemDaoXmlImpl.class;
+        } else if ("hibernate".equalsIgnoreCase(valueDao)) {
+            return OrderItemDaoHiberImpl.class;
         }
         log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
         throw new DaoException(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);

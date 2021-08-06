@@ -2,7 +2,6 @@ package com.exposit.dao.daojson;
 
 import com.exposit.api.dao.ShopProductDao;
 import com.exposit.idgenerators.IdGenerator;
-import com.exposit.marshelling.json.MarshallingShopProductJson;
 import com.exposit.model.ShopProductEntity;
 
 import java.util.Comparator;
@@ -14,10 +13,10 @@ public class ShopProductDaoJsonImpl extends AbstractDaoJsonImpl<ShopProductEntit
     private ShopProductDao shopProductDao;
 
     public ShopProductDaoJsonImpl() {
-        List<ShopProductEntity> shopProduct = MarshallingShopProductJson.deSerializeShopProduct();
-        for (ShopProductEntity entity : shopProduct) {
-            this.autoLoad(entity);
-        }
+//        List<ShopProductEntity> shopProduct = MarshallingShopProductJson.deSerializeShopProduct();
+//        for (ShopProductEntity entity : shopProduct) {
+//            this.autoLoad(entity);
+//        }
     }
 
     @Override

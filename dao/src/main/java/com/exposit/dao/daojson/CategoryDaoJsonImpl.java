@@ -22,6 +22,11 @@ public class CategoryDaoJsonImpl extends AbstractDaoJsonImpl<CategoryEntity> imp
         repository.add(entity);
     }
 
+    @Override
+    public void saveToFile(List<CategoryEntity> entity) {
+        MarshallingCategoryJson.serializeCategory(this.getAll());
+    }
+
     private void autoLoad(CategoryEntity entity) {
         repository.add(entity);
     }
