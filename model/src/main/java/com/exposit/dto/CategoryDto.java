@@ -1,6 +1,6 @@
 package com.exposit.dto;
 
-import com.exposit.model.CategoryEntity;
+import com.exposit.model.db.CategoryDb;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -25,8 +25,8 @@ public class CategoryDto {
     private String name;
 
     @ApiModelProperty(notes = "parent category")
-    private CategoryEntity parent;
+    private Long parentId;
 
     @ApiModelProperty(notes = "childList of categories")
-    private List<CategoryEntity> childList;
+    private List<CategoryDb> childList;
 }

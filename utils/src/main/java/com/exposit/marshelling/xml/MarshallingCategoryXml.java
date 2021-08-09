@@ -1,6 +1,6 @@
 package com.exposit.marshelling.xml;
 
-import com.exposit.model.CategoryEntity;
+import com.exposit.model.db.CategoryDb;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import java.io.File;
@@ -20,7 +20,7 @@ public final class MarshallingCategoryXml {
     private MarshallingCategoryXml() {
     }
 
-    public static void serializeCategory(List<CategoryEntity> entities) {
+    public static void serializeCategory(List<CategoryDb> entities) {
         try {
             MAPPER.writeValue(new File(PATH_TO_FILE), entities);
             String jsonString = MAPPER.writeValueAsString(entities);
@@ -32,11 +32,11 @@ public final class MarshallingCategoryXml {
         }
     }
 
-    public static List<CategoryEntity> deSerializeCategory() {
+    public static List<CategoryDb> deSerializeCategory() {
         try {
             String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.US_ASCII);
-            List<CategoryEntity> category = Arrays.asList(MAPPER
-                    .readValue(json, CategoryEntity[].class));
+            List<CategoryDb> category = Arrays.asList(MAPPER
+                    .readValue(json, CategoryDb[].class));
             if (!category.isEmpty()) {
                 return category;
             }

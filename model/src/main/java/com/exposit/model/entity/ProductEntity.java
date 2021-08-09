@@ -1,4 +1,4 @@
-package com.exposit.model;
+package com.exposit.model.entity;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "products")
-public class ProductEntity extends AEntity {
+public class ProductEntity extends BaseEntity {
     @Column(name = "name")
     private String name;
     @Column(name = "producer")

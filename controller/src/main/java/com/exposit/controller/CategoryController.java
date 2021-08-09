@@ -98,18 +98,18 @@ public class CategoryController {
         return ResponseEntity.ok().body(String.format("category %s successfully updated", id));
     }
 
-    @ApiOperation(value = "Save categories to file")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully completed request"),
-            @ApiResponse(code = 201, message = "Successfully created new entity"),
-            @ApiResponse(code = 401, message = "You are not authorized to create the resource"),
-            @ApiResponse(code = 403, message = "Accessing the resource you were trying to create is forbidden"),
-            @ApiResponse(code = 404, message = "The resource you were trying to create is not found")
-    })
-    @PostMapping(value = "/save")
-    public ResponseEntity<String> saveToFile() {
-        categoryService.saveCategoryToFile();
-        log.info(REQUEST);
-        return ResponseEntity.ok().body("categories successfully saved");
-    }
+//    @ApiOperation(value = "Save categories to file")
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "Successfully completed request"),
+//            @ApiResponse(code = 201, message = "Successfully created new entity"),
+//            @ApiResponse(code = 401, message = "You are not authorized to create the resource"),
+//            @ApiResponse(code = 403, message = "Accessing the resource you were trying to create is forbidden"),
+//            @ApiResponse(code = 404, message = "The resource you were trying to create is not found")
+//    })
+//    @PostMapping(value = "/save")
+//    public ResponseEntity<String> saveToFile() {
+//        categoryService.saveCategoryToFile();
+//        log.info(REQUEST);
+//        return ResponseEntity.ok().body("categories successfully saved");
+//    }
 }

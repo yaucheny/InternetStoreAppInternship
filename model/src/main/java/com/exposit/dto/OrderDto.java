@@ -1,7 +1,7 @@
 package com.exposit.dto;
 
-import com.exposit.model.CustomerEntity;
-import com.exposit.model.OrderItemEntity;
+import com.exposit.model.db.CustomerDb;
+import com.exposit.model.db.OrderItemDb;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,8 +17,8 @@ public class OrderDto {
     private LocalDate dateOfOrder;
     private LocalDate dateOfDelivery;
     private Integer priceOfPurchase;
-    private CustomerEntity customer;
-    private List<OrderItemEntity> orderItemList;
+    private CustomerDb customer;
+    private List<OrderItemDb> orderItemList;
     @Min(0)
     private Long days;
 }

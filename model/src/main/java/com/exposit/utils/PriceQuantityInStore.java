@@ -1,4 +1,4 @@
-package com.exposit.model.utils;
+package com.exposit.utils;
 
 public class PriceQuantityInStore {
     private Integer goodsPrice;

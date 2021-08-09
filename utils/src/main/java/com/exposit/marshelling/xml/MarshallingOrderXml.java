@@ -1,6 +1,6 @@
 package com.exposit.marshelling.xml;
 
-import com.exposit.model.OrderEntity;
+import com.exposit.model.db.OrderDb;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import java.io.File;
@@ -21,7 +21,7 @@ public final class MarshallingOrderXml {
     private MarshallingOrderXml() {
     }
 
-    public static void serializeOrder(List<OrderEntity> entities) {
+    public static void serializeOrder(List<OrderDb> entities) {
         try {
             MAPPER.writeValue(new File(PATH_TO_FILE), entities);
             String jsonString = MAPPER.writeValueAsString(entities);
@@ -33,10 +33,10 @@ public final class MarshallingOrderXml {
         }
     }
 
-    public static List<OrderEntity> deSerializeOrder() {
+    public static List<OrderDb> deSerializeOrder() {
         try {
             String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.US_ASCII);
-            List<OrderEntity> orders = Arrays.asList(MAPPER.readValue(json, OrderEntity[].class));
+            List<OrderDb> orders = Arrays.asList(MAPPER.readValue(json, OrderDb[].class));
             if (!orders.isEmpty()) {
                 return orders;
             }

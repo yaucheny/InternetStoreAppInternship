@@ -1,6 +1,6 @@
 package com.exposit.marshelling.json;
 
-import com.exposit.model.StoreEntity;
+import com.exposit.model.db.StoreDb;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -20,7 +20,7 @@ public class MarshallingStoreJson {
     private MarshallingStoreJson() {
     }
 
-    public static void serializeStore(List<StoreEntity> entities) {
+    public static void serializeStore(List<StoreDb> entities) {
         try {
             MAPPER.writeValue(new File(PATH_TO_FILE), entities);
             String jsonString = MAPPER.writeValueAsString(entities);
@@ -32,10 +32,10 @@ public class MarshallingStoreJson {
         }
     }
 
-    public static List<StoreEntity> deSerializeStore() {
+    public static List<StoreDb> deSerializeStore() {
         try {
             String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.US_ASCII);
-            List<StoreEntity> store = Arrays.asList(MAPPER.readValue(json, StoreEntity[].class));
+            List<StoreDb> store = Arrays.asList(MAPPER.readValue(json, StoreDb[].class));
             if (!store.isEmpty()) {
                 return store;
             }

@@ -2,11 +2,11 @@ package com.exposite.service;
 
 import com.exposit.api.dao.ProductDao;
 import com.exposit.api.service.ProductService;
+import com.exposit.model.db.ProductDb;
 import com.exposit.dto.ProductDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
 import com.exposit.marshelling.json.MarshallingProductJson;
-import com.exposit.model.*;
 import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void addProduct(ProductDto productDto) {
         if (productDto.getId() == null) {
-            ProductEntity product = mapper.map(productDto, ProductEntity.class);
+            ProductDb product = mapper.map(productDto, ProductDb.class);
             productDao.save(product);
         } else {
             log.warn(CAN_NOT_ADD_PRODUCT);
@@ -56,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void updateProduct(Long id, ProductDto productDto) {
         if (productDao.getById(id) != null) {
-            ProductEntity product = mapper.map(productDto, ProductEntity.class);
+            ProductDb product = mapper.map(productDto, ProductDb.class);
             product.setId(id);
             productDao.update(id, product);
         } else {
@@ -67,16 +67,16 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto getProductById(Long id) {
-        ProductEntity productEntity = productDao.getById(id);
-        return mapper.map(productEntity, ProductDto.class);
+        ProductDb productDbEntity = productDao.getById(id);
+        return mapper.map(productDbEntity, ProductDto.class);
     }
 
     @Override
     public List<ProductDto> getAllProducts() {
-        List<ProductEntity> productEntityList = productDao.getAll();
+        List<ProductDb> productDbEntityList = productDao.getAll();
         Type listType = new TypeToken<List<ProductDto>>() {
         }.getType();
-        return mapper.map(productEntityList, listType);
+        return mapper.map(productDbEntityList, listType);
     }
 
     @Override

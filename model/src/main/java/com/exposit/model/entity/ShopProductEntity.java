@@ -1,5 +1,6 @@
-package com.exposit.model;
+package com.exposit.model.entity;
 
+import com.exposit.model.parentmodel.ShopProductModel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "product_shops")
-public class ShopProductEntity extends AEntity {
+public class ShopProductEntity extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")

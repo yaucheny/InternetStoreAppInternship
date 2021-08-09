@@ -6,7 +6,7 @@ import com.exposit.dto.OrderItemDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
 import com.exposit.marshelling.json.MarshallingOrderItemJson;
-import com.exposit.model.OrderItemEntity;
+import com.exposit.model.db.OrderItemDb;
 import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -35,7 +35,7 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Override
     public void addOrderItem(OrderItemDto orderItemDto) {
         if (orderItemDto.getId() == null) {
-            OrderItemEntity orderItem = mapper.map(orderItemDto, OrderItemEntity.class);
+            OrderItemDb orderItem = mapper.map(orderItemDto, OrderItemDb.class);
             orderItemDao.save(orderItem);
         } else {
             log.warn(CAN_NOT_ADD_ORDER_ITEM);
@@ -56,7 +56,7 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Override
     public void updateOrderItem(Long id, OrderItemDto orderItemDto) {
         if (orderItemDao.getById(id) != null) {
-            OrderItemEntity orderItem = mapper.map(orderItemDto, OrderItemEntity.class);
+            OrderItemDb orderItem = mapper.map(orderItemDto, OrderItemDb.class);
             orderItem.setId(id);
             orderItemDao.update(id, orderItem);
         } else {
@@ -67,16 +67,16 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     @Override
     public OrderItemDto getOrderItemById(Long id) {
-        OrderItemEntity orderItem = orderItemDao.getById(id);
+        OrderItemDb orderItem = orderItemDao.getById(id);
         return mapper.map(orderItem, OrderItemDto.class);
     }
 
     @Override
     public List<OrderItemDto> getAllOrderItem() {
-        List<OrderItemEntity> orderItemEntityList = orderItemDao.getAll();
+        List<OrderItemDb> orderItemDbEntityList = orderItemDao.getAll();
         Type listType = new TypeToken<List<OrderItemDto>>() {
         }.getType();
-        return mapper.map(orderItemEntityList, listType);
+        return mapper.map(orderItemDbEntityList, listType);
     }
 
     @Override

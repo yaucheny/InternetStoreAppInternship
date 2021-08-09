@@ -1,12 +1,12 @@
 package com.exposit.api.dao;
 
-import com.exposit.model.CategoryEntity;
+import com.exposit.model.db.CategoryDb;
 
 import java.util.List;
 
-public interface CategoryDao extends GenericDao<CategoryEntity> {
+public interface CategoryDao extends GenericDao<CategoryDb> {
 
-    void save(CategoryEntity entity);
+    void save(CategoryDb entity);
 
-    void saveToFile(List<CategoryEntity> entity);
+    void saveToFile(List<CategoryDb> entity);
 }

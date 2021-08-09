@@ -1,4 +1,4 @@
-package com.exposit.model;
+package com.exposit.model.db;
 
 
 import lombok.Getter;
@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class AEntity {
+public abstract class BaseDb {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

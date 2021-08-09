@@ -1,8 +1,8 @@
 package com.exposit.api.dao;
 
-import com.exposit.model.CustomerEntity;
+import com.exposit.model.db.CustomerDb;
 
-public interface CustomerDao extends GenericDao<CustomerEntity> {
+public interface CustomerDao extends GenericDao<CustomerDb> {
 
-    void save(CustomerEntity entity);
+    void save(CustomerDb entity);
 }

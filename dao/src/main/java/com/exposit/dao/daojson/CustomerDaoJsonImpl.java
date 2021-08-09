@@ -2,24 +2,27 @@ package com.exposit.dao.daojson;
 
 import com.exposit.api.dao.CustomerDao;
 import com.exposit.idgenerators.IdGenerator;
-import com.exposit.model.CustomerEntity;
+import com.exposit.marshelling.json.MarshallingCustomerJson;
+import com.exposit.model.db.CustomerDb;
 
-public class CustomerDaoJsonImpl extends AbstractDaoJsonImpl<CustomerEntity> implements CustomerDao {
+import java.util.List;
+
+public class CustomerDaoJsonImpl extends AbstractDaoJsonImpl<CustomerDb> implements CustomerDao {
 
     public CustomerDaoJsonImpl() {
-//        List<CustomerEntity> customer = MarshallingCustomerJson.deSerializeCustomer();
-//        for (CustomerEntity entity : customer) {
-//            this.autoLoad(entity);
-//        }
+        List<CustomerDb> customer = MarshallingCustomerJson.deSerializeCustomer();
+        for (CustomerDb entity : customer) {
+            this.autoLoad(entity);
+        }
     }
 
     @Override
-    public void save(CustomerEntity entity) {
+    public void save(CustomerDb entity) {
         entity.setId(IdGenerator.generateCustomerId());
         repository.add(entity);
     }
 
-    private void autoLoad(CustomerEntity entity) {
+    private void autoLoad(CustomerDb entity) {
         repository.add(entity);
     }
 }

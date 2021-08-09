@@ -2,24 +2,27 @@ package com.exposit.dao.daojson;
 
 import com.exposit.api.dao.ProductDao;
 import com.exposit.idgenerators.IdGenerator;
-import com.exposit.model.ProductEntity;
+import com.exposit.marshelling.json.MarshallingProductJson;
+import com.exposit.model.db.ProductDb;
 
-public class ProductDaoJsonImpl extends AbstractDaoJsonImpl<ProductEntity> implements ProductDao {
+import java.util.List;
+
+public class ProductDaoJsonImpl extends AbstractDaoJsonImpl<ProductDb> implements ProductDao {
 
     public ProductDaoJsonImpl() {
-//        List<ProductEntity> product = MarshallingProductJson.deSerializeProduct();
-//        for (ProductEntity entity : product) {
-//            this.autoLoad(entity);
-//        }
+        List<ProductDb> product = MarshallingProductJson.deSerializeProduct();
+        for (ProductDb entity : product) {
+            this.autoLoad(entity);
+        }
     }
 
     @Override
-    public void save(ProductEntity entity) {
+    public void save(ProductDb entity) {
         entity.setId(IdGenerator.generateProductId());
         repository.add(entity);
     }
 
-    private void autoLoad(ProductEntity entity) {
+    private void autoLoad(ProductDb entity) {
         repository.add(entity);
     }
 }

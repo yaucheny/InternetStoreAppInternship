@@ -3,26 +3,26 @@ package com.exposit.dao.daoxml;
 import com.exposit.api.dao.ProductDao;
 import com.exposit.idgenerators.IdGenerator;
 import com.exposit.marshelling.xml.MarshallingProductXml;
-import com.exposit.model.ProductEntity;
+import com.exposit.model.db.ProductDb;
 
 import java.util.List;
 
-public class ProductDaoXmlImpl extends AbstractDaoXmlImpl<ProductEntity> implements ProductDao {
+public class ProductDaoXmlImpl extends AbstractDaoXmlImpl<ProductDb> implements ProductDao {
 
     public ProductDaoXmlImpl() {
-        List<ProductEntity> product = MarshallingProductXml.deSerializeProduct();
-        for (ProductEntity entity : product) {
+        List<ProductDb> product = MarshallingProductXml.deSerializeProduct();
+        for (ProductDb entity : product) {
             this.autoLoad(entity);
         }
     }
 
     @Override
-    public void save(ProductEntity entity) {
+    public void save(ProductDb entity) {
         entity.setId(IdGenerator.generateProductId());
         repository.add(entity);
     }
 
-    private void autoLoad(ProductEntity entity) {
+    private void autoLoad(ProductDb entity) {
         repository.add(entity);
     }
 }

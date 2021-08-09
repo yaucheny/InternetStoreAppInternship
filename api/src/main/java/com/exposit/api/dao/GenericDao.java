@@ -1,10 +1,10 @@
 package com.exposit.api.dao;
 
-import com.exposit.model.AEntity;
+import com.exposit.model.db.BaseDb;
 
 import java.util.List;
 
-public interface GenericDao<T extends AEntity> {
+public interface GenericDao<T extends BaseDb> {
 
     T getById(Long id);
 

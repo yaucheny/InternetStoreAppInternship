@@ -1,8 +1,8 @@
 package com.exposit.api.dao;
 
-import com.exposit.model.OrderItemEntity;
+import com.exposit.model.db.OrderItemDb;
 
-public interface OrderItemDao extends GenericDao<OrderItemEntity> {
+public interface OrderItemDao extends GenericDao<OrderItemDb> {
 
-    void save(OrderItemEntity entity);
+    void save(OrderItemDb entity);
 }

@@ -2,11 +2,13 @@ package com.exposite.service;
 
 import com.exposit.api.dao.OrderDao;
 import com.exposit.api.service.OrderService;
+import com.exposit.model.db.OrderDb;
+import com.exposit.model.db.OrderItemDb;
+import com.exposit.model.db.ShopProductDb;
 import com.exposit.dto.OrderDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
 import com.exposit.marshelling.json.MarshallingOrderJson;
-import com.exposit.model.*;
 import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -38,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
     public void addOrder(OrderDto orderDto) {
         if (orderDto.getId() == null) {
             try {
-                OrderEntity order = new OrderEntity();
+                OrderDb order = new OrderDb();
                 LocalDate dateOfOrder = LocalDate.now();
                 order.setDateOfOrder(dateOfOrder);
                 order.setDateOfDelivery(dateOfOrder.plusDays(orderDto.getDays()));
@@ -49,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
                 order.setPriceOfPurchase(priceOfBusket(orderDto.getOrderItemList()));
                 changeQuantityAfterPurchase(orderDto.getOrderItemList());
                 orderDao.save(order);
-                mapper.map(orderDto, OrderEntity.class);
+                mapper.map(orderDto, OrderDb.class);
             } catch (ServiceException e) {
                 log.warn(CAN_NOT_UPDATE_ORDER, e);
                 throw new ServiceException(CAN_NOT_UPDATE_ORDER, e);
@@ -74,7 +76,7 @@ public class OrderServiceImpl implements OrderService {
     public void updateOrder(Long id, OrderDto orderDto) {
         if (orderDao.getById(id) != null) {
             try {
-                OrderEntity order = orderDao.getById(id);
+                OrderDb order = orderDao.getById(id);
                 LocalDate dateOfOrder = LocalDate.now();
                 order.setDateOfOrder(dateOfOrder);
                 order.setDateOfDelivery(dateOfOrder.plusDays(orderDto.getDays()));
@@ -97,16 +99,16 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto getOrderById(Long id) {
-        OrderEntity orderEntity = orderDao.getById(id);
-        return mapper.map(orderEntity, OrderDto.class);
+        OrderDb orderDbEntity = orderDao.getById(id);
+        return mapper.map(orderDbEntity, OrderDto.class);
     }
 
     @Override
     public List<OrderDto> getAllOrder() {
-        List<OrderEntity> orderEntityList = orderDao.getAll();
+        List<OrderDb> orderDbEntityList = orderDao.getAll();
         Type listType = new TypeToken<List<OrderDto>>() {
         }.getType();
-        return mapper.map(orderEntityList, listType);
+        return mapper.map(orderDbEntityList, listType);
     }
 
     @Override
@@ -114,17 +116,17 @@ public class OrderServiceImpl implements OrderService {
         MarshallingOrderJson.serializeOrder(orderDao.getAll());
     }
 
-    private Integer priceOfBusket(List<OrderItemEntity> orderItemList) {
+    private Integer priceOfBusket(List<OrderItemDb> orderItemList) {
         int priceOfBusket = 0;
-        for (OrderItemEntity orderItem : orderItemList) {
+        for (OrderItemDb orderItem : orderItemList) {
             int price = orderItem.getShopProduct().getPrice() * orderItem.getQuantity();
             priceOfBusket = priceOfBusket + price;
         }
         return priceOfBusket;
     }
 
-    private void checkQuantity(List<OrderItemEntity> orderItemList) {
-        for (OrderItemEntity orderItem : orderItemList) {
+    private void checkQuantity(List<OrderItemDb> orderItemList) {
+        for (OrderItemDb orderItem : orderItemList) {
             Integer quantityList = orderItem.getQuantity();
             Integer quantityProduct = orderItem.getShopProduct().getQuantity();
             if (quantityProduct < quantityList) {
@@ -135,10 +137,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private void changeQuantityAfterPurchase(
-            List<OrderItemEntity> orderItemList) {
-        for (OrderItemEntity orderItem : orderItemList) {
+            List<OrderItemDb> orderItemList) {
+        for (OrderItemDb orderItem : orderItemList) {
             Integer quantityList = orderItem.getQuantity();
-            ShopProductEntity shopProduct = orderItem.getShopProduct();
+            ShopProductDb shopProduct = orderItem.getShopProduct();
             Integer resultQuantity = shopProduct.getQuantity() - quantityList;
             shopProduct.setQuantity(resultQuantity);
         }

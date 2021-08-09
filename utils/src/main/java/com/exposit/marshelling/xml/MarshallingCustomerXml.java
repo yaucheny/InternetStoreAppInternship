@@ -1,6 +1,6 @@
 package com.exposit.marshelling.xml;
 
-import com.exposit.model.CustomerEntity;
+import com.exposit.model.db.CustomerDb;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import java.io.File;
@@ -20,7 +20,7 @@ public final class MarshallingCustomerXml {
     private MarshallingCustomerXml() {
     }
 
-    public static void serializeCustomer(List<CustomerEntity> entities) {
+    public static void serializeCustomer(List<CustomerDb> entities) {
         try {
             MAPPER.writeValue(new File(PATH_TO_FILE), entities);
             String jsonString = MAPPER.writeValueAsString(entities);
@@ -32,10 +32,10 @@ public final class MarshallingCustomerXml {
         }
     }
 
-    public static List<CustomerEntity> deSerializeCustomer() {
+    public static List<CustomerDb> deSerializeCustomer() {
         try {
             String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.US_ASCII);
-            List<CustomerEntity> customers = Arrays.asList(MAPPER.readValue(json, CustomerEntity[].class));
+            List<CustomerDb> customers = Arrays.asList(MAPPER.readValue(json, CustomerDb[].class));
             if (!customers.isEmpty()) {
                 return customers;
             }

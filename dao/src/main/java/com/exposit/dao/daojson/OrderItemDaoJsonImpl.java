@@ -2,24 +2,28 @@ package com.exposit.dao.daojson;
 
 import com.exposit.api.dao.OrderItemDao;
 import com.exposit.idgenerators.IdGenerator;
-import com.exposit.model.OrderItemEntity;
+import com.exposit.marshelling.json.MarshallingOrderItemJson;
+import com.exposit.model.db.OrderItemDb;
 
-public class OrderItemDaoJsonImpl extends AbstractDaoJsonImpl<OrderItemEntity> implements OrderItemDao {
+import java.util.List;
+
+public class OrderItemDaoJsonImpl extends AbstractDaoJsonImpl<OrderItemDb> implements OrderItemDao {
 
     public OrderItemDaoJsonImpl() {
-//        List<OrderItemEntity> orderItem = MarshallingOrderItemJson.deSerializeOrderItem();
-//        for (OrderItemEntity entity : orderItem) {
-//            this.autoLoad(entity);
-//        }
+        List<OrderItemDb> orderItem = MarshallingOrderItemJson.deSerializeOrderItem();
+        for (OrderItemDb entity : orderItem) {
+            this.autoLoad(entity);
+        }
     }
 
     @Override
-    public void save(OrderItemEntity entity) {
+    public void save(OrderItemDb entity) {
         entity.setId(IdGenerator.generateOrderItemId());
         repository.add(entity);
     }
 
-    private void autoLoad(OrderItemEntity entity) {
+    private void autoLoad(OrderItemDb entity) {
         repository.add(entity);
     }
+
 }
