@@ -30,7 +30,7 @@ public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductDb> imp
     public List<ShopProductDb> sortByPrice() {
         List<ShopProductDb> productList = shopProductDao.getAll();
         return productList.stream().sorted(Comparator
-                .comparingInt(ShopProductDb::getPrice))
+                .comparingDouble(ShopProductDb::getPrice))
                 .collect(Collectors.toList());
     }
 

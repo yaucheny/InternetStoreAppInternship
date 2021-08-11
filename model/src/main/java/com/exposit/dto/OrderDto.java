@@ -2,6 +2,7 @@ package com.exposit.dto;
 
 import com.exposit.model.db.CustomerDb;
 import com.exposit.model.db.OrderItemDb;
+import com.exposit.model.db.OrderStatusDb;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +20,8 @@ public class OrderDto {
     private Integer priceOfPurchase;
     private CustomerDb customer;
     private List<OrderItemDb> orderItemList;
+    private OrderStatusDb orderStatusDb;
+
     @Min(0)
     private Long days;
 }

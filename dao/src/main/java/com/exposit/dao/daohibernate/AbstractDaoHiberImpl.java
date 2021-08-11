@@ -2,6 +2,7 @@ package com.exposit.dao.daohibernate;
 
 import com.exposit.api.dao.GenericDao;
 import com.exposit.model.db.BaseDb;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,13 +11,14 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
-
+@Transactional
 public abstract class AbstractDaoHiberImpl<T extends BaseDb> implements GenericDao<T> {
     @PersistenceContext(type = PersistenceContextType.TRANSACTION)
     protected EntityManager entityManager;
 
     public T getById(Long id) {
         return this.entityManager.find(this.getClazz(), id);
+//        mapper.map(categoryDbEntity, CategoryDto.class);
     }
 
     @Override

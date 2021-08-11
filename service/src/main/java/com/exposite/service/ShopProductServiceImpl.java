@@ -404,7 +404,7 @@ public class ShopProductServiceImpl implements ShopProductService {
         List<PriceQuantityInStore> priceQuantityInStoreList = new ArrayList<>();
         for (ShopProductDb g : shopProductInParticularStore) {
             PriceQuantityInStore priceQuantityInStore = new PriceQuantityInStore(
-                    g.getStore().getName(), g.getQuantity(), g.getPrice());
+                    g.getPrice(), g.getQuantity(), g.getStore().getName());
             priceQuantityInStoreList.add(priceQuantityInStore);
 
         }

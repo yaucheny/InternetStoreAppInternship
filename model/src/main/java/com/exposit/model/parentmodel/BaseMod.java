@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @MappedSuperclass
-public class BaseModel {
+public class BaseMod {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

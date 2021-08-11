@@ -5,21 +5,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-//@Entity
-//@Table(name = "products")
+@Entity
+@Table(name = "products")
 public class ProductDb extends BaseDb {
-//    @Column(name = "name")
+    @Column(name = "name")
     private String name;
-//    @Column(name = "producer")
+    @Column(name = "producer")
     private String producer;
-//    @OneToMany(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "category_id")
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
     private List<CategoryDb> categoryList;
 
     @Override

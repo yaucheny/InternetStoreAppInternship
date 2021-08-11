@@ -5,18 +5,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-//@Entity
-//@Table(name = "stores")
+@Entity
+@Table(name = "stores")
 public class StoreDb extends BaseDb {
-//    @Column(name = "name")
+    @Column(name = "name")
     private String name;
-//    @Column(name = "internet_page")
+    @Column(name = "internet_page")
     private String internetPage;
-//    @Column(name = "phone_number")
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     @Override

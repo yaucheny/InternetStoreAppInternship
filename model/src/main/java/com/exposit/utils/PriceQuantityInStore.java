@@ -1,22 +1,21 @@
 package com.exposit.utils;
 
-public class PriceQuantityInStore {
-    private Integer goodsPrice;
-    private Integer goodsQuantity;
-    private String storeName;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-    public PriceQuantityInStore(String storeName,
-                                Integer goodsQuantity, Integer goodsPrice) {
-        this.goodsPrice = goodsPrice;
-        this.goodsQuantity = goodsQuantity;
-        this.storeName = storeName;
-    }
+@Data
+@AllArgsConstructor
+public class PriceQuantityInStore {
+    private Double price;
+    private Integer quantity;
+    private String storeName;
 
     @Override
     public String toString() {
-        return "storeName='"
-                + storeName + "\n"
-                + ", goodsQuantity=" + goodsQuantity + "\n"
-                + ", goodsPrice=" + goodsPrice;
+        return "PriceQuantityInStore{"
+                + "price=" + price
+                + ", quantity=" + quantity
+                + ", storeName='" + storeName + '\''
+                + '}';
     }
 }

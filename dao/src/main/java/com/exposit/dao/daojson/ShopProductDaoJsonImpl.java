@@ -33,7 +33,7 @@ public class ShopProductDaoJsonImpl extends AbstractDaoJsonImpl<ShopProductDb> i
     @Override
     public List<ShopProductDb> sortByPrice() {
         List<ShopProductDb> productList = shopProductDao.getAll();
-        return productList.stream().sorted(Comparator.comparingInt(ShopProductDb::getPrice))
+        return productList.stream().sorted(Comparator.comparingDouble(ShopProductDb::getPrice))
                 .collect(Collectors.toList());
     }
 }

@@ -1,7 +1,7 @@
 package com.exposit.model.entity;
 
 
-import com.exposit.model.parentmodel.OrderItemModel;
+import com.exposit.model.parentmodel.OrderItemMod;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "items")
-public class OrderItemEntity extends OrderItemModel {
+public class OrderItemEntity extends OrderItemMod {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_shop_id")
     private ShopProductEntity shopProduct;

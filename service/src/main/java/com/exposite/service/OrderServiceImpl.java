@@ -116,10 +116,10 @@ public class OrderServiceImpl implements OrderService {
         MarshallingOrderJson.serializeOrder(orderDao.getAll());
     }
 
-    private Integer priceOfBusket(List<OrderItemDb> orderItemList) {
-        int priceOfBusket = 0;
+    private Double priceOfBusket(List<OrderItemDb> orderItemList) {
+        double priceOfBusket = 0;
         for (OrderItemDb orderItem : orderItemList) {
-            int price = orderItem.getShopProduct().getPrice() * orderItem.getQuantity();
+            double price = orderItem.getShopProduct().getPrice() * orderItem.getQuantity();
             priceOfBusket = priceOfBusket + price;
         }
         return priceOfBusket;

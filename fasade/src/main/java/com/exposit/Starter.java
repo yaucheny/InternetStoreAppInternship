@@ -27,7 +27,7 @@ public class Starter {
 //                "+7777777");
 //        STORE_SERVICE.addStore("lamoda", "lamoda.ru",
 //                "+8888888");
-//
+
 //
 //        CUSTOMER_SERVICE.addCustomer("Ivan", "Ivanov",
 //                "Suvorova 1 , 1", "ivanov@gmail.com");

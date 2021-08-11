@@ -1,6 +1,5 @@
 package com.exposit.model.entity;
 
-import com.exposit.model.parentmodel.ShopProductModel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
