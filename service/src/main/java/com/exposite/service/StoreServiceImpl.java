@@ -8,7 +8,7 @@ import com.exposit.dto.StoreDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
 import com.exposit.marshelling.json.MarshallingStoreJson;
-import com.exposit.model.StoreEntity;
+import com.exposit.model.db.StoreDb;
 import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -21,15 +21,12 @@ import java.util.List;
 @Log4j
 @Service
 public class StoreServiceImpl implements IStoreService {
+
     private final ModelMapper mapper;
     private final StoreDao storeDao;
-
-    private static final String CAN_NOT_DELETE_STORE
-            = "can not delete store";
-    private static final String CAN_NOT_UPDATE_STORE
-            = "can not update store";
-    private static final String CAN_NOT_ADD_STORE
-            = "can not add store";
+    private static final String CAN_NOT_DELETE_STORE = "can not delete store";
+    private static final String CAN_NOT_UPDATE_STORE = "can not update store";
+    private static final String CAN_NOT_ADD_STORE = "can not add store";
 
     @Autowired
     public StoreServiceImpl(ModelMapper mapper, StoreDao storeDao) {
@@ -40,7 +37,7 @@ public class StoreServiceImpl implements IStoreService {
     @Override
     public void addStore(StoreDto storeDto) {
         if (storeDto.getId() == null) {
-            StoreEntity store = mapper.map(storeDto, StoreEntity.class);
+            StoreDb store = mapper.map(storeDto, StoreDb.class);
             storeDao.save(store);
         } else {
             log.warn(CAN_NOT_ADD_STORE);
@@ -61,7 +58,7 @@ public class StoreServiceImpl implements IStoreService {
     @Override
     public void updateStore(Long id, StoreDto storeDto) {
         if (storeDao.getById(id) != null) {
-            StoreEntity store = mapper.map(storeDto, StoreEntity.class);
+            StoreDb store = mapper.map(storeDto, StoreDb.class);
             store.setId(id);
             storeDao.update(id, store);
         } else {
@@ -72,21 +69,20 @@ public class StoreServiceImpl implements IStoreService {
 
     @Override
     public StoreDto getStoreById(Long id) {
-        StoreEntity storeEntity = storeDao.getById(id);
-        return mapper.map(storeEntity, StoreDto.class);
+        StoreDb storeDbEntity = storeDao.getById(id);
+        return mapper.map(storeDbEntity, StoreDto.class);
     }
 
     @Override
     public List<StoreDto> getAllStore() {
-        List<StoreEntity> storeEntityList = storeDao.getAll();
+        List<StoreDb> storeDbEntityList = storeDao.getAll();
         Type listType = new TypeToken<List<StoreDto>>() {
         }.getType();
-        return mapper.map(storeEntityList, listType);
+        return mapper.map(storeDbEntityList, listType);
     }
 
     @Override
     public void saveStoreToFile() {
-        MarshallingStoreJson
-                .serializeStore(storeDao.getAll());
+        MarshallingStoreJson.serializeStore(storeDao.getAll());
     }
 }

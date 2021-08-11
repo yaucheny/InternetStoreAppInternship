@@ -1,4 +1,4 @@
-package com.exposit.controller;
+package com.exposit.controller.congig;
 
 import com.exposit.exceptions.*;
 import lombok.extern.log4j.Log4j;

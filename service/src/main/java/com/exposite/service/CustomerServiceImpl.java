@@ -6,7 +6,7 @@ import com.exposit.dto.CustomerDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
 import com.exposit.marshelling.json.MarshallingCustomerJson;
-import com.exposit.model.CustomerEntity;
+import com.exposit.model.db.CustomerDb;
 import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -19,15 +19,12 @@ import java.util.List;
 @Log4j
 @Service
 public class CustomerServiceImpl implements CustomerService {
+
     private final ModelMapper mapper;
     private final CustomerDao customerDao;
-
-    private static final String CAN_NOT_DELETE_CUSTOMER
-            = "can not delete customer";
-    private static final String CAN_NOT_UPDATE_CUSTOMER
-            = "can not update customer";
-    private static final String CAN_NOT_ADD_CUSTOMER
-            = "can not add customer";
+    private static final String CAN_NOT_DELETE_CUSTOMER = "can not delete customer";
+    private static final String CAN_NOT_UPDATE_CUSTOMER = "can not update customer";
+    private static final String CAN_NOT_ADD_CUSTOMER = "can not add customer";
 
     @Autowired
     public CustomerServiceImpl(ModelMapper mapper, CustomerDao customerDao) {
@@ -35,12 +32,10 @@ public class CustomerServiceImpl implements CustomerService {
         this.customerDao = customerDao;
     }
 
-
     @Override
     public void addCustomer(CustomerDto customerDto) {
         if (customerDto.getId() == null) {
-            CustomerEntity customer = mapper
-                    .map(customerDto, CustomerEntity.class);
+            CustomerDb customer = mapper.map(customerDto, CustomerDb.class);
             customerDao.save(customer);
         } else {
             log.warn(CAN_NOT_ADD_CUSTOMER);
@@ -61,8 +56,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void updateCustomer(Long id, CustomerDto customerDto) {
         if (customerDao.getById(id) != null) {
-            CustomerEntity customer = mapper
-                    .map(customerDto, CustomerEntity.class);
+            CustomerDb customer = mapper.map(customerDto, CustomerDb.class);
             customer.setId(id);
             customerDao.update(id, customer);
         } else {
@@ -73,21 +67,20 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDto getCustomerById(Long id) {
-        CustomerEntity customerEntity = customerDao.getById(id);
-        return mapper.map(customerEntity, CustomerDto.class);
+        CustomerDb customerDbEntity = customerDao.getById(id);
+        return mapper.map(customerDbEntity, CustomerDto.class);
     }
 
     @Override
     public List<CustomerDto> getAllCustomer() {
-        List<CustomerEntity> customerEntityList = customerDao.getAll();
+        List<CustomerDb> customerDbEntityList = customerDao.getAll();
         Type listType = new TypeToken<List<CustomerDto>>() {
         }.getType();
-        return mapper.map(customerEntityList, listType);
+        return mapper.map(customerDbEntityList, listType);
     }
 
     @Override
     public void saveCustomerToFile() {
-        MarshallingCustomerJson
-                .serializeCustomer(customerDao.getAll());
+        MarshallingCustomerJson.serializeCustomer(customerDao.getAll());
     }
 }

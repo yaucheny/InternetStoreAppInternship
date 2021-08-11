@@ -1,9 +1,9 @@
 package com.exposit.api.dao;
 
-import com.exposit.model.StoreEntity;
+import com.exposit.model.db.StoreDb;
 
-public interface StoreDao extends GenericDao<StoreEntity> {
+public interface StoreDao extends GenericDao<StoreDb> {
 
-    void save(StoreEntity entity);
+    void save(StoreDb entity);
 
 }

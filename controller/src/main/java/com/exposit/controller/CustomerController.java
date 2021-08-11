@@ -39,8 +39,7 @@ public class CustomerController {
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
         customerService.deleteCustomer(id);
         log.info(REQUEST + id);
-        return ResponseEntity.ok().body(String
-                .format("customer %s successfully deleted", id));
+        return ResponseEntity.ok().body(String.format("customer %s successfully deleted", id));
     }
 
     @PostMapping(value = "/")
@@ -50,12 +49,11 @@ public class CustomerController {
         return ResponseEntity.ok().body("new customer added");
     }
 
+    @SuppressWarnings("checkstyle:FinalParameters")
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> update(@PathVariable Long id,
-                                         @Valid @RequestBody CustomerDto customerDto) {
+    public ResponseEntity<String> update(@PathVariable Long id, @Valid @RequestBody CustomerDto customerDto) {
         customerService.updateCustomer(id, customerDto);
         log.info(REQUEST);
-        return ResponseEntity.ok().body(String
-                .format("customer %s successfully updated", id));
+        return ResponseEntity.ok().body(String.format("customer %s successfully updated", id));
     }
 }

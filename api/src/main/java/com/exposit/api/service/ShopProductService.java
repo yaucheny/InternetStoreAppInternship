@@ -1,12 +1,11 @@
 package com.exposit.api.service;
 
 import com.exposit.dto.ShopProductDto;
-import com.exposit.model.utils.PriceQuantityInStore;
+import com.exposit.utils.PriceQuantityInStore;
 
 import java.util.List;
 
 public interface ShopProductService {
-
 
     void addShopProduct(ShopProductDto shopProductDto);
 

@@ -1,6 +1,6 @@
 package com.exposit.marshelling.xml;
 
-import com.exposit.model.ShopProductEntity;
+import com.exposit.model.db.ShopProductDb;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import java.io.File;
@@ -21,14 +21,12 @@ public final class MarshallingShopProductXml {
     private MarshallingShopProductXml() {
     }
 
-    public static void serializeShopProduct(List<ShopProductEntity> entities) {
+    public static void serializeShopProduct(List<ShopProductDb> entities) {
         try {
-            MAPPER.writeValue(new File(
-                    PATH_TO_FILE), entities);
+            MAPPER.writeValue(new File(PATH_TO_FILE), entities);
             String jsonString = MAPPER.writeValueAsString(entities);
             System.out.println(jsonString);
-            String jsonInString2 = MAPPER.writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(entities);
+            String jsonInString2 = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(entities);
             System.out.println(jsonInString2);
 
         } catch (IOException e) {
@@ -36,14 +34,10 @@ public final class MarshallingShopProductXml {
         }
     }
 
-    public static List<ShopProductEntity> deSerializeShopProduct() {
+    public static List<ShopProductDb> deSerializeShopProduct() {
         try {
-            String json = Files.readString(Path.of(
-                    PATH_TO_FILE),
-                    StandardCharsets.US_ASCII);
-            List<ShopProductEntity> shopProduct
-                    = Arrays.asList(MAPPER
-                    .readValue(json, ShopProductEntity[].class));
+            String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.US_ASCII);
+            List<ShopProductDb> shopProduct = Arrays.asList(MAPPER.readValue(json, ShopProductDb[].class));
             if (!shopProduct.isEmpty()) {
                 return shopProduct;
             }

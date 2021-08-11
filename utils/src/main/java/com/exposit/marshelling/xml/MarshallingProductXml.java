@@ -1,6 +1,6 @@
 package com.exposit.marshelling.xml;
 
-import com.exposit.model.ProductEntity;
+import com.exposit.model.db.ProductDb;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import java.io.File;
@@ -21,28 +21,22 @@ public final class MarshallingProductXml {
     private MarshallingProductXml() {
     }
 
-    public static void serializeProduct(List<ProductEntity> entities) {
+    public static void serializeProduct(List<ProductDb> entities) {
         try {
-            MAPPER.writeValue(new File(
-                    PATH_TO_FILE), entities);
+            MAPPER.writeValue(new File(PATH_TO_FILE), entities);
             String jsonString = MAPPER.writeValueAsString(entities);
             System.out.println(jsonString);
-            String jsonInString2 = MAPPER.writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(entities);
+            String jsonInString2 = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(entities);
             System.out.println(jsonInString2);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static List<ProductEntity> deSerializeProduct() {
+    public static List<ProductDb> deSerializeProduct() {
         try {
-            String json = Files.readString(Path.of(
-                    PATH_TO_FILE),
-                    StandardCharsets.US_ASCII);
-            List<ProductEntity> product
-                    = Arrays.asList(MAPPER
-                    .readValue(json, ProductEntity[].class));
+            String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.US_ASCII);
+            List<ProductDb> product = Arrays.asList(MAPPER.readValue(json, ProductDb[].class));
             if (!product.isEmpty()) {
                 return product;
             }

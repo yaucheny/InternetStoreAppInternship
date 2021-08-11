@@ -5,6 +5,7 @@ import com.exposit.dto.StoreDto;
 import java.util.List;
 
 public interface IStoreService {
+
     void addStore(StoreDto storeDto);
 
     void deleteStore(Long id);

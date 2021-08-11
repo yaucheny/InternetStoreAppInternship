@@ -1,8 +1,8 @@
 package com.exposit.api.dao;
 
-import com.exposit.model.ProductEntity;
+import com.exposit.model.db.ProductDb;
 
-public interface ProductDao extends GenericDao<ProductEntity> {
+public interface ProductDao extends GenericDao<ProductDb> {
 
-    void save(ProductEntity entity);
+    void save(ProductDb entity);
 }

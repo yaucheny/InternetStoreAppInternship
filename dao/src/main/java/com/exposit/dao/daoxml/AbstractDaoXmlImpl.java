@@ -2,18 +2,16 @@ package com.exposit.dao.daoxml;
 
 import com.exposit.api.dao.GenericDao;
 import com.exposit.exceptions.DaoException;
-import com.exposit.model.AEntity;
+import com.exposit.model.db.BaseDb;
 import lombok.extern.log4j.Log4j;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Log4j
-public class AbstractDaoXmlImpl<T extends AEntity> implements GenericDao<T> {
+public class AbstractDaoXmlImpl<T extends BaseDb> implements GenericDao<T> {
 
-    private static final String GET_BY_ID_ERROR_MESSAGE
-            = "can not find an entity by id: %d";
+    private static final String GET_BY_ID_ERROR_MESSAGE = "can not find an entity by id: %d";
     protected List<T> repository = new ArrayList<>();
 
     @Override
