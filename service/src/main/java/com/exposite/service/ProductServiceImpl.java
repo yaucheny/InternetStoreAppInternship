@@ -2,21 +2,22 @@ package com.exposite.service;
 
 import com.exposit.api.dao.ProductDao;
 import com.exposit.api.service.ProductService;
-import com.exposit.model.db.ProductDb;
 import com.exposit.dto.ProductDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
 import com.exposit.marshelling.json.MarshallingProductJson;
+import com.exposit.model.db.ProductDb;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
 @Log4j
+@RequiredArgsConstructor
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -25,12 +26,6 @@ public class ProductServiceImpl implements ProductService {
     private static final String CAN_NOT_DELETE_PRODUCT = "can not delete product";
     private static final String CAN_NOT_UPDATE_PRODUCT = "can not update product";
     private static final String CAN_NOT_ADD_PRODUCT = "can not add product";
-
-    @Autowired
-    public ProductServiceImpl(ModelMapper mapper, ProductDao productDao) {
-        this.mapper = mapper;
-        this.productDao = productDao;
-    }
 
     @Override
     public void addProduct(ProductDto productDto) {

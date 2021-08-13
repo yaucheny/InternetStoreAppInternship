@@ -35,7 +35,7 @@ public final class MarshallingOrderXml {
 
     public static List<OrderDb> deSerializeOrder() {
         try {
-            String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.US_ASCII);
+            String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.UTF_8);
             List<OrderDb> orders = Arrays.asList(MAPPER.readValue(json, OrderDb[].class));
             if (!orders.isEmpty()) {
                 return orders;

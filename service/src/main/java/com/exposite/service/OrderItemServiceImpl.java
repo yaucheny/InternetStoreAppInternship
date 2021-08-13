@@ -7,16 +7,17 @@ import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
 import com.exposit.marshelling.json.MarshallingOrderItemJson;
 import com.exposit.model.db.OrderItemDb;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
 @Log4j
+@RequiredArgsConstructor
 @Service
 public class OrderItemServiceImpl implements OrderItemService {
 
@@ -25,12 +26,6 @@ public class OrderItemServiceImpl implements OrderItemService {
     private static final String CAN_NOT_DELETE_ORDER_ITEM = "can not delete orderItem";
     private static final String CAN_NOT_UPDATE_ORDER_ITEM = "can not update orderItem";
     private static final String CAN_NOT_ADD_ORDER_ITEM = "can not add orderItem";
-
-    @Autowired
-    public OrderItemServiceImpl(ModelMapper mapper, OrderItemDao orderItemDao) {
-        this.mapper = mapper;
-        this.orderItemDao = orderItemDao;
-    }
 
     @Override
     public void addOrderItem(OrderItemDto orderItemDto) {

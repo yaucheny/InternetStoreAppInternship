@@ -30,4 +30,6 @@ public class CategoryDaoJsonImpl extends AbstractDaoJsonImpl<CategoryDb> impleme
     private void autoLoad(CategoryDb entity) {
         repository.add(entity);
     }
+
+
 }

@@ -1,4 +1,4 @@
-package com.exposit.utils;
+package com.exposit.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

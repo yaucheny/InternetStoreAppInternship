@@ -22,6 +22,11 @@ public class StoreDaoXmlImpl extends AbstractDaoXmlImpl<StoreDb> implements Stor
         repository.add(entity);
     }
 
+    @Override
+    public void saveToFile(List<StoreDb> entity) {
+
+    }
+
     private void autoLoad(StoreDb entity) {
         repository.add(entity);
     }

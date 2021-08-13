@@ -1,5 +1,6 @@
 package com.exposit.model.db;
 
+import com.exposit.model.api.CategoryModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
@@ -16,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "categories")
-public class CategoryDb extends BaseDb {
+public class CategoryDb extends BaseDb implements CategoryModel {
 
     @Column(name = "name")
     private String name;

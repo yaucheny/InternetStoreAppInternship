@@ -1,14 +1,13 @@
 package com.exposit.controller;
 
-
 import com.exposit.api.service.CategoryService;
 import com.exposit.dto.CategoryDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Log4j
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/category")
 @Api(value = "Categories of online store", description = "Operations pertaining to category in online store")
@@ -23,11 +23,6 @@ public class CategoryController {
 
     private static final String REQUEST = "receive request: /category/";
     private final CategoryService categoryService;
-
-    @Autowired
-    public CategoryController(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
 
     @ApiOperation(value = "Return category by id")
     @ApiResponses(value = {

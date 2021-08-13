@@ -22,6 +22,11 @@ public class OrderItemDaoXmlImpl extends AbstractDaoXmlImpl<OrderItemDb> impleme
         repository.add(entity);
     }
 
+    @Override
+    public void saveToFile(List<OrderItemDb> entity) {
+
+    }
+
     private void autoLoad(OrderItemDb entity) {
         repository.add(entity);
     }

@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class MarshallingStoreJson {
+public final class MarshallingStoreJson {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final String PATH_TO_FILE = "utils/src/main/resources/store.json";
@@ -34,7 +34,7 @@ public class MarshallingStoreJson {
 
     public static List<StoreDb> deSerializeStore() {
         try {
-            String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.US_ASCII);
+            String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.UTF_8);
             List<StoreDb> store = Arrays.asList(MAPPER.readValue(json, StoreDb[].class));
             if (!store.isEmpty()) {
                 return store;

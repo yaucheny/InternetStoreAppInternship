@@ -22,6 +22,11 @@ public class ProductDaoJsonImpl extends AbstractDaoJsonImpl<ProductDb> implement
         repository.add(entity);
     }
 
+    @Override
+    public void saveToFile(List<ProductDb> entity) {
+
+    }
+
     private void autoLoad(ProductDb entity) {
         repository.add(entity);
     }

@@ -1,7 +1,7 @@
 package com.exposit.api.service;
 
 import com.exposit.dto.ShopProductDto;
-import com.exposit.utils.PriceQuantityInStore;
+import com.exposit.model.PriceQuantityInStore;
 
 import java.util.List;
 

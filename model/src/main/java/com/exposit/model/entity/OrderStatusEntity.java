@@ -1,4 +1,4 @@
-package com.exposit.model.db;
+package com.exposit.model.entity;
 
 import com.exposit.model.api.OrderStatusModel;
 import lombok.EqualsAndHashCode;
@@ -9,22 +9,21 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @Entity
 @Table(name = "statuses")
-public class OrderStatusDb extends BaseDb implements OrderStatusModel {
+public class OrderStatusEntity extends BaseEntity implements OrderStatusModel {
 
-    @Column(name = "name")
-    String name;
+        @Column(name = "name")
+        String name;
 
-    @Override
-    public String toString() {
-        return "OrderStatusDb{"
-                + "name='" + name + '\''
-                + '}';
+        @Override
+        public String toString() {
+            return "OrderStatusDb{"
+                    + "name='" + name + '\''
+                    + '}';
+        }
     }
-}

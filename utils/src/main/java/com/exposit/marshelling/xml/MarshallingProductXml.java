@@ -35,7 +35,7 @@ public final class MarshallingProductXml {
 
     public static List<ProductDb> deSerializeProduct() {
         try {
-            String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.US_ASCII);
+            String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.UTF_8);
             List<ProductDb> product = Arrays.asList(MAPPER.readValue(json, ProductDb[].class));
             if (!product.isEmpty()) {
                 return product;

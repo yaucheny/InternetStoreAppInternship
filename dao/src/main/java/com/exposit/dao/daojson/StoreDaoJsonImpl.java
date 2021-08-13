@@ -22,6 +22,11 @@ public class StoreDaoJsonImpl extends AbstractDaoJsonImpl<StoreDb> implements St
         repository.add(entity);
     }
 
+    @Override
+    public void saveToFile(List<StoreDb> entity) {
+
+    }
+
     private void autoLoad(StoreDb entity){
         repository.add(entity);
     }

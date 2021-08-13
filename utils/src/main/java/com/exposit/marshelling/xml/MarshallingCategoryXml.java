@@ -34,7 +34,7 @@ public final class MarshallingCategoryXml {
 
     public static List<CategoryDb> deSerializeCategory() {
         try {
-            String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.US_ASCII);
+            String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.UTF_8);
             List<CategoryDb> category = Arrays.asList(MAPPER
                     .readValue(json, CategoryDb[].class));
             if (!category.isEmpty()) {

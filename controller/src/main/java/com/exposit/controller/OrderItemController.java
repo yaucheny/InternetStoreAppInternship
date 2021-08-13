@@ -2,6 +2,7 @@ package com.exposit.controller;
 
 import com.exposit.api.service.OrderItemService;
 import com.exposit.dto.OrderItemDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,16 +18,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Log4j
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/orderItem")
 public class OrderItemController {
 
     private final OrderItemService orderItemService;
     private static final String REQUEST = "receive request: /orderItem/ ";
-
-    public OrderItemController(OrderItemService orderItemService) {
-        this.orderItemService = orderItemService;
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<OrderItemDto> getById(@PathVariable Long id) {

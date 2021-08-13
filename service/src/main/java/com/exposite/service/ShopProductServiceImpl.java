@@ -7,13 +7,13 @@ import com.exposit.dto.ShopProductDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
 import com.exposit.marshelling.json.MarshallingShopProductJson;
+import com.exposit.model.PriceQuantityInStore;
 import com.exposit.model.db.CategoryDb;
 import com.exposit.model.db.ShopProductDb;
-import com.exposit.utils.PriceQuantityInStore;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Log4j
+@RequiredArgsConstructor
 @Service
 public class ShopProductServiceImpl implements ShopProductService {
 
@@ -42,13 +43,6 @@ public class ShopProductServiceImpl implements ShopProductService {
 
     Type listType = new TypeToken<List<ShopProductDto>>() {
     }.getType();
-
-    @Autowired
-    public ShopProductServiceImpl(ModelMapper mapper, ShopProductDao shopProductDao, CategoryDao categoryDao) {
-        this.mapper = mapper;
-        this.shopProductDao = shopProductDao;
-        this.categoryDao = categoryDao;
-    }
 
     @Override
     public void addShopProduct(ShopProductDto shopProductDto) {
@@ -129,7 +123,7 @@ public class ShopProductServiceImpl implements ShopProductService {
         List<ShopProductDb> shopProductDbEntityList;
         switch (attribute) {
             case (NAME):
-                shopProductDbEntityList = shopProductDao.getAll().stream()
+                shopProductDbEntityList = goods.stream()
                         .filter(p -> p.getProduct().getName().equals(value))
                         .collect(Collectors.toList());
                 return mapper.map(shopProductDbEntityList, listType);
@@ -140,7 +134,7 @@ public class ShopProductServiceImpl implements ShopProductService {
                 return mapper.map(shopProductDbEntityList, listType);
             case (PRICE):
                 shopProductDbEntityList = goods.stream()
-                        .filter(p -> p.getPrice().equals(java.lang.Integer.parseInt(value)))
+                        .filter(p -> p.getPrice().equals(java.lang.Double.parseDouble(value)))
                         .collect(Collectors.toList());
                 return mapper.map(shopProductDbEntityList, listType);
             case (QUANTITY):
@@ -181,7 +175,7 @@ public class ShopProductServiceImpl implements ShopProductService {
                         return mapper.map(shopProductDbEntityList, listType);
                     case (PRICE):
                         shopProductDbEntityList = goods.stream()
-                                .filter(p -> p.getPrice().equals(java.lang.Integer.parseInt(value1)))
+                                .filter(p -> p.getPrice().equals(java.lang.Double.parseDouble(value1)))
                                 .filter(p -> p.getProduct().getName().equals(value2))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductDbEntityList, listType);
@@ -217,7 +211,7 @@ public class ShopProductServiceImpl implements ShopProductService {
                         return mapper.map(shopProductDbEntityList, listType);
                     case (PRICE):
                         shopProductDbEntityList = goods.stream()
-                                .filter(p -> p.getPrice().equals(java.lang.Integer.parseInt(value1)))
+                                .filter(p -> p.getPrice().equals(java.lang.Double.parseDouble(value1)))
                                 .filter(p -> p.getProduct().getProducer().equals(value2))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductDbEntityList, listType);
@@ -248,31 +242,31 @@ public class ShopProductServiceImpl implements ShopProductService {
                     case (PRODUCER):
                         shopProductDbEntityList = goods.stream()
                                 .filter(p -> p.getProduct().getProducer().equals(value1))
-                                .filter(p -> p.getPrice().equals(java.lang.Integer.parseInt(value2)))
+                                .filter(p -> p.getPrice().equals(java.lang.Double.parseDouble(value2)))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductDbEntityList, listType);
                     case (NAME):
                         shopProductDbEntityList = goods.stream()
                                 .filter(p -> p.getProduct().getName().equals(value1))
-                                .filter(p -> p.getPrice().equals(java.lang.Integer.parseInt(value2)))
+                                .filter(p -> p.getPrice().equals(java.lang.Double.parseDouble(value2)))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductDbEntityList, listType);
                     case (QUANTITY):
                         shopProductDbEntityList = goods.stream()
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer.parseInt(value1)))
-                                .filter(p -> p.getPrice().equals(java.lang.Integer.parseInt(value2)))
+                                .filter(p -> p.getPrice().equals(java.lang.Double.parseDouble(value2)))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductDbEntityList, listType);
                     case (STORE):
                         shopProductDbEntityList = goods.stream()
                                 .filter(p -> p.getStore().getName().equals(value1))
-                                .filter(p -> p.getPrice().equals(java.lang.Integer.parseInt(value2)))
+                                .filter(p -> p.getPrice().equals(java.lang.Double.parseDouble(value2)))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductDbEntityList, listType);
                     case (DESCRIPTION):
                         shopProductDbEntityList = goods.stream()
                                 .filter(p -> p.getDescription().equals(value1))
-                                .filter(p -> p.getPrice().equals(java.lang.Integer.parseInt(value2)))
+                                .filter(p -> p.getPrice().equals(java.lang.Double.parseDouble(value2)))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductDbEntityList, listType);
                     default:
@@ -289,7 +283,7 @@ public class ShopProductServiceImpl implements ShopProductService {
                         return mapper.map(shopProductDbEntityList, listType);
                     case (PRICE):
                         shopProductDbEntityList = goods.stream()
-                                .filter(p -> p.getPrice().equals(java.lang.Integer.parseInt(value1)))
+                                .filter(p -> p.getPrice().equals(java.lang.Double.parseDouble(value1)))
                                 .filter(p -> p.getQuantity().equals(java.lang.Integer.parseInt(value2)))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductDbEntityList, listType);
@@ -325,7 +319,7 @@ public class ShopProductServiceImpl implements ShopProductService {
                         return mapper.map(shopProductDbEntityList, listType);
                     case (PRICE):
                         shopProductDbEntityList = goods.stream()
-                                .filter(p -> p.getPrice().equals(java.lang.Integer.parseInt(value1)))
+                                .filter(p -> p.getPrice().equals(java.lang.Double.parseDouble(value1)))
                                 .filter(p -> p.getStore().getName().equals(value2))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductDbEntityList, listType);
@@ -373,7 +367,7 @@ public class ShopProductServiceImpl implements ShopProductService {
                         return mapper.map(shopProductDbEntityList, listType);
                     case (PRICE):
                         shopProductDbEntityList = goods.stream()
-                                .filter(p -> p.getPrice().equals(java.lang.Integer.parseInt(value1)))
+                                .filter(p -> p.getPrice().equals(java.lang.Double.parseDouble(value1)))
                                 .filter(p -> p.getDescription().equals(value2))
                                 .collect(Collectors.toList());
                         return mapper.map(shopProductDbEntityList, listType);

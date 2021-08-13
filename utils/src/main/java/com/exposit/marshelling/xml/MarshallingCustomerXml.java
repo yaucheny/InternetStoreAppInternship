@@ -34,7 +34,7 @@ public final class MarshallingCustomerXml {
 
     public static List<CustomerDb> deSerializeCustomer() {
         try {
-            String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.US_ASCII);
+            String json = Files.readString(Path.of(PATH_TO_FILE), StandardCharsets.UTF_8);
             List<CustomerDb> customers = Arrays.asList(MAPPER.readValue(json, CustomerDb[].class));
             if (!customers.isEmpty()) {
                 return customers;

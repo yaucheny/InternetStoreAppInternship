@@ -7,8 +7,7 @@ import com.exposit.model.db.OrderDb;
 
 import java.util.List;
 
-public class OrderDaoXmlImpl
-        extends AbstractDaoXmlImpl<OrderDb> implements OrderDao {
+public class OrderDaoXmlImpl extends AbstractDaoXmlImpl<OrderDb> implements OrderDao {
 
     public OrderDaoXmlImpl() {
         List<OrderDb> order = MarshallingOrderXml.deSerializeOrder();
@@ -21,6 +20,11 @@ public class OrderDaoXmlImpl
     public void save(OrderDb entity) {
         entity.setId(IdGenerator.generateOrderId());
         repository.add(entity);
+    }
+
+    @Override
+    public void saveToFile(List<OrderDb> entity) {
+
     }
 
     private void autoLoad(OrderDb entity) {

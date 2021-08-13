@@ -36,4 +36,9 @@ public class ShopProductDaoJsonImpl extends AbstractDaoJsonImpl<ShopProductDb> i
         return productList.stream().sorted(Comparator.comparingDouble(ShopProductDb::getPrice))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void saveToFile(List<ShopProductDb> entity) {
+
+    }
 }

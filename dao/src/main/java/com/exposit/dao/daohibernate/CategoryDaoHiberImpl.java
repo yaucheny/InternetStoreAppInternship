@@ -8,6 +8,11 @@ import java.util.List;
 public class CategoryDaoHiberImpl extends AbstractDaoHiberImpl<CategoryDb> implements CategoryDao {
 
     @Override
+    protected Class<CategoryDb> getClazz() {
+        return CategoryDb.class;
+    }
+
+    @Override
     public void save(CategoryDb entity) {
         if (entity.getId() == null) {
             this.entityManager.persist(entity);
@@ -19,8 +24,4 @@ public class CategoryDaoHiberImpl extends AbstractDaoHiberImpl<CategoryDb> imple
 
     }
 
-    @Override
-    protected Class<CategoryDb> getClazz() {
-        return CategoryDb.class;
-    }
 }

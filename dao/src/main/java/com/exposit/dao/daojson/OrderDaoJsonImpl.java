@@ -22,6 +22,11 @@ public class OrderDaoJsonImpl extends AbstractDaoJsonImpl<OrderDb> implements Or
         repository.add(entity);
     }
 
+    @Override
+    public void saveToFile(List<OrderDb> entity) {
+
+    }
+
     private void autoLoad(OrderDb entity) {
         repository.add(entity);
     }
