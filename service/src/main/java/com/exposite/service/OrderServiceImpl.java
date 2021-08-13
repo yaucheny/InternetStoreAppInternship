@@ -2,17 +2,17 @@ package com.exposite.service;
 
 import com.exposit.api.dao.OrderDao;
 import com.exposit.api.service.OrderService;
-import com.exposit.model.db.OrderDb;
-import com.exposit.model.db.OrderItemDb;
-import com.exposit.model.db.ShopProductDb;
 import com.exposit.dto.OrderDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
 import com.exposit.marshelling.json.MarshallingOrderJson;
+import com.exposit.model.db.OrderDb;
+import com.exposit.model.db.OrderItemDb;
+import com.exposit.model.db.ShopProductDb;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Log4j
+@RequiredArgsConstructor
 @Service
 public class OrderServiceImpl implements OrderService {
 
@@ -29,12 +30,6 @@ public class OrderServiceImpl implements OrderService {
     private static final String CAN_NOT_UPDATE_ORDER = "can not update order";
     private static final String CAN_NOT_ADD_ORDER = "can not add order ";
     private static final String NOT_ENOUGH_PRODUCTS = "Not enough quantity of product in this store ";
-
-    @Autowired
-    public OrderServiceImpl(ModelMapper mapper, OrderDao orderDao) {
-        this.mapper = mapper;
-        this.orderDao = orderDao;
-    }
 
     @Override
     public void addOrder(OrderDto orderDto) {

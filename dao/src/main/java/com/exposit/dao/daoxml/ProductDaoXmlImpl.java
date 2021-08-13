@@ -22,6 +22,11 @@ public class ProductDaoXmlImpl extends AbstractDaoXmlImpl<ProductDb> implements 
         repository.add(entity);
     }
 
+    @Override
+    public void saveToFile(List<ProductDb> entity) {
+
+    }
+
     private void autoLoad(ProductDb entity) {
         repository.add(entity);
     }

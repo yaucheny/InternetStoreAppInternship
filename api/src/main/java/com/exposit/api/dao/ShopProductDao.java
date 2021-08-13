@@ -9,4 +9,6 @@ public interface ShopProductDao extends GenericDao<ShopProductDb> {
     void save(ShopProductDb entity);
 
     List<ShopProductDb> sortByPrice();
+
+    void saveToFile(List<ShopProductDb> entity);
 }

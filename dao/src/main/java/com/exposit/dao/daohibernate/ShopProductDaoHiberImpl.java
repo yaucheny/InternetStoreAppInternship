@@ -20,6 +20,11 @@ public class ShopProductDaoHiberImpl extends AbstractDaoHiberImpl<ShopProductDb>
     }
 
     @Override
+    public void saveToFile(List<ShopProductDb> entity) {
+
+    }
+
+    @Override
     protected Class<ShopProductDb> getClazz() {
         return ShopProductDb.class;
     }

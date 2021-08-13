@@ -7,16 +7,17 @@ import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
 import com.exposit.marshelling.json.MarshallingCustomerJson;
 import com.exposit.model.db.CustomerDb;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
 @Log4j
+@RequiredArgsConstructor
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
@@ -25,12 +26,6 @@ public class CustomerServiceImpl implements CustomerService {
     private static final String CAN_NOT_DELETE_CUSTOMER = "can not delete customer";
     private static final String CAN_NOT_UPDATE_CUSTOMER = "can not update customer";
     private static final String CAN_NOT_ADD_CUSTOMER = "can not add customer";
-
-    @Autowired
-    public CustomerServiceImpl(ModelMapper mapper, CustomerDao customerDao) {
-        this.mapper = mapper;
-        this.customerDao = customerDao;
-    }
 
     @Override
     public void addCustomer(CustomerDto customerDto) {

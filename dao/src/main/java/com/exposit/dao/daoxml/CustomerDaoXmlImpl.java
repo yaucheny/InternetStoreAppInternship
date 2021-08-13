@@ -22,6 +22,11 @@ public class CustomerDaoXmlImpl extends AbstractDaoXmlImpl<CustomerDb> implement
         repository.add(entity);
     }
 
+    @Override
+    public void saveToFile(List<CustomerDb> entity) {
+
+    }
+
     private void autoLoad(CustomerDb entity) {
         repository.add(entity);
     }

@@ -34,6 +34,11 @@ public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductDb> imp
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void saveToFile(List<ShopProductDb> entity) {
+
+    }
+
     private void autoLoad(ShopProductDb entity) {
         repository.add(entity);
     }

@@ -6,32 +6,26 @@ import com.exposit.dto.CategoryDto;
 import com.exposit.exceptions.DaoException;
 import com.exposit.exceptions.ServiceException;
 import com.exposit.model.db.CategoryDb;
-import com.exposit.model.entity.CategoryEntity;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
 @Log4j
+@RequiredArgsConstructor
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private ModelMapper mapper;
+    private final ModelMapper mapper;
 
-    private CategoryDao categoryDao;
+    private final CategoryDao categoryDao;
     private static final String CAN_NOT_DELETE_CATEGORY = "can not delete category";
     private static final String CAN_NOT_ADD_CATEGORY = "can not add category";
     private static final String CAN_NOT_UPDATE_CATEGORY = "can not update category";
-
-    public CategoryServiceImpl(ModelMapper mapper, CategoryDao categoryDao) {
-               this.mapper = mapper;
-        this.categoryDao = categoryDao;
-    }
 
     @Override
     public void addCategory(CategoryDto categoryDto) {

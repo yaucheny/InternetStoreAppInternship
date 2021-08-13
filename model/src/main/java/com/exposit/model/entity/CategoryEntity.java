@@ -1,5 +1,6 @@
 package com.exposit.model.entity;
 
+import com.exposit.model.api.CategoryModel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "categories")
-public class CategoryEntity extends BaseEntity {
+public class CategoryEntity extends BaseEntity implements CategoryModel {
 
     @Column(name = "name")
     private String name;

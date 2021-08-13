@@ -22,6 +22,11 @@ public class CustomerDaoJsonImpl extends AbstractDaoJsonImpl<CustomerDb> impleme
         repository.add(entity);
     }
 
+    @Override
+    public void saveToFile(List<CustomerDb> entity) {
+
+    }
+
     private void autoLoad(CustomerDb entity) {
         repository.add(entity);
     }

@@ -2,8 +2,8 @@ package com.exposit.controller;
 
 import com.exposit.api.service.CustomerService;
 import com.exposit.dto.CustomerDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,17 +11,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Log4j
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
 
     private final CustomerService customerService;
     private static final String REQUEST = "receive request: /customer/ ";
-
-    @Autowired
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<CustomerDto> getById(@PathVariable Long id) {

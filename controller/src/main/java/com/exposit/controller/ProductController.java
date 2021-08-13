@@ -2,6 +2,7 @@ package com.exposit.controller;
 
 import com.exposit.api.service.ProductService;
 import com.exposit.dto.ProductDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,16 +18,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Log4j
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/product")
 public class ProductController {
 
     private final ProductService productService;
     private static final String REQUEST = "receive request: /product/";
-
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDto> getById(@PathVariable Long id) {

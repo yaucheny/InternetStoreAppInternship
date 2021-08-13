@@ -1,6 +1,7 @@
 package com.exposit.model.db;
 
 
+import com.exposit.model.api.BaseModel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class BaseDb {
+public abstract class BaseDb implements BaseModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

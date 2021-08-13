@@ -1,5 +1,6 @@
 package com.exposit.model.db;
 
+import com.exposit.model.api.ShopProductModel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "product_shops")
-public class ShopProductDb extends BaseDb {
+public class ShopProductDb extends BaseDb implements ShopProductModel {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")

@@ -1,5 +1,6 @@
 package com.exposit.model.entity;
 
+import com.exposit.model.api.CustomerModel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = "customers")
-public class CustomerEntity extends BaseEntity {
+public class CustomerEntity extends BaseEntity implements CustomerModel {
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
