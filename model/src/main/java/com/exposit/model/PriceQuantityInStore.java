@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class PriceQuantityInStore {
+
     private Double price;
     private Integer quantity;
     private String storeName;

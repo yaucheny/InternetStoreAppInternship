@@ -1,12 +1,17 @@
 package com.exposit.model.entity;
 
-import com.exposit.model.api.CategoryModel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import java.util.List;
 
 @Getter
@@ -15,7 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "categories")
-public class CategoryEntity extends BaseEntity implements CategoryModel {
+public class CategoryEntity extends BaseEntity {
 
     @Column(name = "name")
     private String name;
@@ -23,7 +28,7 @@ public class CategoryEntity extends BaseEntity implements CategoryModel {
     @ManyToOne
     private CategoryEntity parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<CategoryEntity> childList;
 
     @Override

@@ -1,13 +1,18 @@
 package com.exposit.model.entity;
 
-import com.exposit.model.api.ProductModel;
-import com.exposit.model.db.CategoryDb;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.ManyToMany;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.FetchType;
+import javax.persistence.CascadeType;
 import java.util.List;
 
 @Getter
@@ -16,17 +21,19 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "products")
-public class ProductEntity extends BaseEntity implements ProductModel {
+public class ProductEntity extends BaseEntity {
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "producer")
     private String producer;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinTable(name = "products_categories", joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private List<CategoryDb> categoryList;
+    private List<CategoryEntity> categoryList;
 
     @Override
     public String toString() {

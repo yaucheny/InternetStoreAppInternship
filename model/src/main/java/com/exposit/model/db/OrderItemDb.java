@@ -1,25 +1,17 @@
 package com.exposit.model.db;
 
-
-import com.exposit.model.api.OrderItemModel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@Entity
-@Table(name = "items")
-public class OrderItemDb extends BaseDb implements OrderItemModel {
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_shop_id")
+public class OrderItemDb extends BaseDb {
+
     private ShopProductDb shopProduct;
-    @Column(name = "quantity")
     private Integer quantity;
 
     @Override

@@ -68,11 +68,11 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryDto> getAllCategory() {
-                    List<CategoryDb> categoryDbEntityList = categoryDao.getAll();
-            Type listType = new TypeToken<List<CategoryDto>>() {
-            }.getType();
-            return mapper.map(categoryDbEntityList, listType);
-      }
+        List<CategoryDb> categoryDbEntityList = categoryDao.getAll();
+        Type listType = new TypeToken<List<CategoryDto>>() {
+        }.getType();
+        return mapper.map(categoryDbEntityList, listType);
+    }
 
     @Override
     public void saveCategoryToFile() {

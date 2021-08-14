@@ -1,11 +1,6 @@
 package com.exposit.model.entity;
 
-import com.exposit.model.api.OrderModel;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.exposit.model.OrderStatus;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,24 +16,18 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "orders")
-public class OrderEntity extends BaseEntity implements OrderModel {
+public class OrderEntity extends BaseEntity {
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
     @Column(name = "order_date")
     private LocalDate dateOfOrder;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
     @Column(name = "delivery_date")
     private LocalDate dateOfDelivery;
 
     @Column(name = "purchase_price")
     private Integer priceOfPurchase;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "customer_id")
     private CustomerEntity customer;
 
@@ -50,6 +39,12 @@ public class OrderEntity extends BaseEntity implements OrderModel {
 
     @Column(name = "delivery_term")
     private Long days;
+
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "customer_id")
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 
     @Override
     public String toString() {

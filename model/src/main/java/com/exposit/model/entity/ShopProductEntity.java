@@ -1,12 +1,17 @@
 package com.exposit.model.entity;
 
-import com.exposit.model.api.ShopProductModel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.OneToOne;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
+import javax.persistence.CascadeType;
 
 @Getter
 @Setter
@@ -14,7 +19,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "product_shops")
-public class ShopProductEntity extends BaseEntity implements ShopProductModel {
+public class ShopProductEntity extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
@@ -23,10 +28,10 @@ public class ShopProductEntity extends BaseEntity implements ShopProductModel {
     @Column(name = "price")
     private Integer price;
 
-    @Column(name = "name")
+    @Column(name = "quantity")
     private Integer quantity;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "store_id")
     private StoreEntity store;
 

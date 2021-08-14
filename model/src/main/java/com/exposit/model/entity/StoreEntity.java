@@ -1,6 +1,5 @@
 package com.exposit.model.entity;
 
-import com.exposit.model.api.StoreModel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +15,8 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = "stores")
-public class StoreEntity extends BaseEntity implements StoreModel {
+public class StoreEntity extends BaseEntity {
+
     @Column(name = "name")
     private String name;
     @Column(name = "internet_page")
