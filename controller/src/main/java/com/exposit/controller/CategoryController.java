@@ -1,7 +1,7 @@
 package com.exposit.controller;
 
 import com.exposit.api.service.CategoryService;
-import com.exposit.dto.CategoryDto;
+import com.exposit.domain.dto.CategoryDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

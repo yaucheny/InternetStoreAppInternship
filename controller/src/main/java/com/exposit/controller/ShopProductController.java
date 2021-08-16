@@ -1,7 +1,7 @@
 package com.exposit.controller;
 
 import com.exposit.api.service.ShopProductService;
-import com.exposit.dto.ShopProductDto;
+import com.exposit.domain.dto.ShopProductDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.http.ResponseEntity;
