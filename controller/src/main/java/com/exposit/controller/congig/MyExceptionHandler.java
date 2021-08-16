@@ -1,6 +1,6 @@
 package com.exposit.controller.congig;
 
-import com.exposit.exceptions.*;
+import com.exposit.utils.exceptions.*;
 import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
