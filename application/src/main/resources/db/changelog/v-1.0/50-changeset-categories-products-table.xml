@@ -10,21 +10,15 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="address" type="VARCHAR">
-                <constraints nullable="false"/>
+            <column name="product_id" type="BIGINT">
+                <constraints foreignKeyName="products_category_fk" references="products(id)" deleteCascade="true"/>
             </column>
-            <column name="email" type="VARCHAR">
-                <constraints unique="true" nullable="false"/>
-            </column>
-            <column name="first_name" type="VARCHAR">
-                <constraints nullable="false"/>
-            </column>
-            <column name="parent_id" type="BIGINT">
-                <constraints foreignKeyName="fk_category_parent" references="category(id)"/>
+            <column name="category_id" type="BIGINT">
+                <constraints foreignKeyName="category_products_fk" references="categories(id)" deleteCascade="true"/>
             </column>
         </createTable>
         <rollback>
-
+            <dropTable tableName="products_categories"/>
         </rollback>
     </changeSet>
 
