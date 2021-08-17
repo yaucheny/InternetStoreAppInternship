@@ -3,6 +3,7 @@ package com.exposit.dao.util;
 import com.exposit.api.dao.StoreDao;
 import com.exposit.dao.daohibernate.StoreDaoHiberImpl;
 import com.exposit.dao.daojson.StoreDaoJsonImpl;
+import com.exposit.dao.daorepository.StoreDaoRepositoryImpl;
 import com.exposit.dao.daoxml.StoreDaoXmlImpl;
 import com.exposit.utils.exceptions.DaoException;
 import lombok.extern.log4j.Log4j;
@@ -32,8 +33,11 @@ public class StoreDaoFactory implements FactoryBean<StoreDao> {
             log.info("Get data from file category.xml");
             return new StoreDaoXmlImpl();
         } else if ("hibernate".equalsIgnoreCase(valueDao)) {
-            log.info("Get data from postgres database");
+            log.info("Hibernate gets data from postgres database");
             return new StoreDaoHiberImpl();
+        }else if ("jpa-repository".equalsIgnoreCase(valueDao)) {
+            log.info("Spring gets data from postgres database");
+            return new StoreDaoRepositoryImpl();
         }
         log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
         throw new DaoException(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
@@ -47,6 +51,8 @@ public class StoreDaoFactory implements FactoryBean<StoreDao> {
             return StoreDaoXmlImpl.class;
         } else if ("hibernate".equalsIgnoreCase(valueDao)) {
             return StoreDaoHiberImpl.class;
+        } else if ("jpa-repository".equalsIgnoreCase(valueDao)) {
+            return StoreDaoRepositoryImpl.class;
         }
         log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
         throw new DaoException(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
