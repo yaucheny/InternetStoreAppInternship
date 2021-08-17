@@ -3,6 +3,7 @@ package com.exposit.dao.util;
 import com.exposit.api.dao.OrderItemDao;
 import com.exposit.dao.daohibernate.OrderItemDaoHiberImpl;
 import com.exposit.dao.daojson.OrderItemDaoJsonImpl;
+import com.exposit.dao.daorepository.OrderItemDaoRepositoryImpl;
 import com.exposit.dao.daoxml.OrderItemDaoXmlImpl;
 import com.exposit.utils.exceptions.DaoException;
 import lombok.extern.log4j.Log4j;
@@ -33,8 +34,11 @@ public class OrderItemDaoFactory implements FactoryBean<OrderItemDao> {
             log.info("Get data from file category.xml");
             return new OrderItemDaoXmlImpl();
         } else if ("hibernate".equalsIgnoreCase(valueDao)) {
-            log.info("Get data from postgres database");
+            log.info("Hibernate gets data from postgres database");
             return new OrderItemDaoHiberImpl();
+        }else if ("jpa-repository".equalsIgnoreCase(valueDao)) {
+            log.info("Spring gets data from postgres database");
+            return new OrderItemDaoRepositoryImpl();
         }
         log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
         throw new DaoException(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
@@ -48,6 +52,8 @@ public class OrderItemDaoFactory implements FactoryBean<OrderItemDao> {
             return OrderItemDaoXmlImpl.class;
         } else if ("hibernate".equalsIgnoreCase(valueDao)) {
             return OrderItemDaoHiberImpl.class;
+        } else if ("jpa-repository".equalsIgnoreCase(valueDao)) {
+            return OrderItemDaoRepositoryImpl.class;
         }
         log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
         throw new DaoException(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);

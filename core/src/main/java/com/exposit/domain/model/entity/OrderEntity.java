@@ -24,7 +24,7 @@ public class OrderEntity extends BaseEntity {
     private LocalDate dateOfDelivery;
 
     @Column(name = "purchase_price")
-    private Integer priceOfPurchase;
+    private Double priceOfPurchase;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "customer_id")

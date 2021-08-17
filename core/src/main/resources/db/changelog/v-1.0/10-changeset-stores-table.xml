@@ -16,12 +16,12 @@
             <column name="name" type="VARCHAR">
                 <constraints unique="true" nullable="false"/>
             </column>
-            <column name="phone" type="VARCHAR">
+            <column name="phone_number" type="VARCHAR">
                 <constraints unique="true" nullable="false"/>
             </column>
         </createTable>
         <rollback>
-
+            <dropTable tableName="stores"/>
         </rollback>
     </changeSet>
 

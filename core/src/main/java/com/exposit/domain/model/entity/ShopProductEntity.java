@@ -26,7 +26,7 @@ public class ShopProductEntity extends BaseEntity {
     private ProductEntity product;
 
     @Column(name = "price")
-    private Integer price;
+    private Double price;
 
     @Column(name = "quantity")
     private Integer quantity;
