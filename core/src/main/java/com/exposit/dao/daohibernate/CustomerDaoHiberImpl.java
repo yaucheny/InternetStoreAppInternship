@@ -6,6 +6,7 @@ import com.exposit.domain.model.entity.CustomerEntity;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,15 +18,17 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Transactional
 public class CustomerDaoHiberImpl implements CustomerDao {
 
     @PersistenceContext(type = PersistenceContextType.TRANSACTION)
     private EntityManager entityManager;
+    private List<CustomerEntity> repository = new ArrayList<>();
 
     @Autowired
     private ModelMapper mapper;
 
-    private List<CustomerEntity> repository = new ArrayList<>();
 
     @Override
     public void save(CustomerDb customerDb) {
