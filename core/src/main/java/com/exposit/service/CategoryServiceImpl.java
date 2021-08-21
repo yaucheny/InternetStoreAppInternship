@@ -3,9 +3,9 @@ package com.exposit.service;
 import com.exposit.api.dao.CategoryDao;
 import com.exposit.api.service.CategoryService;
 import com.exposit.domain.dto.CategoryDto;
+import com.exposit.domain.model.db.CategoryDb;
 import com.exposit.utils.exceptions.DaoException;
 import com.exposit.utils.exceptions.ServiceException;
-import com.exposit.domain.model.db.CategoryDb;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
@@ -78,4 +78,6 @@ public class CategoryServiceImpl implements CategoryService {
     public void saveCategoryToFile() {
         categoryDao.saveToFile(categoryDao.getAll());
     }
+
+
 }

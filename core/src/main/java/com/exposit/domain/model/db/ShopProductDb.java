@@ -1,5 +1,6 @@
 package com.exposit.domain.model.db;
 
+import com.opencsv.bean.CsvBindByName;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,10 +12,14 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ShopProductDb extends BaseDb {
 
-    private ProductDb product;
-    private Double price;
     private Integer quantity;
     private StoreDb store;
+    private ProductDb product;
+
+    @CsvBindByName(column = "price")
+    private Double price;
+
+    @CsvBindByName(column = "description")
     private String description;
 
     @Override

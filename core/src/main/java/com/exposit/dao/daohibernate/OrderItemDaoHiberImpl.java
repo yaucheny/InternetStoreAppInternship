@@ -6,6 +6,7 @@ import com.exposit.domain.model.entity.OrderItemEntity;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,16 +18,16 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderItemDaoHiberImpl implements OrderItemDao {
 
+@Transactional
+public class OrderItemDaoHiberImpl implements OrderItemDao {
 
     @PersistenceContext(type = PersistenceContextType.TRANSACTION)
     private EntityManager entityManager;
+    private List<OrderItemEntity> repository = new ArrayList<>();
 
     @Autowired
     private ModelMapper mapper;
-
-    private List<OrderItemEntity> repository = new ArrayList<>();
 
     @Override
     public void save(OrderItemDb orderItemDb) {

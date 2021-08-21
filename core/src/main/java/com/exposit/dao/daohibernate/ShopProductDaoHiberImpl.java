@@ -6,6 +6,7 @@ import com.exposit.domain.model.entity.ShopProductEntity;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,16 +18,16 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopProductDaoHiberImpl implements ShopProductDao {
 
+@Transactional
+public class ShopProductDaoHiberImpl implements ShopProductDao {
 
     @PersistenceContext(type = PersistenceContextType.TRANSACTION)
     private EntityManager entityManager;
+    private List<ShopProductEntity> repository = new ArrayList<>();
 
     @Autowired
-    private ModelMapper mapper;
-
-    private List<ShopProductEntity> repository = new ArrayList<>();
+    private  ModelMapper mapper;
 
     @Override
     public void save(ShopProductDb shopProductDb) {

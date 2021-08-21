@@ -21,8 +21,10 @@ import java.util.List;
 
 @Transactional
 public class CategoryDaoHiberImpl implements CategoryDao {
+
     @PersistenceContext(type = PersistenceContextType.TRANSACTION)
     private EntityManager entityManager;
+
     @Autowired
     private ModelMapper mapper;
     private List<CategoryEntity> repository = new ArrayList<>();

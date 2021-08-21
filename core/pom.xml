@@ -59,6 +59,11 @@
 <!--            <version>4.4.3</version>-->
             <version>${liquibase.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>${opencsv.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

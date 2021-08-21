@@ -30,4 +30,6 @@ public interface ShopProductService {
 
     List<PriceQuantityInStore> infoAboutPriceQuantityInStore(String storeName);
 
+    void updateShopProductsFromCsv();
+
 }

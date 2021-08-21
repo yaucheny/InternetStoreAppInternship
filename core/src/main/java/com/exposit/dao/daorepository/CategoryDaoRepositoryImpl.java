@@ -7,17 +7,17 @@ import com.exposit.domain.model.entity.CategoryEntity;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Type;
 import java.util.List;
-
+@Transactional
 public class CategoryDaoRepositoryImpl implements CategoryDao {
 
     @Autowired
-    CategoryRepository categoryRepository;
-
+    private CategoryRepository categoryRepository;
     @Autowired
-    ModelMapper mapper;
+    private ModelMapper mapper;
 
     @Override
     public void save(CategoryDb categoryDb) {
@@ -28,7 +28,7 @@ public class CategoryDaoRepositoryImpl implements CategoryDao {
     }
 
     @Override
-    public void saveToFile(List<CategoryDb> entity) {
+    public void saveToFile(List<CategoryDb> categoryDbList) {
 
     }
 
