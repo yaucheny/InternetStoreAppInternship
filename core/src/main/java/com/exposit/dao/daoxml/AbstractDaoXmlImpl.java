@@ -1,16 +1,18 @@
 package com.exposit.dao.daoxml;
 
 import com.exposit.api.dao.GenericDao;
-import com.exposit.utils.exceptions.DaoException;
 import com.exposit.domain.model.db.BaseDb;
-import lombok.extern.log4j.Log4j;
+import com.exposit.utils.exceptions.DaoException;
+import com.exposit.utils.marshelling.MarshallingJson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Log4j
-public class AbstractDaoXmlImpl<T extends BaseDb> implements GenericDao<T> {
+public abstract class AbstractDaoXmlImpl<T extends BaseDb> implements GenericDao<T> {
 
+    private final static Logger log = LoggerFactory.getLogger(AbstractDaoXmlImpl.class);
     private static final String GET_BY_ID_ERROR_MESSAGE = "can not find an entity by id: %d";
     protected List<T> repository = new ArrayList<>();
 
@@ -40,4 +42,14 @@ public class AbstractDaoXmlImpl<T extends BaseDb> implements GenericDao<T> {
     public List<T> getAll() {
         return new ArrayList<>(repository);
     }
+
+    @Override
+    public void saveToFile(List<T> entity) {
+        MarshallingJson.serializeJsonEntity(entity);
+    }
+
+    protected void autoLoad(T entity) {
+        repository.add(entity);
+    }
+
 }

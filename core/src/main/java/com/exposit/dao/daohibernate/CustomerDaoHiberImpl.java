@@ -3,6 +3,7 @@ package com.exposit.dao.daohibernate;
 import com.exposit.api.dao.CustomerDao;
 import com.exposit.domain.model.db.CustomerDb;
 import com.exposit.domain.model.entity.CustomerEntity;
+import com.exposit.utils.marshelling.MarshallingJson;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class CustomerDaoHiberImpl implements CustomerDao {
 
     @Override
     public void saveToFile(List<CustomerDb> entity) {
-
+        MarshallingJson.serializeJsonEntity(entity);
     }
 
     public CustomerDb getById(Long id) {

@@ -3,6 +3,7 @@ package com.exposit.dao.daohibernate;
 import com.exposit.api.dao.ShopProductDao;
 import com.exposit.domain.model.db.ShopProductDb;
 import com.exposit.domain.model.entity.ShopProductEntity;
+import com.exposit.utils.marshelling.MarshallingJson;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class ShopProductDaoHiberImpl implements ShopProductDao {
     private List<ShopProductEntity> repository = new ArrayList<>();
 
     @Autowired
-    private  ModelMapper mapper;
+    private ModelMapper mapper;
 
     @Override
     public void save(ShopProductDb shopProductDb) {
@@ -39,12 +40,20 @@ public class ShopProductDaoHiberImpl implements ShopProductDao {
 
     @Override
     public List<ShopProductDb> sortByPrice() {
-        return null;
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<ShopProductEntity> query = builder.createQuery(ShopProductEntity.class);
+        Root<ShopProductEntity> root = query.from(ShopProductEntity.class);
+
+        query.orderBy(builder.asc(root.get("price")));
+        List<ShopProductEntity> shopProductEntityList = entityManager.createQuery(query).getResultList();
+        Type listType = new TypeToken<List<ShopProductDb>>() {
+        }.getType();
+        return mapper.map(shopProductEntityList, listType);
     }
 
     @Override
-    public void saveToFile(List<ShopProductDb> shopProductDbList) {
-
+    public void saveToFile(List<ShopProductDb> entity) {
+        MarshallingJson.serializeJsonEntity(entity);
     }
 
     public ShopProductDb getById(Long id) {

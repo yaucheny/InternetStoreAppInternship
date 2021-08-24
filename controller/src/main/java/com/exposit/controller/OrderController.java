@@ -3,19 +3,20 @@ package com.exposit.controller;
 import com.exposit.api.service.OrderService;
 import com.exposit.domain.dto.OrderDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@Log4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/order")
 public class OrderController {
 
+    private final static Logger log = LoggerFactory.getLogger(OrderController.class);
     private final OrderService orderService;
     private static final String REQUEST = "receive request: /order/ ";
 
@@ -50,5 +51,12 @@ public class OrderController {
         orderService.updateOrder(id, orderDto);
         log.info(REQUEST);
         return ResponseEntity.ok().body(String.format("order %s successfully updated", id));
+    }
+
+    @PostMapping(value = "/save")
+    public ResponseEntity<String> saveToFile() {
+        orderService.saveOrderToFile();
+        log.info(REQUEST);
+        return ResponseEntity.ok().body("orders successfully saved");
     }
 }

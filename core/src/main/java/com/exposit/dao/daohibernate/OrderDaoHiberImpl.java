@@ -3,6 +3,7 @@ package com.exposit.dao.daohibernate;
 import com.exposit.api.dao.OrderDao;
 import com.exposit.domain.model.db.OrderDb;
 import com.exposit.domain.model.entity.OrderEntity;
+import com.exposit.utils.marshelling.MarshallingJson;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,8 @@ public class OrderDaoHiberImpl implements OrderDao {
     }
 
     @Override
-    public void saveToFile(List<OrderDb> orderDb) {
-
+    public void saveToFile(List<OrderDb> entity) {
+        MarshallingJson.serializeJsonEntity(entity);
     }
 
     public OrderDb getById(Long id) {

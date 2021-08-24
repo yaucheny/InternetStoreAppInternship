@@ -1,14 +1,23 @@
 package com.exposit.utils.idgenerators;
 
-public final class IdGenerator {
+import lombok.Setter;
 
+public final class IdGenerator {
+    @Setter
     private static Long orderId = 1L;
+    @Setter
     private static Long customerId = 1L;
+    @Setter
     private static Long storeId = 1L;
+    @Setter
     private static Long productId = 1L;
+    @Setter
     private static Long shopProductId = 1L;
+    @Setter
     private static Long orderItemId = 1L;
+    @Setter
     private static Long categoryId = 1L;
+
 
     private IdGenerator() {
     }
@@ -22,7 +31,7 @@ public final class IdGenerator {
     }
 
     public static Long generateStoreId() {
-            return storeId++;
+        return storeId++;
     }
 
     public static Long generateProductId() {

@@ -3,6 +3,7 @@ package com.exposit.dao.daohibernate;
 import com.exposit.api.dao.CategoryDao;
 import com.exposit.domain.model.db.CategoryDb;
 import com.exposit.domain.model.entity.CategoryEntity;
+import com.exposit.utils.marshelling.MarshallingJson;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class CategoryDaoHiberImpl implements CategoryDao {
 
     @Override
     public void saveToFile(List<CategoryDb> entity) {
-
+        MarshallingJson.serializeJsonEntity(entity);
     }
 
     public CategoryDb getById(Long id) {

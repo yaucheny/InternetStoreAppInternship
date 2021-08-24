@@ -1,19 +1,20 @@
 package com.exposit.dao.daojson;
 
 import com.exposit.api.dao.CategoryDao;
-import com.exposit.utils.idgenerators.IdGenerator;
-import com.exposit.utils.marshelling.json.MarshallingCategoryJson;
 import com.exposit.domain.model.db.CategoryDb;
+import com.exposit.utils.idgenerators.IdGenerator;
+import com.exposit.utils.marshelling.MarshallingJson;
 
 import java.util.List;
 
 public class CategoryDaoJsonImpl extends AbstractDaoJsonImpl<CategoryDb> implements CategoryDao {
 
     public CategoryDaoJsonImpl() {
-        List<CategoryDb> category = MarshallingCategoryJson.deSerializeCategory();
+        List<CategoryDb> category = MarshallingJson.deserializeJsonEntity(CategoryDb.class);
         for (CategoryDb entity : category) {
             this.autoLoad(entity);
         }
+        IdGenerator.setCategoryId((long) category.size() + 1);
     }
 
     @Override
@@ -21,15 +22,4 @@ public class CategoryDaoJsonImpl extends AbstractDaoJsonImpl<CategoryDb> impleme
         entity.setId(IdGenerator.generateCategoryId());
         repository.add(entity);
     }
-
-    @Override
-    public void saveToFile(List<CategoryDb> entity) {
-        MarshallingCategoryJson.serializeCategory(this.getAll());
-    }
-
-    private void autoLoad(CategoryDb entity) {
-        repository.add(entity);
-    }
-
-
 }

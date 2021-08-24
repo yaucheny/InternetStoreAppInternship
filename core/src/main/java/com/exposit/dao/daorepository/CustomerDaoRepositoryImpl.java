@@ -4,6 +4,7 @@ import com.exposit.api.dao.CustomerDao;
 import com.exposit.dao.daorepository.repository.CustomerRepository;
 import com.exposit.domain.model.db.CustomerDb;
 import com.exposit.domain.model.entity.CustomerEntity;
+import com.exposit.utils.marshelling.MarshallingXml;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,8 @@ public class CustomerDaoRepositoryImpl implements CustomerDao {
     }
 
     @Override
-    public void saveToFile(List<CustomerDb> customerDbList) {
-
+    public void saveToFile(List<CustomerDb> entity) {
+        MarshallingXml.serializeJsonEntity(entity);
     }
 
     @Override

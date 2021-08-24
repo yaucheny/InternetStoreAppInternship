@@ -3,19 +3,20 @@ package com.exposit.controller;
 import com.exposit.api.service.IStoreService;
 import com.exposit.domain.dto.StoreDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@Log4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/store")
 public class StoreController {
 
+    private final static Logger log = LoggerFactory.getLogger(StoreController.class);
     private final IStoreService storeService;
     private static final String REQUEST = "receive request: /store/ ";
 
@@ -50,5 +51,12 @@ public class StoreController {
         storeService.updateStore(id, storeDto);
         log.info(REQUEST);
         return ResponseEntity.ok().body(String.format("category %s successfully updated", id));
+    }
+
+    @PostMapping(value = "/save")
+    public ResponseEntity<String> saveToFile() {
+        storeService.saveStoreToFile();
+        log.info(REQUEST);
+        return ResponseEntity.ok().body("stores successfully saved");
     }
 }

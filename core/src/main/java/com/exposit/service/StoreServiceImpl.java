@@ -3,24 +3,25 @@ package com.exposit.service;
 import com.exposit.api.dao.StoreDao;
 import com.exposit.api.service.IStoreService;
 import com.exposit.domain.dto.StoreDto;
+import com.exposit.domain.model.db.StoreDb;
 import com.exposit.utils.exceptions.DaoException;
 import com.exposit.utils.exceptions.ServiceException;
-import com.exposit.utils.marshelling.json.MarshallingStoreJson;
-import com.exposit.domain.model.db.StoreDb;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
-@Log4j
+
 @RequiredArgsConstructor
 @Service
 public class StoreServiceImpl implements IStoreService {
 
+    private final static Logger log = LoggerFactory.getLogger(StoreServiceImpl.class);
     private final ModelMapper mapper;
     private final StoreDao storeDao;
     private static final String CAN_NOT_DELETE_STORE = "can not delete store";
@@ -69,14 +70,14 @@ public class StoreServiceImpl implements IStoreService {
 
     @Override
     public List<StoreDto> getAllStore() {
-        List<StoreDb> storeDbEntityList = storeDao.getAll();
+        List<StoreDb> storeDbList = storeDao.getAll();
         Type listType = new TypeToken<List<StoreDto>>() {
         }.getType();
-        return mapper.map(storeDbEntityList, listType);
+        return mapper.map(storeDbList, listType);
     }
 
     @Override
     public void saveStoreToFile() {
-        MarshallingStoreJson.serializeStore(storeDao.getAll());
+        storeDao.saveToFile(storeDao.getAll());
     }
 }

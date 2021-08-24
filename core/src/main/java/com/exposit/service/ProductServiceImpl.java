@@ -3,24 +3,24 @@ package com.exposit.service;
 import com.exposit.api.dao.ProductDao;
 import com.exposit.api.service.ProductService;
 import com.exposit.domain.dto.ProductDto;
+import com.exposit.domain.model.db.ProductDb;
 import com.exposit.utils.exceptions.DaoException;
 import com.exposit.utils.exceptions.ServiceException;
-import com.exposit.utils.marshelling.json.MarshallingProductJson;
-import com.exposit.domain.model.db.ProductDb;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
-@Log4j
 @RequiredArgsConstructor
 @Service
 public class ProductServiceImpl implements ProductService {
 
+    private final static Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
     private final ModelMapper mapper;
     private final ProductDao productDao;
     private static final String CAN_NOT_DELETE_PRODUCT = "can not delete product";
@@ -62,20 +62,20 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto getProductById(Long id) {
-        ProductDb productDbEntity = productDao.getById(id);
-        return mapper.map(productDbEntity, ProductDto.class);
+        ProductDb productDb = productDao.getById(id);
+        return mapper.map(productDb, ProductDto.class);
     }
 
     @Override
     public List<ProductDto> getAllProducts() {
-        List<ProductDb> productDbEntityList = productDao.getAll();
+        List<ProductDb> productDbList = productDao.getAll();
         Type listType = new TypeToken<List<ProductDto>>() {
         }.getType();
-        return mapper.map(productDbEntityList, listType);
+        return mapper.map(productDbList, listType);
     }
 
     @Override
     public void saveProductToFile() {
-        MarshallingProductJson.serializeProduct(productDao.getAll());
+        productDao.saveToFile(productDao.getAll());
     }
 }

@@ -7,21 +7,22 @@ import com.exposit.domain.model.db.CategoryDb;
 import com.exposit.utils.exceptions.DaoException;
 import com.exposit.utils.exceptions.ServiceException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
-@Log4j
+
 @RequiredArgsConstructor
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
+    private final static Logger log = LoggerFactory.getLogger(CategoryServiceImpl.class);
     private final ModelMapper mapper;
-
     private final CategoryDao categoryDao;
     private static final String CAN_NOT_DELETE_CATEGORY = "can not delete category";
     private static final String CAN_NOT_ADD_CATEGORY = "can not add category";
@@ -62,16 +63,16 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto getCategoryById(Long id) {
-        CategoryDb categoryDbEntity = categoryDao.getById(id);
-        return mapper.map(categoryDbEntity, CategoryDto.class);
+        CategoryDb categoryDb = categoryDao.getById(id);
+        return mapper.map(categoryDb, CategoryDto.class);
     }
 
     @Override
     public List<CategoryDto> getAllCategory() {
-        List<CategoryDb> categoryDbEntityList = categoryDao.getAll();
+        List<CategoryDb> categoryDbList = categoryDao.getAll();
         Type listType = new TypeToken<List<CategoryDto>>() {
         }.getType();
-        return mapper.map(categoryDbEntityList, listType);
+        return mapper.map(categoryDbList, listType);
     }
 
     @Override

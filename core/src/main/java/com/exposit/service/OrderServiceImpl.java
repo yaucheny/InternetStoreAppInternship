@@ -3,27 +3,27 @@ package com.exposit.service;
 import com.exposit.api.dao.OrderDao;
 import com.exposit.api.service.OrderService;
 import com.exposit.domain.dto.OrderDto;
-import com.exposit.utils.exceptions.DaoException;
-import com.exposit.utils.exceptions.ServiceException;
-import com.exposit.utils.marshelling.json.MarshallingOrderJson;
 import com.exposit.domain.model.db.OrderDb;
 import com.exposit.domain.model.db.OrderItemDb;
 import com.exposit.domain.model.db.ShopProductDb;
+import com.exposit.utils.exceptions.DaoException;
+import com.exposit.utils.exceptions.ServiceException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.List;
 
-@Log4j
 @RequiredArgsConstructor
 @Service
 public class OrderServiceImpl implements OrderService {
 
+    private final static Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
     private final ModelMapper mapper;
     private final OrderDao orderDao;
     private static final String CAN_NOT_DELETE_ORDER = "can not delete order";
@@ -94,21 +94,21 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto getOrderById(Long id) {
-        OrderDb orderDbEntity = orderDao.getById(id);
-        return mapper.map(orderDbEntity, OrderDto.class);
+        OrderDb orderDb = orderDao.getById(id);
+        return mapper.map(orderDb, OrderDto.class);
     }
 
     @Override
     public List<OrderDto> getAllOrder() {
-        List<OrderDb> orderDbEntityList = orderDao.getAll();
+        List<OrderDb> orderDbList = orderDao.getAll();
         Type listType = new TypeToken<List<OrderDto>>() {
         }.getType();
-        return mapper.map(orderDbEntityList, listType);
+        return mapper.map(orderDbList, listType);
     }
 
     @Override
     public void saveOrderToFile() {
-        MarshallingOrderJson.serializeOrder(orderDao.getAll());
+        orderDao.saveToFile(orderDao.getAll());
     }
 
     private Double priceOfBusket(List<OrderItemDb> orderItemList) {

@@ -1,11 +1,13 @@
 package com.exposit.menu;
 
-import lombok.extern.log4j.Log4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 
-@Log4j
 public class Navigator {
+
+    private final static Logger log = LoggerFactory.getLogger(Navigator.class);
     private MenuItem menuItem;
     private static Navigator instance;
     private Menu currentMenu;
