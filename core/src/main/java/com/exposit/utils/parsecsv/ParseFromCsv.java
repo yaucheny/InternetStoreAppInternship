@@ -2,7 +2,8 @@ package com.exposit.utils.parsecsv;
 
 import com.exposit.domain.model.db.ShopProductDb;
 import com.opencsv.bean.CsvToBeanBuilder;
-import lombok.extern.log4j.Log4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileReader;
@@ -12,25 +13,22 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
-@Log4j
 public final class ParseFromCsv {
+
+    private final static Logger log = LoggerFactory.getLogger(ParseFromCsv.class);
     private static Integer i = 0;
-    private static final String FILE_PATH_SEARCHING_DIRECTORY = "application/src/main/resources/csv/search" +
-            "/product_shops_.csv";
-    private static final String FILE_PATH_SAVING_DIRECTORY = "application/src/main/resources/csv/save/product_shops_" +
-            "%s.csv";
-    private static final String FILE_PATH_PARSING_DIRECTORY = "application/src/main/resources/csv/parse" +
-            "/product_shops_.csv";
+    private static final String FILE_SEARCHING_DIR = "application/src/main/resources/csv/search/product_shops_.csv";
+    private static final String FILE_SAVING_DIR = "application/src/main/resources/csv/save/product_shops_%s.csv";
+    private static final String FILE_PARSING_DIR = "application/src/main/resources/csv/parse / product_shops_.csv";
     private static final String DIRECTORY_PATH_SEARCHING = "application/src/main/resources/csv/search";
     private static final String DIRECTORY_PATH_PARSING = "application/src/main/resources/csv/parse";
-
 
     private ParseFromCsv() {
     }
 
     public static List<ShopProductDb> parseFileFromCsv() {
         if (ParseFromCsv.isDirNotEmpty(DIRECTORY_PATH_PARSING)) {
-            try (FileReader cswReader = new FileReader(FILE_PATH_PARSING_DIRECTORY)) {
+            try (FileReader cswReader = new FileReader(FILE_PARSING_DIR)) {
                 List<ShopProductDb> beans = new CsvToBeanBuilder(cswReader)
                         .withType(ShopProductDb.class)
                         .build()
@@ -48,8 +46,8 @@ public final class ParseFromCsv {
     public static boolean moveToParseDir() {
         if (ParseFromCsv.isDirNotEmpty(DIRECTORY_PATH_SEARCHING)) {
             try {
-                Files.move(Paths.get(FILE_PATH_SEARCHING_DIRECTORY),
-                        Paths.get(FILE_PATH_PARSING_DIRECTORY));
+                Files.move(Paths.get(FILE_SEARCHING_DIR),
+                        Paths.get(FILE_PARSING_DIR));
                 return true;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -63,8 +61,8 @@ public final class ParseFromCsv {
             i++;
             String s = i.toString();
             try {
-                Files.move(Paths.get(FILE_PATH_PARSING_DIRECTORY),
-                        Paths.get(String.format(FILE_PATH_SAVING_DIRECTORY, s)));
+                Files.move(Paths.get(FILE_PARSING_DIR),
+                        Paths.get(String.format(FILE_SAVING_DIR, s)));
             } catch (IOException e) {
                 e.printStackTrace();
             }

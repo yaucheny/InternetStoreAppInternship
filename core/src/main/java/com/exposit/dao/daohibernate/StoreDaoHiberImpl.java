@@ -3,6 +3,7 @@ package com.exposit.dao.daohibernate;
 import com.exposit.api.dao.StoreDao;
 import com.exposit.domain.model.db.StoreDb;
 import com.exposit.domain.model.entity.StoreEntity;
+import com.exposit.utils.marshelling.MarshallingJson;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,8 @@ public class StoreDaoHiberImpl implements StoreDao {
     }
 
     @Override
-    public void saveToFile(List<StoreDb> storeDbList) {
-
+    public void saveToFile(List<StoreDb> entity) {
+        MarshallingJson.serializeJsonEntity(entity);
     }
 
     public StoreDb getById(Long id) {

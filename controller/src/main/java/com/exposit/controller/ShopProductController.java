@@ -3,26 +3,20 @@ package com.exposit.controller;
 import com.exposit.api.service.ShopProductService;
 import com.exposit.domain.dto.ShopProductDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@Log4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/shopProduct")
 public class ShopProductController {
 
+    private final static Logger log = LoggerFactory.getLogger(ShopProductController.class);
     private final ShopProductService shopProductService;
     private static final String REQUEST = "receive request: /shopProduct/ ";
 
@@ -59,5 +53,12 @@ public class ShopProductController {
         shopProductService.updateShopProduct(id, shopProductDto);
         log.info(REQUEST);
         return ResponseEntity.ok().body(String.format("shopProduct %s successfully updated", id));
+    }
+
+    @PostMapping(value = "/save")
+    public ResponseEntity<String> saveToFile() {
+        shopProductService.saveShopProductToFile();
+        log.info(REQUEST);
+        return ResponseEntity.ok().body("products successfully saved");
     }
 }

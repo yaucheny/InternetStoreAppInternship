@@ -3,24 +3,24 @@ package com.exposit.service;
 import com.exposit.api.dao.OrderItemDao;
 import com.exposit.api.service.OrderItemService;
 import com.exposit.domain.dto.OrderItemDto;
+import com.exposit.domain.model.db.OrderItemDb;
 import com.exposit.utils.exceptions.DaoException;
 import com.exposit.utils.exceptions.ServiceException;
-import com.exposit.utils.marshelling.json.MarshallingOrderItemJson;
-import com.exposit.domain.model.db.OrderItemDb;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
-@Log4j
 @RequiredArgsConstructor
 @Service
 public class OrderItemServiceImpl implements OrderItemService {
 
+    private final static Logger log = LoggerFactory.getLogger(OrderItemServiceImpl.class);
     private final ModelMapper mapper;
     private final OrderItemDao orderItemDao;
     private static final String CAN_NOT_DELETE_ORDER_ITEM = "can not delete orderItem";
@@ -68,14 +68,14 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     @Override
     public List<OrderItemDto> getAllOrderItem() {
-        List<OrderItemDb> orderItemDbEntityList = orderItemDao.getAll();
+        List<OrderItemDb> orderItemDbList = orderItemDao.getAll();
         Type listType = new TypeToken<List<OrderItemDto>>() {
         }.getType();
-        return mapper.map(orderItemDbEntityList, listType);
+        return mapper.map(orderItemDbList, listType);
     }
 
     @Override
     public void saveOrderItemToFile() {
-        MarshallingOrderItemJson.serializeOrderItem(orderItemDao.getAll());
+        orderItemDao.saveToFile(orderItemDao.getAll());
     }
 }

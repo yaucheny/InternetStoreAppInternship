@@ -4,6 +4,7 @@ import com.exposit.api.dao.CategoryDao;
 import com.exposit.dao.daorepository.repository.CategoryRepository;
 import com.exposit.domain.model.db.CategoryDb;
 import com.exposit.domain.model.entity.CategoryEntity;
+import com.exposit.utils.marshelling.MarshallingXml;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,8 @@ public class CategoryDaoRepositoryImpl implements CategoryDao {
     }
 
     @Override
-    public void saveToFile(List<CategoryDb> categoryDbList) {
-
+    public void saveToFile(List<CategoryDb> entity) {
+        MarshallingXml.serializeJsonEntity(entity);
     }
 
     @Override

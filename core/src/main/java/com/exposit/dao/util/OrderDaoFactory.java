@@ -6,17 +6,18 @@ import com.exposit.dao.daojson.OrderDaoJsonImpl;
 import com.exposit.dao.daorepository.OrderDaoRepositoryImpl;
 import com.exposit.dao.daoxml.OrderDaoXmlImpl;
 import com.exposit.utils.exceptions.DaoException;
-import lombok.extern.log4j.Log4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-@Log4j
 @Configuration
 @PropertySource("classpath:application.properties")
 public class OrderDaoFactory implements FactoryBean<OrderDao> {
 
+    private final static Logger log = LoggerFactory.getLogger(OrderDaoFactory.class);
     private String valueDao;
     private static final String GET_DAO_TYPE_ERROR_MESSAGE = "can not find dao by property: ";
 
@@ -27,10 +28,10 @@ public class OrderDaoFactory implements FactoryBean<OrderDao> {
     @Override
     public OrderDao getObject() throws Exception {
         if ("json".equalsIgnoreCase(valueDao)) {
-            log.info("Get data from file category.json");
+            log.info("Get data from file OrderDb.json");
             return new OrderDaoJsonImpl();
         } else if ("xml".equalsIgnoreCase(valueDao)) {
-            log.info("Get data from file category.xml");
+            log.info("Get data from file OrderDb.xml");
             return new OrderDaoXmlImpl();
         } else if ("hibernate".equalsIgnoreCase(valueDao)) {
             log.info("Hibernate gets data from postgres database");

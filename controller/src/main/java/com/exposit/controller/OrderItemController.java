@@ -3,26 +3,20 @@ package com.exposit.controller;
 import com.exposit.api.service.OrderItemService;
 import com.exposit.domain.dto.OrderItemDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@Log4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/orderItem")
 public class OrderItemController {
 
+    private final static Logger log = LoggerFactory.getLogger(OrderItemController.class);
     private final OrderItemService orderItemService;
     private static final String REQUEST = "receive request: /orderItem/ ";
 
@@ -57,5 +51,12 @@ public class OrderItemController {
         orderItemService.updateOrderItem(id, orderItemDto);
         log.info(REQUEST);
         return ResponseEntity.ok().body(String.format("orderItem %s successfully updated", id));
+    }
+
+    @PostMapping(value = "/save")
+    public ResponseEntity<String> saveToFile() {
+        orderItemService.saveOrderItemToFile();
+        log.info(REQUEST);
+        return ResponseEntity.ok().body("orderItems successfully saved");
     }
 }

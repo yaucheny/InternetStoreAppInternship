@@ -4,14 +4,15 @@ import com.exposit.api.dao.ShopProductDao;
 import com.exposit.dao.daorepository.repository.ShopProductRepository;
 import com.exposit.domain.model.db.ShopProductDb;
 import com.exposit.domain.model.entity.ShopProductEntity;
+import com.exposit.utils.marshelling.MarshallingXml;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Type;
 import java.util.List;
-
 @Transactional
 public class ShopProductDaoRepositoryImpl implements ShopProductDao {
 
@@ -31,12 +32,15 @@ public class ShopProductDaoRepositoryImpl implements ShopProductDao {
 
     @Override
     public List<ShopProductDb> sortByPrice() {
-        return null;
+        List<ShopProductEntity> categoryEntityList = shopProductRepository.findAll(Sort.by("price"));
+        Type listType = new TypeToken<List<ShopProductDb>>() {
+        }.getType();
+        return mapper.map(categoryEntityList, listType);
     }
 
     @Override
-    public void saveToFile(List<ShopProductDb> shopProductDbList) {
-
+    public void saveToFile(List<ShopProductDb> entity) {
+        MarshallingXml.serializeJsonEntity(entity);
     }
 
     @Override

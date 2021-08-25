@@ -4,6 +4,7 @@ import com.exposit.api.dao.OrderDao;
 import com.exposit.dao.daorepository.repository.OrderRepository;
 import com.exposit.domain.model.db.OrderDb;
 import com.exposit.domain.model.entity.OrderEntity;
+import com.exposit.utils.marshelling.MarshallingXml;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,8 @@ public class OrderDaoRepositoryImpl implements OrderDao {
     }
 
     @Override
-    public void saveToFile(List<OrderDb> orderDbList) {
-
+    public void saveToFile(List<OrderDb> entity) {
+        MarshallingXml.serializeJsonEntity(entity);
     }
 
     @Override

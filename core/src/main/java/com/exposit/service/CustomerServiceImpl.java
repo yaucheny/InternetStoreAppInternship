@@ -3,24 +3,24 @@ package com.exposit.service;
 import com.exposit.api.dao.CustomerDao;
 import com.exposit.api.service.CustomerService;
 import com.exposit.domain.dto.CustomerDto;
+import com.exposit.domain.model.db.CustomerDb;
 import com.exposit.utils.exceptions.DaoException;
 import com.exposit.utils.exceptions.ServiceException;
-import com.exposit.utils.marshelling.json.MarshallingCustomerJson;
-import com.exposit.domain.model.db.CustomerDb;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
-@Log4j
 @RequiredArgsConstructor
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
+    private final static Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class);
     private final ModelMapper mapper;
     private final CustomerDao customerDao;
     private static final String CAN_NOT_DELETE_CUSTOMER = "can not delete customer";
@@ -68,14 +68,14 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerDto> getAllCustomer() {
-        List<CustomerDb> customerDbEntityList = customerDao.getAll();
+        List<CustomerDb> customerDbList = customerDao.getAll();
         Type listType = new TypeToken<List<CustomerDto>>() {
         }.getType();
-        return mapper.map(customerDbEntityList, listType);
+        return mapper.map(customerDbList, listType);
     }
 
     @Override
     public void saveCustomerToFile() {
-        MarshallingCustomerJson.serializeCustomer(customerDao.getAll());
+        customerDao.saveToFile(customerDao.getAll());
     }
 }

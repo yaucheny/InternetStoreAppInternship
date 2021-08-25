@@ -4,6 +4,7 @@ import com.exposit.api.dao.StoreDao;
 import com.exposit.dao.daorepository.repository.StoreRepository;
 import com.exposit.domain.model.db.StoreDb;
 import com.exposit.domain.model.entity.StoreEntity;
+import com.exposit.utils.marshelling.MarshallingXml;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class StoreDaoRepositoryImpl implements StoreDao {
 
     @Override
     public void saveToFile(List<StoreDb> entity) {
-
+        MarshallingXml.serializeJsonEntity(entity);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.exposit.dao.daojson;
 
 import com.exposit.api.dao.ShopProductDao;
-import com.exposit.utils.idgenerators.IdGenerator;
-import com.exposit.utils.marshelling.json.MarshallingShopProductJson;
 import com.exposit.domain.model.db.ShopProductDb;
+import com.exposit.utils.idgenerators.IdGenerator;
+import com.exposit.utils.marshelling.MarshallingJson;
 
 import java.util.Comparator;
 import java.util.List;
@@ -14,10 +14,11 @@ public class ShopProductDaoJsonImpl extends AbstractDaoJsonImpl<ShopProductDb> i
     private ShopProductDao shopProductDao;
 
     public ShopProductDaoJsonImpl() {
-        List<ShopProductDb> shopProduct = MarshallingShopProductJson.deSerializeShopProduct();
+        List<ShopProductDb> shopProduct = MarshallingJson.deserializeJsonEntity(ShopProductDb.class);
         for (ShopProductDb entity : shopProduct) {
             this.autoLoad(entity);
         }
+        IdGenerator.setShopProductId((long) shopProduct.size() + 1);
     }
 
     @Override
@@ -26,19 +27,10 @@ public class ShopProductDaoJsonImpl extends AbstractDaoJsonImpl<ShopProductDb> i
         repository.add(entity);
     }
 
-    private void autoLoad(ShopProductDb entity) {
-        repository.add(entity);
-    }
-
     @Override
     public List<ShopProductDb> sortByPrice() {
         List<ShopProductDb> productList = shopProductDao.getAll();
         return productList.stream().sorted(Comparator.comparingDouble(ShopProductDb::getPrice))
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public void saveToFile(List<ShopProductDb> entity) {
-
     }
 }

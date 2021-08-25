@@ -3,26 +3,20 @@ package com.exposit.controller;
 import com.exposit.api.service.ProductService;
 import com.exposit.domain.dto.ProductDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@Log4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/product")
 public class ProductController {
 
+    private final static Logger log = LoggerFactory.getLogger(ProductController.class);
     private final ProductService productService;
     private static final String REQUEST = "receive request: /product/";
 
@@ -57,5 +51,12 @@ public class ProductController {
         productService.updateProduct(id, productDto);
         log.info(REQUEST);
         return ResponseEntity.ok().body(String.format("product %s successfully updated", id));
+    }
+
+    @PostMapping(value = "/save")
+    public ResponseEntity<String> saveToFile() {
+        productService.saveProductToFile();
+        log.info(REQUEST);
+        return ResponseEntity.ok().body("products successfully saved");
     }
 }

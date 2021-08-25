@@ -7,20 +7,21 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@Log4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/category")
 @Api(value = "Categories of online store", description = "Operations pertaining to category in online store")
 public class CategoryController {
 
+    private final static Logger log = LoggerFactory.getLogger(CategoryController.class);
     private static final String REQUEST = "receive request: /category/";
     private final CategoryService categoryService;
 
@@ -93,18 +94,18 @@ public class CategoryController {
         return ResponseEntity.ok().body(String.format("category %s successfully updated", id));
     }
 
-//    @ApiOperation(value = "Save categories to file")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Successfully completed request"),
-//            @ApiResponse(code = 201, message = "Successfully created new entity"),
-//            @ApiResponse(code = 401, message = "You are not authorized to create the resource"),
-//            @ApiResponse(code = 403, message = "Accessing the resource you were trying to create is forbidden"),
-//            @ApiResponse(code = 404, message = "The resource you were trying to create is not found")
-//    })
-//    @PostMapping(value = "/save")
-//    public ResponseEntity<String> saveToFile() {
-//        categoryService.saveCategoryToFile();
-//        log.info(REQUEST);
-//        return ResponseEntity.ok().body("categories successfully saved");
-//    }
+    @ApiOperation(value = "Save categories to file")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully completed request"),
+            @ApiResponse(code = 201, message = "Successfully created new entity"),
+            @ApiResponse(code = 401, message = "You are not authorized to create the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to create is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to create is not found")
+    })
+    @PostMapping(value = "/save")
+    public ResponseEntity<String> saveToFile() {
+        categoryService.saveCategoryToFile();
+        log.info(REQUEST);
+        return ResponseEntity.ok().body("categories successfully saved");
+    }
 }

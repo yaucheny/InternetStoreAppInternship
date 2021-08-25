@@ -3,9 +3,6 @@ package com.exposit.actions.product;
 import com.exposit.actions.AbstractAction;
 import com.exposit.actions.IAction;
 
-import lombok.extern.log4j.Log4j;
-
-@Log4j
 public class UpdateProduct extends AbstractAction implements IAction {
 //    private static final StoreService storeService
 //    = StoreServiceImpl.getInstance();

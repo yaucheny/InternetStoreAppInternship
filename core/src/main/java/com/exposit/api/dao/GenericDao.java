@@ -14,4 +14,7 @@ public interface GenericDao<T extends BaseDb> {
 
     List<T> getAll();
 
+    void saveToFile(List<T> entity);
+
+    void save(T entity);
 }

@@ -1,9 +1,9 @@
 package com.exposit.dao.daoxml;
 
 import com.exposit.api.dao.ShopProductDao;
-import com.exposit.utils.idgenerators.IdGenerator;
-import com.exposit.utils.marshelling.xml.MarshallingShopProductXml;
 import com.exposit.domain.model.db.ShopProductDb;
+import com.exposit.utils.idgenerators.IdGenerator;
+import com.exposit.utils.marshelling.MarshallingXml;
 
 import java.util.Comparator;
 import java.util.List;
@@ -14,10 +14,11 @@ public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductDb> imp
     private ShopProductDao shopProductDao;
 
     public ShopProductDaoXmlImpl() {
-        List<ShopProductDb> shopProduct = MarshallingShopProductXml.deSerializeShopProduct();
+        List<ShopProductDb> shopProduct = MarshallingXml.deserializeXmlEntity(ShopProductDb.class);
         for (ShopProductDb entity : shopProduct) {
             this.autoLoad(entity);
         }
+        IdGenerator.setShopProductId((long) shopProduct.size() + 1);
     }
 
     @Override
@@ -32,14 +33,5 @@ public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductDb> imp
         return productList.stream().sorted(Comparator
                 .comparingDouble(ShopProductDb::getPrice))
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public void saveToFile(List<ShopProductDb> entity) {
-
-    }
-
-    private void autoLoad(ShopProductDb entity) {
-        repository.add(entity);
     }
 }
