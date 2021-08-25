@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private final static Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
     private final ModelMapper mapper;
     private final ProductDao productDao;
     private static final String CAN_NOT_DELETE_PRODUCT = "can not delete product";
@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             productDao.delete(productDao.getById(id));
         } catch (DaoException e) {
-            log.warn(CAN_NOT_DELETE_PRODUCT, e);
+            log.warn(CAN_NOT_DELETE_PRODUCT);
             throw new ServiceException(CAN_NOT_DELETE_PRODUCT, e);
         }
     }

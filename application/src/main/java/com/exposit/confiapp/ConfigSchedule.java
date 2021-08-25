@@ -17,13 +17,12 @@ import org.springframework.scheduling.annotation.Scheduled;
 @ConditionalOnProperty(name = "scheduling.enabled", matchIfMissing = true)
 public class ConfigSchedule {
 
-    private static final Logger log = LoggerFactory.getLogger(ConfigSchedule.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ConfigSchedule.class);
     private final ShopProductService shopProductService;
 
     @Scheduled(fixedDelayString = "${searching.file.delay}", initialDelay = 100)
     public void inspectDirectoryScheduling() {
-        System.out.println("" + Thread.currentThread().getName());
-
+        LOG.debug(Thread.currentThread().getName());
         if (ParseFromCsv.moveToParseDir()) {
             shopProductService.updateShopProductsFromCsv();
         }

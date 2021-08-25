@@ -21,7 +21,7 @@ import java.util.List;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private final static Logger log = LoggerFactory.getLogger(CategoryServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(CategoryServiceImpl.class);
     private final ModelMapper mapper;
     private final CategoryDao categoryDao;
     private static final String CAN_NOT_DELETE_CATEGORY = "can not delete category";
@@ -44,7 +44,7 @@ public class CategoryServiceImpl implements CategoryService {
         try {
             categoryDao.delete(categoryDao.getById(id));
         } catch (DaoException e) {
-            log.warn(CAN_NOT_DELETE_CATEGORY, e);
+            log.warn(CAN_NOT_DELETE_CATEGORY);
             throw new ServiceException(CAN_NOT_DELETE_CATEGORY, e);
         }
     }

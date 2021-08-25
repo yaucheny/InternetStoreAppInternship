@@ -5,7 +5,7 @@ import com.exposit.dao.daohibernate.OrderDaoHiberImpl;
 import com.exposit.dao.daojson.OrderDaoJsonImpl;
 import com.exposit.dao.daorepository.OrderDaoRepositoryImpl;
 import com.exposit.dao.daoxml.OrderDaoXmlImpl;
-import com.exposit.utils.exceptions.DaoException;
+import com.exposit.utils.exceptions.BeanFactoryException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
@@ -17,31 +17,32 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("classpath:application.properties")
 public class OrderDaoFactory implements FactoryBean<OrderDao> {
 
-    private final static Logger log = LoggerFactory.getLogger(OrderDaoFactory.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrderDaoFactory.class);
     private String valueDao;
-    private static final String GET_DAO_TYPE_ERROR_MESSAGE = "can not find dao by property: ";
+    private static final String GET_DAO_TYPE_ERROR_LOG = "can not find dao by property: {}";
+    private static final String GET_DAO_TYPE_ERROR_EXCEPTION = "can not find dao by property: %s";
 
     public OrderDaoFactory(@Value("${dao.config}") String valueDao) {
         this.valueDao = valueDao;
     }
 
     @Override
-    public OrderDao getObject() throws Exception {
+    public OrderDao getObject()  {
         if ("json".equalsIgnoreCase(valueDao)) {
-            log.info("Get data from file OrderDb.json");
+            LOG.info("Get data from file OrderDb.json");
             return new OrderDaoJsonImpl();
         } else if ("xml".equalsIgnoreCase(valueDao)) {
-            log.info("Get data from file OrderDb.xml");
+            LOG.info("Get data from file OrderDb.xml");
             return new OrderDaoXmlImpl();
         } else if ("hibernate".equalsIgnoreCase(valueDao)) {
-            log.info("Hibernate gets data from postgres database");
+            LOG.info("Hibernate gets data from postgres database");
             return new OrderDaoHiberImpl();
         }else if ("jpa-repository".equalsIgnoreCase(valueDao)) {
-            log.info("Spring gets data from postgres database");
+            LOG.info("Spring gets data from postgres database");
             return new OrderDaoRepositoryImpl();
         }
-        log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
-        throw new DaoException(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
+        LOG.warn(GET_DAO_TYPE_ERROR_LOG, valueDao);
+        throw new BeanFactoryException(String.format(GET_DAO_TYPE_ERROR_EXCEPTION, valueDao));
     }
 
     @Override
@@ -55,7 +56,7 @@ public class OrderDaoFactory implements FactoryBean<OrderDao> {
         } else if ("jpa-repository".equalsIgnoreCase(valueDao)) {
             return OrderDaoRepositoryImpl.class;
         }
-        log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
-        throw new DaoException(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
+        LOG.warn(GET_DAO_TYPE_ERROR_LOG, valueDao);
+        throw new BeanFactoryException(String.format(GET_DAO_TYPE_ERROR_EXCEPTION, valueDao));
     }
 }

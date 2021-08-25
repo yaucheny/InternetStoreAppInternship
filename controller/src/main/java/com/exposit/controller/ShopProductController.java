@@ -16,26 +16,27 @@ import java.util.List;
 @RequestMapping("/shopProduct")
 public class ShopProductController {
 
-    private final static Logger log = LoggerFactory.getLogger(ShopProductController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ShopProductController.class);
     private final ShopProductService shopProductService;
     private static final String REQUEST = "receive request: /shopProduct/ ";
+    private static final String REQUEST_PARAM = "receive request: /shopProduct/{}";
 
     @GetMapping("/{id}")
     public ResponseEntity<ShopProductDto> getById(@PathVariable Long id) {
-        log.info(REQUEST + id);
+        LOG.debug(REQUEST_PARAM, id);
         return ResponseEntity.ok().body(shopProductService.getShopProductById(id));
     }
 
     @GetMapping("/")
     public ResponseEntity<List<ShopProductDto>> getAll() {
-        log.info(REQUEST);
+        LOG.debug(REQUEST);
         return ResponseEntity.ok().body(shopProductService.getAllShopProduct());
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
         shopProductService.deleteShopProduct(id);
-        log.info(REQUEST + id);
+        LOG.debug(REQUEST_PARAM, id);
         return ResponseEntity.ok().body(String.format("shopProduct %s successfully deleted", id));
     }
 
@@ -43,7 +44,7 @@ public class ShopProductController {
     public ResponseEntity<String> save(
             @Valid @RequestBody ShopProductDto shopProductDto) {
         shopProductService.addShopProduct(shopProductDto);
-        log.info(REQUEST);
+        LOG.debug(REQUEST);
         return ResponseEntity.ok().body("new category added");
     }
 
@@ -51,14 +52,14 @@ public class ShopProductController {
     public ResponseEntity<String> update(@PathVariable Long id,
                                          @Valid @RequestBody ShopProductDto shopProductDto) {
         shopProductService.updateShopProduct(id, shopProductDto);
-        log.info(REQUEST);
+        LOG.debug(REQUEST_PARAM, id);
         return ResponseEntity.ok().body(String.format("shopProduct %s successfully updated", id));
     }
 
     @PostMapping(value = "/save")
     public ResponseEntity<String> saveToFile() {
         shopProductService.saveShopProductToFile();
-        log.info(REQUEST);
+        LOG.debug(REQUEST);
         return ResponseEntity.ok().body("products successfully saved");
     }
 }

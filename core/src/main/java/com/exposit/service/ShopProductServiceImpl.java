@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @Service
 public class ShopProductServiceImpl implements ShopProductService {
 
-    private final static Logger log = LoggerFactory.getLogger(ShopProductServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ShopProductServiceImpl.class);
     private final ModelMapper mapper;
     private final ShopProductDao shopProductDao;
     private final CategoryDao categoryDao;
@@ -50,7 +50,7 @@ public class ShopProductServiceImpl implements ShopProductService {
             ShopProductDb shopProduct = mapper.map(shopProductDto, ShopProductDb.class);
             shopProductDao.save(shopProduct);
         } else {
-            log.warn(CAN_NOT_ADD_SHOP_PRODUCT);
+            LOG.warn(CAN_NOT_ADD_SHOP_PRODUCT);
             throw new DaoException(CAN_NOT_ADD_SHOP_PRODUCT);
         }
     }
@@ -60,7 +60,7 @@ public class ShopProductServiceImpl implements ShopProductService {
         try {
             shopProductDao.delete(shopProductDao.getById(id));
         } catch (DaoException e) {
-            log.warn(CAN_NOT_DELETE_SHOP_PRODUCT, e);
+            LOG.warn(CAN_NOT_DELETE_SHOP_PRODUCT);
             throw new ServiceException(CAN_NOT_DELETE_SHOP_PRODUCT, e);
         }
     }
@@ -72,7 +72,7 @@ public class ShopProductServiceImpl implements ShopProductService {
             shopProduct.setId(id);
             shopProductDao.update(id, shopProduct);
         } else {
-            log.warn(CAN_NOT_UPDATE_SHOP_PRODUCT);
+            LOG.warn(CAN_NOT_UPDATE_SHOP_PRODUCT);
             throw new ServiceException(CAN_NOT_UPDATE_SHOP_PRODUCT);
         }
     }
@@ -138,7 +138,7 @@ public class ShopProductServiceImpl implements ShopProductService {
             List<ShopProductDb> goodDb = mapper.map(this.filterByAttribute(val1, attrib1, goods), listType);
             return this.filterByAttribute(val2, attrib2, goodDb);
         }
-        log.warn(CAN_NOT_FIND_PRODUCT);
+        LOG.warn(CAN_NOT_FIND_PRODUCT);
         throw new DaoException(CAN_NOT_FIND_PRODUCT);
     }
 
@@ -164,39 +164,46 @@ public class ShopProductServiceImpl implements ShopProductService {
         }.getType();
         List<ShopProductDb> shopProductDbList;
         switch (attribute) {
-            case (NAME):
+            case (NAME) -> {
                 shopProductDbList = goods.stream()
                         .filter(p -> p.getProduct().getName().equals(value))
                         .collect(Collectors.toList());
                 return mapper.map(shopProductDbList, listType);
-            case (PRODUCER):
+            }
+            case (PRODUCER) -> {
                 shopProductDbList = goods.stream()
                         .filter(p -> p.getProduct().getProducer().equals(value))
                         .collect(Collectors.toList());
                 return mapper.map(shopProductDbList, listType);
-            case (PRICE):
+            }
+            case (PRICE) -> {
                 shopProductDbList = goods.stream()
-                        .filter(p -> p.getPrice().equals(java.lang.Double.parseDouble(value)))
+                        .filter(p -> p.getPrice().equals(Double.parseDouble(value)))
                         .collect(Collectors.toList());
                 return mapper.map(shopProductDbList, listType);
-            case (QUANTITY):
+            }
+            case (QUANTITY) -> {
                 shopProductDbList = goods.stream()
-                        .filter(p -> p.getQuantity().equals(java.lang.Integer.parseInt(value)))
+                        .filter(p -> p.getQuantity().equals(Integer.parseInt(value)))
                         .collect(Collectors.toList());
                 return mapper.map(shopProductDbList, listType);
-            case (STORE):
+            }
+            case (STORE) -> {
                 shopProductDbList = goods.stream()
                         .filter(p -> p.getStore().getName().equals(value))
                         .collect(Collectors.toList());
                 return mapper.map(shopProductDbList, listType);
-            case (DESCRIPTION):
+            }
+            case (DESCRIPTION) -> {
                 shopProductDbList = goods.stream()
                         .filter(p -> p.getDescription().equals(value))
                         .collect(Collectors.toList());
                 return mapper.map(shopProductDbList, listType);
-            default:
-                log.warn(FALSE_ATTRIBUTE_NAME);
+            }
+            default -> {
+                LOG.warn(FALSE_ATTRIBUTE_NAME);
                 throw new DaoException(FALSE_ATTRIBUTE_NAME);
+            }
         }
     }
 
@@ -204,7 +211,7 @@ public class ShopProductServiceImpl implements ShopProductService {
     @Override
     public void updateShopProductsFromCsv() {
         List<ShopProductDb> listFromCsv = ParseFromCsv.parseFileFromCsv();
-        System.out.println("" + Thread.currentThread().getName());
+        LOG.info("" + Thread.currentThread().getName());
         for (int i = 0; i < listFromCsv.size(); i++) {
             Long id = listFromCsv.get(i).getId();
             ShopProductDb shopProductDb = shopProductDao.getById(id);

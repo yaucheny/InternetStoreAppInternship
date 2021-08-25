@@ -17,7 +17,7 @@ public class StoreDto {
     private String name;
 
     @NotEmpty
-    @Pattern(regexp = "(http(s)?://)?([\\w-]+\\.)+[\\w-]+(/[\\w- ;,./?%&=]*)?",
+    @Pattern(regexp = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]",
             message = "internet page should be a valid page format")
     private String internetPage;
 

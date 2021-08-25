@@ -16,33 +16,34 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
 
-    private final static Logger log = LoggerFactory.getLogger(CustomerController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomerController.class);
     private final CustomerService customerService;
     private static final String REQUEST = "receive request: /customer/ ";
+    private static final String REQUEST_PARAM = "receive request: /customer/{}";
 
     @GetMapping("/{id}")
     public ResponseEntity<CustomerDto> getById(@PathVariable Long id) {
-        log.info(REQUEST + id);
+        LOG.debug(REQUEST_PARAM, id);
         return ResponseEntity.ok().body(customerService.getCustomerById(id));
     }
 
     @GetMapping("/")
     public ResponseEntity<List<CustomerDto>> getAll() {
-        log.info(REQUEST);
+        LOG.debug(REQUEST);
         return ResponseEntity.ok().body(customerService.getAllCustomer());
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
         customerService.deleteCustomer(id);
-        log.info(REQUEST + id);
+        LOG.debug(REQUEST_PARAM, id);
         return ResponseEntity.ok().body(String.format("customer %s successfully deleted", id));
     }
 
     @PostMapping(value = "/")
     public ResponseEntity<String> save(@Valid @RequestBody CustomerDto customerDto) {
         customerService.addCustomer(customerDto);
-        log.info(REQUEST);
+        LOG.debug(REQUEST);
         return ResponseEntity.ok().body("new customer added");
     }
 
@@ -50,14 +51,14 @@ public class CustomerController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<String> update(@PathVariable Long id, @Valid @RequestBody CustomerDto customerDto) {
         customerService.updateCustomer(id, customerDto);
-        log.info(REQUEST);
+        LOG.debug(REQUEST_PARAM, id);
         return ResponseEntity.ok().body(String.format("customer %s successfully updated", id));
     }
 
     @PostMapping(value = "/save")
     public ResponseEntity<String> saveToFile() {
         customerService.saveCustomerToFile();
-        log.info(REQUEST);
+        LOG.debug(REQUEST);
         return ResponseEntity.ok().body("customers successfully saved");
     }
 }

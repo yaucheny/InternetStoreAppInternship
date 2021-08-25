@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-    private final static Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class);
     private final ModelMapper mapper;
     private final CustomerDao customerDao;
     private static final String CAN_NOT_DELETE_CUSTOMER = "can not delete customer";
@@ -43,7 +43,7 @@ public class CustomerServiceImpl implements CustomerService {
         try {
             customerDao.delete(customerDao.getById(id));
         } catch (DaoException e) {
-            log.warn(CAN_NOT_DELETE_CUSTOMER, e);
+            log.warn(CAN_NOT_DELETE_CUSTOMER);
             throw new ServiceException(CAN_NOT_DELETE_CUSTOMER, e);
         }
     }

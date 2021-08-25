@@ -1,6 +1,5 @@
 package com.exposit.utils.marshelling;
 
-import com.exposit.domain.model.db.BaseDb;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -12,10 +11,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class MarshallingJson<T extends BaseDb> {
+public final class MarshallingJson {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final String PATH = "core/src/main/resources/datajson/";
+
+    private MarshallingJson() {
+    }
 
     public static <T> void serializeJsonEntity(List<T> entities) {
         if (!entities.isEmpty()) {
@@ -31,7 +33,7 @@ public class MarshallingJson<T extends BaseDb> {
     }
 
     public static <T> List<T> deserializeJsonEntity(Class<T> classOnWhichArrayIsDefined) {
-        String json = null;
+        String json;
         String path = PATH + classOnWhichArrayIsDefined.getSimpleName() + ".json";
         try {
             json = Files.readString(Path.of(path), StandardCharsets.UTF_8);

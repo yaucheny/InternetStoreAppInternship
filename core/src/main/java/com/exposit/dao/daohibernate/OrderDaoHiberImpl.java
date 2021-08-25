@@ -3,9 +3,12 @@ package com.exposit.dao.daohibernate;
 import com.exposit.api.dao.OrderDao;
 import com.exposit.domain.model.db.OrderDb;
 import com.exposit.domain.model.entity.OrderEntity;
+import com.exposit.utils.exceptions.NotFoundException;
 import com.exposit.utils.marshelling.MarshallingJson;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,21 +19,21 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
-
-@Transactional
 public class OrderDaoHiberImpl implements OrderDao {
+
+    private static final Logger LOG = LoggerFactory.getLogger(OrderDaoHiberImpl.class);
+    private static final String GET_BY_ID_ERROR_LOG = "can not find an entity by id: {}";
+    private static final String GET_BY_ID_ERROR_EXCEPTION = "can not find an entity by id: %s";
 
     @PersistenceContext(type = PersistenceContextType.TRANSACTION)
     private EntityManager entityManager;
-    private List<OrderEntity> repository = new ArrayList<>();
 
-    @Autowired
     private ModelMapper mapper;
 
     @Override
+    @Transactional
     public void save(OrderDb orderDb) {
         if (orderDb.getId() == null) {
             OrderEntity orderEntity = mapper.map(orderDb, OrderEntity.class);
@@ -39,16 +42,24 @@ public class OrderDaoHiberImpl implements OrderDao {
     }
 
     @Override
+    @Transactional
     public void saveToFile(List<OrderDb> entity) {
         MarshallingJson.serializeJsonEntity(entity);
     }
 
+    @Override
     public OrderDb getById(Long id) {
-        OrderEntity orderEntity = this.entityManager.find(OrderEntity.class, id);
-        return mapper.map(orderEntity, OrderDb.class);
+        try {
+            OrderEntity orderEntity = this.entityManager.find(OrderEntity.class, id);
+            return mapper.map(orderEntity, OrderDb.class);
+        } catch (IllegalArgumentException e) {
+            LOG.error(GET_BY_ID_ERROR_LOG, id);
+            throw new NotFoundException(String.format(GET_BY_ID_ERROR_EXCEPTION, id), e);
+        }
     }
 
     @Override
+    @Transactional
     public void delete(OrderDb orderDb) {
         if (orderDb.getId() != null) {
             OrderEntity orderEntity = mapper.map(orderDb, OrderEntity.class);
@@ -58,6 +69,7 @@ public class OrderDaoHiberImpl implements OrderDao {
     }
 
     @Override
+    @Transactional
     public void update(Long id, OrderDb orderDb) {
         if (orderDb.getId() != null) {
             OrderEntity orderEntity = mapper.map(orderDb, OrderEntity.class);
@@ -76,5 +88,10 @@ public class OrderDaoHiberImpl implements OrderDao {
         Type listType = new TypeToken<List<OrderDb>>() {
         }.getType();
         return mapper.map(orderEntityList, listType);
+    }
+
+    @Autowired
+    public void setMapper(ModelMapper mapper) {
+        this.mapper = mapper;
     }
 }

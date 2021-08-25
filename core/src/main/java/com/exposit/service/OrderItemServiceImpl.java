@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 public class OrderItemServiceImpl implements OrderItemService {
 
-    private final static Logger log = LoggerFactory.getLogger(OrderItemServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(OrderItemServiceImpl.class);
     private final ModelMapper mapper;
     private final OrderItemDao orderItemDao;
     private static final String CAN_NOT_DELETE_ORDER_ITEM = "can not delete orderItem";
@@ -43,7 +43,7 @@ public class OrderItemServiceImpl implements OrderItemService {
         try {
             orderItemDao.delete(orderItemDao.getById(id));
         } catch (DaoException e) {
-            log.warn(CAN_NOT_DELETE_ORDER_ITEM, e);
+            log.warn(CAN_NOT_DELETE_ORDER_ITEM);
             throw new ServiceException(CAN_NOT_DELETE_ORDER_ITEM, e);
         }
     }

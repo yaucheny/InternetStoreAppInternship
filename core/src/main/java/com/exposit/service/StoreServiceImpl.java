@@ -21,7 +21,7 @@ import java.util.List;
 @Service
 public class StoreServiceImpl implements IStoreService {
 
-    private final static Logger log = LoggerFactory.getLogger(StoreServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(StoreServiceImpl.class);
     private final ModelMapper mapper;
     private final StoreDao storeDao;
     private static final String CAN_NOT_DELETE_STORE = "can not delete store";
@@ -44,7 +44,7 @@ public class StoreServiceImpl implements IStoreService {
         try {
             storeDao.delete(storeDao.getById(id));
         } catch (DaoException e) {
-            log.warn(CAN_NOT_DELETE_STORE, e);
+            log.warn(CAN_NOT_DELETE_STORE);
             throw new ServiceException(CAN_NOT_DELETE_STORE, e);
         }
     }
@@ -63,7 +63,7 @@ public class StoreServiceImpl implements IStoreService {
 
     @Override
     public StoreDto getStoreById(Long id) {
-        storeDao.getById(id).getClass();
+        storeDao.getById(id);
         StoreDb storeDbEntity = storeDao.getById(id);
         return mapper.map(storeDbEntity, StoreDto.class);
     }

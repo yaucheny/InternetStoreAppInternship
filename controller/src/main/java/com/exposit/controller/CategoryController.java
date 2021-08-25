@@ -18,11 +18,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/category")
-@Api(value = "Categories of online store", description = "Operations pertaining to category in online store")
+@Api(value = "Categories of online store")
 public class CategoryController {
 
-    private final static Logger log = LoggerFactory.getLogger(CategoryController.class);
-    private static final String REQUEST = "receive request: /category/";
+    private static final Logger LOG = LoggerFactory.getLogger(CategoryController.class);
+    private static final String REQUEST = "receive request: /category/ ";
+    private static final String REQUEST_PARAM = "receive request: /category/{}";
     private final CategoryService categoryService;
 
     @ApiOperation(value = "Return category by id")
@@ -34,7 +35,7 @@ public class CategoryController {
     })
      @GetMapping(value = "/{id}")
     public ResponseEntity<CategoryDto> getById(@Valid @PathVariable Long id) {
-        log.info(REQUEST + id);
+        LOG.debug(REQUEST_PARAM, id);
         return ResponseEntity.ok().body(categoryService.getCategoryById(id));
     }
 
@@ -47,7 +48,7 @@ public class CategoryController {
     })
     @GetMapping(value = "/")
     public ResponseEntity<List<CategoryDto>> getAll() {
-        log.info(REQUEST);
+        LOG.debug(REQUEST);
         return ResponseEntity.ok().body(categoryService.getAllCategory());
     }
 
@@ -61,7 +62,7 @@ public class CategoryController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> deleteById(@Valid @PathVariable Long id) {
         categoryService.deleteCategory(id);
-        log.info(REQUEST + id);
+        LOG.debug(REQUEST_PARAM, id);
         return ResponseEntity.ok().body(String.format("category %s successfully deleted", id));
     }
 
@@ -76,7 +77,7 @@ public class CategoryController {
     @PostMapping(value = "/")
     public ResponseEntity<String> save(@Valid @RequestBody CategoryDto categoryDto) {
         categoryService.addCategory(categoryDto);
-        log.info(REQUEST);
+        LOG.debug(REQUEST);
         return ResponseEntity.ok().body("new category added");
     }
 
@@ -90,7 +91,7 @@ public class CategoryController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<String> update(@PathVariable Long id, @Valid @RequestBody CategoryDto categoryDto) {
         categoryService.updateCategory(id, categoryDto);
-        log.info(REQUEST);
+        LOG.debug(REQUEST_PARAM, id);
         return ResponseEntity.ok().body(String.format("category %s successfully updated", id));
     }
 
@@ -105,7 +106,7 @@ public class CategoryController {
     @PostMapping(value = "/save")
     public ResponseEntity<String> saveToFile() {
         categoryService.saveCategoryToFile();
-        log.info(REQUEST);
+        LOG.debug(REQUEST);
         return ResponseEntity.ok().body("categories successfully saved");
     }
 }

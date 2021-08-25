@@ -5,8 +5,7 @@ import com.exposit.dao.daohibernate.ProductDaoHiberImpl;
 import com.exposit.dao.daojson.ProductDaoJsonImpl;
 import com.exposit.dao.daorepository.ProductDaoRepositoryImpl;
 import com.exposit.dao.daoxml.ProductDaoXmlImpl;
-import com.exposit.utils.exceptions.DaoException;
-import lombok.extern.log4j.Log4j;
+import com.exposit.utils.exceptions.BeanFactoryException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
@@ -14,36 +13,36 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-@Log4j
 @Configuration
 @PropertySource("classpath:application.properties")
 public class ProductDaoFactory implements FactoryBean<ProductDao> {
 
-    private final static Logger log = LoggerFactory.getLogger(ProductDaoFactory.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ProductDaoFactory.class);
     private String valueDao;
-    private static final String GET_DAO_TYPE_ERROR_MESSAGE = "can not find dao by property: ";
+    private static final String GET_DAO_TYPE_ERROR_LOG = "can not find dao by property: {}";
+    private static final String GET_DAO_TYPE_ERROR_EXCEPTION = "can not find dao by property: %s";
 
     public ProductDaoFactory(@Value("${dao.config}") String valueDao) {
         this.valueDao = valueDao;
     }
 
     @Override
-    public ProductDao getObject() throws Exception {
+    public ProductDao getObject()  {
         if ("json".equalsIgnoreCase(valueDao)) {
-            log.info("Get data from file ProductDb.json");
+            LOG.info("Get data from file ProductDb.json");
             return new ProductDaoJsonImpl();
         } else if ("xml".equalsIgnoreCase(valueDao)) {
-            log.info("Get data from file ProductDb.xml");
+            LOG.info("Get data from file ProductDb.xml");
             return new ProductDaoXmlImpl();
         } else if ("hibernate".equalsIgnoreCase(valueDao)) {
-            log.info("Hibernate gets data from postgres database");
+            LOG.info("Hibernate gets data from postgres database");
             return new ProductDaoHiberImpl();
         }else if ("jpa-repository".equalsIgnoreCase(valueDao)) {
-            log.info("Spring gets data from postgres database");
+            LOG.info("Spring gets data from postgres database");
             return new ProductDaoRepositoryImpl();
         }
-        log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
-        throw new DaoException(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
+        LOG.warn(GET_DAO_TYPE_ERROR_LOG, valueDao);
+        throw new BeanFactoryException(String.format(GET_DAO_TYPE_ERROR_EXCEPTION, valueDao));
     }
 
     @Override
@@ -57,7 +56,7 @@ public class ProductDaoFactory implements FactoryBean<ProductDao> {
         } else if ("jpa-repository".equalsIgnoreCase(valueDao)) {
             return ProductDaoRepositoryImpl.class;
         }
-        log.warn(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
-        throw new DaoException(GET_DAO_TYPE_ERROR_MESSAGE + valueDao);
+        LOG.warn(GET_DAO_TYPE_ERROR_LOG, valueDao);
+        throw new BeanFactoryException(String.format(GET_DAO_TYPE_ERROR_EXCEPTION, valueDao));
     }
 }

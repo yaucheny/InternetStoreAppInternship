@@ -11,9 +11,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class MarshallingXml {
+public final class MarshallingXml {
     private static final XmlMapper MAPPER = new XmlMapper();
     private static final String PATH = "core/src/main/resources/dataxml/";
+
+    private MarshallingXml() {
+    }
 
     public static <T> void serializeJsonEntity(List<T> entities) {
         if (!entities.isEmpty()) {
@@ -30,7 +33,7 @@ public class MarshallingXml {
 
     public static <T> List<T> deserializeXmlEntity(Class<T> classOnWhichArrayIsDefined) {
 
-        String json = null;
+        String json;
         String path = PATH + classOnWhichArrayIsDefined.getSimpleName() + ".xml";
         try {
             json = Files.readString(Path.of(path), StandardCharsets.UTF_8);

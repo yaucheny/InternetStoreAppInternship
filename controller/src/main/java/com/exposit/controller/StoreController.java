@@ -16,47 +16,48 @@ import java.util.List;
 @RequestMapping("/store")
 public class StoreController {
 
-    private final static Logger log = LoggerFactory.getLogger(StoreController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StoreController.class);
     private final IStoreService storeService;
     private static final String REQUEST = "receive request: /store/ ";
+    private static final String REQUEST_PARAM = "receive request: /store/{}";
 
     @GetMapping("/{id}")
     public ResponseEntity<StoreDto> getById(@PathVariable Long id) {
-        log.info(REQUEST + id);
+        LOG.info(REQUEST_PARAM, id);
         return ResponseEntity.ok().body(storeService.getStoreById(id));
     }
 
     @GetMapping("/")
     public ResponseEntity<List<StoreDto>> getAll() {
-        log.info(REQUEST);
+        LOG.info(REQUEST);
         return ResponseEntity.ok().body(storeService.getAllStore());
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
         storeService.deleteStore(id);
-        log.info(REQUEST + id);
+        LOG.info(REQUEST_PARAM, id);
         return ResponseEntity.ok().body(String.format("store %s successfully deleted", id));
     }
 
     @PostMapping(value = "/")
     public ResponseEntity<String> save(@Valid @RequestBody StoreDto storeDto) {
         storeService.addStore(storeDto);
-        log.info(REQUEST);
+        LOG.info(REQUEST);
         return ResponseEntity.ok().body("new store added");
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<String> update(@PathVariable Long id, @Valid @RequestBody StoreDto storeDto) {
         storeService.updateStore(id, storeDto);
-        log.info(REQUEST);
+        LOG.info(REQUEST_PARAM, id);
         return ResponseEntity.ok().body(String.format("category %s successfully updated", id));
     }
 
     @PostMapping(value = "/save")
     public ResponseEntity<String> saveToFile() {
         storeService.saveStoreToFile();
-        log.info(REQUEST);
+        LOG.info(REQUEST);
         return ResponseEntity.ok().body("stores successfully saved");
     }
 }

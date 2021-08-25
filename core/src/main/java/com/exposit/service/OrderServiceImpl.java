@@ -23,7 +23,7 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    private final static Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
     private final ModelMapper mapper;
     private final OrderDao orderDao;
     private static final String CAN_NOT_DELETE_ORDER = "can not delete order";
@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
                 orderDao.save(order);
                 mapper.map(orderDto, OrderDb.class);
             } catch (ServiceException e) {
-                log.warn(CAN_NOT_UPDATE_ORDER, e);
+                log.warn(CAN_NOT_UPDATE_ORDER);
                 throw new ServiceException(CAN_NOT_UPDATE_ORDER, e);
             }
         } else {
@@ -62,7 +62,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             orderDao.delete(orderDao.getById(id));
         } catch (DaoException e) {
-            log.warn(CAN_NOT_DELETE_ORDER, e);
+            log.warn(CAN_NOT_DELETE_ORDER);
             throw new ServiceException(CAN_NOT_DELETE_ORDER, e);
         }
     }
@@ -83,7 +83,7 @@ public class OrderServiceImpl implements OrderService {
                 changeQuantityAfterPurchase(orderDto.getOrderItemList());
                 orderDao.update(id, order);
             } catch (ServiceException e) {
-                log.warn(CAN_NOT_UPDATE_ORDER, e);
+                log.warn(CAN_NOT_UPDATE_ORDER);
                 throw new ServiceException(CAN_NOT_UPDATE_ORDER, e);
             }
         } else {

@@ -12,14 +12,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public final class ParseFromCsv {
 
-    private final static Logger log = LoggerFactory.getLogger(ParseFromCsv.class);
+    private static final Logger log = LoggerFactory.getLogger(ParseFromCsv.class);
     private static Integer i = 0;
     private static final String FILE_SEARCHING_DIR = "application/src/main/resources/csv/search/product_shops_.csv";
     private static final String FILE_SAVING_DIR = "application/src/main/resources/csv/save/product_shops_%s.csv";
-    private static final String FILE_PARSING_DIR = "application/src/main/resources/csv/parse / product_shops_.csv";
+    private static final String FILE_PARSING_DIR = "application/src/main/resources/csv/parse/product_shops_.csv";
     private static final String DIRECTORY_PATH_SEARCHING = "application/src/main/resources/csv/search";
     private static final String DIRECTORY_PATH_PARSING = "application/src/main/resources/csv/parse";
 
@@ -29,11 +30,10 @@ public final class ParseFromCsv {
     public static List<ShopProductDb> parseFileFromCsv() {
         if (ParseFromCsv.isDirNotEmpty(DIRECTORY_PATH_PARSING)) {
             try (FileReader cswReader = new FileReader(FILE_PARSING_DIR)) {
-                List<ShopProductDb> beans = new CsvToBeanBuilder(cswReader)
+                return new CsvToBeanBuilder(cswReader)
                         .withType(ShopProductDb.class)
                         .build()
                         .parse();
-                return beans;
             } catch (Exception e) {
                 log.warn("", e);
                 e.getLocalizedMessage();
@@ -71,9 +71,6 @@ public final class ParseFromCsv {
 
     private static boolean isDirNotEmpty(String path) {
         File file = new File(path);
-        if (file.list().length > 0) {
-            return true;
-        }
-        return false;
+        return Objects.requireNonNull(file.list()).length > 0;
     }
 }

@@ -3,9 +3,12 @@ package com.exposit.dao.daohibernate;
 import com.exposit.api.dao.OrderItemDao;
 import com.exposit.domain.model.db.OrderItemDb;
 import com.exposit.domain.model.entity.OrderItemEntity;
+import com.exposit.utils.exceptions.NotFoundException;
 import com.exposit.utils.marshelling.MarshallingJson;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,21 +19,21 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
-
-@Transactional
 public class OrderItemDaoHiberImpl implements OrderItemDao {
+
+    private static final Logger LOG = LoggerFactory.getLogger(OrderItemDaoHiberImpl.class);
+    private static final String GET_BY_ID_ERROR_LOG = "can not find an entity by id: {}";
+    private static final String GET_BY_ID_ERROR_EXCEPTION = "can not find an entity by id: %s";
 
     @PersistenceContext(type = PersistenceContextType.TRANSACTION)
     private EntityManager entityManager;
-    private List<OrderItemEntity> repository = new ArrayList<>();
 
-    @Autowired
     private ModelMapper mapper;
 
     @Override
+    @Transactional
     public void save(OrderItemDb orderItemDb) {
         if (orderItemDb.getId() == null) {
             OrderItemEntity orderItemEntity = mapper.map(orderItemDb, OrderItemEntity.class);
@@ -39,16 +42,24 @@ public class OrderItemDaoHiberImpl implements OrderItemDao {
     }
 
     @Override
+    @Transactional
     public void saveToFile(List<OrderItemDb> entity) {
         MarshallingJson.serializeJsonEntity(entity);
     }
 
+    @Override
     public OrderItemDb getById(Long id) {
-        OrderItemEntity orderItemEntity = this.entityManager.find(OrderItemEntity.class, id);
-        return mapper.map(orderItemEntity, OrderItemDb.class);
+        try {
+            OrderItemEntity orderItemEntity = this.entityManager.find(OrderItemEntity.class, id);
+            return mapper.map(orderItemEntity, OrderItemDb.class);
+        } catch (IllegalArgumentException e) {
+            LOG.error(GET_BY_ID_ERROR_LOG, id);
+            throw new NotFoundException(String.format(GET_BY_ID_ERROR_EXCEPTION, id), e);
+        }
     }
 
     @Override
+    @Transactional
     public void delete(OrderItemDb orderItemDb) {
         if (orderItemDb.getId() != null) {
             OrderItemEntity orderItemEntity = mapper.map(orderItemDb, OrderItemEntity.class);
@@ -58,6 +69,7 @@ public class OrderItemDaoHiberImpl implements OrderItemDao {
     }
 
     @Override
+    @Transactional
     public void update(Long id, OrderItemDb orderItemDb) {
         if (orderItemDb.getId() != null) {
             OrderItemEntity orderItemEntity = mapper.map(orderItemDb, OrderItemEntity.class);
@@ -76,5 +88,10 @@ public class OrderItemDaoHiberImpl implements OrderItemDao {
         Type listType = new TypeToken<List<OrderItemDb>>() {
         }.getType();
         return mapper.map(orderItemEntityList, listType);
+    }
+
+    @Autowired
+    public void setMapper(ModelMapper mapper) {
+        this.mapper = mapper;
     }
 }
