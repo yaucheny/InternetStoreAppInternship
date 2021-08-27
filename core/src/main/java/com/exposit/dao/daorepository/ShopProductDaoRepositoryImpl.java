@@ -25,8 +25,6 @@ public class ShopProductDaoRepositoryImpl implements ShopProductDao {
     private static final String GET_BY_ID_ERROR_EXCEPTION = "can not find an entity by id: %s";
 
     private ShopProductRepository shopProductRepository;
-
-    @Autowired
     private ModelMapper mapper;
 
 
@@ -100,8 +98,13 @@ public class ShopProductDaoRepositoryImpl implements ShopProductDao {
     }
 
     @Autowired
-    public void setMapper(ModelMapper mapper) {
-        this.mapper = mapper;
+    public void setMapper(ModelMapper mapper1) {
+        this.mapper = mapper1;
+    }
+
+    @Autowired
+    public void setShopProductRepository(ShopProductRepository shopProductRepository1) {
+        this.shopProductRepository = shopProductRepository1;
     }
 }
 

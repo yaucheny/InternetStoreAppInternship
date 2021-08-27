@@ -10,10 +10,10 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="internet_page" type="VARCHAR">
+            <column name="name" type="VARCHAR">
                 <constraints unique="true" nullable="false"/>
             </column>
-            <column name="name" type="VARCHAR">
+            <column name="internet_page" type="VARCHAR">
                 <constraints unique="true" nullable="false"/>
             </column>
             <column name="phone_number" type="VARCHAR">

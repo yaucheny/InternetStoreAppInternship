@@ -42,6 +42,7 @@ public class ShopProductDaoHiberImpl implements ShopProductDao {
     }
 
     @Override
+    @Transactional
     public List<ShopProductDb> sortByPrice() {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<ShopProductEntity> query = builder.createQuery(ShopProductEntity.class);
@@ -61,6 +62,7 @@ public class ShopProductDaoHiberImpl implements ShopProductDao {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public ShopProductDb getById(Long id) {
         try {
             ShopProductEntity shopProductEntity = this.entityManager.find(ShopProductEntity.class, id);
@@ -91,6 +93,7 @@ public class ShopProductDaoHiberImpl implements ShopProductDao {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ShopProductDb> getAll() {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<ShopProductEntity> criteriaQuery = builder.createQuery(ShopProductEntity.class);
@@ -104,7 +107,7 @@ public class ShopProductDaoHiberImpl implements ShopProductDao {
     }
 
     @Autowired
-    public void setMapper(ModelMapper mapper) {
-        this.mapper = mapper;
+    public void setMapper(ModelMapper mapper1) {
+        this.mapper = mapper1;
     }
 }

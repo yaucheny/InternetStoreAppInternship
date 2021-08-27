@@ -48,6 +48,7 @@ public class StoreDaoHiberImpl implements StoreDao {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public StoreDb getById(Long id) {
         try {
             StoreEntity storeEntity = this.entityManager.find(StoreEntity.class, id);
@@ -78,6 +79,7 @@ public class StoreDaoHiberImpl implements StoreDao {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<StoreDb> getAll() {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<StoreEntity> criteriaQuery = builder.createQuery(StoreEntity.class);
@@ -91,7 +93,7 @@ public class StoreDaoHiberImpl implements StoreDao {
     }
 
     @Autowired
-    public void setMapper(ModelMapper mapper) {
-        this.mapper = mapper;
+    public void setMapper(ModelMapper mapper1) {
+        this.mapper = mapper1;
     }
 }

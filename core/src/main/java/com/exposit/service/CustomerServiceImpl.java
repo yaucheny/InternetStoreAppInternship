@@ -4,7 +4,7 @@ import com.exposit.api.dao.CustomerDao;
 import com.exposit.api.service.CustomerService;
 import com.exposit.domain.dto.CustomerDto;
 import com.exposit.domain.model.db.CustomerDb;
-import com.exposit.utils.exceptions.DaoException;
+import com.exposit.utils.exceptions.NotFoundException;
 import com.exposit.utils.exceptions.ServiceException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-    private static final Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomerServiceImpl.class);
     private final ModelMapper mapper;
     private final CustomerDao customerDao;
     private static final String CAN_NOT_DELETE_CUSTOMER = "can not delete customer";
@@ -30,11 +30,14 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void addCustomer(CustomerDto customerDto) {
         if (customerDto.getId() == null) {
-            CustomerDb customer = mapper.map(customerDto, CustomerDb.class);
-            customerDao.save(customer);
-        } else {
-            log.warn(CAN_NOT_ADD_CUSTOMER);
-            throw new DaoException(CAN_NOT_ADD_CUSTOMER);
+            try {
+                CustomerDb customer = mapper.map(customerDto, CustomerDb.class);
+                customerDao.save(customer);
+
+            } catch (Exception e) {
+                LOG.error(CAN_NOT_ADD_CUSTOMER);
+                throw new ServiceException(CAN_NOT_ADD_CUSTOMER, e);
+            }
         }
     }
 
@@ -42,8 +45,8 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteCustomer(Long id) {
         try {
             customerDao.delete(customerDao.getById(id));
-        } catch (DaoException e) {
-            log.warn(CAN_NOT_DELETE_CUSTOMER);
+        } catch (NotFoundException e) {
+            LOG.error(CAN_NOT_DELETE_CUSTOMER);
             throw new ServiceException(CAN_NOT_DELETE_CUSTOMER, e);
         }
     }
@@ -54,9 +57,6 @@ public class CustomerServiceImpl implements CustomerService {
             CustomerDb customer = mapper.map(customerDto, CustomerDb.class);
             customer.setId(id);
             customerDao.update(id, customer);
-        } else {
-            log.warn(CAN_NOT_UPDATE_CUSTOMER);
-            throw new ServiceException(CAN_NOT_UPDATE_CUSTOMER);
         }
     }
 

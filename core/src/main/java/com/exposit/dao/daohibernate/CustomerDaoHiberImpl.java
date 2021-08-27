@@ -47,7 +47,9 @@ public class CustomerDaoHiberImpl implements CustomerDao {
     public void saveToFile(List<CustomerDb> entity) {
         MarshallingJson.serializeJsonEntity(entity);
     }
+
     @Override
+    @Transactional(readOnly = true)
     public CustomerDb getById(Long id) {
         try {
             CustomerEntity customerEntity = this.entityManager.find(CustomerEntity.class, id);
@@ -78,6 +80,7 @@ public class CustomerDaoHiberImpl implements CustomerDao {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CustomerDb> getAll() {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<CustomerEntity> criteriaQuery = builder.createQuery(CustomerEntity.class);
@@ -91,7 +94,7 @@ public class CustomerDaoHiberImpl implements CustomerDao {
     }
 
     @Autowired
-    public void setMapper(ModelMapper mapper) {
-        this.mapper = mapper;
+    public void setMapper(ModelMapper mapper1) {
+        this.mapper = mapper1;
     }
 }

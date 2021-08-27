@@ -48,6 +48,7 @@ public class CategoryDaoHiberImpl implements CategoryDao {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CategoryDb getById(Long id) {
         try {
             CategoryEntity categoryEntity = this.entityManager.find(CategoryEntity.class, id);
@@ -78,6 +79,7 @@ public class CategoryDaoHiberImpl implements CategoryDao {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CategoryDb> getAll() {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<CategoryEntity> criteriaQuery = builder.createQuery(CategoryEntity.class);
@@ -91,7 +93,7 @@ public class CategoryDaoHiberImpl implements CategoryDao {
     }
 
     @Autowired
-    public void setMapper(ModelMapper mapper) {
-        this.mapper = mapper;
+    public void setMapper(ModelMapper mapper1) {
+        this.mapper = mapper1;
     }
 }

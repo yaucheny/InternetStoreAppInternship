@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.lang.reflect.Type;
 import java.util.List;
 
+@Transactional
 public class StoreDaoRepositoryImpl implements StoreDao {
 
     private static final Logger LOG = LoggerFactory.getLogger(StoreDaoRepositoryImpl.class);
@@ -23,8 +24,6 @@ public class StoreDaoRepositoryImpl implements StoreDao {
     private static final String GET_BY_ID_ERROR_EXCEPTION = "can not find an entity by id: %s";
 
     private StoreRepository storeRepository;
-
-    @Autowired
     private ModelMapper mapper;
 
     @Override
@@ -86,8 +85,13 @@ public class StoreDaoRepositoryImpl implements StoreDao {
     }
 
     @Autowired
-    public void setMapper(ModelMapper mapper) {
-        this.mapper = mapper;
+    public void setMapper(ModelMapper mapper1) {
+        this.mapper = mapper1;
+    }
+
+    @Autowired
+    public void setStoreRepository(StoreRepository storeRepository1) {
+        this.storeRepository = storeRepository1;
     }
 }
 

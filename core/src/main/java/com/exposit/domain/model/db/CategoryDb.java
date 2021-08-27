@@ -1,16 +1,15 @@
 package com.exposit.domain.model.db;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class CategoryDb extends BaseDb {
 
@@ -27,5 +26,20 @@ public class CategoryDb extends BaseDb {
                 + ", name='" + name + '\''
                 + ", childList=" + childList
                 + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CategoryDb)) return false;
+        CategoryDb that = (CategoryDb) o;
+        return Objects.equals(name, that.name) &&
+                Objects.equals(parentId, that.parentId) &&
+                Objects.equals(childList, that.childList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, parentId, childList);
     }
 }

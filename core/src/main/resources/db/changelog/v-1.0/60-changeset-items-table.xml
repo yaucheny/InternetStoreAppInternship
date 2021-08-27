@@ -10,7 +10,7 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="quantity" type="BIGINT">
+            <column name="quantity" type="INTEGER">
                 <constraints nullable="false"/>
             </column>
             <column name="product_shop_id" type="BIGINT">

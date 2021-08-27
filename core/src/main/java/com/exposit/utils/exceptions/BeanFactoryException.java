@@ -1,6 +1,7 @@
 package com.exposit.utils.exceptions;
 
 public class BeanFactoryException extends RuntimeException {
+
     public BeanFactoryException(String message) {
         super(message);
     }

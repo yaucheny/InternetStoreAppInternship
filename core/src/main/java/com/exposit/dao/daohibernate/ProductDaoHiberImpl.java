@@ -48,6 +48,7 @@ public class ProductDaoHiberImpl implements ProductDao {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public ProductDb getById(Long id) {
         try {
             ProductEntity productEntity = this.entityManager.find(ProductEntity.class, id);
@@ -78,6 +79,7 @@ public class ProductDaoHiberImpl implements ProductDao {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ProductDb> getAll() {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<ProductEntity> criteriaQuery = builder.createQuery(ProductEntity.class);
@@ -91,7 +93,7 @@ public class ProductDaoHiberImpl implements ProductDao {
     }
 
     @Autowired
-    public void setMapper(ModelMapper mapper) {
-        this.mapper = mapper;
+    public void setMapper(ModelMapper mapper1) {
+        this.mapper = mapper1;
     }
 }

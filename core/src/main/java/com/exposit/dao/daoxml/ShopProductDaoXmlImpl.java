@@ -11,9 +11,7 @@ import java.util.stream.Collectors;
 
 public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductDb> implements ShopProductDao {
 
-    private ShopProductDao shopProductDao;
-
-    public ShopProductDaoXmlImpl() {
+       public ShopProductDaoXmlImpl() {
         List<ShopProductDb> shopProduct = MarshallingXml.deserializeXmlEntity(ShopProductDb.class);
         for (ShopProductDb entity : shopProduct) {
             this.autoLoad(entity);
@@ -29,7 +27,7 @@ public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductDb> imp
 
     @Override
     public List<ShopProductDb> sortByPrice() {
-        List<ShopProductDb> productList = shopProductDao.getAll();
+        List<ShopProductDb> productList = this.getAll();
         return productList.stream().sorted(Comparator
                 .comparingDouble(ShopProductDb::getPrice))
                 .collect(Collectors.toList());

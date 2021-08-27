@@ -23,8 +23,6 @@ public class CustomerDaoRepositoryImpl implements CustomerDao {
     private static final String GET_BY_ID_ERROR_EXCEPTION = "can not find an entity by id: %s";
 
     private CustomerRepository customerRepository;
-
-    @Autowired
     private ModelMapper mapper;
 
 
@@ -88,8 +86,13 @@ public class CustomerDaoRepositoryImpl implements CustomerDao {
     }
 
     @Autowired
-    public void setMapper(ModelMapper mapper) {
-        this.mapper = mapper;
+    public void setMapper(ModelMapper mapper1) {
+        this.mapper = mapper1;
+    }
+
+    @Autowired
+    public void setCustomerRepository(CustomerRepository customerRepository1) {
+        this.customerRepository = customerRepository1;
     }
 }
 

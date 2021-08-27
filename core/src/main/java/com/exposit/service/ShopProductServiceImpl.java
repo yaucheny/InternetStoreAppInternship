@@ -3,11 +3,13 @@ package com.exposit.service;
 import com.exposit.api.dao.CategoryDao;
 import com.exposit.api.dao.ShopProductDao;
 import com.exposit.api.service.ShopProductService;
+import com.exposit.domain.dto.PriceQuantityInStoreDto;
 import com.exposit.domain.dto.ShopProductDto;
 import com.exposit.domain.model.PriceQuantityInStore;
 import com.exposit.domain.model.db.CategoryDb;
 import com.exposit.domain.model.db.ShopProductDb;
 import com.exposit.utils.exceptions.DaoException;
+import com.exposit.utils.exceptions.NotFoundException;
 import com.exposit.utils.exceptions.ServiceException;
 import com.exposit.utils.parsecsv.ParseFromCsv;
 import lombok.RequiredArgsConstructor;
@@ -47,11 +49,13 @@ public class ShopProductServiceImpl implements ShopProductService {
     @Override
     public void addShopProduct(ShopProductDto shopProductDto) {
         if (shopProductDto.getId() == null) {
-            ShopProductDb shopProduct = mapper.map(shopProductDto, ShopProductDb.class);
-            shopProductDao.save(shopProduct);
-        } else {
-            LOG.warn(CAN_NOT_ADD_SHOP_PRODUCT);
-            throw new DaoException(CAN_NOT_ADD_SHOP_PRODUCT);
+            try {
+                ShopProductDb shopProduct = mapper.map(shopProductDto, ShopProductDb.class);
+                shopProductDao.save(shopProduct);
+            } catch (Exception e) {
+                LOG.error(CAN_NOT_ADD_SHOP_PRODUCT);
+                throw new ServiceException(CAN_NOT_ADD_SHOP_PRODUCT, e);
+            }
         }
     }
 
@@ -60,7 +64,7 @@ public class ShopProductServiceImpl implements ShopProductService {
         try {
             shopProductDao.delete(shopProductDao.getById(id));
         } catch (DaoException e) {
-            LOG.warn(CAN_NOT_DELETE_SHOP_PRODUCT);
+            LOG.error(CAN_NOT_DELETE_SHOP_PRODUCT);
             throw new ServiceException(CAN_NOT_DELETE_SHOP_PRODUCT, e);
         }
     }
@@ -68,12 +72,14 @@ public class ShopProductServiceImpl implements ShopProductService {
     @Override
     public void updateShopProduct(Long id, ShopProductDto shopProductDto) {
         if (shopProductDao.getById(id) != null) {
-            ShopProductDb shopProduct = mapper.map(shopProductDto, ShopProductDb.class);
-            shopProduct.setId(id);
-            shopProductDao.update(id, shopProduct);
-        } else {
-            LOG.warn(CAN_NOT_UPDATE_SHOP_PRODUCT);
-            throw new ServiceException(CAN_NOT_UPDATE_SHOP_PRODUCT);
+            try {
+                ShopProductDb shopProduct = mapper.map(shopProductDto, ShopProductDb.class);
+                shopProduct.setId(id);
+                shopProductDao.update(id, shopProduct);
+            } catch (NotFoundException e) {
+                LOG.error(CAN_NOT_UPDATE_SHOP_PRODUCT);
+                throw new ServiceException(CAN_NOT_UPDATE_SHOP_PRODUCT, e);
+            }
         }
     }
 
@@ -114,11 +120,13 @@ public class ShopProductServiceImpl implements ShopProductService {
                 .findAny().orElse(null);
         List<ShopProductDb> shopProducts = shopProductDao.getAll();
         if (categoryDb != null) {
-            List<ShopProductDb> shopProductDbEntityList = shopProducts.stream()
+            List<ShopProductDb> shopProductDbList = shopProducts.stream()
                     .filter(p -> p.getProduct().getCategoryList().contains(categoryDb))
                     .collect(Collectors.toList());
-            return mapper.map(shopProductDbEntityList, listType);
+
+            return mapper.map(shopProductDbList, listType);
         }
+        LOG.error(FALSE_CATEGORY_NAME);
         throw new ServiceException(FALSE_CATEGORY_NAME);
     }
 
@@ -135,16 +143,16 @@ public class ShopProductServiceImpl implements ShopProductService {
             List<ShopProductDb> goods = shopProductDao.getAll();
             Type listType = new TypeToken<List<ShopProductDb>>() {
             }.getType();
-            List<ShopProductDb> goodDb = mapper.map(this.filterByAttribute(val1, attrib1, goods), listType);
-            return this.filterByAttribute(val2, attrib2, goodDb);
+            List<ShopProductDto> productDtoList = this.filterByAttribute(val1, attrib1, goods);
+            List<ShopProductDb> productDbList = mapper.map(productDtoList, listType);
+            return this.filterByAttribute(val2, attrib2, productDbList);
         }
-        LOG.warn(CAN_NOT_FIND_PRODUCT);
-        throw new DaoException(CAN_NOT_FIND_PRODUCT);
+        LOG.error(CAN_NOT_FIND_PRODUCT);
+        throw new ServiceException(CAN_NOT_FIND_PRODUCT);
     }
 
     @Override
-    public List<PriceQuantityInStore> infoAboutPriceQuantityInStore(
-            String storeName) {
+    public List<PriceQuantityInStoreDto> infoAboutPriceQuantityInStore(String storeName) {
         List<ShopProductDb> shopProductList = shopProductDao.getAll();
         List<ShopProductDb> shopProductInParticularStore = shopProductList.stream()
                 .filter(p -> p.getStore().getName().equals(storeName))
@@ -152,11 +160,13 @@ public class ShopProductServiceImpl implements ShopProductService {
         List<PriceQuantityInStore> priceQuantityInStoreList = new ArrayList<>();
         for (ShopProductDb g : shopProductInParticularStore) {
             PriceQuantityInStore priceQuantityInStore = new PriceQuantityInStore(
-                    g.getPrice(), g.getQuantity(), g.getStore().getName());
+                    g.getProduct(), g.getPrice(), g.getQuantity(), g.getStore().getName());
             priceQuantityInStoreList.add(priceQuantityInStore);
 
         }
-        return priceQuantityInStoreList;
+        Type listType = new TypeToken<List<PriceQuantityInStore>>() {
+        }.getType();
+        return mapper.map(priceQuantityInStoreList, listType);
     }
 
     private List<ShopProductDto> filterByAttribute(String value, String attribute, List<ShopProductDb> goods) {
@@ -201,8 +211,8 @@ public class ShopProductServiceImpl implements ShopProductService {
                 return mapper.map(shopProductDbList, listType);
             }
             default -> {
-                LOG.warn(FALSE_ATTRIBUTE_NAME);
-                throw new DaoException(FALSE_ATTRIBUTE_NAME);
+                LOG.error(FALSE_ATTRIBUTE_NAME);
+                throw new ServiceException(FALSE_ATTRIBUTE_NAME);
             }
         }
     }

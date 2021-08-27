@@ -1,14 +1,14 @@
 package com.exposit.domain.model.db;
 
 import com.opencsv.bean.CsvBindByName;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class ShopProductDb extends BaseDb {
 
@@ -32,5 +32,22 @@ public class ShopProductDb extends BaseDb {
                 + ", store=" + store
                 + ", description='" + description + '\''
                 + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ShopProductDb)) return false;
+        ShopProductDb that = (ShopProductDb) o;
+        return Objects.equals(quantity, that.quantity) &&
+                Objects.equals(store, that.store) &&
+                Objects.equals(product, that.product) &&
+                Objects.equals(price, that.price) &&
+                Objects.equals(description, that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(quantity, store, product, price, description);
     }
 }

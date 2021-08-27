@@ -5,6 +5,7 @@ import com.exposit.api.service.OrderItemService;
 import com.exposit.domain.dto.OrderItemDto;
 import com.exposit.domain.model.db.OrderItemDb;
 import com.exposit.utils.exceptions.DaoException;
+import com.exposit.utils.exceptions.NotFoundException;
 import com.exposit.utils.exceptions.ServiceException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -20,7 +21,7 @@ import java.util.List;
 @Service
 public class OrderItemServiceImpl implements OrderItemService {
 
-    private static final Logger log = LoggerFactory.getLogger(OrderItemServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrderItemServiceImpl.class);
     private final ModelMapper mapper;
     private final OrderItemDao orderItemDao;
     private static final String CAN_NOT_DELETE_ORDER_ITEM = "can not delete orderItem";
@@ -30,11 +31,13 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Override
     public void addOrderItem(OrderItemDto orderItemDto) {
         if (orderItemDto.getId() == null) {
-            OrderItemDb orderItem = mapper.map(orderItemDto, OrderItemDb.class);
-            orderItemDao.save(orderItem);
-        } else {
-            log.warn(CAN_NOT_ADD_ORDER_ITEM);
-            throw new DaoException(CAN_NOT_ADD_ORDER_ITEM);
+            try {
+                OrderItemDb orderItem = mapper.map(orderItemDto, OrderItemDb.class);
+                orderItemDao.save(orderItem);
+            } catch (Exception e) {
+                LOG.error(CAN_NOT_ADD_ORDER_ITEM);
+                throw new ServiceException(CAN_NOT_ADD_ORDER_ITEM, e);
+            }
         }
     }
 
@@ -43,7 +46,7 @@ public class OrderItemServiceImpl implements OrderItemService {
         try {
             orderItemDao.delete(orderItemDao.getById(id));
         } catch (DaoException e) {
-            log.warn(CAN_NOT_DELETE_ORDER_ITEM);
+            LOG.error(CAN_NOT_DELETE_ORDER_ITEM);
             throw new ServiceException(CAN_NOT_DELETE_ORDER_ITEM, e);
         }
     }
@@ -51,12 +54,14 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Override
     public void updateOrderItem(Long id, OrderItemDto orderItemDto) {
         if (orderItemDao.getById(id) != null) {
-            OrderItemDb orderItem = mapper.map(orderItemDto, OrderItemDb.class);
-            orderItem.setId(id);
-            orderItemDao.update(id, orderItem);
-        } else {
-            log.warn(CAN_NOT_UPDATE_ORDER_ITEM);
-            throw new ServiceException(CAN_NOT_UPDATE_ORDER_ITEM);
+            try {
+                OrderItemDb orderItem = mapper.map(orderItemDto, OrderItemDb.class);
+                orderItem.setId(id);
+                orderItemDao.update(id, orderItem);
+            } catch (NotFoundException e) {
+                LOG.error(CAN_NOT_UPDATE_ORDER_ITEM);
+                throw new ServiceException(CAN_NOT_UPDATE_ORDER_ITEM, e);
+            }
         }
     }
 

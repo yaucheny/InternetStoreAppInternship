@@ -23,8 +23,6 @@ public class OrderItemDaoRepositoryImpl implements OrderItemDao {
     private static final String GET_BY_ID_ERROR_EXCEPTION = "can not find an entity by id: %s";
 
     private OrderItemRepository orderItemRepository;
-
-    @Autowired
     private ModelMapper mapper;
 
     @Override
@@ -85,8 +83,14 @@ public class OrderItemDaoRepositoryImpl implements OrderItemDao {
     }
 
     @Autowired
-    public void setMapper(ModelMapper mapper) {
-        this.mapper = mapper;
+    public void setMapper(ModelMapper mapper1) {
+        this.mapper = mapper1;
+    }
+
+    @Autowired
+
+    public void setOrderItemRepository(OrderItemRepository orderItemRepository1) {
+        this.orderItemRepository = orderItemRepository1;
     }
 }
 

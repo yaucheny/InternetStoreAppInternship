@@ -7,7 +7,9 @@ import com.exposit.domain.model.db.OrderDb;
 import com.exposit.domain.model.db.OrderItemDb;
 import com.exposit.domain.model.db.ShopProductDb;
 import com.exposit.utils.exceptions.DaoException;
+import com.exposit.utils.exceptions.NotFoundException;
 import com.exposit.utils.exceptions.ServiceException;
+import com.exposit.utils.exceptions.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -23,13 +25,14 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    private static final Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrderServiceImpl.class);
     private final ModelMapper mapper;
     private final OrderDao orderDao;
     private static final String CAN_NOT_DELETE_ORDER = "can not delete order";
     private static final String CAN_NOT_UPDATE_ORDER = "can not update order";
     private static final String CAN_NOT_ADD_ORDER = "can not add order ";
-    private static final String NOT_ENOUGH_PRODUCTS = "Not enough quantity of product in this store ";
+    private static final String NOT_ENOUGH_PRODUCTS = "not enough quantity of product in this store ";
+    private static final String WRONG_DATA = "check values of data in update reques ";
 
     @Override
     public void addOrder(OrderDto orderDto) {
@@ -47,13 +50,10 @@ public class OrderServiceImpl implements OrderService {
                 changeQuantityAfterPurchase(orderDto.getOrderItemList());
                 orderDao.save(order);
                 mapper.map(orderDto, OrderDb.class);
-            } catch (ServiceException e) {
-                log.warn(CAN_NOT_UPDATE_ORDER);
-                throw new ServiceException(CAN_NOT_UPDATE_ORDER, e);
+            } catch (Exception e) {
+                LOG.error(CAN_NOT_ADD_ORDER);
+                throw new ServiceException(CAN_NOT_ADD_ORDER, e);
             }
-        } else {
-            log.warn(CAN_NOT_ADD_ORDER);
-            throw new DaoException(CAN_NOT_ADD_ORDER);
         }
     }
 
@@ -62,7 +62,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             orderDao.delete(orderDao.getById(id));
         } catch (DaoException e) {
-            log.warn(CAN_NOT_DELETE_ORDER);
+            LOG.error(CAN_NOT_DELETE_ORDER);
             throw new ServiceException(CAN_NOT_DELETE_ORDER, e);
         }
     }
@@ -72,23 +72,24 @@ public class OrderServiceImpl implements OrderService {
         if (orderDao.getById(id) != null) {
             try {
                 OrderDb order = orderDao.getById(id);
-                LocalDate dateOfOrder = LocalDate.now();
-                order.setDateOfOrder(dateOfOrder);
-                order.setDateOfDelivery(dateOfOrder.plusDays(orderDto.getDays()));
+                order.setDateOfOrder(orderDto.getDateOfOrder());
+                order.setDateOfDelivery(orderDto.getDateOfDelivery());
                 order.setCustomer(orderDto.getCustomer());
-                checkQuantity(orderDto.getOrderItemList());
                 order.setOrderItemList(orderDto.getOrderItemList());
                 order.setDays(orderDto.getDays());
-                order.setPriceOfPurchase(priceOfBusket(orderDto.getOrderItemList()));
+                order.setPriceOfPurchase(orderDto.getPriceOfPurchase());
                 changeQuantityAfterPurchase(orderDto.getOrderItemList());
+                checkQuantity(orderDto.getOrderItemList());
+                if (order.getDateOfOrder().plusDays(order.getDays()) != order.getDateOfDelivery()
+                        || !order.getPriceOfPurchase().equals(priceOfBusket(orderDto.getOrderItemList()))) {
+                    LOG.error(WRONG_DATA);
+                    throw new ValidationException(WRONG_DATA);
+                }
                 orderDao.update(id, order);
-            } catch (ServiceException e) {
-                log.warn(CAN_NOT_UPDATE_ORDER);
+            } catch (NotFoundException e) {
+                LOG.error(CAN_NOT_UPDATE_ORDER);
                 throw new ServiceException(CAN_NOT_UPDATE_ORDER, e);
             }
-        } else {
-            log.warn(CAN_NOT_UPDATE_ORDER);
-            throw new ServiceException(CAN_NOT_UPDATE_ORDER);
         }
     }
 
@@ -125,8 +126,8 @@ public class OrderServiceImpl implements OrderService {
             Integer quantityList = orderItem.getQuantity();
             Integer quantityProduct = orderItem.getShopProduct().getQuantity();
             if (quantityProduct < quantityList) {
-                log.warn(NOT_ENOUGH_PRODUCTS);
-                throw new ServiceException(NOT_ENOUGH_PRODUCTS);
+                LOG.error(NOT_ENOUGH_PRODUCTS);
+                throw new ValidationException(NOT_ENOUGH_PRODUCTS);
             }
         }
     }

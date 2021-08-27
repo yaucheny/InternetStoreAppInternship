@@ -1,7 +1,7 @@
 package com.exposit.api.service;
 
+import com.exposit.domain.dto.PriceQuantityInStoreDto;
 import com.exposit.domain.dto.ShopProductDto;
-import com.exposit.domain.model.PriceQuantityInStore;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public interface ShopProductService {
 
     List<ShopProductDto> findByOneAttribute(String value, String attribute);
 
-    List<PriceQuantityInStore> infoAboutPriceQuantityInStore(String storeName);
+    List<PriceQuantityInStoreDto> infoAboutPriceQuantityInStore(String storeName);
 
     void updateShopProductsFromCsv();
 

@@ -1,6 +1,8 @@
 package com.exposit.utils.marshelling;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +15,9 @@ import java.util.List;
 
 public final class MarshallingJson {
 
+    private static final Logger LOG = LoggerFactory.getLogger(MarshallingJson.class);
     private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final String FILE_NOT_FOUND_LOG = "missing *.json file for entity {}, {}";
     private static final String PATH = "core/src/main/resources/datajson/";
 
     private MarshallingJson() {
@@ -22,12 +26,15 @@ public final class MarshallingJson {
     public static <T> void serializeJsonEntity(List<T> entities) {
         if (!entities.isEmpty()) {
             String path = PATH + entities.get(0).getClass().getSimpleName() + ".json";
+            File file = new File(path);
             try {
-                MAPPER.writeValue(new File(path), entities);
-                MAPPER.writeValueAsString(entities);
-                MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(entities);
+                if (!file.createNewFile()) {
+                    MAPPER.writeValue(new File(path), entities);
+                    MAPPER.writeValueAsString(entities);
+                    MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(entities);
+                }
             } catch (IOException e) {
-                e.printStackTrace();
+                LOG.error(FILE_NOT_FOUND_LOG,path, e.getStackTrace());
             }
         }
     }
@@ -35,15 +42,18 @@ public final class MarshallingJson {
     public static <T> List<T> deserializeJsonEntity(Class<T> classOnWhichArrayIsDefined) {
         String json;
         String path = PATH + classOnWhichArrayIsDefined.getSimpleName() + ".json";
+        File file = new File(path);
         try {
-            json = Files.readString(Path.of(path), StandardCharsets.UTF_8);
-            Class<T[]> arrayClass = (Class<T[]>) Class.forName("[L" + classOnWhichArrayIsDefined.getName() + ";");
-            T[] objects = MAPPER.readValue(json, arrayClass);
-            if (objects.length > 0) {
-                return Arrays.asList(objects);
+            if (!file.createNewFile()) {
+                json = Files.readString(Path.of(path), StandardCharsets.UTF_8);
+                Class<T[]> arrayClass = (Class<T[]>) Class.forName("[L" + classOnWhichArrayIsDefined.getName() + ";");
+                T[] objects = MAPPER.readValue(json, arrayClass);
+                if (objects.length > 0) {
+                    return Arrays.asList(objects);
+                }
             }
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            LOG.error(FILE_NOT_FOUND_LOG, path, e.getStackTrace());
         }
         return Collections.emptyList();
     }

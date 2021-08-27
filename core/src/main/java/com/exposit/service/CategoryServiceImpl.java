@@ -4,7 +4,7 @@ import com.exposit.api.dao.CategoryDao;
 import com.exposit.api.service.CategoryService;
 import com.exposit.domain.dto.CategoryDto;
 import com.exposit.domain.model.db.CategoryDb;
-import com.exposit.utils.exceptions.DaoException;
+import com.exposit.utils.exceptions.NotFoundException;
 import com.exposit.utils.exceptions.ServiceException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -21,7 +21,7 @@ import java.util.List;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private static final Logger log = LoggerFactory.getLogger(CategoryServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CategoryServiceImpl.class);
     private final ModelMapper mapper;
     private final CategoryDao categoryDao;
     private static final String CAN_NOT_DELETE_CATEGORY = "can not delete category";
@@ -31,11 +31,13 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void addCategory(CategoryDto categoryDto) {
         if (categoryDto.getId() == null) {
-            CategoryDb categoryDb = mapper.map(categoryDto, CategoryDb.class);
-            categoryDao.save(categoryDb);
-        } else {
-            log.warn(CAN_NOT_ADD_CATEGORY);
-            throw new DaoException(CAN_NOT_ADD_CATEGORY);
+            try {
+                CategoryDb categoryDb = mapper.map(categoryDto, CategoryDb.class);
+                categoryDao.save(categoryDb);
+            } catch (Exception e) {
+                LOG.error(CAN_NOT_ADD_CATEGORY);
+                throw new ServiceException(CAN_NOT_ADD_CATEGORY, e);
+            }
         }
     }
 
@@ -43,8 +45,8 @@ public class CategoryServiceImpl implements CategoryService {
     public void deleteCategory(Long id) {
         try {
             categoryDao.delete(categoryDao.getById(id));
-        } catch (DaoException e) {
-            log.warn(CAN_NOT_DELETE_CATEGORY);
+        } catch (NotFoundException e) {
+            LOG.error(CAN_NOT_DELETE_CATEGORY);
             throw new ServiceException(CAN_NOT_DELETE_CATEGORY, e);
         }
     }
@@ -52,12 +54,14 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void updateCategory(Long id, CategoryDto categoryDto) {
         if (categoryDao.getById(id) != null) {
-            CategoryDb category = mapper.map(categoryDto, CategoryDb.class);
-            category.setId(id);
-            categoryDao.update(id, category);
-        } else {
-            log.warn(CAN_NOT_UPDATE_CATEGORY);
-            throw new ServiceException(CAN_NOT_UPDATE_CATEGORY);
+            try {
+                CategoryDb category = mapper.map(categoryDto, CategoryDb.class);
+                category.setId(id);
+                categoryDao.update(id, category);
+            } catch (NotFoundException e) {
+                LOG.error(CAN_NOT_UPDATE_CATEGORY);
+                throw new ServiceException(CAN_NOT_UPDATE_CATEGORY);
+            }
         }
     }
 

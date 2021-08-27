@@ -48,6 +48,7 @@ public class OrderDaoHiberImpl implements OrderDao {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public OrderDb getById(Long id) {
         try {
             OrderEntity orderEntity = this.entityManager.find(OrderEntity.class, id);
@@ -78,6 +79,7 @@ public class OrderDaoHiberImpl implements OrderDao {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<OrderDb> getAll() {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<OrderEntity> criteriaQuery = builder.createQuery(OrderEntity.class);
@@ -91,7 +93,7 @@ public class OrderDaoHiberImpl implements OrderDao {
     }
 
     @Autowired
-    public void setMapper(ModelMapper mapper) {
-        this.mapper = mapper;
+    public void setMapper(ModelMapper mapper1) {
+        this.mapper = mapper1;
     }
 }
