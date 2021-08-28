@@ -4,23 +4,30 @@ import com.exposit.api.dao.StoreDao;
 import com.exposit.dao.daorepository.repository.StoreRepository;
 import com.exposit.domain.model.db.StoreDb;
 import com.exposit.domain.model.entity.StoreEntity;
+import com.exposit.utils.exceptions.NotFoundException;
 import com.exposit.utils.marshelling.MarshallingXml;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Type;
 import java.util.List;
+
 @Transactional
 public class StoreDaoRepositoryImpl implements StoreDao {
 
-    @Autowired
+    private static final Logger LOG = LoggerFactory.getLogger(StoreDaoRepositoryImpl.class);
+    private static final String GET_BY_ID_ERROR_LOG = "can not find an entity by id: {}";
+    private static final String GET_BY_ID_ERROR_EXCEPTION = "can not find an entity by id: %s";
+
     private StoreRepository storeRepository;
-    @Autowired
     private ModelMapper mapper;
 
     @Override
+    @Transactional
     public void save(StoreDb storeDb) {
         if (storeDb.getId() == null) {
             StoreEntity categoryEntity = mapper.map(storeDb, StoreEntity.class);
@@ -29,17 +36,25 @@ public class StoreDaoRepositoryImpl implements StoreDao {
     }
 
     @Override
+    @Transactional
     public void saveToFile(List<StoreDb> entity) {
         MarshallingXml.serializeJsonEntity(entity);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public StoreDb getById(Long id) {
-        StoreEntity storeEntity = storeRepository.getById(id);
-        return mapper.map(storeEntity, StoreDb.class);
+        try {
+            StoreEntity storeEntity = storeRepository.getById(id);
+            return mapper.map(storeEntity, StoreDb.class);
+        } catch (Exception e) {
+            LOG.error(GET_BY_ID_ERROR_LOG, id);
+            throw new NotFoundException(String.format(GET_BY_ID_ERROR_EXCEPTION, id));
+        }
     }
 
     @Override
+    @Transactional
     public void delete(StoreDb storeDb) {
         if (storeDb.getId() != null) {
             StoreEntity storeEntity = mapper.map(storeDb, StoreEntity.class);
@@ -48,6 +63,7 @@ public class StoreDaoRepositoryImpl implements StoreDao {
     }
 
     @Override
+    @Transactional
     public void update(Long id, StoreDb storeDb) {
         if (storeDb.getId() != null) {
             StoreEntity storeEntityToUpdate = storeRepository.getById(id);
@@ -60,11 +76,22 @@ public class StoreDaoRepositoryImpl implements StoreDao {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<StoreDb> getAll() {
         List<StoreEntity> storeEntityList = storeRepository.findAll();
         Type listType = new TypeToken<List<StoreDb>>() {
         }.getType();
         return mapper.map(storeEntityList, listType);
+    }
+
+    @Autowired
+    public void setMapper(ModelMapper mapper1) {
+        this.mapper = mapper1;
+    }
+
+    @Autowired
+    public void setStoreRepository(StoreRepository storeRepository1) {
+        this.storeRepository = storeRepository1;
     }
 }
 

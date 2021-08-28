@@ -15,8 +15,9 @@ import java.util.List;
 @Setter
 @Schema(description = "Entity category")
 public class CategoryDto {
+
     @Min(value = 1, message = "value of id should be more than 0")
-    @ApiModelProperty(notes = "id of category")
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
     @NotEmpty
@@ -24,7 +25,7 @@ public class CategoryDto {
     @ApiModelProperty(notes = "name of category")
     private String name;
 
-    @ApiModelProperty(notes = "parent category")
+    @ApiModelProperty(notes = "parent of category")
     private Long parentId;
 
     @ApiModelProperty(notes = "childList of categories")

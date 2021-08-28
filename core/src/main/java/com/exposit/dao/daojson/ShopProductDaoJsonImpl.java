@@ -11,8 +11,6 @@ import java.util.stream.Collectors;
 
 public class ShopProductDaoJsonImpl extends AbstractDaoJsonImpl<ShopProductDb> implements ShopProductDao {
 
-    private ShopProductDao shopProductDao;
-
     public ShopProductDaoJsonImpl() {
         List<ShopProductDb> shopProduct = MarshallingJson.deserializeJsonEntity(ShopProductDb.class);
         for (ShopProductDb entity : shopProduct) {
@@ -29,7 +27,7 @@ public class ShopProductDaoJsonImpl extends AbstractDaoJsonImpl<ShopProductDb> i
 
     @Override
     public List<ShopProductDb> sortByPrice() {
-        List<ShopProductDb> productList = shopProductDao.getAll();
+        List<ShopProductDb> productList = this.getAll();
         return productList.stream().sorted(Comparator.comparingDouble(ShopProductDb::getPrice))
                 .collect(Collectors.toList());
     }

@@ -155,7 +155,12 @@
         <module name="HiddenField"/>
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
-        <module name="MagicNumber"/>
+                <module name="MagicNumber">
+            <property name="tokens" value="NUM_DOUBLE, NUM_FLOAT"/>
+            <property name="ignoreNumbers" value="0, 0.5, 1, 100, 200, 201, 401, 403, 404"/>
+            <property name="ignoreFieldDeclaration" value="true"/>
+            <property name="ignoreAnnotation" value="true"/>
+        </module>
         <module name="MissingSwitchDefault"/>
         <module name="MultipleVariableDeclarations"/>
         <module name="SimplifyBooleanExpression"/>

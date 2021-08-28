@@ -2,6 +2,10 @@ package com.exposit.controller;
 
 import com.exposit.api.service.IStoreService;
 import com.exposit.domain.dto.StoreDto;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,47 +20,94 @@ import java.util.List;
 @RequestMapping("/store")
 public class StoreController {
 
-    private final static Logger log = LoggerFactory.getLogger(StoreController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StoreController.class);
     private final IStoreService storeService;
     private static final String REQUEST = "receive request: /store/ ";
+    private static final String REQUEST_PARAM = "receive request: /store/{}";
 
+    @ApiOperation(value = "Return store by id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved entity"),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    })
     @GetMapping("/{id}")
-    public ResponseEntity<StoreDto> getById(@PathVariable Long id) {
-        log.info(REQUEST + id);
+    public ResponseEntity<StoreDto> getById(@Valid @Parameter(description = "id of store")
+                                            @PathVariable Long id) {
+        LOG.info(REQUEST_PARAM, id);
         return ResponseEntity.ok().body(storeService.getStoreById(id));
     }
 
+    @ApiOperation(value = "Return all stores")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved list"),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    })
     @GetMapping("/")
     public ResponseEntity<List<StoreDto>> getAll() {
-        log.info(REQUEST);
+        LOG.info(REQUEST);
         return ResponseEntity.ok().body(storeService.getAllStore());
     }
 
+    @ApiOperation(value = "Delete store by id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully deleted entity"),
+            @ApiResponse(code = 401, message = "You are not authorized to delete entity"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to delete is not found")
+    })
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable Long id) {
+    public ResponseEntity<String> deleteById(@Valid @Parameter(description = "id of store")
+                                             @PathVariable Long id) {
         storeService.deleteStore(id);
-        log.info(REQUEST + id);
+        LOG.info(REQUEST_PARAM, id);
         return ResponseEntity.ok().body(String.format("store %s successfully deleted", id));
     }
 
+    @ApiOperation(value = "Create new store")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully completed request"),
+            @ApiResponse(code = 201, message = "Successfully created new entity"),
+            @ApiResponse(code = 401, message = "You are not authorized to create the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to create is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to create is not found")
+    })
     @PostMapping(value = "/")
     public ResponseEntity<String> save(@Valid @RequestBody StoreDto storeDto) {
         storeService.addStore(storeDto);
-        log.info(REQUEST);
+        LOG.info(REQUEST);
         return ResponseEntity.ok().body("new store added");
     }
 
+    @ApiOperation(value = "Update store by id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully updated entity"),
+            @ApiResponse(code = 401, message = "You are not authorized to update the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to update is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to update is not found")
+    })
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> update(@PathVariable Long id, @Valid @RequestBody StoreDto storeDto) {
+    public ResponseEntity<String> update(@Valid @Parameter(description = "id of store") @PathVariable Long id,
+                                         @Valid @RequestBody StoreDto storeDto) {
         storeService.updateStore(id, storeDto);
-        log.info(REQUEST);
+        LOG.info(REQUEST_PARAM, id);
         return ResponseEntity.ok().body(String.format("category %s successfully updated", id));
     }
 
+    @ApiOperation(value = "Save stores to file")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully completed request"),
+            @ApiResponse(code = 401, message = "You are not authorized to save the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to save is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to save is not found")
+    })
     @PostMapping(value = "/save")
     public ResponseEntity<String> saveToFile() {
         storeService.saveStoreToFile();
-        log.info(REQUEST);
+        LOG.info(REQUEST);
         return ResponseEntity.ok().body("stores successfully saved");
     }
 }

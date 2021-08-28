@@ -3,6 +3,7 @@ package com.exposit.dao.config;
 
 import com.exposit.api.dao.*;
 import com.exposit.dao.util.*;
+import com.exposit.utils.exceptions.BeanFactoryException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,37 +22,37 @@ public class ConfigDao {
     private final StoreDaoFactory storeDaoFactory;
 
     @Bean
-    public CategoryDao categoryDao() throws Exception {
+    public CategoryDao categoryDao() throws BeanFactoryException {
         return categoryDaoFactory.getObject();
     }
 
     @Bean
-    public ProductDao productDao() throws Exception {
+    public ProductDao productDao() throws BeanFactoryException {
         return productDaoFactory.getObject();
     }
 
     @Bean
-    public ShopProductDao shopProductDao() throws Exception {
+    public ShopProductDao shopProductDao() throws BeanFactoryException {
         return shopProductDaoFactory.getObject();
     }
 
     @Bean
-    public OrderDao orderDao() throws Exception {
+    public OrderDao orderDao() throws BeanFactoryException {
         return orderDaoFactory.getObject();
     }
 
     @Bean
-    public OrderItemDao orderItemDao() throws Exception {
+    public OrderItemDao orderItemDao() throws BeanFactoryException {
         return orderItemDaoFactory.getObject();
     }
 
     @Bean
-    public StoreDao storeDao() throws Exception {
+    public StoreDao storeDao() throws BeanFactoryException {
         return storeDaoFactory.getObject();
     }
 
     @Bean
-    public CustomerDao customerDao() throws Exception {
+    public CustomerDao customerDao() throws BeanFactoryException {
         return customerDaoFactory.getObject();
     }
 }

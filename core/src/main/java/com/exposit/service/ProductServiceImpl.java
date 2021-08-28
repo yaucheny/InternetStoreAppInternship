@@ -5,6 +5,7 @@ import com.exposit.api.service.ProductService;
 import com.exposit.domain.dto.ProductDto;
 import com.exposit.domain.model.db.ProductDb;
 import com.exposit.utils.exceptions.DaoException;
+import com.exposit.utils.exceptions.NotFoundException;
 import com.exposit.utils.exceptions.ServiceException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -20,7 +21,7 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private final static Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ProductServiceImpl.class);
     private final ModelMapper mapper;
     private final ProductDao productDao;
     private static final String CAN_NOT_DELETE_PRODUCT = "can not delete product";
@@ -30,11 +31,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void addProduct(ProductDto productDto) {
         if (productDto.getId() == null) {
-            ProductDb product = mapper.map(productDto, ProductDb.class);
-            productDao.save(product);
-        } else {
-            log.warn(CAN_NOT_ADD_PRODUCT);
-            throw new DaoException(CAN_NOT_ADD_PRODUCT);
+            try {
+                ProductDb product = mapper.map(productDto, ProductDb.class);
+                productDao.save(product);
+            } catch (Exception e) {
+                LOG.error(CAN_NOT_ADD_PRODUCT);
+                throw new ServiceException(CAN_NOT_ADD_PRODUCT,e);
+            }
         }
     }
 
@@ -43,7 +46,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             productDao.delete(productDao.getById(id));
         } catch (DaoException e) {
-            log.warn(CAN_NOT_DELETE_PRODUCT, e);
+            LOG.error(CAN_NOT_DELETE_PRODUCT);
             throw new ServiceException(CAN_NOT_DELETE_PRODUCT, e);
         }
     }
@@ -51,12 +54,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void updateProduct(Long id, ProductDto productDto) {
         if (productDao.getById(id) != null) {
-            ProductDb product = mapper.map(productDto, ProductDb.class);
-            product.setId(id);
-            productDao.update(id, product);
-        } else {
-            log.warn(CAN_NOT_UPDATE_PRODUCT);
-            throw new ServiceException(CAN_NOT_UPDATE_PRODUCT);
+            try {
+                ProductDb product = mapper.map(productDto, ProductDb.class);
+                product.setId(id);
+                productDao.update(id, product);
+            } catch (NotFoundException e) {
+                LOG.error(CAN_NOT_UPDATE_PRODUCT);
+                throw new ServiceException(CAN_NOT_UPDATE_PRODUCT, e);
+            }
         }
     }
 

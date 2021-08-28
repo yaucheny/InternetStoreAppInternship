@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,11 +19,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/category")
-@Api(value = "Categories of online store", description = "Operations pertaining to category in online store")
+@Api(value = "Categories of online store")
 public class CategoryController {
 
-    private final static Logger log = LoggerFactory.getLogger(CategoryController.class);
-    private static final String REQUEST = "receive request: /category/";
+    private static final Logger LOG = LoggerFactory.getLogger(CategoryController.class);
+    private static final String REQUEST = "receive request: /category/ ";
+    private static final String REQUEST_PARAM = "receive request: /category/{}";
     private final CategoryService categoryService;
 
     @ApiOperation(value = "Return category by id")
@@ -32,9 +34,10 @@ public class CategoryController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-     @GetMapping(value = "/{id}")
-    public ResponseEntity<CategoryDto> getById(@Valid @PathVariable Long id) {
-        log.info(REQUEST + id);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<CategoryDto> getById(@Valid @Parameter(description = "id of category")
+                                               @PathVariable Long id) {
+        LOG.debug(REQUEST_PARAM, id);
         return ResponseEntity.ok().body(categoryService.getCategoryById(id));
     }
 
@@ -47,7 +50,7 @@ public class CategoryController {
     })
     @GetMapping(value = "/")
     public ResponseEntity<List<CategoryDto>> getAll() {
-        log.info(REQUEST);
+        LOG.debug(REQUEST);
         return ResponseEntity.ok().body(categoryService.getAllCategory());
     }
 
@@ -59,9 +62,10 @@ public class CategoryController {
             @ApiResponse(code = 404, message = "The resource you were trying to delete is not found")
     })
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> deleteById(@Valid @PathVariable Long id) {
+    public ResponseEntity<String> deleteById(@Valid @Parameter(description = "id of category")
+                                             @PathVariable Long id) {
         categoryService.deleteCategory(id);
-        log.info(REQUEST + id);
+        LOG.debug(REQUEST_PARAM, id);
         return ResponseEntity.ok().body(String.format("category %s successfully deleted", id));
     }
 
@@ -76,7 +80,7 @@ public class CategoryController {
     @PostMapping(value = "/")
     public ResponseEntity<String> save(@Valid @RequestBody CategoryDto categoryDto) {
         categoryService.addCategory(categoryDto);
-        log.info(REQUEST);
+        LOG.debug(REQUEST);
         return ResponseEntity.ok().body("new category added");
     }
 
@@ -88,24 +92,24 @@ public class CategoryController {
             @ApiResponse(code = 404, message = "The resource you were trying to update is not found")
     })
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> update(@PathVariable Long id, @Valid @RequestBody CategoryDto categoryDto) {
+    public ResponseEntity<String> update(@Valid @Parameter(description = "id of category") @PathVariable Long id,
+                                         @Valid @RequestBody CategoryDto categoryDto) {
         categoryService.updateCategory(id, categoryDto);
-        log.info(REQUEST);
+        LOG.debug(REQUEST_PARAM, id);
         return ResponseEntity.ok().body(String.format("category %s successfully updated", id));
     }
 
     @ApiOperation(value = "Save categories to file")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully completed request"),
-            @ApiResponse(code = 201, message = "Successfully created new entity"),
-            @ApiResponse(code = 401, message = "You are not authorized to create the resource"),
-            @ApiResponse(code = 403, message = "Accessing the resource you were trying to create is forbidden"),
-            @ApiResponse(code = 404, message = "The resource you were trying to create is not found")
+            @ApiResponse(code = 401, message = "You are not authorized to save the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to save is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to save is not found")
     })
     @PostMapping(value = "/save")
     public ResponseEntity<String> saveToFile() {
         categoryService.saveCategoryToFile();
-        log.info(REQUEST);
+        LOG.debug(REQUEST);
         return ResponseEntity.ok().body("categories successfully saved");
     }
 }

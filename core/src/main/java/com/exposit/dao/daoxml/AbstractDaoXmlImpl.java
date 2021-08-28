@@ -2,7 +2,7 @@ package com.exposit.dao.daoxml;
 
 import com.exposit.api.dao.GenericDao;
 import com.exposit.domain.model.db.BaseDb;
-import com.exposit.utils.exceptions.DaoException;
+import com.exposit.utils.exceptions.NotFoundException;
 import com.exposit.utils.marshelling.MarshallingJson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,19 +12,20 @@ import java.util.List;
 
 public abstract class AbstractDaoXmlImpl<T extends BaseDb> implements GenericDao<T> {
 
-    private final static Logger log = LoggerFactory.getLogger(AbstractDaoXmlImpl.class);
-    private static final String GET_BY_ID_ERROR_MESSAGE = "can not find an entity by id: %d";
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractDaoXmlImpl.class);
+    private static final String GET_BY_ID_ERROR_LOG = "can not find an entity by id: {}";
+    private static final String GET_BY_ID_ERROR_EXCEPTION = "can not find an entity by id: %s";
     protected List<T> repository = new ArrayList<>();
 
     @Override
     public T getById(Long id) {
         for (T entity : repository) {
-            if (id.equals(entity.getId())) {
+            if (entity.getId().equals(id)) {
                 return entity;
             }
         }
-        log.warn(String.format(GET_BY_ID_ERROR_MESSAGE, id));
-        throw new DaoException(String.format(GET_BY_ID_ERROR_MESSAGE, id));
+        LOG.error(GET_BY_ID_ERROR_LOG, id);
+        throw new NotFoundException(String.format(GET_BY_ID_ERROR_EXCEPTION, id));
     }
 
     @Override

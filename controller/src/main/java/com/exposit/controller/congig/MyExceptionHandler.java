@@ -1,6 +1,11 @@
 package com.exposit.controller.congig;
 
-import com.exposit.utils.exceptions.*;
+import com.exposit.utils.exceptions.DaoException;
+import com.exposit.utils.exceptions.ServiceException;
+import com.exposit.utils.exceptions.FileNotFoundException;
+import com.exposit.utils.exceptions.NotFoundException;
+import com.exposit.utils.exceptions.ValidationException;
+import com.exposit.utils.exceptions.BeanFactoryException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -19,39 +24,41 @@ import java.util.Map;
 @ControllerAdvice
 public class MyExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private final static Logger log = LoggerFactory.getLogger(MyExceptionHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MyExceptionHandler.class);
+
     @ExceptionHandler(FileNotFoundException.class)
-    protected ResponseEntity<String>
-    handleFileNotFoundException(FileNotFoundException ex) {
-        log.error(ex.getMessage());
+    protected ResponseEntity<String> handleFileNotFoundException(FileNotFoundException ex) {
+        LOG.error(ex.getMessage());
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(NotFoundException.class)
-    protected ResponseEntity<String>
-    handleNotFoundException(NotFoundException ex) {
-        log.error(ex.getMessage());
+    protected ResponseEntity<String> handleNotFoundException(NotFoundException ex) {
+        LOG.error(ex.getMessage());
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(MarshallingException.class)
-    protected ResponseEntity<String>
-    handleNotFoundException(MarshallingException ex) {
-        log.error(ex.getMessage());
+    @ExceptionHandler(ValidationException.class)
+    protected ResponseEntity<String> handleValidationException(ValidationException ex) {
+        LOG.error(ex.getMessage());
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(DaoException.class)
-    protected ResponseEntity<String>
-    handleNotFoundException(DaoException ex) {
-        log.error(ex.getMessage());
+    protected ResponseEntity<String> handleDaoException(DaoException ex) {
+        LOG.error(ex.getMessage());
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(ServiceException.class)
-    protected ResponseEntity<String>
-    handleNotFoundException(ServiceException ex) {
-        log.error(ex.getMessage());
+    protected ResponseEntity<String> handleServiceException(ServiceException ex) {
+        LOG.error(ex.getMessage());
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(BeanFactoryException.class)
+    protected ResponseEntity<String> handleBeanFactoryException(BeanFactoryException ex) {
+        LOG.error(ex.getMessage());
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
@@ -60,7 +67,7 @@ public class MyExceptionHandler extends ResponseEntityExceptionHandler {
             MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         Map<String, String> errors = new HashMap<>();
 
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
+        ex.getBindingResult().getAllErrors().forEach(error -> {
             String fieldName = ((FieldError) error).getField();
             String message = error.getDefaultMessage();
             errors.put(fieldName, message);

@@ -5,6 +5,7 @@ import com.exposit.api.service.IStoreService;
 import com.exposit.domain.dto.StoreDto;
 import com.exposit.domain.model.db.StoreDb;
 import com.exposit.utils.exceptions.DaoException;
+import com.exposit.utils.exceptions.NotFoundException;
 import com.exposit.utils.exceptions.ServiceException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -21,7 +22,7 @@ import java.util.List;
 @Service
 public class StoreServiceImpl implements IStoreService {
 
-    private final static Logger log = LoggerFactory.getLogger(StoreServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StoreServiceImpl.class);
     private final ModelMapper mapper;
     private final StoreDao storeDao;
     private static final String CAN_NOT_DELETE_STORE = "can not delete store";
@@ -31,11 +32,13 @@ public class StoreServiceImpl implements IStoreService {
     @Override
     public void addStore(StoreDto storeDto) {
         if (storeDto.getId() == null) {
-            StoreDb store = mapper.map(storeDto, StoreDb.class);
-            storeDao.save(store);
-        } else {
-            log.warn(CAN_NOT_ADD_STORE);
-            throw new DaoException(CAN_NOT_ADD_STORE);
+            try {
+                StoreDb store = mapper.map(storeDto, StoreDb.class);
+                storeDao.save(store);
+            } catch (Exception e) {
+                LOG.error(CAN_NOT_ADD_STORE);
+                throw new ServiceException(CAN_NOT_ADD_STORE, e);
+            }
         }
     }
 
@@ -44,7 +47,7 @@ public class StoreServiceImpl implements IStoreService {
         try {
             storeDao.delete(storeDao.getById(id));
         } catch (DaoException e) {
-            log.warn(CAN_NOT_DELETE_STORE, e);
+            LOG.error(CAN_NOT_DELETE_STORE);
             throw new ServiceException(CAN_NOT_DELETE_STORE, e);
         }
     }
@@ -52,18 +55,20 @@ public class StoreServiceImpl implements IStoreService {
     @Override
     public void updateStore(Long id, StoreDto storeDto) {
         if (storeDao.getById(id) != null) {
-            StoreDb store = mapper.map(storeDto, StoreDb.class);
-            store.setId(id);
-            storeDao.update(id, store);
-        } else {
-            log.warn(CAN_NOT_UPDATE_STORE);
-            throw new ServiceException(CAN_NOT_UPDATE_STORE);
+            try {
+                StoreDb store = mapper.map(storeDto, StoreDb.class);
+                store.setId(id);
+                storeDao.update(id, store);
+            } catch (NotFoundException e) {
+                LOG.error(CAN_NOT_UPDATE_STORE);
+                throw new ServiceException(CAN_NOT_UPDATE_STORE, e);
+            }
         }
     }
 
     @Override
     public StoreDto getStoreById(Long id) {
-        storeDao.getById(id).getClass();
+        storeDao.getById(id);
         StoreDb storeDbEntity = storeDao.getById(id);
         return mapper.map(storeDbEntity, StoreDto.class);
     }

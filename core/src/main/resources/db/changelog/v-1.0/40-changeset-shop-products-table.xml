@@ -13,10 +13,10 @@
             <column name="description" type="VARCHAR">
                 <constraints nullable="false"/>
             </column>
-            <column name="price" type="BIGINT">
+            <column name="price" type="DOUBLE PRECISION">
                 <constraints  nullable="false"/>
             </column>
-            <column name="quantity" type="BIGINT">
+            <column name="quantity" type="INTEGER">
                 <constraints nullable="false"/>
             </column>
             <column name="store_id" type="BIGINT">

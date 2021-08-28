@@ -1,5 +1,6 @@
 package com.exposit.domain.model;
 
+import com.exposit.domain.model.db.ProductDb;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -7,6 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class PriceQuantityInStore {
 
+    private ProductDb productDb;
     private Double price;
     private Integer quantity;
     private String storeName;
@@ -14,6 +16,7 @@ public class PriceQuantityInStore {
     @Override
     public String toString() {
         return "PriceQuantityInStore{"
+                + "product=" + productDb
                 + "price=" + price
                 + ", quantity=" + quantity
                 + ", storeName='" + storeName + '\''
