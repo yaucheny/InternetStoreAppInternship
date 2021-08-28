@@ -220,16 +220,19 @@ public class ShopProductServiceImpl implements ShopProductService {
     @Async
     @Override
     public void updateShopProductsFromCsv() {
-        List<ShopProductDb> listFromCsv = ParseFromCsv.parseFileFromCsv();
+        List<ShopProductDto> listFromCsv = ParseFromCsv.parseEntityFromCsv();
+        Type listType = new TypeToken<List<ShopProductDb>>() {
+        }.getType();
+        List<ShopProductDb> productDbList = mapper.map(listFromCsv, listType);
         LOG.info("" + Thread.currentThread().getName());
-        for (int i = 0; i < listFromCsv.size(); i++) {
-            Long id = listFromCsv.get(i).getId();
+        for (int i = 0; i < productDbList.size(); i++) {
+            Long id = productDbList.get(i).getId();
             ShopProductDb shopProductDb = shopProductDao.getById(id);
-            shopProductDb.setPrice(listFromCsv.get(i).getPrice());
-            shopProductDb.setDescription(listFromCsv.get(i).getDescription());
+            shopProductDb.setPrice(productDbList.get(i).getPrice());
+            shopProductDb.setDescription(productDbList.get(i).getDescription());
             shopProductDao.update((long) i + 1, shopProductDb);
         }
-        ParseFromCsv.moveToSaveDirChangeName();
+//        ParseFromCsv.moveToSaveDirChangeName();
 
     }
 }

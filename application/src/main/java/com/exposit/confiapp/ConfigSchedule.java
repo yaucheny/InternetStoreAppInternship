@@ -22,10 +22,10 @@ public class ConfigSchedule {
 
     @Scheduled(fixedDelayString = "${searching.file.delay}", initialDelay = 100)
     public void inspectDirectoryScheduling() {
-        LOG.debug(Thread.currentThread().getName());
-        if (ParseFromCsv.moveToParseDir()) {
-            shopProductService.updateShopProductsFromCsv();
-        }
+        LOG.error(Thread.currentThread().getName());
+        ParseFromCsv.moveToParseDir();
+        shopProductService.updateShopProductsFromCsv();
+
 
     }
 }

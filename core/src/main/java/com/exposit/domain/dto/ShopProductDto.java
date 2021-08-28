@@ -25,7 +25,7 @@ public class ShopProductDto {
 
     @Min(value = 0, message = "price should be more then 0")
     @ApiModelProperty(notes = "price of product in shop")
-    private Integer price;
+    private Double price;
 
     @Min(value = 0, message = "quantity should be more than 0")
     @ApiModelProperty(notes = "quantity of product in shop")
