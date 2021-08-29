@@ -64,7 +64,7 @@ public class CacheCsv {
         File file = new File(FILE_CACHE);
         BufferedWriter bf = null;
         try {
-            bf = new BufferedWriter(new FileWriter(file));
+            bf = new BufferedWriter(new FileWriter(file,false));
             for (Map.Entry<String, String> entry : map.entrySet()) {
                 bf.write(entry.getKey() + ":" + entry.getValue());
                 bf.newLine();

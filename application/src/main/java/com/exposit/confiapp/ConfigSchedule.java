@@ -22,6 +22,8 @@ public class ConfigSchedule {
 
     @Scheduled(fixedDelayString = "${searching.file.delay}", initialDelay = 100)
     public void inspectDirectoryScheduling() {
+        ParseFromCsv.inspectSearchDirForErrors();
+        ParseFromCsv.inspectParseDirForErrors();
         LOG.error(Thread.currentThread().getName());
         ParseFromCsv.moveToParseDir();
         shopProductService.updateShopProductsFromCsv();

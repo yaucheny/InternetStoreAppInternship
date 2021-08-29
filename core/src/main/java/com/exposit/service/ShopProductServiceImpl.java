@@ -17,7 +17,6 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
@@ -217,7 +216,7 @@ public class ShopProductServiceImpl implements ShopProductService {
         }
     }
 
-    @Async
+  //  @Async
     @Override
     public void updateShopProductsFromCsv() {
         List<ShopProductDto> listFromCsv = ParseFromCsv.parseEntityFromCsv();
@@ -226,11 +225,14 @@ public class ShopProductServiceImpl implements ShopProductService {
         List<ShopProductDb> productDbList = mapper.map(listFromCsv, listType);
         LOG.info("" + Thread.currentThread().getName());
         for (int i = 0; i < productDbList.size(); i++) {
+            try{
             Long id = productDbList.get(i).getId();
             ShopProductDb shopProductDb = shopProductDao.getById(id);
             shopProductDb.setPrice(productDbList.get(i).getPrice());
             shopProductDb.setDescription(productDbList.get(i).getDescription());
             shopProductDao.update((long) i + 1, shopProductDb);
+        }catch (NotFoundException e){
+            LOG.error("Async");}
         }
 //        ParseFromCsv.moveToSaveDirChangeName();
 
