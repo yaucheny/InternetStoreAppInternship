@@ -3,17 +3,22 @@ package com.exposit.utils.parsecsv;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class CacheCsv {
+public final class CacheCsv {
 
-    private static Map<String, String> cache = new LinkedHashMap<>();
-    private final static String VALUE = "not_parsed";
+    private static final Map<String, String> CACHE = new LinkedHashMap<>();
+    private static final String VALUE = "not_parsed";
     private static final String FILE_CACHE = "application/src/main/resources/csv/cache.txt";
+
+    private CacheCsv() {
+    }
 
     public static void writePathToCache(String path) {
         File file = new File(FILE_CACHE);
@@ -45,7 +50,7 @@ public class CacheCsv {
                 String value = parts[1].trim();
 
                 if (!path.equals("") && !value.equals(""))
-                    cache.put(path, value);
+                    CACHE.put(path, value);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,14 +62,14 @@ public class CacheCsv {
                 }
             }
         }
-        return cache;
+        return CACHE;
     }
 
     public static void writeMapToCache(Map<String, String> map) {
         File file = new File(FILE_CACHE);
         BufferedWriter bf = null;
         try {
-            bf = new BufferedWriter(new FileWriter(file,false));
+            bf = new BufferedWriter(new FileWriter(file, false));
             for (Map.Entry<String, String> entry : map.entrySet()) {
                 bf.write(entry.getKey() + ":" + entry.getValue());
                 bf.newLine();
@@ -78,5 +83,16 @@ public class CacheCsv {
             } catch (Exception e) {
             }
         }
+    }
+
+    public static void clearCasheFile() {
+        PrintWriter writer = null;
+        try {
+            writer = new PrintWriter(FILE_CACHE);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        writer.print("");
+        writer.close();
     }
 }

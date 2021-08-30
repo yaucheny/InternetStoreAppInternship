@@ -1,6 +1,0 @@
-"id","description","price"
-"1","none","275.0"
-"2","available in credit","330.0"
-"3","special price","385.0"
-"4","goods with gift","495.0"
-"5","warranty from producer","1155.0"
