@@ -21,6 +21,7 @@ public final class ParseFromCsv {
     private static final Logger LOG = LoggerFactory.getLogger(ParseFromCsv.class);
     private static final String DIR_SEARCH = "application/src/main/resources/csv/search";
     private static final String DIR_PARSE = "application/src/main/resources/csv/parse";
+    private static final String DIR_PARSE_TEMP = "application/src/main/resources/csv/parse/%d";
 
     private static final String PATTERN = ".*\\.csv";
     private static final String PATTERN_ANY = ".*\\.*";
@@ -31,14 +32,16 @@ public final class ParseFromCsv {
     }
 
     public static void moveSearchToParseDir() {
-        if (!UtilParseCsv.searchAnyTypeFiles(PATTERN, SEARCH_FOLDER).isEmpty()) {
-            List<String> result = UtilParseCsv.searchAnyTypeFiles(PATTERN, SEARCH_FOLDER);
+        List<String> result = UtilParseCsv.searchCsvTypeFiles(PATTERN, SEARCH_FOLDER);
+        if (!result.isEmpty()) {
             for (String path : result) {
                 if (expectedHeaders(path)) {
                     String pathNewNanoFile = UtilParseCsv.renameFileNanoTime(path);
-                    CacheCsv.writePathToCache(path);
+
+                    String pathParse = pathNewNanoFile.replace("search", "parse");
+                    CacheCsv.writePathToCache(pathParse);
                     try {
-                        Files.move(Path.of(path), Path.of(pathNewNanoFile));
+                        Files.move(Path.of(path), Path.of(pathParse));
                     } catch (IOException e) {
                         LOG.error("moveToParseDir");
                     }
@@ -56,7 +59,7 @@ public final class ParseFromCsv {
     }
 
     public static void moveSearchToErrorDir() {
-        List<String> result = UtilParseCsv.searchAnyTypeFiles(PATTERN, SEARCH_FOLDER);
+        List<String> result = UtilParseCsv.searchNotCsvTypeFiles(PATTERN, SEARCH_FOLDER);
         if (!result.isEmpty()) {
             for (String path : result) {
                 LOG.error(Thread.currentThread().getName() + "move to err dir");
@@ -115,10 +118,13 @@ public final class ParseFromCsv {
     }
 
     public static void inspectParseDirForErrors() {
-        if (!UtilParseCsv.searchAnyTypeFiles(PATTERN_ANY, PARSE_FOLDER).isEmpty()) {
+        if (!UtilParseCsv.searchCsvTypeFiles(PATTERN_ANY, PARSE_FOLDER).isEmpty()) {
             for (File fileError : Objects.requireNonNull(PARSE_FOLDER.listFiles())) {
                 String path = fileError.getAbsolutePath();
-                String pathNewNanoFile = UtilParseCsv.renameFileNanoTime(path);
+                long nanoTime = System.nanoTime();
+                String extension = UtilParseCsv.getFileExtension(path);
+                String pathNewNanoFile = String.format(DIR_PARSE_TEMP, nanoTime).concat(extension);
+
                 String pathError = pathNewNanoFile.replace("parse", "error");
                 try {
 

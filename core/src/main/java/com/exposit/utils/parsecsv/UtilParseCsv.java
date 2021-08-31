@@ -14,16 +14,29 @@ import java.util.Objects;
 
 public class UtilParseCsv {
 
-    private static final String DIR_PARSE_TEMP = "application/src/main/resources/csv/parse/%d";
+    private static final String DIR_PARSE_TEMP = "application/src/main/resources/csv/search/%d";
     private static final Logger LOG = LoggerFactory.getLogger(UtilParseCsv.class);
 
-    public static List<String> searchAnyTypeFiles(String pattern, File searchFolder) {
+    public static List<String> searchNotCsvTypeFiles(String pattern, File searchFolder) {
         List<String> result = new ArrayList<>();
         for (File f : Objects.requireNonNull(searchFolder.listFiles())) {
             if (f.isDirectory()) {
-                searchAnyTypeFiles(pattern, f);
+                searchNotCsvTypeFiles(pattern, f);
             }
             if (f.isFile() && !f.getName().matches(pattern)) {
+                result.add(f.getAbsolutePath());
+            }
+        }
+        return result;
+    }
+
+    public static List<String> searchCsvTypeFiles(String pattern, File searchFolder) {
+        List<String> result = new ArrayList<>();
+        for (File f : Objects.requireNonNull(searchFolder.listFiles())) {
+            if (f.isDirectory()) {
+                searchNotCsvTypeFiles(pattern, f);
+            }
+            if (f.isFile() && f.getName().matches(pattern)) {
                 result.add(f.getAbsolutePath());
             }
         }
@@ -36,7 +49,7 @@ public class UtilParseCsv {
         return String.format(DIR_PARSE_TEMP, nanoTime).concat(extension);
     }
 
-    private static String getFileExtension(String path) {
+    public static String getFileExtension(String path) {
         int lastIndexOf = path.lastIndexOf(".");
         if (lastIndexOf == -1) {
             return "";
