@@ -33,7 +33,7 @@ public class ConfigSchedule {
     public void inspectDirectoryScheduling() {
         ParseFromCsv.moveSearchToErrorDir();
         ParseFromCsv.moveSearchToParseDir();
-        LOG.error(Thread.currentThread().getName());
+        LOG.info(Thread.currentThread().getName());
         shopProductService.updateShopProductsFromCsv();
 
 

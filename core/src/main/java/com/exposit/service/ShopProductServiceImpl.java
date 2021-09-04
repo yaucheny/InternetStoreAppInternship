@@ -3,10 +3,12 @@ package com.exposit.service;
 import com.exposit.api.dao.CategoryDao;
 import com.exposit.api.dao.ShopProductDao;
 import com.exposit.api.service.ShopProductService;
+import com.exposit.dao.daorepository.LogInfoDaoRepositoryImpl;
 import com.exposit.domain.dto.PriceQuantityInStoreDto;
 import com.exposit.domain.dto.ShopProductDto;
 import com.exposit.domain.model.PriceQuantityInStore;
 import com.exposit.domain.model.db.CategoryDb;
+import com.exposit.domain.model.db.LogInfoDb;
 import com.exposit.domain.model.db.ShopProductDb;
 import com.exposit.utils.exceptions.DaoException;
 import com.exposit.utils.exceptions.NotFoundException;
@@ -17,11 +19,13 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -32,12 +36,14 @@ public class ShopProductServiceImpl implements ShopProductService {
     private final ModelMapper mapper;
     private final ShopProductDao shopProductDao;
     private final CategoryDao categoryDao;
+    private final LogInfoDaoRepositoryImpl logInfoDao;
     private static final String FALSE_CATEGORY_NAME = "False category name";
     private static final String FALSE_ATTRIBUTE_NAME = "False attribute name";
     private static final String CAN_NOT_DELETE_SHOP_PRODUCT = "can not delete shopProduct";
     private static final String CAN_NOT_UPDATE_SHOP_PRODUCT = "can not update shopProduct";
     private static final String CAN_NOT_ADD_SHOP_PRODUCT = "can not add shopProduct";
     private static final String CAN_NOT_FIND_PRODUCT = "values are equal";
+    private static final String ERROR_IN_STRING = "error reading a string";
     private static final String NAME = "name";
     private static final String PRODUCER = "producer";
     private static final String PRICE = "price";
@@ -216,25 +222,49 @@ public class ShopProductServiceImpl implements ShopProductService {
         }
     }
 
-  //  @Async
+    @Async
     @Override
     public void updateShopProductsFromCsv() {
-        List<ShopProductDto> listFromCsv = ParseFromCsv.parseEntityFromCsv();
-        Type listType = new TypeToken<List<ShopProductDb>>() {
-        }.getType();
-        List<ShopProductDb> productDbList = mapper.map(listFromCsv, listType);
+        long startTime = System.currentTimeMillis();
         LOG.info("" + Thread.currentThread().getName());
-        for (int i = 0; i < productDbList.size(); i++) {
-            try{
-            Long id = productDbList.get(i).getId();
-            ShopProductDb shopProductDb = shopProductDao.getById(id);
-            shopProductDb.setPrice(productDbList.get(i).getPrice());
-            shopProductDb.setDescription(productDbList.get(i).getDescription());
-            shopProductDao.update((long) i + 1, shopProductDb);
-        }catch (NotFoundException e){
-            LOG.error("Async");}
+        Map<List<ShopProductDto>, String> map = ParseFromCsv.parseEntityFromCsv();
+        if (map.size() > 0) {
+            Map.Entry<List<ShopProductDto>, String> entry = map.entrySet().iterator().next();
+            List<ShopProductDto> listFromCsv = entry.getKey();
+            Type listType = new TypeToken<List<ShopProductDb>>() {
+            }.getType();
+            List<ShopProductDb> productDbList = mapper.map(listFromCsv, listType);
+            long j = 0;
+            for (int i = 0; i < productDbList.size(); i++) {
+                try {
+                    if (productDbList.get(i).getId() != null && productDbList.get(i).getId() > 0
+                            && productDbList.get(i).getPrice() != null && productDbList.get(i).getPrice() > 0
+                            && productDbList.get(i).getDescription() != null
+                            && productDbList.get(i).getDescription().length() > 0) {
+                        Long id = productDbList.get(i).getId();
+                        ShopProductDb shopProductDb = shopProductDao.getById(id);
+                        shopProductDb.setPrice(productDbList.get(i).getPrice());
+                        shopProductDb.setDescription(productDbList.get(i).getDescription());
+                        shopProductDao.update((long) i + 1, shopProductDb);
+                        j++;
+                    }
+                } catch (NotFoundException e) {
+                    LOG.error(ERROR_IN_STRING);
+                    throw new ServiceException(ERROR_IN_STRING, e);
+                }
+            }
+            long endTime = System.currentTimeMillis();
+            String path = entry.getValue();
+            LogInfoDb logInfoDb = new LogInfoDb();
+            logInfoDb.setNumberErrors((long) productDbList.size() - j);
+            logInfoDb.setNumberUpdates(j);
+            logInfoDb.setPath(path);
+            logInfoDb.setWorkTime(endTime - startTime);
+            logInfoDao.save(logInfoDb);
+            LOG.info("data successfully updated");
         }
-//        ParseFromCsv.moveToSaveDirChangeName();
-
+        LOG.info("" + Thread.currentThread().getName() + " finish work");
     }
+
+
 }

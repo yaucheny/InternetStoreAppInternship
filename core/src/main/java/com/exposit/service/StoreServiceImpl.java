@@ -1,7 +1,7 @@
 package com.exposit.service;
 
 import com.exposit.api.dao.StoreDao;
-import com.exposit.api.service.IStoreService;
+import com.exposit.api.service.StoreService;
 import com.exposit.domain.dto.StoreDto;
 import com.exposit.domain.model.db.StoreDb;
 import com.exposit.utils.exceptions.DaoException;
@@ -20,7 +20,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class StoreServiceImpl implements IStoreService {
+public class StoreServiceImpl implements StoreService {
 
     private static final Logger LOG = LoggerFactory.getLogger(StoreServiceImpl.class);
     private final ModelMapper mapper;

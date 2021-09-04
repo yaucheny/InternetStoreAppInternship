@@ -1,10 +1,11 @@
 package com.exposit.domain.dto;
 
-import com.exposit.domain.model.entity.OrderStatusEntity;
 import com.exposit.domain.model.db.CustomerDb;
 import com.exposit.domain.model.db.OrderItemDb;
+import com.exposit.domain.model.entity.OrderStatusEntity;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@Builder
 @Schema(description = "entity of order")
 public class OrderDto {
 

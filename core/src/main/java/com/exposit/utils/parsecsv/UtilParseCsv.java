@@ -12,10 +12,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class UtilParseCsv {
+public final class UtilParseCsv {
 
     private static final String DIR_PARSE_TEMP = "application/src/main/resources/csv/search/%d";
     private static final Logger LOG = LoggerFactory.getLogger(UtilParseCsv.class);
+
+    private UtilParseCsv() {
+    }
 
     public static List<String> searchNotCsvTypeFiles(String pattern, File searchFolder) {
         List<String> result = new ArrayList<>();
@@ -65,8 +68,7 @@ public class UtilParseCsv {
             LOG.error(Thread.currentThread().getName());
             return beans;
         } catch (Exception e) {
-            LOG.warn("parce csv", e);
-            e.getLocalizedMessage();
+            LOG.error("can not parse csv file");
         }
         return Collections.emptyList();
     }

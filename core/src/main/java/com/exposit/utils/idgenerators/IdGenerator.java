@@ -18,6 +18,9 @@ public final class IdGenerator {
     @Setter
     private static Long categoryId = 1L;
 
+    @Setter
+    private static Long logInfoId = 1L;
+
 
     private IdGenerator() {
     }
@@ -48,6 +51,10 @@ public final class IdGenerator {
 
     public static Long generateCategoryId() {
         return categoryId++;
+    }
+
+    public static Long generateLogInfoId() {
+        return logInfoId++;
     }
 
 

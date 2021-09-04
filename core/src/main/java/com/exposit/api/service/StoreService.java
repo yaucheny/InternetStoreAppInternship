@@ -4,7 +4,7 @@ import com.exposit.domain.dto.StoreDto;
 
 import java.util.List;
 
-public interface IStoreService {
+public interface StoreService {
 
     void addStore(StoreDto storeDto);
 

@@ -44,6 +44,7 @@ public class ShopProductDaoHiberImpl implements ShopProductDao {
     @Override
     @Transactional
     public List<ShopProductDb> sortByPrice() {
+        LOG.debug("Execution of dao method sortBy price");
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<ShopProductEntity> query = builder.createQuery(ShopProductEntity.class);
         Root<ShopProductEntity> root = query.from(ShopProductEntity.class);

@@ -1,9 +1,9 @@
-package com.exposit.actions.product;
+package com.exposit.actions.shopproduct;
 
 import com.exposit.actions.AbstractAction;
 import com.exposit.actions.IAction;
 
-public class FindProductByOneAttribute extends AbstractAction
+public class FindShopProductByOneAttribute extends AbstractAction
         implements IAction {
 
     @Override

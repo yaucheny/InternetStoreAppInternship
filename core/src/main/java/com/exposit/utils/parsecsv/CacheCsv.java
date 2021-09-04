@@ -1,5 +1,8 @@
 package com.exposit.utils.parsecsv;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,7 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public final class CacheCsv {
-
+    private static final Logger LOG = LoggerFactory.getLogger(CacheCsv.class);
     private static final Map<String, String> CACHE = new LinkedHashMap<>();
     private static final String VALUE = "not_parsed";
     private static final String FILE_CACHE = "application/src/main/resources/csv/cache.txt";
@@ -22,77 +25,52 @@ public final class CacheCsv {
 
     public static void writePathToCache(String path) {
         File file = new File(FILE_CACHE);
-        BufferedWriter bf = null;
-        try {
-            bf = new BufferedWriter(new FileWriter(file, true));
+        try (BufferedWriter bf = new BufferedWriter(new FileWriter(file, true))) {
             bf.write(path + ":" + VALUE);
             bf.newLine();
             bf.flush();
         } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                bf.close();
-            } catch (Exception e) {
-            }
+            LOG.error("can not write path to cache");
         }
     }
 
     public static Map<String, String> getDataFromCache() {
-        BufferedReader br = null;
-        try {
-            File file = new File(FILE_CACHE);
-            br = new BufferedReader(new FileReader(file));
+        File file = new File(FILE_CACHE);
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line = null;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(":");
                 String path = parts[0].trim();
                 String value = parts[1].trim();
-
-                if (!path.equals("") && !value.equals(""))
+                if (!path.equals("") && !value.equals("")) {
                     CACHE.put(path, value);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (Exception e) {
                 }
             }
+        } catch (Exception e) {
+            LOG.error("can not get data from cache cache");
         }
+
         return CACHE;
     }
 
     public static void writeMapToCache(Map<String, String> map) {
         File file = new File(FILE_CACHE);
-        BufferedWriter bf = null;
-        try {
-            bf = new BufferedWriter(new FileWriter(file, false));
+        try (BufferedWriter bf = new BufferedWriter(new FileWriter(file, false))) {
             for (Map.Entry<String, String> entry : map.entrySet()) {
                 bf.write(entry.getKey() + ":" + entry.getValue());
                 bf.newLine();
             }
             bf.flush();
         } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                bf.close();
-            } catch (Exception e) {
-            }
+            LOG.error("can not save data to cache");
         }
     }
 
     public static void clearCasheFile() {
-        PrintWriter writer = null;
-        try {
-            writer = new PrintWriter(FILE_CACHE);
+        try (PrintWriter writer = new PrintWriter(FILE_CACHE)) {
+            writer.print("");
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            LOG.error("can not clean txt cache file");
         }
-        writer.print("");
-        writer.close();
     }
 }

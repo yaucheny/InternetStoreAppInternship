@@ -1,10 +1,12 @@
 package com.exposit.menu;
 
-import java.util.Objects;
+import org.springframework.stereotype.Component;
+
 import java.util.Scanner;
 
+@Component
 public class MenuController {
-    private static MenuController instance;
+
     private Builder builder;
     private Navigator navigator;
 
@@ -13,11 +15,6 @@ public class MenuController {
         builder.buildMenu();
         navigator = Navigator.getInstance();
     }
-
-    public static MenuController getInstance() {
-        return Objects.requireNonNullElse(instance, new MenuController());
-    }
-
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
@@ -28,7 +25,7 @@ public class MenuController {
         while (index > 0) {
 
             index = scanner.nextInt();
-            if (index == 0) {
+            if (index==0) {
                 break;
             }
             navigator.navigate(index);

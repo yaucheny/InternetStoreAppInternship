@@ -1,4 +1,4 @@
-package com.exposit.controller.congig;
+package com.exposit.controller.config;
 
 import com.exposit.utils.exceptions.DaoException;
 import com.exposit.utils.exceptions.ServiceException;

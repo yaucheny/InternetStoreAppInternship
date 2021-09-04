@@ -1,6 +1,7 @@
 package com.exposit.controller;
 
 import com.exposit.api.service.OrderItemService;
+import com.exposit.facade.config.ConfigFacade;
 import com.exposit.domain.dto.OrderItemDto;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -9,6 +10,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/orderItem")
+@ConditionalOnMissingBean(value = ConfigFacade.class)
 public class OrderItemController {
 
     private static final Logger LOG = LoggerFactory.getLogger(OrderItemController.class);

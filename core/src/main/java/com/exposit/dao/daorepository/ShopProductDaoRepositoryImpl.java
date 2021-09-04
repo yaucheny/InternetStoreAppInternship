@@ -40,6 +40,7 @@ public class ShopProductDaoRepositoryImpl implements ShopProductDao {
     @Override
     @Transactional
     public List<ShopProductDb> sortByPrice() {
+        LOG.debug("Execution of dao method sortBy price");
         List<ShopProductEntity> categoryEntityList = shopProductRepository.findAll(Sort.by("price"));
         Type listType = new TypeToken<List<ShopProductDb>>() {
         }.getType();

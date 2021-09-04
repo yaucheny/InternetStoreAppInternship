@@ -13,27 +13,18 @@ public class LogBeforeAspect {
 
     private static final Logger LOG = LoggerFactory.getLogger(LogBeforeAspect.class);
 
-    @Before("execution(public * com.exposit.dao.daojson.*.*(..)) "
-            + "|| execution(public * com.exposit.dao.daoxml.*.*(..))"
-            + "|| execution(public * com.exposit.dao.daohibernate.*.*(..))"
-            + "|| execution(public * com.exposit.dao.daorepository.*.*(..))")
-
-    public void logBeforeDaoMethod(JoinPoint joinPoint) {
-        LOG.error("execution of dao method {}", joinPoint.getSignature().getName());
-    }
-
     @Before("execution(public * com.exposit.service.*.*(..))")
     public void logBeforeServiceMethod(JoinPoint joinPoint) {
-        LOG.error("execution of service method {}", joinPoint.getSignature().getName());
+        LOG.debug("execution of service method {}", joinPoint.getSignature().getName());
     }
 
     @Before("execution(public * com.exposit.controller.*.*(..))")
     public void logBeforeControllerMethod(JoinPoint joinPoint) {
-        LOG.error("execution of controller method {}", joinPoint.getSignature().getName());
+        LOG.debug("execution of controller method {}", joinPoint.getSignature().getName());
     }
 
     @Before("execution(public * com.exposit.actions.*.*(..))")
     public void logBeforeFacadeMethod(JoinPoint joinPoint) {
-        LOG.error("execution of facade method {}", joinPoint.getSignature().getName());
+        LOG.debug("execution of facade method {}", joinPoint.getSignature().getName());
     }
 }

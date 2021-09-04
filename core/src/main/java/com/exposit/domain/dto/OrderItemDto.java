@@ -3,6 +3,7 @@ package com.exposit.domain.dto;
 import com.exposit.domain.model.db.ShopProductDb;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import javax.validation.constraints.Min;
 
 @Getter
 @Setter
+@Builder
 @Schema(description = "entity of orderItem")
 public class OrderItemDto {
 

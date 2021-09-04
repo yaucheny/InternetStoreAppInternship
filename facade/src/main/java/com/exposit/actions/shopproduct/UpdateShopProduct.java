@@ -1,9 +1,9 @@
-package com.exposit.actions.product;
+package com.exposit.actions.shopproduct;
 
 import com.exposit.actions.AbstractAction;
 import com.exposit.actions.IAction;
 
-public class UpdateProduct extends AbstractAction implements IAction {
+public class UpdateShopProduct extends AbstractAction implements IAction {
 //    private static final StoreService storeService
 //    = StoreServiceImpl.getInstance();
 

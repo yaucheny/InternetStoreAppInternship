@@ -24,6 +24,7 @@ public final class MarshallingXml {
     }
 
     public static <T> void serializeJsonEntity(List<T> entities) {
+        LOG.debug("execution serialization method");
         if (!entities.isEmpty()) {
             String path = PATH + entities.get(0).getClass().getSimpleName() + ".xml";
             File file = new File(path);
@@ -34,12 +35,13 @@ public final class MarshallingXml {
                     MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(entities);
                 }
             } catch (IOException e) {
-                LOG.error(FILE_NOT_FOUND_LOG, path, e.getStackTrace());
+                LOG.error(FILE_NOT_FOUND_LOG, path, e.getLocalizedMessage());
             }
         }
     }
 
     public static <T> List<T> deserializeXmlEntity(Class<T> classOnWhichArrayIsDefined) {
+        LOG.debug("execution deserialization method");
         String json;
         String path = PATH + classOnWhichArrayIsDefined.getSimpleName() + ".xml";
         File file = new File(path);
@@ -53,7 +55,7 @@ public final class MarshallingXml {
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
-            LOG.error(FILE_NOT_FOUND_LOG, path, e.getStackTrace());
+            LOG.error(FILE_NOT_FOUND_LOG, path, e.getLocalizedMessage());
         }
         return Collections.emptyList();
     }
