@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>fasade</artifactId>
+    <artifactId>facade</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>facade</name>
     <description>Intern project in Spring Boot</description>

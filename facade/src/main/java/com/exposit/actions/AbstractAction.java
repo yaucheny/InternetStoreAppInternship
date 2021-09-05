@@ -1,13 +1,13 @@
 package com.exposit.actions;
 
-import com.exposit.menu.Fasade;
+import com.exposit.menu.Facade;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class AbstractAction {
 
-    protected Fasade fasade = new Fasade();
+    protected Facade facade = new Facade();
     protected BufferedReader reader = new BufferedReader(
             new InputStreamReader(System.in));
 

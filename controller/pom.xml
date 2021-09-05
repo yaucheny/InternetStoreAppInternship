@@ -23,7 +23,7 @@
         <version>1.0-SNAPSHOT</version>
     </dependency>
      <dependency>
-         <artifactId>fasade</artifactId>
+         <artifactId>facade</artifactId>
          <groupId>com.example</groupId>
          <version>1.0-SNAPSHOT</version>
      </dependency>
