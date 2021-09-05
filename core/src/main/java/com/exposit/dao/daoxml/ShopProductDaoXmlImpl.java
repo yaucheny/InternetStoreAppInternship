@@ -10,7 +10,13 @@ import org.slf4j.LoggerFactory;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * Implementation of {@link ShopProductDao} interface.
+ * Implementation works with Jackson API and xml format files
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductDb> implements ShopProductDao {
 
     private static final Logger LOG = LoggerFactory.getLogger(ShopProductDaoXmlImpl.class);

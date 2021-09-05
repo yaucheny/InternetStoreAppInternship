@@ -18,6 +18,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Collections;
 
+/**
+ * Class to configure swagger parameters.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
@@ -31,8 +37,8 @@ public class SwaggerConfig {
                 .build()
                 .securityContexts(Collections.singletonList(securityContext()))
                 .securitySchemes(Collections.singletonList(basicAuthScheme()))
-      .apiInfo(apiInfo());
-}
+                .apiInfo(apiInfo());
+    }
 
     private ApiInfo apiInfo() {
         return new ApiInfo(

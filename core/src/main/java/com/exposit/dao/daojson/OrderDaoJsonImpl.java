@@ -6,7 +6,13 @@ import com.exposit.utils.idgenerators.IdGenerator;
 import com.exposit.utils.marshelling.MarshallingJson;
 
 import java.util.List;
-
+/**
+ * Implementation of {@link OrderDao} interface.
+ * Implementation works with Jackson API and json format files
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 public class OrderDaoJsonImpl extends AbstractDaoJsonImpl<OrderDb> implements OrderDao {
 
     public OrderDaoJsonImpl() {

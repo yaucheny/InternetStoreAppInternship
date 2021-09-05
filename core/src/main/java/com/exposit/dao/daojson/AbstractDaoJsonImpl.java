@@ -9,7 +9,13 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Implementation of {@link GenericDao} interface.
+ * Implementation works with Jackson API and xml format files
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 public abstract class AbstractDaoJsonImpl<T extends BaseDb> implements GenericDao<T> {
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractDaoJsonImpl.class);

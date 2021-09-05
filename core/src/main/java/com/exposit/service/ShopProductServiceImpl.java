@@ -27,7 +27,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
+/**
+ * Implementation of {@link ShopProductService} interface.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @RequiredArgsConstructor
 @Service
 public class ShopProductServiceImpl implements ShopProductService {

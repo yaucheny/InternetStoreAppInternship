@@ -20,7 +20,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.lang.reflect.Type;
 import java.util.List;
-
+/**
+ * Implementation of {@link ShopProductDao} interface.
+ * Implementation works with Hibernate framework and postgres database
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 public class ShopProductDaoHiberImpl implements ShopProductDao {
 
     private static final Logger LOG = LoggerFactory.getLogger(ShopProductDaoHiberImpl.class);

@@ -15,7 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Type;
 import java.util.List;
-
+/**
+ * Implementation of {@link OrderDao} interface.
+ * Implementation works with spring data JPA and postgres database
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 public class OrderDaoRepositoryImpl implements OrderDao {
 
     private static final Logger LOG = LoggerFactory.getLogger(OrderDaoRepositoryImpl.class);

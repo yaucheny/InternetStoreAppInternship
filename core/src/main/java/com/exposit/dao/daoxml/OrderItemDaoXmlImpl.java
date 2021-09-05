@@ -6,7 +6,13 @@ import com.exposit.utils.idgenerators.IdGenerator;
 import com.exposit.utils.marshelling.MarshallingXml;
 
 import java.util.List;
-
+/**
+ * Implementation of {@link OrderItemDao} interface.
+ * Implementation works with Jackson API and xml format files
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 public class OrderItemDaoXmlImpl extends AbstractDaoXmlImpl<OrderItemDb> implements OrderItemDao {
 
     public OrderItemDaoXmlImpl() {

@@ -21,6 +21,13 @@ import javax.persistence.criteria.Root;
 import java.lang.reflect.Type;
 import java.util.List;
 
+/**
+ * Implementation of {@link CategoryDao} interface.
+ * Implementation works with Hibernate framework and postgres database
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 public class CategoryDaoHiberImpl implements CategoryDao {
 
     private static final Logger LOG = LoggerFactory.getLogger(CategoryDaoHiberImpl.class);

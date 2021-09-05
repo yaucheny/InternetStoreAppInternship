@@ -6,7 +6,13 @@ import com.exposit.utils.idgenerators.IdGenerator;
 import com.exposit.utils.marshelling.MarshallingXml;
 
 import java.util.List;
-
+/**
+ * Implementation of {@link StoreDao} interface.
+ * Implementation works with Jackson API and xml format files
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 public class StoreDaoXmlImpl extends AbstractDaoXmlImpl<StoreDb> implements StoreDao {
 
     public StoreDaoXmlImpl() {

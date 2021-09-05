@@ -16,7 +16,12 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.List;
-
+/**
+ * Implementation of {@link ProductService} interface.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @RequiredArgsConstructor
 @Service
 public class ProductServiceImpl implements ProductService {

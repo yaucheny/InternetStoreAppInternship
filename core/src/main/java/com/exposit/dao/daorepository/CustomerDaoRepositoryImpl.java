@@ -15,7 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Type;
 import java.util.List;
-
+/**
+ * Implementation of {@link CustomerDao} interface.
+ * Implementation works with spring data JPA and postgres database
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 public class CustomerDaoRepositoryImpl implements CustomerDao {
 
     private static final Logger LOG = LoggerFactory.getLogger(CustomerDaoRepositoryImpl.class);

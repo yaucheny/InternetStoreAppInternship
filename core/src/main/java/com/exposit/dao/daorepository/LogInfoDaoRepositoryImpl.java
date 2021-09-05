@@ -10,7 +10,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
+/**
+ * Implementation of {@link LogInfoDao} interface.
+ * Implementation works with spring data JPA and postgres database
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @RequiredArgsConstructor
 @Repository
 public class LogInfoDaoRepositoryImpl implements LogInfoDao {

@@ -13,7 +13,15 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.annotation.PostConstruct;
 
-
+/**
+ * Class to configure scheduler in spring boot.
+ * Scheduling can be switch off @see #field scheduling.enabled in application.properties.
+ * Scheduling can be configured with property  fixedDelayString @see #field searching.file.delay
+ * in application.properties.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @Configuration
 @EnableScheduling
 @RequiredArgsConstructor

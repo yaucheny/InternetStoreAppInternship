@@ -7,6 +7,12 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Executor;
 
+/**
+ * Class to configure Async in spring boot.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @Configuration
 @EnableAsync
 public class AsyncConfig {

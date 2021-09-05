@@ -4,7 +4,12 @@ import com.exposit.domain.dto.PriceQuantityInStoreDto;
 import com.exposit.domain.dto.ShopProductDto;
 
 import java.util.List;
-
+/**
+ * Service interface for{@link com/exposit/domain/model/db/ShopProductDb.java}.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 public interface ShopProductService {
 
     void addShopProduct(ShopProductDto shopProductDto);
