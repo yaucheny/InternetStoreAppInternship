@@ -37,6 +37,10 @@ public class CategoryDaoHiberImpl implements CategoryDao {
     public void save(CategoryDb categoryDb) {
         if (categoryDb.getId() == null) {
             CategoryEntity categoryEntity = mapper.map(categoryDb, CategoryEntity.class);
+            if (categoryDb.getParentId() != null) {
+                CategoryEntity parent = this.entityManager.find(CategoryEntity.class, categoryDb.getParentId());
+                categoryEntity.setParent(parent);
+            }
             this.entityManager.persist(categoryEntity);
         }
     }

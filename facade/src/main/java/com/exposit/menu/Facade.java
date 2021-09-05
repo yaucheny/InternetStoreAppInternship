@@ -15,22 +15,34 @@ import com.exposit.domain.dto.PriceQuantityInStoreDto;
 import com.exposit.domain.dto.ProductDto;
 import com.exposit.domain.dto.ShopProductDto;
 import com.exposit.domain.dto.StoreDto;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
+@Component
 public class Facade {
 
-    @Autowired
+    private final StoreService storeService;
+    private final CategoryService categoryService;
+    private final CustomerService customerService;
+    private final ProductService productService;
+    private final ShopProductService shopProductService;
+    private final OrderService orderService;
 
-    private StoreService storeService;
-    private CategoryService categoryService;
-    private CustomerService customerService;
-    private ProductService productService;
-    private ShopProductService shopProductService;
-    private OrderService orderService;
-    private OrderItemService orderItemService;
+    public Facade(StoreService storeService, CategoryService categoryService, CustomerService customerService,
+                  ProductService productService, ShopProductService shopProductService, OrderService orderService,
+                   OrderItemService orderItemService) {
+        this.storeService = storeService;
+        this.categoryService = categoryService;
+        this.customerService = customerService;
+        this.productService = productService;
+        this.shopProductService = shopProductService;
+        this.orderService = orderService;
+
+        this.orderItemService = orderItemService;
+    }
+
+    private final OrderItemService orderItemService;
 
     public void addStore(StoreDto storeDto) {
         storeService.addStore(storeDto);
@@ -222,40 +234,6 @@ public class Facade {
         orderItemService.saveOrderItemToFile();
     }
 
-    @Autowired
-    public void setStoreService(StoreService storeService) {
-        this.storeService = storeService;
-    }
-
-    @Autowired
-    public void setCategoryService(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
-
-    @Autowired
-    public void setCustomerService(CustomerService customerService) {
-        this.customerService = customerService;
-    }
-
-    @Autowired
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
-    }
-
-    @Autowired
-    public void setShopProductService(ShopProductService shopProductService) {
-        this.shopProductService = shopProductService;
-    }
-
-    @Autowired
-    public void setOrderService(OrderService orderService) {
-        this.orderService = orderService;
-    }
-
-    @Autowired
-    public void setOrderItemService(OrderItemService orderItemService) {
-        this.orderItemService = orderItemService;
-    }
 }
 
 

@@ -5,9 +5,9 @@ import com.exposit.domain.model.db.OrderItemDb;
 import com.exposit.domain.model.entity.OrderStatusEntity;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.validation.constraints.Min;
 import java.time.LocalDate;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@Builder
+@ToString
 @Schema(description = "entity of order")
 public class OrderDto {
 

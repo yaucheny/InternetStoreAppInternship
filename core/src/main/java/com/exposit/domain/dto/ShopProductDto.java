@@ -4,9 +4,9 @@ import com.exposit.domain.model.db.ProductDb;
 import com.exposit.domain.model.db.StoreDb;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
-@Builder
+@ToString
 @Schema(description = "entity of shopProduct")
 public class ShopProductDto {
 

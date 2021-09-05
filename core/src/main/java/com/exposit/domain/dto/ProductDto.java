@@ -3,9 +3,9 @@ package com.exposit.domain.dto;
 import com.exposit.domain.model.db.CategoryDb;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@Builder
+@ToString
 @Schema(description = "entity of product")
 public class ProductDto {
 

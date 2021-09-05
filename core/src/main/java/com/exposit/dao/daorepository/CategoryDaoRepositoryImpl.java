@@ -32,6 +32,9 @@ public class CategoryDaoRepositoryImpl implements CategoryDao {
     public void save(CategoryDb categoryDb) {
         if (categoryDb.getId() == null) {
             CategoryEntity categoryEntity = mapper.map(categoryDb, CategoryEntity.class);
+            if (categoryDb.getParentId() != null) {
+                categoryEntity.setParent(categoryRepository.getById(categoryDb.getParentId()));
+            }
             categoryRepository.save(categoryEntity);
         }
     }

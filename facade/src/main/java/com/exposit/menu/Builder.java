@@ -38,6 +38,7 @@ import com.exposit.actions.shopproduct.GetAllShopProduct;
 import com.exposit.actions.shopproduct.GetByIdShopProduct;
 import com.exposit.actions.shopproduct.GetShopProductFromCategory;
 import com.exposit.actions.shopproduct.InfoAboutPriceQuantityInStore;
+import com.exposit.actions.shopproduct.SaveToFileShopProduct;
 import com.exposit.actions.shopproduct.SortShopProductByPrice;
 import com.exposit.actions.shopproduct.UpdateShopProduct;
 import com.exposit.actions.store.AddStore;
@@ -46,21 +47,72 @@ import com.exposit.actions.store.GetAllStore;
 import com.exposit.actions.store.GetByIdStore;
 import com.exposit.actions.store.SaveToFileStore;
 import com.exposit.actions.store.UpdateStore;
-
-import java.util.Objects;
-
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+@Component
+@RequiredArgsConstructor
 public class Builder {
-    private static Builder instance;
+
     private Menu rootMenu;
+    private final AddCategory addCategory;
+    private final DeleteCategory deleteCategory;
+    private final UpdateCategory updateCategory;
+    private final GetByIdCategory getByIdCategory;
+    private final GetAllCategory getAllCategory;
+    private final SaveToFileCategory saveToFileCategory;
 
-    private Builder() {
 
-    }
+    private final AddCustomer addCustomer;
+    private final DeleteCustomer deleteCustomer;
+    private final UpdateCustomer updateCustomer;
+    private final GetByIdCustomer getByIdCustomer;
+    private final GetAllCustomer getAllCustomer;
+    private final SaveToFileCustomer saveToFileCustomer;
 
-    public static Builder getInstance() {
-        instance = Objects.requireNonNullElse(instance, new Builder());
-        return instance;
-    }
+
+    private final AddOrder addOrder;
+    private final DeleteOrder deleteOrder;
+    private final UpdateOrder updateOrder;
+    private final GetByIdOrder getByIdOrder;
+    private final GetAllOrder getAllOrder;
+    private final SaveToFileOrder saveToFileOrder;
+
+
+    private final AddOrderItem addOrderItem;
+    private final DeleteOrderItem deleteOrderItem;
+    private final UpdateOrderItem updateOrderItem;
+    private final GetByIdOrderItem getByIdOrderItem;
+    private final GetAllOrderItem getAllOrderItem;
+    private final SaveToFileOrderItem saveToFileOrderItem;
+
+
+    private final AddProduct addProduct;
+    private final DeleteProduct deleteProduct;
+    private final UpdateProduct updateProduct;
+    private final GetByIdProduct getByIdProduct;
+    private final GetAllProduct getAllProduct;
+    private final FindShopProductByOneAttribute findShopProductByOneAttribute;
+    private final FindShopProductByTwoAttribute findShopProductByTwoAttribute;
+    private final GetShopProductFromCategory getShopProductFromCategory;
+    private final InfoAboutPriceQuantityInStore infoAboutPriceQuantityInStore;
+    private final SortShopProductByPrice sortShopProductByPrice;
+    private final SaveToFileProduct saveToFileProduct;
+
+
+    private final AddShopProduct addShopProduct;
+    private final DeleteShopProduct deleteShopProduct;
+    private final UpdateShopProduct updateShopProduct;
+    private final GetByIdShopProduct getByIdShopProduct;
+    private final GetAllShopProduct getAllShopProduct;
+    private final SaveToFileShopProduct saveToFileShopProduct;
+
+
+    private final AddStore addStore;
+    private final DeleteStore deleteStore;
+    private final UpdateStore updateStore;
+    private final GetByIdStore getByIdStore;
+    private final GetAllStore getAllStore;
+    private final SaveToFileStore saveToFileStore;
 
     public Menu getRootMenu() {
         return rootMenu;
@@ -91,17 +143,17 @@ public class Builder {
         storeMenu.addMenuItem(new MenuItem("Exit",
                 () -> System.out.println(""), null));
         storeMenu.addMenuItem(new MenuItem("Add new store",
-                new AddStore(), rootMenu));
+                addStore, rootMenu));
         storeMenu.addMenuItem(new MenuItem("Update store",
-                new UpdateStore(), rootMenu));
+                updateStore, rootMenu));
         storeMenu.addMenuItem(new MenuItem("Delete store",
-                new DeleteStore(), rootMenu));
+                deleteStore, rootMenu));
         storeMenu.addMenuItem(new MenuItem("Get by id store",
-                new GetByIdStore(), rootMenu));
+               getByIdStore, rootMenu));
         storeMenu.addMenuItem(new MenuItem("Get all stores",
-                new GetAllStore(), rootMenu));
+               getAllStore, rootMenu));
         storeMenu.addMenuItem(new MenuItem("Save stores to file",
-                new SaveToFileStore(), rootMenu));
+                saveToFileStore, rootMenu));
         return storeMenu;
     }
 
@@ -110,17 +162,17 @@ public class Builder {
         customerMenu.addMenuItem(new MenuItem("Exit",
                 () -> System.out.println(""), null));
         customerMenu.addMenuItem(new MenuItem("Add customer",
-                new AddCustomer(), rootMenu));
+               addCustomer, rootMenu));
         customerMenu.addMenuItem(new MenuItem("Update customer",
-                new UpdateCustomer(), rootMenu));
+                updateCustomer, rootMenu));
         customerMenu.addMenuItem(new MenuItem("Delete customer",
-                new DeleteCustomer(), rootMenu));
+                deleteCustomer, rootMenu));
         customerMenu.addMenuItem(new MenuItem("GetById customer",
-                new GetByIdCustomer(), rootMenu));
+                getByIdCustomer, rootMenu));
         customerMenu.addMenuItem(new MenuItem("Get All customer",
-                new GetAllCustomer(), rootMenu));
+                getAllCustomer, rootMenu));
         customerMenu.addMenuItem(new MenuItem("Save customer to file",
-                new SaveToFileCustomer(), rootMenu));
+                saveToFileCustomer, rootMenu));
         return customerMenu;
     }
 
@@ -129,17 +181,17 @@ public class Builder {
         categoryMenu.addMenuItem(new MenuItem("Exit",
                 () -> System.out.println(""), null));
         categoryMenu.addMenuItem(new MenuItem("Add category",
-                new AddCategory(), rootMenu));
+                addCategory, rootMenu));
         categoryMenu.addMenuItem(new MenuItem("Update category",
-                new UpdateCategory(), rootMenu));
+                updateCategory, rootMenu));
         categoryMenu.addMenuItem(new MenuItem("Delete category",
-                new DeleteCategory(), rootMenu));
+                deleteCategory, rootMenu));
         categoryMenu.addMenuItem(new MenuItem("GetById category",
-                new GetByIdCategory(), rootMenu));
+                getByIdCategory, rootMenu));
         categoryMenu.addMenuItem(new MenuItem("Get All category",
-                new GetAllCategory(), rootMenu));
+                getAllCategory, rootMenu));
         categoryMenu.addMenuItem(new MenuItem("Save category to file",
-                new SaveToFileCategory(), rootMenu));
+                saveToFileCategory, rootMenu));
         return categoryMenu;
     }
 
@@ -148,17 +200,17 @@ public class Builder {
         orderMenu.addMenuItem(new MenuItem("Exit",
                 () -> System.out.println(""), null));
         orderMenu.addMenuItem(new MenuItem("Add order",
-                new AddOrder(), rootMenu));
+                addOrder, rootMenu));
         orderMenu.addMenuItem(new MenuItem("Delete order",
-                new DeleteOrder(), rootMenu));
+                deleteOrder, rootMenu));
         orderMenu.addMenuItem(new MenuItem("Update order",
-                new UpdateOrder(), rootMenu));
+                updateOrder, rootMenu));
         orderMenu.addMenuItem(new MenuItem("Get by id order",
-                new GetByIdOrder(), rootMenu));
+                getByIdOrder, rootMenu));
         orderMenu.addMenuItem(new MenuItem("get all order",
-                new GetAllOrder(), rootMenu));
+                getAllOrder, rootMenu));
         orderMenu.addMenuItem(new MenuItem("Save stores to order",
-                new SaveToFileOrder(), rootMenu));
+                saveToFileOrder, rootMenu));
         return orderMenu;
     }
 
@@ -167,17 +219,17 @@ public class Builder {
         productMenu.addMenuItem(new MenuItem("Exit",
                 () -> System.out.println(""), null));
         productMenu.addMenuItem(new MenuItem("Add product",
-                new AddProduct(), rootMenu));
+               addProduct, rootMenu));
         productMenu.addMenuItem(new MenuItem("Delete product",
-                new DeleteProduct(), rootMenu));
+                deleteProduct, rootMenu));
         productMenu.addMenuItem(new MenuItem("Update product",
-                new UpdateProduct(), rootMenu));
+                updateProduct, rootMenu));
         productMenu.addMenuItem(new MenuItem("Get by id product",
-                new GetByIdProduct(), rootMenu));
+                getByIdProduct, rootMenu));
         productMenu.addMenuItem(new MenuItem("get all product",
-                new GetAllProduct(), rootMenu));
+                getAllProduct, rootMenu));
         productMenu.addMenuItem(new MenuItem("Save products to file",
-                new SaveToFileProduct(), rootMenu));
+                saveToFileProduct, rootMenu));
         return productMenu;
     }
 
@@ -186,17 +238,17 @@ public class Builder {
         orderItemMenu.addMenuItem(new MenuItem("Exit",
                 () -> System.out.println(""), null));
         orderItemMenu.addMenuItem(new MenuItem("Add orderItem",
-                new AddOrderItem(), rootMenu));
+                addOrderItem, rootMenu));
         orderItemMenu.addMenuItem(new MenuItem("Delete orderItem",
-                new DeleteOrderItem(), rootMenu));
+                deleteOrderItem, rootMenu));
         orderItemMenu.addMenuItem(new MenuItem("Update orderItem",
-                new UpdateOrderItem(), rootMenu));
+                updateOrderItem, rootMenu));
         orderItemMenu.addMenuItem(new MenuItem("Get by id orderItem",
-                new GetByIdOrderItem(), rootMenu));
+                getByIdOrderItem, rootMenu));
         orderItemMenu.addMenuItem(new MenuItem("get all orderItem",
-                new GetAllOrderItem(), rootMenu));
+                getAllOrderItem, rootMenu));
         orderItemMenu.addMenuItem(new MenuItem("Save orderItem to file",
-                new SaveToFileOrderItem(), rootMenu));
+                saveToFileOrderItem, rootMenu));
         return orderItemMenu;
     }
 
@@ -205,28 +257,28 @@ public class Builder {
         shopProductMenu.addMenuItem(new MenuItem("Exit",
                 () -> System.out.println(""), null));
         shopProductMenu.addMenuItem(new MenuItem("Add shopProduct",
-                new AddShopProduct(), rootMenu));
+                addShopProduct, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem("Delete shopProduct",
-                new DeleteShopProduct(), rootMenu));
+               deleteShopProduct, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem("Update shopProduct",
-                new UpdateShopProduct(), rootMenu));
+                updateShopProduct, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem("Get by id shopProduct",
-                new GetByIdShopProduct(), rootMenu));
+                getByIdShopProduct, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem("Get all shopProducts",
-                new GetAllShopProduct(), rootMenu));
+                getAllShopProduct, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem("Sort all products by shopPrice",
-                new SortShopProductByPrice(), rootMenu));
+                sortShopProductByPrice, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem("Find shopProduct by one attribute",
-                new FindShopProductByOneAttribute(), rootMenu));
+                findShopProductByOneAttribute, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem("Find shopProduct by two attributes",
-                new FindShopProductByTwoAttribute(), rootMenu));
+                findShopProductByTwoAttribute, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem("Get shopProduct from category",
-                new GetShopProductFromCategory(), rootMenu));
+                getShopProductFromCategory, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem(
                 "Get info about product's price and quantity in store",
-                new InfoAboutPriceQuantityInStore(), rootMenu));
+                infoAboutPriceQuantityInStore, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem("Save shopProducts to file",
-                new GetAllStore(), rootMenu));
+                saveToFileShopProduct, rootMenu));
         return shopProductMenu;
     }
 }

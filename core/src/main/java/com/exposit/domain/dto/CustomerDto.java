@@ -2,9 +2,9 @@ package com.exposit.domain.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
-@Builder
+@ToString
 @Schema(description = "entity of customer")
 public class CustomerDto {
 

@@ -7,12 +7,12 @@ import java.util.Scanner;
 @Component
 public class MenuController {
 
-    private Builder builder;
+    private final Builder builder;
     private Navigator navigator;
 
-    private MenuController() {
-        builder = Builder.getInstance();
-        builder.buildMenu();
+    private MenuController(Builder builder) {
+        this.builder = builder;
+        this.builder.buildMenu();
         navigator = Navigator.getInstance();
     }
 
@@ -21,7 +21,7 @@ public class MenuController {
 
         navigator.setCurrentMenu(builder.getRootMenu());
         navigator.printMenu();
-        Integer index = 1;
+        int index = 1;
         while (index > 0) {
 
             index = scanner.nextInt();
