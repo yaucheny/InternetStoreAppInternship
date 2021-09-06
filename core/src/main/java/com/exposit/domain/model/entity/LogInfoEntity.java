@@ -6,7 +6,14 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
+/**
+ * Simple JavaBean object that represents a LogInfo entity. This additional object is created
+ * to work with hibernate and spring data JPA. This object is mapped from LogInfodb object
+ * {@link com.exposit.domain.model.db.LogInfoDb} in dao layer.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @Data
 @Entity
 @Table(name = "logs")

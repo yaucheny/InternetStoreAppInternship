@@ -10,7 +10,12 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
+/**
+ * Dto object that represents a Store.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @Getter
 @Setter
 @ToString

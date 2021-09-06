@@ -15,10 +15,19 @@ import com.exposit.domain.dto.PriceQuantityInStoreDto;
 import com.exposit.domain.dto.ProductDto;
 import com.exposit.domain.dto.ShopProductDto;
 import com.exposit.domain.dto.StoreDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Class implements pattern facade, it connect every method of service layer to the
+ * menu position .
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
+@RequiredArgsConstructor
 @Component
 public class Facade {
 
@@ -28,19 +37,6 @@ public class Facade {
     private final ProductService productService;
     private final ShopProductService shopProductService;
     private final OrderService orderService;
-
-    public Facade(StoreService storeService, CategoryService categoryService, CustomerService customerService,
-                  ProductService productService, ShopProductService shopProductService, OrderService orderService,
-                   OrderItemService orderItemService) {
-        this.storeService = storeService;
-        this.categoryService = categoryService;
-        this.customerService = customerService;
-        this.productService = productService;
-        this.shopProductService = shopProductService;
-        this.orderService = orderService;
-
-        this.orderItemService = orderItemService;
-    }
 
     private final OrderItemService orderItemService;
 

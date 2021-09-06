@@ -16,7 +16,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-
+/**
+ * Controller for {@link com.exposit.domain.model.db.OrderDb}'s pages.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/order")

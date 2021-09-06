@@ -13,6 +13,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Class is responsible for marshalling and unmarshalling objects in json format.
+ * Marshalling and Unmarshalling is provided by Jackson library.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 public final class MarshallingJson {
 
     private static final Logger LOG = LoggerFactory.getLogger(MarshallingJson.class);
@@ -23,6 +30,12 @@ public final class MarshallingJson {
     private MarshallingJson() {
     }
 
+    /**
+     * Serializes data in json format to file.
+     *
+     * @param entities List of entities type <T>
+     * @author Yauheni Markevich
+     */
     public static <T> void serializeJsonEntity(List<T> entities) {
         LOG.debug("execution serialization method");
         if (!entities.isEmpty()) {
@@ -35,11 +48,17 @@ public final class MarshallingJson {
                     MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(entities);
                 }
             } catch (IOException e) {
-                LOG.error(FILE_NOT_FOUND_LOG,path, e.getLocalizedMessage());
+                LOG.error(FILE_NOT_FOUND_LOG, path, e.getLocalizedMessage());
             }
         }
     }
-
+    /**
+     * Deserializes data from file to json format.
+     *
+     * @param classOnWhichArrayIsDefined Class.class of entities from file
+     * @return List<Class.class> of entities.
+     * @author Yauheni Markevich
+     */
     public static <T> List<T> deserializeJsonEntity(Class<T> classOnWhichArrayIsDefined) {
         LOG.debug("execution deserialization method");
         String json;

@@ -13,7 +13,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-
+/**
+ * Implementation of {@link FactoryBean<CategoryDao>} interface.
+ * FactoryBean creates proper implementations of dao layer after receiving value
+ * from application properties @see #field dao.config.
+ * Input of dao in application.properties decides which implementation will be downloaded.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @Component
 @PropertySource("classpath:application.properties")
 public class CategoryDaoFactory implements FactoryBean<CategoryDao> {
@@ -38,7 +46,7 @@ public class CategoryDaoFactory implements FactoryBean<CategoryDao> {
         } else if ("hibernate".equalsIgnoreCase(valueDao)) {
             LOG.info("Hibernate gets data from postgres database");
             return new CategoryDaoHiberImpl();
-        }else if ("jpa-repository".equalsIgnoreCase(valueDao)) {
+        } else if ("jpa-repository".equalsIgnoreCase(valueDao)) {
             LOG.info("Spring gets data from postgres database");
             return new CategoryDaoRepositoryImpl();
         }

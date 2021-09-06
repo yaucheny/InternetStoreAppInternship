@@ -4,7 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
-
+/**
+ * Special class that connects every point of menu to the method invocation.
+ * This class is responsible for navigation by menu.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 public class Navigator {
 
     private final static Logger log = LoggerFactory.getLogger(Navigator.class);

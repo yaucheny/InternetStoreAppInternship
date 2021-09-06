@@ -6,7 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
-
+/**
+ * Simple JavaBean object that represents a ShopProduct.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @Getter
 @Setter
 @NoArgsConstructor

@@ -11,7 +11,12 @@ import lombok.ToString;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-
+/**
+ * Dto object that represents a ShopProduct.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @Getter
 @Setter
 @ToString

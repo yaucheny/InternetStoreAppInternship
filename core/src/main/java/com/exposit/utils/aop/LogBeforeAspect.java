@@ -6,7 +6,13 @@ import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
+/**
+ * AOP aspect that is injected before invocation of method.
+ * Aspect is responsible for adding logging.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @Component
 @Aspect
 public class LogBeforeAspect {

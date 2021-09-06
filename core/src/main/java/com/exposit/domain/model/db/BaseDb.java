@@ -5,6 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Simple JavaBean object that represents a parent object.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @NoArgsConstructor
 @Getter
 @Setter

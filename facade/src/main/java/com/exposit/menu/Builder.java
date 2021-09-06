@@ -1,118 +1,127 @@
 package com.exposit.menu;
 
-import com.exposit.actions.category.AddCategory;
-import com.exposit.actions.category.DeleteCategory;
-import com.exposit.actions.category.GetAllCategory;
-import com.exposit.actions.category.GetByIdCategory;
-import com.exposit.actions.category.SaveToFileCategory;
-import com.exposit.actions.category.UpdateCategory;
-import com.exposit.actions.customer.AddCustomer;
-import com.exposit.actions.customer.DeleteCustomer;
-import com.exposit.actions.customer.GetAllCustomer;
-import com.exposit.actions.customer.GetByIdCustomer;
-import com.exposit.actions.customer.SaveToFileCustomer;
-import com.exposit.actions.customer.UpdateCustomer;
-import com.exposit.actions.order.AddOrder;
-import com.exposit.actions.order.DeleteOrder;
-import com.exposit.actions.order.GetAllOrder;
-import com.exposit.actions.order.GetByIdOrder;
-import com.exposit.actions.order.SaveToFileOrder;
-import com.exposit.actions.order.UpdateOrder;
-import com.exposit.actions.orderitem.AddOrderItem;
-import com.exposit.actions.orderitem.DeleteOrderItem;
-import com.exposit.actions.orderitem.GetAllOrderItem;
-import com.exposit.actions.orderitem.GetByIdOrderItem;
-import com.exposit.actions.orderitem.SaveToFileOrderItem;
-import com.exposit.actions.orderitem.UpdateOrderItem;
-import com.exposit.actions.product.AddProduct;
-import com.exposit.actions.product.DeleteProduct;
-import com.exposit.actions.product.GetAllProduct;
-import com.exposit.actions.product.GetByIdProduct;
-import com.exposit.actions.product.SaveToFileProduct;
-import com.exposit.actions.product.UpdateProduct;
-import com.exposit.actions.shopproduct.AddShopProduct;
-import com.exposit.actions.shopproduct.DeleteShopProduct;
-import com.exposit.actions.shopproduct.FindShopProductByOneAttribute;
-import com.exposit.actions.shopproduct.FindShopProductByTwoAttribute;
-import com.exposit.actions.shopproduct.GetAllShopProduct;
-import com.exposit.actions.shopproduct.GetByIdShopProduct;
-import com.exposit.actions.shopproduct.GetShopProductFromCategory;
-import com.exposit.actions.shopproduct.InfoAboutPriceQuantityInStore;
-import com.exposit.actions.shopproduct.SaveToFileShopProduct;
-import com.exposit.actions.shopproduct.SortShopProductByPrice;
-import com.exposit.actions.shopproduct.UpdateShopProduct;
-import com.exposit.actions.store.AddStore;
-import com.exposit.actions.store.DeleteStore;
-import com.exposit.actions.store.GetAllStore;
-import com.exposit.actions.store.GetByIdStore;
-import com.exposit.actions.store.SaveToFileStore;
-import com.exposit.actions.store.UpdateStore;
+import com.exposit.actions.category.AddCategoryImpl;
+import com.exposit.actions.category.DeleteCategoryImpl;
+import com.exposit.actions.category.GetAllCategoryImpl;
+import com.exposit.actions.category.GetByIdCategoryImpl;
+import com.exposit.actions.category.SaveToFileCategoryImpl;
+import com.exposit.actions.category.UpdateCategoryImpl;
+import com.exposit.actions.customer.AddCustomerImpl;
+import com.exposit.actions.customer.DeleteCustomerImpl;
+import com.exposit.actions.customer.GetAllCustomerImpl;
+import com.exposit.actions.customer.GetByIdCustomerImpl;
+import com.exposit.actions.customer.SaveToFileCustomerImpl;
+import com.exposit.actions.customer.UpdateCustomerImpl;
+import com.exposit.actions.order.AddOrderImpl;
+import com.exposit.actions.order.DeleteOrderImpl;
+import com.exposit.actions.order.GetAllOrderImpl;
+import com.exposit.actions.order.GetByIdOrderImpl;
+import com.exposit.actions.order.SaveToFileOrderImpl;
+import com.exposit.actions.order.UpdateOrderImpl;
+import com.exposit.actions.orderitem.AddOrderItemImpl;
+import com.exposit.actions.orderitem.DeleteOrderItemImpl;
+import com.exposit.actions.orderitem.GetAllOrderItemImpl;
+import com.exposit.actions.orderitem.GetByIdOrderItemImpl;
+import com.exposit.actions.orderitem.SaveToFileOrderItemImpl;
+import com.exposit.actions.orderitem.UpdateOrderItemImpl;
+import com.exposit.actions.product.AddProductImpl;
+import com.exposit.actions.product.DeleteProductImpl;
+import com.exposit.actions.product.GetAllProductImpl;
+import com.exposit.actions.product.GetByIdProductImpl;
+import com.exposit.actions.product.SaveToFileProductImpl;
+import com.exposit.actions.product.UpdateProductImpl;
+import com.exposit.actions.shopproduct.AddShopProductImpl;
+import com.exposit.actions.shopproduct.DeleteShopProductImpl;
+import com.exposit.actions.shopproduct.FindShopProductByOneAttributeImpl;
+import com.exposit.actions.shopproduct.FindShopProductByTwoAttributeImpl;
+import com.exposit.actions.shopproduct.GetAllShopProductImpl;
+import com.exposit.actions.shopproduct.GetByIdShopProductImpl;
+import com.exposit.actions.shopproduct.GetShopProductFromCategoryImpl;
+import com.exposit.actions.shopproduct.InfoAboutPriceQuantityInStoreImpl;
+import com.exposit.actions.shopproduct.SaveToFileShopProductImpl;
+import com.exposit.actions.shopproduct.SortShopProductByPriceImpl;
+import com.exposit.actions.shopproduct.UpdateShopProductImpl;
+import com.exposit.actions.store.AddStoreImpl;
+import com.exposit.actions.store.DeleteStoreImpl;
+import com.exposit.actions.store.GetAllStoreImpl;
+import com.exposit.actions.store.GetByIdStoreImpl;
+import com.exposit.actions.store.SaveToFileStoreImpl;
+import com.exposit.actions.store.UpdateStoreImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+/**
+ * Class builds console menu.
+ * Every position of menu is linked to special action {@link com.exposit.actions}
+ * Every choice of menu position is linked to class which invokes method.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @Component
 @RequiredArgsConstructor
 public class Builder {
 
     private Menu rootMenu;
-    private final AddCategory addCategory;
-    private final DeleteCategory deleteCategory;
-    private final UpdateCategory updateCategory;
-    private final GetByIdCategory getByIdCategory;
-    private final GetAllCategory getAllCategory;
-    private final SaveToFileCategory saveToFileCategory;
+    private final AddCategoryImpl addCategoryImpl;
+    private final DeleteCategoryImpl deleteCategoryImpl;
+    private final UpdateCategoryImpl updateCategoryImpl;
+    private final GetByIdCategoryImpl getByIdCategoryImpl;
+    private final GetAllCategoryImpl getAllCategoryImpl;
+    private final SaveToFileCategoryImpl saveToFileCategoryImpl;
 
 
-    private final AddCustomer addCustomer;
-    private final DeleteCustomer deleteCustomer;
-    private final UpdateCustomer updateCustomer;
-    private final GetByIdCustomer getByIdCustomer;
-    private final GetAllCustomer getAllCustomer;
-    private final SaveToFileCustomer saveToFileCustomer;
+    private final AddCustomerImpl addCustomerImpl;
+    private final DeleteCustomerImpl deleteCustomerImpl;
+    private final UpdateCustomerImpl updateCustomerImpl;
+    private final GetByIdCustomerImpl getByIdCustomerImpl;
+    private final GetAllCustomerImpl getAllCustomerImpl;
+    private final SaveToFileCustomerImpl saveToFileCustomerImpl;
 
 
-    private final AddOrder addOrder;
-    private final DeleteOrder deleteOrder;
-    private final UpdateOrder updateOrder;
-    private final GetByIdOrder getByIdOrder;
-    private final GetAllOrder getAllOrder;
-    private final SaveToFileOrder saveToFileOrder;
+    private final AddOrderImpl addOrderImpl;
+    private final DeleteOrderImpl deleteOrderImpl;
+    private final UpdateOrderImpl updateOrderImpl;
+    private final GetByIdOrderImpl getByIdOrderImpl;
+    private final GetAllOrderImpl getAllOrderImpl;
+    private final SaveToFileOrderImpl saveToFileOrderImpl;
 
 
-    private final AddOrderItem addOrderItem;
-    private final DeleteOrderItem deleteOrderItem;
-    private final UpdateOrderItem updateOrderItem;
-    private final GetByIdOrderItem getByIdOrderItem;
-    private final GetAllOrderItem getAllOrderItem;
-    private final SaveToFileOrderItem saveToFileOrderItem;
+    private final AddOrderItemImpl addOrderItemImpl;
+    private final DeleteOrderItemImpl deleteOrderItemImpl;
+    private final UpdateOrderItemImpl updateOrderItemImpl;
+    private final GetByIdOrderItemImpl getByIdOrderItemImpl;
+    private final GetAllOrderItemImpl getAllOrderItemImpl;
+    private final SaveToFileOrderItemImpl saveToFileOrderItemImpl;
 
 
-    private final AddProduct addProduct;
-    private final DeleteProduct deleteProduct;
-    private final UpdateProduct updateProduct;
-    private final GetByIdProduct getByIdProduct;
-    private final GetAllProduct getAllProduct;
-    private final FindShopProductByOneAttribute findShopProductByOneAttribute;
-    private final FindShopProductByTwoAttribute findShopProductByTwoAttribute;
-    private final GetShopProductFromCategory getShopProductFromCategory;
-    private final InfoAboutPriceQuantityInStore infoAboutPriceQuantityInStore;
-    private final SortShopProductByPrice sortShopProductByPrice;
-    private final SaveToFileProduct saveToFileProduct;
+    private final AddProductImpl addProductImpl;
+    private final DeleteProductImpl deleteProductImpl;
+    private final UpdateProductImpl updateProductImpl;
+    private final GetByIdProductImpl getByIdProductImpl;
+    private final GetAllProductImpl getAllProductImpl;
+    private final FindShopProductByOneAttributeImpl findShopProductByOneAttributeImpl;
+    private final FindShopProductByTwoAttributeImpl findShopProductByTwoAttributeImpl;
+    private final GetShopProductFromCategoryImpl getShopProductFromCategoryImpl;
+    private final InfoAboutPriceQuantityInStoreImpl infoAboutPriceQuantityInStoreImpl;
+    private final SortShopProductByPriceImpl sortShopProductByPriceImpl;
+    private final SaveToFileProductImpl saveToFileProductImpl;
 
 
-    private final AddShopProduct addShopProduct;
-    private final DeleteShopProduct deleteShopProduct;
-    private final UpdateShopProduct updateShopProduct;
-    private final GetByIdShopProduct getByIdShopProduct;
-    private final GetAllShopProduct getAllShopProduct;
-    private final SaveToFileShopProduct saveToFileShopProduct;
+    private final AddShopProductImpl addShopProductImpl;
+    private final DeleteShopProductImpl deleteShopProductImpl;
+    private final UpdateShopProductImpl updateShopProductImpl;
+    private final GetByIdShopProductImpl getByIdShopProductImpl;
+    private final GetAllShopProductImpl getAllShopProductImpl;
+    private final SaveToFileShopProductImpl saveToFileShopProductImpl;
 
 
-    private final AddStore addStore;
-    private final DeleteStore deleteStore;
-    private final UpdateStore updateStore;
-    private final GetByIdStore getByIdStore;
-    private final GetAllStore getAllStore;
-    private final SaveToFileStore saveToFileStore;
+    private final AddStoreImpl addStoreImpl;
+    private final DeleteStoreImpl deleteStoreImpl;
+    private final UpdateStoreImpl updateStoreImpl;
+    private final GetByIdStoreImpl getByIdStoreImpl;
+    private final GetAllStoreImpl getAllStoreImpl;
+    private final SaveToFileStoreImpl saveToFileStoreImpl;
 
     public Menu getRootMenu() {
         return rootMenu;
@@ -143,17 +152,17 @@ public class Builder {
         storeMenu.addMenuItem(new MenuItem("Exit",
                 () -> System.out.println(""), null));
         storeMenu.addMenuItem(new MenuItem("Add new store",
-                addStore, rootMenu));
+                addStoreImpl, rootMenu));
         storeMenu.addMenuItem(new MenuItem("Update store",
-                updateStore, rootMenu));
+                updateStoreImpl, rootMenu));
         storeMenu.addMenuItem(new MenuItem("Delete store",
-                deleteStore, rootMenu));
+                deleteStoreImpl, rootMenu));
         storeMenu.addMenuItem(new MenuItem("Get by id store",
-               getByIdStore, rootMenu));
+                getByIdStoreImpl, rootMenu));
         storeMenu.addMenuItem(new MenuItem("Get all stores",
-               getAllStore, rootMenu));
+                getAllStoreImpl, rootMenu));
         storeMenu.addMenuItem(new MenuItem("Save stores to file",
-                saveToFileStore, rootMenu));
+                saveToFileStoreImpl, rootMenu));
         return storeMenu;
     }
 
@@ -162,17 +171,17 @@ public class Builder {
         customerMenu.addMenuItem(new MenuItem("Exit",
                 () -> System.out.println(""), null));
         customerMenu.addMenuItem(new MenuItem("Add customer",
-               addCustomer, rootMenu));
+                addCustomerImpl, rootMenu));
         customerMenu.addMenuItem(new MenuItem("Update customer",
-                updateCustomer, rootMenu));
+                updateCustomerImpl, rootMenu));
         customerMenu.addMenuItem(new MenuItem("Delete customer",
-                deleteCustomer, rootMenu));
+                deleteCustomerImpl, rootMenu));
         customerMenu.addMenuItem(new MenuItem("GetById customer",
-                getByIdCustomer, rootMenu));
+                getByIdCustomerImpl, rootMenu));
         customerMenu.addMenuItem(new MenuItem("Get All customer",
-                getAllCustomer, rootMenu));
+                getAllCustomerImpl, rootMenu));
         customerMenu.addMenuItem(new MenuItem("Save customer to file",
-                saveToFileCustomer, rootMenu));
+                saveToFileCustomerImpl, rootMenu));
         return customerMenu;
     }
 
@@ -181,17 +190,17 @@ public class Builder {
         categoryMenu.addMenuItem(new MenuItem("Exit",
                 () -> System.out.println(""), null));
         categoryMenu.addMenuItem(new MenuItem("Add category",
-                addCategory, rootMenu));
+                addCategoryImpl, rootMenu));
         categoryMenu.addMenuItem(new MenuItem("Update category",
-                updateCategory, rootMenu));
+                updateCategoryImpl, rootMenu));
         categoryMenu.addMenuItem(new MenuItem("Delete category",
-                deleteCategory, rootMenu));
+                deleteCategoryImpl, rootMenu));
         categoryMenu.addMenuItem(new MenuItem("GetById category",
-                getByIdCategory, rootMenu));
+                getByIdCategoryImpl, rootMenu));
         categoryMenu.addMenuItem(new MenuItem("Get All category",
-                getAllCategory, rootMenu));
+                getAllCategoryImpl, rootMenu));
         categoryMenu.addMenuItem(new MenuItem("Save category to file",
-                saveToFileCategory, rootMenu));
+                saveToFileCategoryImpl, rootMenu));
         return categoryMenu;
     }
 
@@ -200,17 +209,17 @@ public class Builder {
         orderMenu.addMenuItem(new MenuItem("Exit",
                 () -> System.out.println(""), null));
         orderMenu.addMenuItem(new MenuItem("Add order",
-                addOrder, rootMenu));
+                addOrderImpl, rootMenu));
         orderMenu.addMenuItem(new MenuItem("Delete order",
-                deleteOrder, rootMenu));
+                deleteOrderImpl, rootMenu));
         orderMenu.addMenuItem(new MenuItem("Update order",
-                updateOrder, rootMenu));
+                updateOrderImpl, rootMenu));
         orderMenu.addMenuItem(new MenuItem("Get by id order",
-                getByIdOrder, rootMenu));
+                getByIdOrderImpl, rootMenu));
         orderMenu.addMenuItem(new MenuItem("get all order",
-                getAllOrder, rootMenu));
+                getAllOrderImpl, rootMenu));
         orderMenu.addMenuItem(new MenuItem("Save stores to order",
-                saveToFileOrder, rootMenu));
+                saveToFileOrderImpl, rootMenu));
         return orderMenu;
     }
 
@@ -219,17 +228,17 @@ public class Builder {
         productMenu.addMenuItem(new MenuItem("Exit",
                 () -> System.out.println(""), null));
         productMenu.addMenuItem(new MenuItem("Add product",
-               addProduct, rootMenu));
+                addProductImpl, rootMenu));
         productMenu.addMenuItem(new MenuItem("Delete product",
-                deleteProduct, rootMenu));
+                deleteProductImpl, rootMenu));
         productMenu.addMenuItem(new MenuItem("Update product",
-                updateProduct, rootMenu));
+                updateProductImpl, rootMenu));
         productMenu.addMenuItem(new MenuItem("Get by id product",
-                getByIdProduct, rootMenu));
+                getByIdProductImpl, rootMenu));
         productMenu.addMenuItem(new MenuItem("get all product",
-                getAllProduct, rootMenu));
+                getAllProductImpl, rootMenu));
         productMenu.addMenuItem(new MenuItem("Save products to file",
-                saveToFileProduct, rootMenu));
+                saveToFileProductImpl, rootMenu));
         return productMenu;
     }
 
@@ -238,17 +247,17 @@ public class Builder {
         orderItemMenu.addMenuItem(new MenuItem("Exit",
                 () -> System.out.println(""), null));
         orderItemMenu.addMenuItem(new MenuItem("Add orderItem",
-                addOrderItem, rootMenu));
+                addOrderItemImpl, rootMenu));
         orderItemMenu.addMenuItem(new MenuItem("Delete orderItem",
-                deleteOrderItem, rootMenu));
+                deleteOrderItemImpl, rootMenu));
         orderItemMenu.addMenuItem(new MenuItem("Update orderItem",
-                updateOrderItem, rootMenu));
+                updateOrderItemImpl, rootMenu));
         orderItemMenu.addMenuItem(new MenuItem("Get by id orderItem",
-                getByIdOrderItem, rootMenu));
+                getByIdOrderItemImpl, rootMenu));
         orderItemMenu.addMenuItem(new MenuItem("get all orderItem",
-                getAllOrderItem, rootMenu));
+                getAllOrderItemImpl, rootMenu));
         orderItemMenu.addMenuItem(new MenuItem("Save orderItem to file",
-                saveToFileOrderItem, rootMenu));
+                saveToFileOrderItemImpl, rootMenu));
         return orderItemMenu;
     }
 
@@ -257,28 +266,28 @@ public class Builder {
         shopProductMenu.addMenuItem(new MenuItem("Exit",
                 () -> System.out.println(""), null));
         shopProductMenu.addMenuItem(new MenuItem("Add shopProduct",
-                addShopProduct, rootMenu));
+                addShopProductImpl, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem("Delete shopProduct",
-               deleteShopProduct, rootMenu));
+                deleteShopProductImpl, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem("Update shopProduct",
-                updateShopProduct, rootMenu));
+                updateShopProductImpl, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem("Get by id shopProduct",
-                getByIdShopProduct, rootMenu));
+                getByIdShopProductImpl, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem("Get all shopProducts",
-                getAllShopProduct, rootMenu));
+                getAllShopProductImpl, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem("Sort all products by shopPrice",
-                sortShopProductByPrice, rootMenu));
+                sortShopProductByPriceImpl, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem("Find shopProduct by one attribute",
-                findShopProductByOneAttribute, rootMenu));
+                findShopProductByOneAttributeImpl, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem("Find shopProduct by two attributes",
-                findShopProductByTwoAttribute, rootMenu));
+                findShopProductByTwoAttributeImpl, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem("Get shopProduct from category",
-                getShopProductFromCategory, rootMenu));
+                getShopProductFromCategoryImpl, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem(
                 "Get info about product's price and quantity in store",
-                infoAboutPriceQuantityInStore, rootMenu));
+                infoAboutPriceQuantityInStoreImpl, rootMenu));
         shopProductMenu.addMenuItem(new MenuItem("Save shopProducts to file",
-                saveToFileShopProduct, rootMenu));
+                saveToFileShopProductImpl, rootMenu));
         return shopProductMenu;
     }
 }

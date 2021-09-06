@@ -20,6 +20,11 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
+    /**
+     * Prints all methods from Application context.
+     *
+     * @author Yauheni Markevich
+     */
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {

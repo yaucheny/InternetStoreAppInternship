@@ -20,7 +20,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Special class for handling the exceptions in controller layer.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @ControllerAdvice
 public class MyExceptionHandler extends ResponseEntityExceptionHandler {
 

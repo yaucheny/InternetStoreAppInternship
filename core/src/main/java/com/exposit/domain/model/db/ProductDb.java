@@ -6,7 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
-
+/**
+ * Simple JavaBean object that represents a product.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)

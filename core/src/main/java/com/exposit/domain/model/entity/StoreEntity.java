@@ -8,7 +8,14 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
+/**
+ * Simple JavaBean object that represents a Store entity. This additional object is created
+ * to work with hibernate and spring data JPA. This object is mapped from StoreDb object
+ * {@link com.exposit.domain.model.db.StoreDb} in dao layer.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)

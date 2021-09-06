@@ -1,14 +1,19 @@
 package com.exposit.menu;
 
-import com.exposit.actions.IAction;
-
+import com.exposit.actions.Action;
+/**
+ * Simple JavaBean object that represents a MenuItem.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 public class MenuItem {
 
     private String title;
-    private IAction action;
+    private Action action;
     private Menu nextMenu;
 
-    public MenuItem(String title, IAction action, Menu nextMenu) {
+    public MenuItem(String title, Action action, Menu nextMenu) {
         this.title = title;
         this.action = action;
         this.nextMenu = nextMenu;
@@ -26,7 +31,7 @@ public class MenuItem {
         return title;
     }
 
-    public void setAction(IAction action) {
+    public void setAction(Action action) {
         this.action = action;
     }
 }

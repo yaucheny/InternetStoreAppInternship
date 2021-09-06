@@ -27,7 +27,11 @@ import java.util.Collections;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-
+    /**
+     * Configures swagger.
+     *
+     * @author Yauheni Markevich
+     */
     @Bean
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -40,6 +44,11 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo());
     }
 
+    /**
+     * Configures information for swagger main page.
+     *
+     * @author Yauheni Markevich
+     */
     private ApiInfo apiInfo() {
         return new ApiInfo(
                 "My INTERNSHIP API",
@@ -50,17 +59,31 @@ public class SwaggerConfig {
                 "License of API", "API license URL", Collections.emptyList());
     }
 
+    /**
+     * Configures security context.
+     *
+     * @author Yauheni Markevich
+     */
     private SecurityContext securityContext() {
         return SecurityContext.builder()
                 .securityReferences(Collections.singletonList(basicAuthReference()))
-                .forPaths(PathSelectors.ant("/**"))
                 .build();
     }
 
+    /**
+     * Returns type of authentication.
+     *
+     * @author Yauheni Markevich
+     */
     private SecurityScheme basicAuthScheme() {
         return new BasicAuth("basicAuth");
     }
 
+    /**
+     * Returns type of security reference.
+     *
+     * @author Yauheni Markevich
+     */
     private SecurityReference basicAuthReference() {
         return new SecurityReference("basicAuth", new AuthorizationScope[0]);
     }

@@ -12,7 +12,15 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-
+/**
+ * Implementation of {@link FactoryBean< StoreDao >} interface.
+ * FactoryBean creates proper implementations of dao layer after receiving value
+ * from application properties @see #field dao.config.
+ * Input of dao in application.properties decides which implementation will be downloaded.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @Configuration
 @PropertySource("classpath:application.properties")
 public class StoreDaoFactory implements FactoryBean<StoreDao> {

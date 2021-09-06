@@ -17,6 +17,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Class helps to convert csv files. It provides methods of working with *.csv files.
+ * Class provides methods of searching files, parsing from csv, searching for wrong format files
+ * and corrupted files.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 public final class ParseFromCsv {
 
     private static final Logger LOG = LoggerFactory.getLogger(ParseFromCsv.class);
@@ -39,6 +47,15 @@ public final class ParseFromCsv {
     private ParseFromCsv() {
     }
 
+    /**
+     * Checks headers and matching pattern of file.
+     * Files that match conditions are moved to parse directory and renamed.
+     * Files that don't match conditions are moved to error directory and renamed.
+     *
+     * @author Yauheni Markevich
+     * @see UtilParseCsv#searchCsvTypeFiles(String, File)
+     * @see #expectedHeaders(String)
+     */
     public static void moveSearchToParseDir() {
         List<String> result = UtilParseCsv.searchCsvTypeFiles(PATTERN, SEARCH_FOLDER);
         if (!result.isEmpty()) {
@@ -65,6 +82,13 @@ public final class ParseFromCsv {
         }
     }
 
+    /**
+     * Move files from search directory to error directory all file, that don't match pattern of method
+     * Before moving names of files should be changed to nanotime.*.
+     *
+     * @author Yauheni Markevich
+     * @see UtilParseCsv#searchNotCsvTypeFiles(String, File).
+     */
     public static void moveSearchToErrorDir() {
         List<String> result = UtilParseCsv.searchNotCsvTypeFiles(PATTERN, SEARCH_FOLDER);
         if (!result.isEmpty()) {
@@ -80,6 +104,12 @@ public final class ParseFromCsv {
         }
     }
 
+    /**
+     * Check headers of csv file.
+     *
+     * @param path to file where headers should be checked.
+     * @author Yauheni Markevich
+     */
     public static boolean expectedHeaders(String path) {
         List<String> expectedHeaders = Arrays.asList("id", "description", "price");
         try (CSVReader reader = new CSVReader(new FileReader(path))) {
@@ -93,6 +123,17 @@ public final class ParseFromCsv {
         return false;
     }
 
+    /**
+     * Files that are written in cache.txt and their status is "not_parsed" are added to
+     * Map<String, String> cache.
+     * If exception happen during work of method file is moved to error directory and renamed.
+     * Files that match conditions are moved to parse directory and renamed.
+     * Files that don't match conditions are moved to error directory and renamed.
+     *
+     * @author Yauheni Markevich
+     * @see UtilParseCsv#searchCsvTypeFiles(String, File)
+     * @see #expectedHeaders(String)
+     */
     public static Map<List<ShopProductDto>, String> parseEntityFromCsv() {
         Map<String, String> cache = CacheCsv.getDataFromCache();
         for (Map.Entry<String, String> entry : cache.entrySet()) {
@@ -124,6 +165,12 @@ public final class ParseFromCsv {
         return Collections.emptyMap();
     }
 
+    /**
+     * On starting application checks parse directory and
+     * moves all files from previous session to error directory.
+     *
+     * @author Yauheni Markevich
+     */
     public static void inspectParseDirForErrors() {
         if (!UtilParseCsv.searchCsvTypeFiles(PATTERN_ANY, PARSE_FOLDER).isEmpty()) {
             for (File fileError : Objects.requireNonNull(PARSE_FOLDER.listFiles())) {

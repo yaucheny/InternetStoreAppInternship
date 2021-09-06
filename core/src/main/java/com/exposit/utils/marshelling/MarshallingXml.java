@@ -12,7 +12,13 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
+/**
+ * Class is responsible for marshalling and unmarshalling objects in xml format.
+ * Marshalling and Unmarshalling is provided by Jackson library.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 public final class MarshallingXml {
 
     private static final Logger LOG = LoggerFactory.getLogger(MarshallingXml.class);
@@ -22,7 +28,12 @@ public final class MarshallingXml {
 
     private MarshallingXml() {
     }
-
+    /**
+     * Serializes data in xml format to file.
+     *
+     * @param entities List of entities type <T>
+     * @author Yauheni Markevich
+     */
     public static <T> void serializeJsonEntity(List<T> entities) {
         LOG.debug("execution serialization method");
         if (!entities.isEmpty()) {
@@ -39,7 +50,13 @@ public final class MarshallingXml {
             }
         }
     }
-
+    /**
+     * Deserializes data from file to xml format.
+     *
+     * @param classOnWhichArrayIsDefined Class.class of entities from file
+     * @return List<Class.class> of entities.
+     * @author Yauheni Markevich
+     */
     public static <T> List<T> deserializeXmlEntity(Class<T> classOnWhichArrayIsDefined) {
         LOG.debug("execution deserialization method");
         String json;

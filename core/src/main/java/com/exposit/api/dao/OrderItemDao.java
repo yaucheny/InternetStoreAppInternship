@@ -1,6 +1,7 @@
 package com.exposit.api.dao;
 
 import com.exposit.domain.model.db.OrderItemDb;
+
 /**
  * Dao interface for{@link com/exposit/domain/model/db/OrderItemDb.java}.
  *
@@ -9,4 +10,4 @@ import com.exposit.domain.model.db.OrderItemDb;
  */
 public interface OrderItemDao extends GenericDao<OrderItemDb> {
 
-    }
+}

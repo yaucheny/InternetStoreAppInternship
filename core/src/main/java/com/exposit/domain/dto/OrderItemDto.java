@@ -8,7 +8,12 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.Min;
-
+/**
+ * Dto object that represents a OrderItem.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @Getter
 @Setter
 @ToString

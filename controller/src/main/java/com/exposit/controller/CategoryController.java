@@ -1,8 +1,8 @@
 package com.exposit.controller;
 
 import com.exposit.api.service.CategoryService;
-import com.exposit.facade.config.ConfigFacade;
 import com.exposit.domain.dto.CategoryDto;
+import com.exposit.facade.config.ConfigFacade;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -25,6 +25,12 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Controller for {@link com.exposit.domain.model.db.CategoryDb}'s pages.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/category")

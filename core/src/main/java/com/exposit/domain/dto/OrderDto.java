@@ -12,7 +12,12 @@ import lombok.ToString;
 import javax.validation.constraints.Min;
 import java.time.LocalDate;
 import java.util.List;
-
+/**
+ * Dto object that represents a order.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @Getter
 @Setter
 @ToString

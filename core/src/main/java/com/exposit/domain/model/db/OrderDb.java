@@ -13,7 +13,12 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
-
+/**
+ * Simple JavaBean object that represents a Order.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)

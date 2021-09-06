@@ -8,7 +8,14 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-
+/**
+ * Simple JavaBean object that represents a Order entity. This additional object is created
+ * to work with hibernate and spring data JPA. This object is mapped from Vdb object
+ * {@link com.exposit.domain.model.db.OrderDb} in dao layer.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)

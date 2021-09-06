@@ -12,7 +12,14 @@ import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
-
+/**
+ * Simple JavaBean object that represents a ShopProduct entity. This additional object is created
+ * to work with hibernate and spring data JPA. This object is mapped from ShopProduct object
+ * {@link com.exposit.domain.model.db.ShopProductDb} in dao layer.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
