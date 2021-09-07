@@ -24,7 +24,7 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/store")
+@RequestMapping("/stores")
 @ConditionalOnMissingBean(value = ConfigFacade.class)
 public class StoreController {
 
@@ -40,7 +40,7 @@ public class StoreController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    @GetMapping("/{id}")
+    @GetMapping("/v1/{id}")
     public ResponseEntity<StoreDto> getById(@Valid @Parameter(description = "id of store")
                                             @PathVariable Long id) {
         LOG.info(REQUEST_PARAM, id);
@@ -54,7 +54,7 @@ public class StoreController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    @GetMapping("/")
+    @GetMapping("/v1")
     public ResponseEntity<List<StoreDto>> getAll() {
         LOG.info(REQUEST);
         return ResponseEntity.ok().body(storeService.getAllStore());
@@ -67,7 +67,7 @@ public class StoreController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to delete is not found")
     })
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/v1/{id}")
     public ResponseEntity<String> deleteById(@Valid @Parameter(description = "id of store")
                                              @PathVariable Long id) {
         storeService.deleteStore(id);
@@ -83,7 +83,7 @@ public class StoreController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to create is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to create is not found")
     })
-    @PostMapping(value = "/")
+    @PostMapping(value = "/v1")
     public ResponseEntity<String> save(@Valid @RequestBody StoreDto storeDto) {
         storeService.addStore(storeDto);
         LOG.info(REQUEST);
@@ -97,7 +97,7 @@ public class StoreController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to update is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to update is not found")
     })
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/v1/{id}")
     public ResponseEntity<String> update(@Valid @Parameter(description = "id of store") @PathVariable Long id,
                                          @Valid @RequestBody StoreDto storeDto) {
         storeService.updateStore(id, storeDto);
@@ -112,7 +112,7 @@ public class StoreController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to save is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to save is not found")
     })
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/v1/file")
     public ResponseEntity<String> saveToFile() {
         storeService.saveStoreToFile();
         LOG.info(REQUEST);

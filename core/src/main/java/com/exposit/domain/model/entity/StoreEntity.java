@@ -1,9 +1,7 @@
 package com.exposit.domain.model.entity;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,10 +14,8 @@ import javax.persistence.Table;
  * @author Yauheni Markevich
  * @version 1.0
  */
-@Getter
-@Setter
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "stores")
 public class StoreEntity extends BaseEntity {
@@ -30,14 +26,4 @@ public class StoreEntity extends BaseEntity {
     private String internetPage;
     @Column(name = "phone_number")
     private String phoneNumber;
-
-    @Override
-    public String toString() {
-        return "Store{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", internetPage='" + internetPage + '\''
-                + ", phoneNumber='" + phoneNumber + '\''
-                + '}';
-    }
 }

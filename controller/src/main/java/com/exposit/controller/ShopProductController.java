@@ -33,7 +33,7 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/shopProduct")
+@RequestMapping("/shopProducts")
 @ConditionalOnMissingBean(value = ConfigFacade.class)
 public class ShopProductController {
 
@@ -49,7 +49,7 @@ public class ShopProductController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    @GetMapping("/{id}")
+    @GetMapping("/v1/{id}")
     public ResponseEntity<ShopProductDto> getById(@Valid @Parameter(description = "id of shopProduct")
                                                   @PathVariable Long id) {
         LOG.debug(REQUEST_PARAM, id);
@@ -63,7 +63,7 @@ public class ShopProductController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    @GetMapping("/")
+    @GetMapping("/v1")
     public ResponseEntity<List<ShopProductDto>> getAll() {
         LOG.debug(REQUEST);
         return ResponseEntity.ok().body(shopProductService.getAllShopProduct());
@@ -76,7 +76,7 @@ public class ShopProductController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to delete is not found")
     })
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/v1/{id}")
     public ResponseEntity<String> deleteById(@Valid @Parameter(description = "id of shopProduct")
                                              @PathVariable Long id) {
         shopProductService.deleteShopProduct(id);
@@ -93,7 +93,7 @@ public class ShopProductController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to create is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to create is not found")
     })
-    @PostMapping(value = "/")
+    @PostMapping(value = "/v1")
     public ResponseEntity<String> save(
             @Valid @RequestBody ShopProductDto shopProductDto) {
         shopProductService.addShopProduct(shopProductDto);
@@ -108,7 +108,7 @@ public class ShopProductController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to update is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to update is not found")
     })
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/v1/{id}")
     public ResponseEntity<String> update(@Valid @Parameter(description = "id of shopProduct") @PathVariable Long id,
                                          @Valid @RequestBody ShopProductDto shopProductDto) {
         shopProductService.updateShopProduct(id, shopProductDto);
@@ -123,7 +123,7 @@ public class ShopProductController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to save is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to save is not found")
     })
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/v1/file")
     public ResponseEntity<String> saveToFile() {
         shopProductService.saveShopProductToFile();
         LOG.debug(REQUEST);
@@ -137,7 +137,7 @@ public class ShopProductController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to sort is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to sort is not found")
     })
-    @GetMapping(value = "/price")
+    @GetMapping(value = "/v1/price")
     public ResponseEntity<List<ShopProductDto>> sortByPrice() {
         LOG.debug(REQUEST);
         return ResponseEntity.ok().body(shopProductService.sortByPrice());
@@ -150,7 +150,7 @@ public class ShopProductController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to get is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to get is not found")
     })
-    @GetMapping("/category")
+    @GetMapping("/v1/category")
     public ResponseEntity<List<ShopProductDto>> getProductsFromCategory(
             @Parameter(description = "name of category of product")
             @RequestParam(value = "name") String name) {
@@ -165,7 +165,7 @@ public class ShopProductController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to get is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to get is not found")
     })
-    @GetMapping(value = "/store")
+    @GetMapping(value = "/v1/store")
     public ResponseEntity<List<PriceQuantityInStoreDto>> infoAboutPriceQuantityInStore(
             @Parameter(description = "name of store")
             @RequestParam(value = "name") String name) {
@@ -180,7 +180,7 @@ public class ShopProductController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to get is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to get is not found")
     })
-    @GetMapping(value = "/attribute/one")
+    @GetMapping(value = "/v1/attribute/one")
     public ResponseEntity<List<ShopProductDto>> getByOneAttribute(
             @Parameter(description = "name of field of shopProduct")
             @RequestParam(value = "attribute") String attrib1,
@@ -197,7 +197,7 @@ public class ShopProductController {
             @ApiResponse(code = 401, message = "You are not authorized to get the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to get is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to get is not found")})
-    @GetMapping(value = "/attribute/two")
+    @GetMapping(value = "/v1/attribute/two")
     public ResponseEntity<List<ShopProductDto>> getByTwoAttribute(
             @Parameter(description = "name of field of shopProduct")
             @RequestParam(value = "attribute1") String attrib1,

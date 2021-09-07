@@ -1,17 +1,15 @@
 package com.exposit.domain.model.entity;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
+import javax.persistence.Table;
 import java.util.List;
 /**
  * Simple JavaBean object that represents a Category entity. This additional object is created
@@ -21,10 +19,8 @@ import java.util.List;
  * @author Yauheni Markevich
  * @version 1.0
  */
-@Getter
-@Setter
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "categories")
 public class CategoryEntity extends BaseEntity {
@@ -37,13 +33,4 @@ public class CategoryEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<CategoryEntity> childList;
-
-    @Override
-    public String toString() {
-        return "Category{" + "id=" + id
-                + ", name='" + name + '\''
-                + ", parentCategory=" + parent
-                + ", childList=" + childList
-                + '}';
-    }
 }

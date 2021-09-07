@@ -10,7 +10,9 @@ import lombok.ToString;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 /**
  * Dto object that represents a ShopProduct.
  *
@@ -23,10 +25,10 @@ import javax.validation.constraints.Size;
 @Schema(description = "entity of shopProduct")
 public class ShopProductDto {
 
-    @Min(value = 1, message = "value of id should be more than 0")
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
+    @NotNull
     @ApiModelProperty(notes = "product in shop")
     private ProductDb product;
 
@@ -37,7 +39,7 @@ public class ShopProductDto {
     @Min(value = 0, message = "quantity should be more than 0")
     @ApiModelProperty(notes = "quantity of product in shop")
     private Integer quantity;
-
+    @NotNull
     @ApiModelProperty(notes = "store of product")
     private StoreDb store;
 

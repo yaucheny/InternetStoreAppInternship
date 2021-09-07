@@ -1,9 +1,7 @@
 package com.exposit.domain.model.db;
 
 import com.opencsv.bean.CsvBindByName;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * Simple JavaBean object that represents a parent object.
@@ -11,10 +9,9 @@ import lombok.Setter;
  * @author Yauheni Markevich
  * @version 1.0
  */
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
 public abstract class BaseDb {
+
     @CsvBindByName(column = "id")
     protected Long id;
 }

@@ -22,11 +22,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 /**
  * Implementation of {@link ShopProductService} interface.
  *
@@ -172,7 +176,6 @@ public class ShopProductServiceImpl implements ShopProductService {
             PriceQuantityInStore priceQuantityInStore = new PriceQuantityInStore(
                     g.getProduct(), g.getPrice(), g.getQuantity(), g.getStore().getName());
             priceQuantityInStoreList.add(priceQuantityInStore);
-
         }
         Type listType = new TypeToken<List<PriceQuantityInStore>>() {
         }.getType();
@@ -184,46 +187,39 @@ public class ShopProductServiceImpl implements ShopProductService {
         }.getType();
         List<ShopProductDb> shopProductDbList;
         switch (attribute) {
-            case (NAME) -> {
+            case (NAME):
                 shopProductDbList = goods.stream()
                         .filter(p -> p.getProduct().getName().equals(value))
                         .collect(Collectors.toList());
                 return mapper.map(shopProductDbList, listType);
-            }
-            case (PRODUCER) -> {
+            case (PRODUCER):
                 shopProductDbList = goods.stream()
                         .filter(p -> p.getProduct().getProducer().equals(value))
                         .collect(Collectors.toList());
                 return mapper.map(shopProductDbList, listType);
-            }
-            case (PRICE) -> {
+            case (PRICE):
                 shopProductDbList = goods.stream()
                         .filter(p -> p.getPrice().equals(Double.parseDouble(value)))
                         .collect(Collectors.toList());
                 return mapper.map(shopProductDbList, listType);
-            }
-            case (QUANTITY) -> {
+            case (QUANTITY):
                 shopProductDbList = goods.stream()
                         .filter(p -> p.getQuantity().equals(Integer.parseInt(value)))
                         .collect(Collectors.toList());
                 return mapper.map(shopProductDbList, listType);
-            }
-            case (STORE) -> {
+            case (STORE):
                 shopProductDbList = goods.stream()
                         .filter(p -> p.getStore().getName().equals(value))
                         .collect(Collectors.toList());
                 return mapper.map(shopProductDbList, listType);
-            }
-            case (DESCRIPTION) -> {
+            case (DESCRIPTION):
                 shopProductDbList = goods.stream()
                         .filter(p -> p.getDescription().equals(value))
                         .collect(Collectors.toList());
                 return mapper.map(shopProductDbList, listType);
-            }
-            default -> {
+            default:
                 LOG.error(FALSE_ATTRIBUTE_NAME);
                 throw new ServiceException(FALSE_ATTRIBUTE_NAME);
-            }
         }
     }
 
@@ -231,7 +227,7 @@ public class ShopProductServiceImpl implements ShopProductService {
     @Override
     public void updateShopProductsFromCsv() {
         long startTime = System.currentTimeMillis();
-        LOG.info("" + Thread.currentThread().getName());
+        LOG.info(Thread.currentThread().getName());
         Map<List<ShopProductDto>, String> map = ParseFromCsv.parseEntityFromCsv();
         if (map.size() > 0) {
             Map.Entry<List<ShopProductDto>, String> entry = map.entrySet().iterator().next();
@@ -267,9 +263,13 @@ public class ShopProductServiceImpl implements ShopProductService {
             logInfoDb.setWorkTime(endTime - startTime);
             logInfoDao.save(logInfoDb);
             LOG.info("data successfully updated");
+            String pathSave = path.replace("parse", "save");
+            try {
+                Files.move(Path.of(path), Path.of(pathSave));
+            } catch (IOException e) {
+                LOG.error("can not move file to save directory");
+            }
         }
-        LOG.info("" + Thread.currentThread().getName() + " finish work");
+        LOG.info("{} finish work", Thread.currentThread().getName());
     }
-
-
 }

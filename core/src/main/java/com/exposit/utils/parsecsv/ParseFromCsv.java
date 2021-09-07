@@ -145,7 +145,6 @@ public final class ParseFromCsv {
                     String pathSave = entry.getKey().replace(PARSE, SAVE);
                     entry.setValue(PARSE);
                     CacheCsv.writeMapToCache(cache);
-                    Files.move(Path.of(pathParse), Path.of(pathSave));
                     Map<List<ShopProductDto>, String> map = new HashMap<>();
                     map.put(listOfObjects, pathSave);
                     return map;

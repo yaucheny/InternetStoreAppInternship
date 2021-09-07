@@ -33,7 +33,7 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/categories")
 @Api(value = "Categories of online store")
 @ConditionalOnMissingBean(value = ConfigFacade.class)
 public class CategoryController {
@@ -50,7 +50,7 @@ public class CategoryController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/v1/{id}")
     public ResponseEntity<CategoryDto> getById(@Valid @Parameter(description = "id of category")
                                                @PathVariable Long id) {
         LOG.debug(REQUEST_PARAM, id);
@@ -64,7 +64,7 @@ public class CategoryController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    @GetMapping(value = "/")
+    @GetMapping(value = "/v1")
     public ResponseEntity<List<CategoryDto>> getAll() {
         LOG.debug(REQUEST);
         return ResponseEntity.ok().body(categoryService.getAllCategory());
@@ -77,7 +77,7 @@ public class CategoryController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to delete is not found")
     })
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/v1/{id}")
     public ResponseEntity<String> deleteById(@Valid @Parameter(description = "id of category")
                                              @PathVariable Long id) {
         categoryService.deleteCategory(id);
@@ -93,7 +93,7 @@ public class CategoryController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to create is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to create is not found")
     })
-    @PostMapping(value = "/")
+    @PostMapping(value = "/v1")
     public ResponseEntity<String> save(@Valid @RequestBody CategoryDto categoryDto) {
         categoryService.addCategory(categoryDto);
         LOG.debug(REQUEST);
@@ -107,7 +107,7 @@ public class CategoryController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to update is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to update is not found")
     })
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/v1/{id}")
     public ResponseEntity<String> update(@Valid @Parameter(description = "id of category") @PathVariable Long id,
                                          @Valid @RequestBody CategoryDto categoryDto) {
         categoryService.updateCategory(id, categoryDto);
@@ -122,7 +122,7 @@ public class CategoryController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to save is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to save is not found")
     })
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/v1/file")
     public ResponseEntity<String> saveToFile() {
         categoryService.saveCategoryToFile();
         LOG.debug(REQUEST);

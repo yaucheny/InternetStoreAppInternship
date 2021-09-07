@@ -1,18 +1,16 @@
 package com.exposit.domain.model.entity;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.ManyToMany;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.FetchType;
-import javax.persistence.CascadeType;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.util.List;
 /**
  * Simple JavaBean object that represents a Product entity. This additional object is created
@@ -22,10 +20,8 @@ import java.util.List;
  * @author Yauheni Markevich
  * @version 1.0
  */
-@Getter
-@Setter
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "products")
 public class ProductEntity extends BaseEntity {
@@ -41,14 +37,4 @@ public class ProductEntity extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private List<CategoryEntity> categoryList;
-
-    @Override
-    public String toString() {
-        return "Product{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", producer='" + producer + '\''
-                + ", categoryList=" + categoryList
-                + '}';
-    }
 }

@@ -1,18 +1,16 @@
 package com.exposit.domain.model.entity;
 
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.OneToOne;
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 /**
  * Simple JavaBean object that represents a OrderItem entity. This additional object is created
  * to work with hibernate and spring data JPA. This object is mapped from OrderItemdb object
@@ -21,10 +19,8 @@ import javax.persistence.CascadeType;
  * @author Yauheni Markevich
  * @version 1.0
  */
-@Getter
-@Setter
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "items")
 public class OrderItemEntity extends BaseEntity {
@@ -35,13 +31,4 @@ public class OrderItemEntity extends BaseEntity {
 
     @Column(name = "quantity")
     private Integer quantity;
-
-    @Override
-    public String toString() {
-        return "OrderItem{"
-                + "id=" + id
-                + ", shopProduct=" + shopProduct
-                + ", quantity=" + quantity
-                + '}';
-    }
 }

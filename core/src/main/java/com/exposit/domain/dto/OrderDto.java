@@ -10,8 +10,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
+
 /**
  * Dto object that represents a order.
  *
@@ -24,7 +26,6 @@ import java.util.List;
 @Schema(description = "entity of order")
 public class OrderDto {
 
-    @Min(value = 1, message = "value of id should be more than 0")
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
@@ -37,16 +38,18 @@ public class OrderDto {
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Double priceOfPurchase;
 
+    @NotNull
     @ApiModelProperty(notes = " customer of order")
     private CustomerDb customer;
 
+    @NotNull
     @ApiModelProperty(notes = "order items included in order")
     private List<OrderItemDb> orderItemList;
 
     @ApiModelProperty(notes = "status of order")
     private OrderStatusEntity orderStatusEntity;
 
-    @Min(0)
+    @Min(value = 0, message = "amount of days should be more 0")
     @ApiModelProperty(notes = "amount days to deliver an order")
     private Long days;
 }

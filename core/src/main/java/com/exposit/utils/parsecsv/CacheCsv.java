@@ -22,6 +22,7 @@ import java.util.Map;
  * @version 1.0
  */
 public final class CacheCsv {
+
     private static final Logger LOG = LoggerFactory.getLogger(CacheCsv.class);
     private static final Map<String, String> CACHE = new LinkedHashMap<>();
     private static final String VALUE = "not_parsed";

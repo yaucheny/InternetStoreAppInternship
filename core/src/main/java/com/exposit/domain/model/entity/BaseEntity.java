@@ -1,10 +1,14 @@
 package com.exposit.domain.model.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
 
 /**
  * Simple JavaBean object that represents a parent entity. This additional object is created
@@ -14,9 +18,8 @@ import javax.persistence.*;
  * @author Yauheni Markevich
  * @version 1.0
  */
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode
 @MappedSuperclass
 public abstract class BaseEntity {
 

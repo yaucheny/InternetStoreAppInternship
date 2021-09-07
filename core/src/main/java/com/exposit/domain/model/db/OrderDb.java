@@ -6,10 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,11 +17,8 @@ import java.util.List;
  * @author Yauheni Markevich
  * @version 1.0
  */
-@Getter
-@Setter
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
-
+@Data
 public class OrderDb extends BaseDb {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
@@ -41,17 +36,4 @@ public class OrderDb extends BaseDb {
     private List<OrderItemDb> orderItemList;
     private Long days;
     private OrderStatusEntity orderStatusEntity;
-
-    @Override
-    public String toString() {
-        return "Order{"
-                + "id=" + id
-                + ", dateOfOrder=" + dateOfOrder
-                + ", dateOfDelivery=" + dateOfDelivery
-                + ", priceOfPurchase=" + priceOfPurchase
-                + ", customer=" + customer
-                + ", orderItemList=" + orderItemList
-                + ", orderStatus=" + orderStatusEntity
-                + '}';
-    }
 }

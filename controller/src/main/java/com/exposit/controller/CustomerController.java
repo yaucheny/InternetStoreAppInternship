@@ -24,7 +24,7 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/customers")
 @ConditionalOnMissingBean(value = ConfigFacade.class)
 public class CustomerController {
 
@@ -40,7 +40,7 @@ public class CustomerController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    @GetMapping("/{id}")
+    @GetMapping("/v1/{id}")
     public ResponseEntity<CustomerDto> getById(@Valid @Parameter(description = "id of customer")
                                                @PathVariable Long id) {
         LOG.debug(REQUEST_PARAM, id);
@@ -54,7 +54,7 @@ public class CustomerController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    @GetMapping("/")
+    @GetMapping("/v1")
     public ResponseEntity<List<CustomerDto>> getAll() {
         LOG.debug(REQUEST);
         return ResponseEntity.ok().body(customerService.getAllCustomer());
@@ -67,7 +67,7 @@ public class CustomerController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to delete is not found")
     })
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/v1/{id}")
     public ResponseEntity<String> deleteById(@Valid @Parameter(description = "id of customer")
                                              @PathVariable Long id) {
         customerService.deleteCustomer(id);
@@ -83,7 +83,7 @@ public class CustomerController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to create is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to create is not found")
     })
-    @PostMapping(value = "/")
+    @PostMapping(value = "/v1")
     public ResponseEntity<String> save(@Valid @RequestBody CustomerDto customerDto) {
         customerService.addCustomer(customerDto);
         LOG.debug(REQUEST);
@@ -97,7 +97,7 @@ public class CustomerController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to update is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to update is not found")
     })
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/v1/{id}")
     public ResponseEntity<String> update(@Valid @Parameter(description = "id of customer") @PathVariable Long id,
                                          @Valid @RequestBody CustomerDto customerDto) {
         customerService.updateCustomer(id, customerDto);
@@ -112,7 +112,7 @@ public class CustomerController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to save is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to save is not found")
     })
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/v1/file")
     public ResponseEntity<String> saveToFile() {
         customerService.saveCustomerToFile();
         LOG.debug(REQUEST);

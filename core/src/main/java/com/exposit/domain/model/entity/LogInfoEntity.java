@@ -2,6 +2,7 @@ package com.exposit.domain.model.entity;
 
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import javax.persistence.Table;
  * @version 1.0
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "logs")
 public class LogInfoEntity extends BaseEntity {
@@ -30,15 +32,4 @@ public class LogInfoEntity extends BaseEntity {
 
     @Column(name = "number_update")
     private Long numberUpdates;
-
-    @Override
-    public String toString() {
-        return "ForLogInfoEntity{"
-                + ", id=" + id
-                + "path='" + path + '\''
-                + ", time=" + workTime
-                + ", errorString=" + numberErrors
-                + ", updateString=" + numberUpdates
-                + '}';
-    }
 }

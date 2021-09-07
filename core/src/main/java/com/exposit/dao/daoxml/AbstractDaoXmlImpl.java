@@ -9,10 +9,12 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Implementation of {@link GenericDao} interface.
  * Implementation works with Jackson API and xml format files
  *
+ * @param <T> Type of element stored in GenericDao
  * @author Yauheni Markevich
  * @version 1.0
  */

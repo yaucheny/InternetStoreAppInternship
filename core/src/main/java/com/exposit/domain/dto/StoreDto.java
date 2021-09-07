@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -22,8 +21,7 @@ import javax.validation.constraints.Size;
 @Schema(description = "entity of store")
 public class StoreDto {
 
-    @Min(value = 1, message = "value of id should be more than 0")
-    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
+        @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
     @NotEmpty

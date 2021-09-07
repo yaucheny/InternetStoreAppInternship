@@ -23,7 +23,7 @@
                 <constraints foreignKeyName="product_shop_store_fk" references="stores(id)" deleteCascade="true"/>
             </column>
             <column name="product_id" type="BIGINT">
-                <constraints foreignKeyName="product_shop_product_fk" references="products(id)"/>
+                <constraints foreignKeyName="product_shop_product_fk" references="products(id)" deleteCascade="true"/>
             </column>
         </createTable>
         <rollback>

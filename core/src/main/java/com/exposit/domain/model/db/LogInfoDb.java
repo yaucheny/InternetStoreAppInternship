@@ -1,6 +1,7 @@
 package com.exposit.domain.model.db;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Simple JavaBean object that represents a LogInfo.
@@ -11,21 +12,11 @@ import lombok.Data;
  * @version 1.0
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class LogInfoDb extends BaseDb {
 
     private String path;
     private Long workTime;
     private Long numberErrors;
     private Long numberUpdates;
-
-    @Override
-    public String toString() {
-        return "ForLogInfoEntity{"
-                + ", id=" + id
-                + "path='" + path + '\''
-                + ", time=" + workTime
-                + ", errorString=" + numberErrors
-                + ", updateString=" + numberUpdates
-                + '}';
-    }
 }

@@ -6,6 +6,7 @@ import com.exposit.domain.dto.OrderDto;
 import com.exposit.domain.model.db.OrderDb;
 import com.exposit.domain.model.db.OrderItemDb;
 import com.exposit.domain.model.db.ShopProductDb;
+import com.exposit.domain.model.entity.OrderStatusEntity;
 import com.exposit.utils.exceptions.DaoException;
 import com.exposit.utils.exceptions.NotFoundException;
 import com.exposit.utils.exceptions.ServiceException;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.List;
+
 /**
  * Implementation of {@link OrderService} interface.
  *
@@ -37,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
     private static final String CAN_NOT_UPDATE_ORDER = "can not update order";
     private static final String CAN_NOT_ADD_ORDER = "can not add order ";
     private static final String NOT_ENOUGH_PRODUCTS = "not enough quantity of product in this store ";
-    private static final String WRONG_DATA = "check values of data in update reques ";
+    private static final String WRONG_DATA = "check values of data in update request ";
 
     @Override
     public void addOrder(OrderDto orderDto) {
@@ -52,6 +54,7 @@ public class OrderServiceImpl implements OrderService {
                 order.setOrderItemList(orderDto.getOrderItemList());
                 order.setDays(orderDto.getDays());
                 order.setPriceOfPurchase(priceOfBusket(orderDto.getOrderItemList()));
+                order.setOrderStatusEntity(OrderStatusEntity.NOT_DELIVERED);
                 changeQuantityAfterPurchase(orderDto.getOrderItemList());
                 orderDao.save(order);
                 mapper.map(orderDto, OrderDb.class);
@@ -78,18 +81,15 @@ public class OrderServiceImpl implements OrderService {
             try {
                 OrderDb order = orderDao.getById(id);
                 order.setDateOfOrder(orderDto.getDateOfOrder());
-                order.setDateOfDelivery(orderDto.getDateOfDelivery());
+                order.setDays(orderDto.getDays());
+                order.setDateOfDelivery(order.getDateOfOrder().plusDays(orderDto.getDays()));
                 order.setCustomer(orderDto.getCustomer());
                 order.setOrderItemList(orderDto.getOrderItemList());
                 order.setDays(orderDto.getDays());
-                order.setPriceOfPurchase(orderDto.getPriceOfPurchase());
+                order.setOrderStatusEntity(orderDto.getOrderStatusEntity());
+                order.setPriceOfPurchase(priceOfBusket(order.getOrderItemList()));
                 changeQuantityAfterPurchase(orderDto.getOrderItemList());
                 checkQuantity(orderDto.getOrderItemList());
-                if (order.getDateOfOrder().plusDays(order.getDays()) != order.getDateOfDelivery()
-                        || !order.getPriceOfPurchase().equals(priceOfBusket(orderDto.getOrderItemList()))) {
-                    LOG.error(WRONG_DATA);
-                    throw new ValidationException(WRONG_DATA);
-                }
                 orderDao.update(id, order);
             } catch (NotFoundException e) {
                 LOG.error(CAN_NOT_UPDATE_ORDER);

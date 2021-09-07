@@ -8,6 +8,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 /**
  * Dto object that represents a OrderItem.
  *
@@ -20,13 +22,14 @@ import javax.validation.constraints.Min;
 @Schema(description = "entity of orderItem")
 public class OrderItemDto {
 
-    @Min(value = 1, message = "value of id should be more than 0")
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
+    @NotNull
     @ApiModelProperty(notes = "product of shop in order item")
     private ShopProductDb shopProduct;
 
+    @NotNull
     @ApiModelProperty(notes = "quantity product of shop in order item")
     @Min(value = 0, message = "quantity should me more than 0")
     private Integer quantity;
