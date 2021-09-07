@@ -17,7 +17,7 @@ public class MenuController {
     private final Builder builder;
     private Navigator navigator;
 
-    private MenuController(Builder builder1) {
+    public MenuController(Builder builder1) {
         this.builder = builder1;
         this.builder.buildMenu();
         navigator = Navigator.getInstance();
