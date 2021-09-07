@@ -25,7 +25,6 @@ public class MenuController {
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
-
         navigator.setCurrentMenu(builder.getRootMenu());
         navigator.printMenu();
         int index = 1;

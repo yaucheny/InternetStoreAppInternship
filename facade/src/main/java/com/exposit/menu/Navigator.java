@@ -20,7 +20,6 @@ public class Navigator {
     private Menu currentMenu;
 
     private Navigator() {
-
     }
 
     public static Navigator getInstance() {
@@ -28,7 +27,6 @@ public class Navigator {
     }
 
     public void printMenu() {
-
         if (!currentMenu.getMenuItems().isEmpty()) {
             int pos = -1;
             for (MenuItem item : currentMenu.getMenuItems()) {
@@ -39,7 +37,6 @@ public class Navigator {
             }
         }
         System.out.println("choose index");
-
     }
 
     public void navigate(int index) {
@@ -48,11 +45,9 @@ public class Navigator {
                 MenuItem menuItem = currentMenu.getMenuItems().get(index);
                 menuItem.doAction();
                 currentMenu = menuItem.getNextMenu();
-
             }
         } catch (IndexOutOfBoundsException e) {
             LOG.warn("Wrong index was selected", e);
-
         }
     }
 
