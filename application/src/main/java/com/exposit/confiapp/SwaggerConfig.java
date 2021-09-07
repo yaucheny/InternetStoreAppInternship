@@ -30,6 +30,7 @@ public class SwaggerConfig {
     /**
      * Configures swagger.
      *
+     * @return Swagger configuration
      * @author Yauheni Markevich
      */
     @Bean
@@ -47,6 +48,7 @@ public class SwaggerConfig {
     /**
      * Configures information for swagger main page.
      *
+     * @return Info of swagger html page.
      * @author Yauheni Markevich
      */
     private ApiInfo apiInfo() {
@@ -62,6 +64,7 @@ public class SwaggerConfig {
     /**
      * Configures security context.
      *
+     * @return Configuration pf sequrity context
      * @author Yauheni Markevich
      */
     private SecurityContext securityContext() {
@@ -73,6 +76,7 @@ public class SwaggerConfig {
     /**
      * Returns type of authentication.
      *
+     * @return Schema of basic authentication.
      * @author Yauheni Markevich
      */
     private SecurityScheme basicAuthScheme() {
@@ -82,6 +86,7 @@ public class SwaggerConfig {
     /**
      * Returns type of security reference.
      *
+     * @return Reference of basic authentication.
      * @author Yauheni Markevich
      */
     private SecurityReference basicAuthReference() {

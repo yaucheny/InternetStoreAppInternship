@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Interface for a Data Access Object that can be used for a single specified type domain object.
- *
+ * * @param <T> Type of element stored in Class
  * @author Yauheni Markevich
  * @version 1.0
  */

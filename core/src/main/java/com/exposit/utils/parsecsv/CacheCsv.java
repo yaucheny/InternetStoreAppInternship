@@ -29,6 +29,7 @@ public final class CacheCsv {
     private static final String FILE_CACHE = "application/src/main/resources/csv/cache.txt";
 
     private CacheCsv() {
+
     }
 
     /**

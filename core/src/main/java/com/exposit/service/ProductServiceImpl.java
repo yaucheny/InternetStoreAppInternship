@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.List;
+
 /**
  * Implementation of {@link ProductService} interface.
  *
@@ -41,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
                 productDao.save(product);
             } catch (Exception e) {
                 LOG.error(CAN_NOT_ADD_PRODUCT);
-                throw new ServiceException(CAN_NOT_ADD_PRODUCT,e);
+                throw new ServiceException(CAN_NOT_ADD_PRODUCT, e);
             }
         }
     }

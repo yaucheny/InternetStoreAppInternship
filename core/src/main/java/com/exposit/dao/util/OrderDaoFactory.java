@@ -12,8 +12,9 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+
 /**
- * Implementation of {@link FactoryBean< OrderDao >} interface.
+ * Implementation of {@link FactoryBean<OrderDao>} interface.
  * FactoryBean creates proper implementations of dao layer after receiving value
  * from application properties @see #field dao.config.
  * Input of dao in application.properties decides which implementation will be downloaded.
@@ -30,12 +31,12 @@ public class OrderDaoFactory implements FactoryBean<OrderDao> {
     private static final String GET_DAO_TYPE_ERROR_LOG = "can not find dao by property: {}";
     private static final String GET_DAO_TYPE_ERROR_EXCEPTION = "can not find dao by property: %s";
 
-    public OrderDaoFactory(@Value("${dao.config}") String valueDao) {
-        this.valueDao = valueDao;
+    public OrderDaoFactory(@Value("${dao.config}") String valueDao1) {
+        this.valueDao = valueDao1;
     }
 
     @Override
-    public OrderDao getObject()  {
+    public OrderDao getObject() {
         if ("json".equalsIgnoreCase(valueDao)) {
             LOG.info("Get data from file OrderDb.json");
             return new OrderDaoJsonImpl();
@@ -45,7 +46,7 @@ public class OrderDaoFactory implements FactoryBean<OrderDao> {
         } else if ("hibernate".equalsIgnoreCase(valueDao)) {
             LOG.info("Hibernate gets data from postgres database");
             return new OrderDaoHiberImpl();
-        }else if ("jpa-repository".equalsIgnoreCase(valueDao)) {
+        } else if ("jpa-repository".equalsIgnoreCase(valueDao)) {
             LOG.info("Spring gets data from postgres database");
             return new OrderDaoRepositoryImpl();
         }

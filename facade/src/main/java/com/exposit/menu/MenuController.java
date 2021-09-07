@@ -3,6 +3,7 @@ package com.exposit.menu;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
+
 /**
  * Special class controls actions of console menu.
  * This class is responsible for running in main menu and calling additional menu items.
@@ -16,8 +17,8 @@ public class MenuController {
     private final Builder builder;
     private Navigator navigator;
 
-    private MenuController(Builder builder) {
-        this.builder = builder;
+    private MenuController(Builder builder1) {
+        this.builder = builder1;
         this.builder.buildMenu();
         navigator = Navigator.getInstance();
     }
@@ -31,7 +32,7 @@ public class MenuController {
         while (index > 0) {
 
             index = scanner.nextInt();
-            if (index==0) {
+            if (index == 0) {
                 break;
             }
             navigator.navigate(index);

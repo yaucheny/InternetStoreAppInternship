@@ -31,8 +31,8 @@ public class CategoryDaoFactory implements FactoryBean<CategoryDao> {
     private static final String GET_DAO_TYPE_ERROR_LOG = "can not find dao by property: {}";
     private static final String GET_DAO_TYPE_ERROR_EXCEPTION = "can not find dao by property: %s";
 
-    public CategoryDaoFactory(@Value("${dao.config}") String valueDao) {
-        this.valueDao = valueDao;
+    public CategoryDaoFactory(@Value("${dao.config}") String valueDao1) {
+        this.valueDao = valueDao1;
     }
 
     @Override

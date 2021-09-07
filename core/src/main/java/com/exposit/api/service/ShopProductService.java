@@ -66,7 +66,7 @@ public interface ShopProductService {
 
     /**
      * Sorts products in shop by price.
-     *
+     * @return Sorted List of ShopProduct
      * @author Yauheni Markevich
      */
     List<ShopProductDto> sortByPrice();

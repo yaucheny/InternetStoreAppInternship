@@ -33,6 +33,7 @@ public final class MarshallingJson {
     /**
      * Serializes data in json format to file.
      *
+     * @param <T>      Type of element stored in List
      * @param entities List of entities type <T>
      * @author Yauheni Markevich
      */
@@ -52,9 +53,11 @@ public final class MarshallingJson {
             }
         }
     }
+
     /**
      * Deserializes data from file to json format.
      *
+     * @param <T>                        Type of element stored in List
      * @param classOnWhichArrayIsDefined Class.class of entities from file
      * @return List<Class.class> of entities.
      * @author Yauheni Markevich

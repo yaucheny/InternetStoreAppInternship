@@ -14,6 +14,7 @@ public interface ShopProductDao extends GenericDao<ShopProductDb> {
     /**
      * Sorts products in shop by price.
      *
+     * @return Sorted List of ShopProduct.
      * @author Yauheni Markevich
      */
     List<ShopProductDb> sortByPrice();

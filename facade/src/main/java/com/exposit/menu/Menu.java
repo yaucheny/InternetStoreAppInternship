@@ -9,7 +9,7 @@ import java.util.List;
  * @version 1.0
  */
 public class Menu {
-    private String name;
+
     private List<MenuItem> menuItems = new ArrayList<>();
 
     public List<MenuItem> getMenuItems() {

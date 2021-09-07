@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
+
 /**
  * Special class that connects every point of menu to the method invocation.
  * This class is responsible for navigation by menu.
@@ -13,7 +14,7 @@ import java.util.Objects;
  */
 public class Navigator {
 
-    private final static Logger log = LoggerFactory.getLogger(Navigator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Navigator.class);
     private MenuItem menuItem;
     private static Navigator instance;
     private Menu currentMenu;
@@ -50,7 +51,7 @@ public class Navigator {
 
             }
         } catch (IndexOutOfBoundsException e) {
-            log.warn("Wrong index was selected", e);
+            LOG.warn("Wrong index was selected", e);
 
         }
     }

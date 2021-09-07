@@ -13,10 +13,10 @@ public class MenuItem {
     private Action action;
     private Menu nextMenu;
 
-    public MenuItem(String title, Action action, Menu nextMenu) {
-        this.title = title;
-        this.action = action;
-        this.nextMenu = nextMenu;
+    public MenuItem(String title1, Action action1, Menu nextMenu1) {
+        this.title = title1;
+        this.action = action1;
+        this.nextMenu = nextMenu1;
     }
 
     public void doAction() {
@@ -31,7 +31,7 @@ public class MenuItem {
         return title;
     }
 
-    public void setAction(Action action) {
-        this.action = action;
+    public void setAction(Action action1) {
+        this.action = action1;
     }
 }
