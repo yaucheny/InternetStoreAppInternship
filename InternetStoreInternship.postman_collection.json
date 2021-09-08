@@ -1,0 +1,4032 @@
+{
+	"info": {
+		"_postman_id": "1d40fcf3-ec20-483e-a2e2-97a426a88c1f",
+		"name": "InternetStoreInternship",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "getCategoryById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/categories/v1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"v1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCategoryById Exc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/categories/v1/1000000000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"v1",
+								"1000000000000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCategories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/categories/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCategory",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"less_litre\",\r\n    \"parentId\": 1,\r\n        \"childList\": [\r\n        {\r\n            \"id\": 3,\r\n            \"name\": \"technics\",\r\n            \"childList\": [\r\n                {\r\n                    \"id\": 9,\r\n                    \"name\": \"type_of_control\",\r\n                    \"childList\": [],\r\n                    \"parentId\": null\r\n                },\r\n                {\r\n                    \"id\": 10,\r\n                    \"name\": \"installation_type\",\r\n                    \"childList\": [],\r\n                    \"parentId\": null\r\n                },\r\n                {\r\n                    \"id\": 11,\r\n                    \"name\": \"dimensions\",\r\n                    \"childList\": [],\r\n                    \"parentId\": null\r\n                }\r\n            ],\r\n            \"parentId\": null\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"name\": \"clothes\",\r\n            \"childList\": [],\r\n            \"parentId\": null\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"name\": \"toys\",\r\n            \"childList\": [],\r\n            \"parentId\": null\r\n        }\r\n    ]\r\n},\r\n    \"childList\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/categories/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCategory exc_name",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"parentId\": 1,\r\n        \"childList\": [\r\n        {\r\n            \"id\": 3,\r\n            \"name\": \"\",\r\n            \"childList\": [\r\n                {\r\n                    \"id\": 9,\r\n                    \"name\": \"type_of_control\",\r\n                    \"childList\": [],\r\n                    \"parentId\": null\r\n                },\r\n                {\r\n                    \"id\": 10,\r\n                    \"name\": \"installation_type\",\r\n                    \"childList\": [],\r\n                    \"parentId\": null\r\n                },\r\n                {\r\n                    \"id\": 11,\r\n                    \"name\": \"dimensions\",\r\n                    \"childList\": [],\r\n                    \"parentId\": null\r\n                }\r\n            ],\r\n            \"parentId\": null\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"name\": \"clothes\",\r\n            \"childList\": [],\r\n            \"parentId\": null\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"name\": \"toys\",\r\n            \"childList\": [],\r\n            \"parentId\": null\r\n        }\r\n    ]\r\n},\r\n    \"childList\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/categories/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCategory exc_id",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"less_litre\",\r\n    \"parentId\": -1,\r\n        \"childList\": [\r\n        {\r\n            \"id\": 3,\r\n            \"name\": \"\",\r\n            \"childList\": [\r\n                {\r\n                    \"id\": 9,\r\n                    \"name\": \"type_of_control\",\r\n                    \"childList\": [],\r\n                    \"parentId\": null\r\n                },\r\n                {\r\n                    \"id\": 10,\r\n                    \"name\": \"installation_type\",\r\n                    \"childList\": [],\r\n                    \"parentId\": null\r\n                },\r\n                {\r\n                    \"id\": 11,\r\n                    \"name\": \"dimensions\",\r\n                    \"childList\": [],\r\n                    \"parentId\": null\r\n                }\r\n            ],\r\n            \"parentId\": null\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"name\": \"clothes\",\r\n            \"childList\": [],\r\n            \"parentId\": null\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"name\": \"toys\",\r\n            \"childList\": [],\r\n            \"parentId\": null\r\n        }\r\n    ]\r\n},\r\n    \"childList\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/categories/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Category",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"222\",\r\n    \"parentId\": 30,\r\n    \"childList\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/categories/v1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"v1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Category exc_id",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"222\",\r\n    \"parentId\": 30,\r\n    \"childList\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/categories/v1/1000000000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"v1",
+								"1000000000000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Category exc_valid_parent",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"222\",\r\n    \"parentId\": -1,\r\n    \"childList\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/categories/v1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"v1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Category exc_valid_name",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"parentId\": 30,\r\n    \"childList\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/categories/v1/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"v1",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCategoryById",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/categories/v1/29",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"v1",
+								"29"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCategoryById Exc",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/categories/v1/740000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"v1",
+								"740000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveToFileCategory",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/categories/v1/file",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"v1",
+								"file"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "getOrderById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orders/v1/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"v1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrderById exc_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orders/v1/10000000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"v1",
+								"10000000000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllOrders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orders/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrder",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dateOfOrder\": \"2021-09-07\",\r\n    \"customer\": {\r\n        \"id\": 1,\r\n        \"firstName\": \"Ivan\",\r\n        \"lastName\": \"Ivanov\",\r\n        \"address\": \"Suvorova 1 , 1\",\r\n        \"email\": \"ivanov@gmail.com\"\r\n    },\r\n    \"orderItemList\": [\r\n        {\r\n            \"id\": 1,\r\n            \"shopProduct\": {\r\n                \"id\": 1,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21 vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"telephone\",\r\n                    \"producer\": \"lg\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 33,\r\n                            \"name\": \"sensor\",\r\n                            \"parentId\": 11\r\n                        },\r\n                        {\r\n                            \"id\": 35,\r\n                            \"name\": \"small\",\r\n                            \"parentId\": 12\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 250.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"shopProduct\": {\r\n                \"id\": 11,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 6,\r\n                    \"name\": \"refrigerator\",\r\n                    \"producer\": \"bosch\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 32,\r\n                            \"name\": \"free_standing\",\r\n                            \"parentId\": 10\r\n                        },\r\n                        {\r\n                            \"id\": 34,\r\n                            \"name\": \"button\",\r\n                            \"parentId\": 11\r\n                        },\r\n                        {\r\n                            \"id\": 36,\r\n                            \"name\": \"big\",\r\n                            \"parentId\": 12\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 1050.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"shopProduct\": {\r\n                \"id\": 22,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 2,\r\n                    \"name\": \"ozone\",\r\n                    \"internetPage\": \"ozon.ru\",\r\n                    \"phoneNumber\": \"+375294444444\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 11,\r\n                    \"name\": \"shirt\",\r\n                    \"producer\": \"collins\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 37,\r\n                            \"name\": \"children\",\r\n                            \"parentId\": 13\r\n                        },\r\n                        {\r\n                            \"id\": 40,\r\n                            \"name\": \"summer\",\r\n                            \"parentId\": 14\r\n                        },\r\n                        {\r\n                            \"id\": 43,\r\n                            \"name\": \"premium\",\r\n                            \"parentId\": 15\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 60.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 12,\r\n            \"shopProduct\": {\r\n                \"id\": 33,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21 vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 17,\r\n                    \"name\": \"cubes\",\r\n                    \"producer\": \"play\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 45,\r\n                            \"name\": \"children\",\r\n                            \"parentId\": 16\r\n                        },\r\n                        {\r\n                            \"id\": 47,\r\n                            \"name\": \"wood\",\r\n                            \"parentId\": 17\r\n                        },\r\n                        {\r\n                            \"id\": 49,\r\n                            \"name\": \"develop\",\r\n                            \"parentId\": 18\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 10.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 16,\r\n            \"shopProduct\": {\r\n                \"id\": 51,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 26,\r\n                    \"name\": \"canned_food\",\r\n                    \"producer\": \"pet\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 52,\r\n                            \"name\": \"chicken\",\r\n                            \"parentId\": 19\r\n                        },\r\n                        {\r\n                            \"id\": 54,\r\n                            \"name\": \"cat\",\r\n                            \"parentId\": 20\r\n                        },\r\n                        {\r\n                            \"id\": 56,\r\n                            \"name\": \"old\",\r\n                            \"parentId\": 21\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 2.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 20,\r\n            \"shopProduct\": {\r\n                \"id\": 62,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 2,\r\n                    \"name\": \"ozone\",\r\n                    \"internetPage\": \"ozon.ru\",\r\n                    \"phoneNumber\": \"+375294444444\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 31,\r\n                    \"name\": \"baby_mix\",\r\n                    \"producer\": \"baby\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 57,\r\n                            \"name\": \"milk\",\r\n                            \"parentId\": 22\r\n                        },\r\n                        {\r\n                            \"id\": 59,\r\n                            \"name\": \"instant\",\r\n                            \"parentId\": 23\r\n                        },\r\n                        {\r\n                            \"id\": 60,\r\n                            \"name\": \"not_instant\",\r\n                            \"parentId\": 23\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 6.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 24,\r\n            \"shopProduct\": {\r\n                \"id\": 73,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21 vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 37,\r\n                    \"name\": \"cookies\",\r\n                    \"producer\": \"volcov\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 57,\r\n                            \"name\": \"milk\",\r\n                            \"parentId\": 22\r\n                        },\r\n                        {\r\n                            \"id\": 59,\r\n                            \"name\": \"instant\",\r\n                            \"parentId\": 23\r\n                        },\r\n                        {\r\n                            \"id\": 61,\r\n                            \"name\": \"before_year\",\r\n                            \"parentId\": 24\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 5.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 28,\r\n            \"shopProduct\": {\r\n                \"id\": 91,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 46,\r\n                    \"name\": \"hot_dog\",\r\n                    \"producer\": \"mmk\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 64,\r\n                            \"name\": \"food_adult\",\r\n                            \"parentId\": 25\r\n                        },\r\n                        {\r\n                            \"id\": 66,\r\n                            \"name\": \"not_sport_food\",\r\n                            \"parentId\": 26\r\n                        },\r\n                        {\r\n                            \"id\": 68,\r\n                            \"name\": \"not_frozen\",\r\n                            \"parentId\": 27\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 2.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        }\r\n    ],\r\n    \"orderStatusEntity\": \"NOT_DELIVERED\",\r\n    \"days\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orders/v1/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"v1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrder exc_valid_days",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dateOfOrder\": \"2021-09-07\",\r\n    \"dateOfDelivery\": \"2021-09-08\",\r\n    \"priceOfPurchase\": 1385.0,\r\n    \"customer\": {\r\n        \"id\": 1,\r\n        \"firstName\": \"Ivan\",\r\n        \"lastName\": \"Ivanov\",\r\n        \"address\": \"Suvorova 1 , 1\",\r\n        \"email\": \"ivanov@gmail.com\"\r\n    },\r\n    \"orderItemList\": [\r\n        {\r\n            \"id\": 1,\r\n            \"shopProduct\": {\r\n                \"id\": 1,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21 vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"telephone\",\r\n                    \"producer\": \"lg\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 33,\r\n                            \"name\": \"sensor\",\r\n                            \"parentId\": 11\r\n                        },\r\n                        {\r\n                            \"id\": 35,\r\n                            \"name\": \"small\",\r\n                            \"parentId\": 12\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 250.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"shopProduct\": {\r\n                \"id\": 11,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 6,\r\n                    \"name\": \"refrigerator\",\r\n                    \"producer\": \"bosch\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 32,\r\n                            \"name\": \"free_standing\",\r\n                            \"parentId\": 10\r\n                        },\r\n                        {\r\n                            \"id\": 34,\r\n                            \"name\": \"button\",\r\n                            \"parentId\": 11\r\n                        },\r\n                        {\r\n                            \"id\": 36,\r\n                            \"name\": \"big\",\r\n                            \"parentId\": 12\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 1050.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"shopProduct\": {\r\n                \"id\": 22,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 2,\r\n                    \"name\": \"ozone\",\r\n                    \"internetPage\": \"ozon.ru\",\r\n                    \"phoneNumber\": \"+375294444444\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 11,\r\n                    \"name\": \"shirt\",\r\n                    \"producer\": \"collins\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 37,\r\n                            \"name\": \"children\",\r\n                            \"parentId\": 13\r\n                        },\r\n                        {\r\n                            \"id\": 40,\r\n                            \"name\": \"summer\",\r\n                            \"parentId\": 14\r\n                        },\r\n                        {\r\n                            \"id\": 43,\r\n                            \"name\": \"premium\",\r\n                            \"parentId\": 15\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 60.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 12,\r\n            \"shopProduct\": {\r\n                \"id\": 33,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21 vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 17,\r\n                    \"name\": \"cubes\",\r\n                    \"producer\": \"play\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 45,\r\n                            \"name\": \"children\",\r\n                            \"parentId\": 16\r\n                        },\r\n                        {\r\n                            \"id\": 47,\r\n                            \"name\": \"wood\",\r\n                            \"parentId\": 17\r\n                        },\r\n                        {\r\n                            \"id\": 49,\r\n                            \"name\": \"develop\",\r\n                            \"parentId\": 18\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 10.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 16,\r\n            \"shopProduct\": {\r\n                \"id\": 51,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 26,\r\n                    \"name\": \"canned_food\",\r\n                    \"producer\": \"pet\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 52,\r\n                            \"name\": \"chicken\",\r\n                            \"parentId\": 19\r\n                        },\r\n                        {\r\n                            \"id\": 54,\r\n                            \"name\": \"cat\",\r\n                            \"parentId\": 20\r\n                        },\r\n                        {\r\n                            \"id\": 56,\r\n                            \"name\": \"old\",\r\n                            \"parentId\": 21\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 2.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 20,\r\n            \"shopProduct\": {\r\n                \"id\": 62,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 2,\r\n                    \"name\": \"ozone\",\r\n                    \"internetPage\": \"ozon.ru\",\r\n                    \"phoneNumber\": \"+375294444444\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 31,\r\n                    \"name\": \"baby_mix\",\r\n                    \"producer\": \"baby\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 57,\r\n                            \"name\": \"milk\",\r\n                            \"parentId\": 22\r\n                        },\r\n                        {\r\n                            \"id\": 59,\r\n                            \"name\": \"instant\",\r\n                            \"parentId\": 23\r\n                        },\r\n                        {\r\n                            \"id\": 60,\r\n                            \"name\": \"not_instant\",\r\n                            \"parentId\": 23\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 6.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 24,\r\n            \"shopProduct\": {\r\n                \"id\": 73,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21 vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 37,\r\n                    \"name\": \"cookies\",\r\n                    \"producer\": \"volcov\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 57,\r\n                            \"name\": \"milk\",\r\n                            \"parentId\": 22\r\n                        },\r\n                        {\r\n                            \"id\": 59,\r\n                            \"name\": \"instant\",\r\n                            \"parentId\": 23\r\n                        },\r\n                        {\r\n                            \"id\": 61,\r\n                            \"name\": \"before_year\",\r\n                            \"parentId\": 24\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 5.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 28,\r\n            \"shopProduct\": {\r\n                \"id\": 91,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 46,\r\n                    \"name\": \"hot_dog\",\r\n                    \"producer\": \"mmk\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 64,\r\n                            \"name\": \"food_adult\",\r\n                            \"parentId\": 25\r\n                        },\r\n                        {\r\n                            \"id\": 66,\r\n                            \"name\": \"not_sport_food\",\r\n                            \"parentId\": 26\r\n                        },\r\n                        {\r\n                            \"id\": 68,\r\n                            \"name\": \"not_frozen\",\r\n                            \"parentId\": 27\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 2.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        }\r\n    ],\r\n    \"orderStatusEntity\": \"NOT_DELIVERED\",\r\n    \"days\": -11\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orders/v1/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"v1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrder exc_valid_service_Quant",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dateOfOrder\": \"2021-09-07\",\r\n    \"dateOfDelivery\": \"2021-09-08\",\r\n    \"priceOfPurchase\": 3768.0,\r\n    \"customer\": {\r\n        \"id\": 1,\r\n        \"firstName\": \"Ivan\",\r\n        \"lastName\": \"Ivanov\",\r\n        \"address\": \"Suvorova 1 , 1\",\r\n        \"email\": \"ivanov@gmail.com\"\r\n    },\r\n    \"orderItemList\": [\r\n        {\r\n            \"id\": 1,\r\n            \"shopProduct\": {\r\n                \"id\": 1,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21 vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"telephone\",\r\n                    \"producer\": \"lg\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 33,\r\n                            \"name\": \"sensor\",\r\n                            \"parentId\": 11\r\n                        },\r\n                        {\r\n                            \"id\": 35,\r\n                            \"name\": \"small\",\r\n                            \"parentId\": 12\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 250.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"shopProduct\": {\r\n                \"id\": 11,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 6,\r\n                    \"name\": \"refrigerator\",\r\n                    \"producer\": \"bosch\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 32,\r\n                            \"name\": \"free_standing\",\r\n                            \"parentId\": 10\r\n                        },\r\n                        {\r\n                            \"id\": 34,\r\n                            \"name\": \"button\",\r\n                            \"parentId\": 11\r\n                        },\r\n                        {\r\n                            \"id\": 36,\r\n                            \"name\": \"big\",\r\n                            \"parentId\": 12\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 1050.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"shopProduct\": {\r\n                \"id\": 22,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 2,\r\n                    \"name\": \"ozone\",\r\n                    \"internetPage\": \"ozon.ru\",\r\n                    \"phoneNumber\": \"+375294444444\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 11,\r\n                    \"name\": \"shirt\",\r\n                    \"producer\": \"collins\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 37,\r\n                            \"name\": \"children\",\r\n                            \"parentId\": 13\r\n                        },\r\n                        {\r\n                            \"id\": 40,\r\n                            \"name\": \"summer\",\r\n                            \"parentId\": 14\r\n                        },\r\n                        {\r\n                            \"id\": 43,\r\n                            \"name\": \"premium\",\r\n                            \"parentId\": 15\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 60.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 12,\r\n            \"shopProduct\": {\r\n                \"id\": 33,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21 vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 17,\r\n                    \"name\": \"cubes\",\r\n                    \"producer\": \"play\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 45,\r\n                            \"name\": \"children\",\r\n                            \"parentId\": 16\r\n                        },\r\n                        {\r\n                            \"id\": 47,\r\n                            \"name\": \"wood\",\r\n                            \"parentId\": 17\r\n                        },\r\n                        {\r\n                            \"id\": 49,\r\n                            \"name\": \"develop\",\r\n                            \"parentId\": 18\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 10.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 16,\r\n            \"shopProduct\": {\r\n                \"id\": 51,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 26,\r\n                    \"name\": \"canned_food\",\r\n                    \"producer\": \"pet\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 52,\r\n                            \"name\": \"chicken\",\r\n                            \"parentId\": 19\r\n                        },\r\n                        {\r\n                            \"id\": 54,\r\n                            \"name\": \"cat\",\r\n                            \"parentId\": 20\r\n                        },\r\n                        {\r\n                            \"id\": 56,\r\n                            \"name\": \"old\",\r\n                            \"parentId\": 21\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 2.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 20,\r\n            \"shopProduct\": {\r\n                \"id\": 62,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 2,\r\n                    \"name\": \"ozone\",\r\n                    \"internetPage\": \"ozon.ru\",\r\n                    \"phoneNumber\": \"+375294444444\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 31,\r\n                    \"name\": \"baby_mix\",\r\n                    \"producer\": \"baby\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 57,\r\n                            \"name\": \"milk\",\r\n                            \"parentId\": 22\r\n                        },\r\n                        {\r\n                            \"id\": 59,\r\n                            \"name\": \"instant\",\r\n                            \"parentId\": 23\r\n                        },\r\n                        {\r\n                            \"id\": 60,\r\n                            \"name\": \"not_instant\",\r\n                            \"parentId\": 23\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 6.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 24,\r\n            \"shopProduct\": {\r\n                \"id\": 73,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21 vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 37,\r\n                    \"name\": \"cookies\",\r\n                    \"producer\": \"volcov\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 57,\r\n                            \"name\": \"milk\",\r\n                            \"parentId\": 22\r\n                        },\r\n                        {\r\n                            \"id\": 59,\r\n                            \"name\": \"instant\",\r\n                            \"parentId\": 23\r\n                        },\r\n                        {\r\n                            \"id\": 61,\r\n                            \"name\": \"before_year\",\r\n                            \"parentId\": 24\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 5.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 28,\r\n            \"shopProduct\": {\r\n                \"id\": 91,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 46,\r\n                    \"name\": \"hot_dog\",\r\n                    \"producer\": \"mmk\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 64,\r\n                            \"name\": \"food_adult\",\r\n                            \"parentId\": 25\r\n                        },\r\n                        {\r\n                            \"id\": 66,\r\n                            \"name\": \"not_sport_food\",\r\n                            \"parentId\": 26\r\n                        },\r\n                        {\r\n                            \"id\": 68,\r\n                            \"name\": \"not_frozen\",\r\n                            \"parentId\": 27\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 2.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 100\r\n        }\r\n    ],\r\n    \"orderStatusEntity\": \"NOT_DELIVERED\",\r\n    \"days\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orders/v1/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"v1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrder exc_id",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dateOfOrder\": \"2021-09-07\",\r\n    \"dateOfDelivery\": \"2021-09-08\",\r\n    \"priceOfPurchase\": 3768.0,\r\n    \"customer\": {\r\n        \"id\": 1,\r\n        \"firstName\": \"Ivan\",\r\n        \"lastName\": \"Ivanov\",\r\n        \"address\": \"Suvorova 1 , 1\",\r\n        \"email\": \"ivanov@gmail.com\"\r\n    },\r\n    \"orderItemList\": [\r\n        {\r\n            \"id\": 1,\r\n            \"shopProduct\": {\r\n                \"id\": 1,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21 vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"telephone\",\r\n                    \"producer\": \"lg\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 33,\r\n                            \"name\": \"sensor\",\r\n                            \"parentId\": 11\r\n                        },\r\n                        {\r\n                            \"id\": 35,\r\n                            \"name\": \"small\",\r\n                            \"parentId\": 12\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 250.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"shopProduct\": {\r\n                \"id\": 11,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 6,\r\n                    \"name\": \"refrigerator\",\r\n                    \"producer\": \"bosch\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 32,\r\n                            \"name\": \"free_standing\",\r\n                            \"parentId\": 10\r\n                        },\r\n                        {\r\n                            \"id\": 34,\r\n                            \"name\": \"button\",\r\n                            \"parentId\": 11\r\n                        },\r\n                        {\r\n                            \"id\": 36,\r\n                            \"name\": \"big\",\r\n                            \"parentId\": 12\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 1050.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"shopProduct\": {\r\n                \"id\": 22,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 2,\r\n                    \"name\": \"ozone\",\r\n                    \"internetPage\": \"ozon.ru\",\r\n                    \"phoneNumber\": \"+375294444444\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 11,\r\n                    \"name\": \"shirt\",\r\n                    \"producer\": \"collins\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 37,\r\n                            \"name\": \"children\",\r\n                            \"parentId\": 13\r\n                        },\r\n                        {\r\n                            \"id\": 40,\r\n                            \"name\": \"summer\",\r\n                            \"parentId\": 14\r\n                        },\r\n                        {\r\n                            \"id\": 43,\r\n                            \"name\": \"premium\",\r\n                            \"parentId\": 15\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 60.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 12,\r\n            \"shopProduct\": {\r\n                \"id\": 33,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21 vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 17,\r\n                    \"name\": \"cubes\",\r\n                    \"producer\": \"play\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 45,\r\n                            \"name\": \"children\",\r\n                            \"parentId\": 16\r\n                        },\r\n                        {\r\n                            \"id\": 47,\r\n                            \"name\": \"wood\",\r\n                            \"parentId\": 17\r\n                        },\r\n                        {\r\n                            \"id\": 49,\r\n                            \"name\": \"develop\",\r\n                            \"parentId\": 18\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 10.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 16,\r\n            \"shopProduct\": {\r\n                \"id\": 51,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 26,\r\n                    \"name\": \"canned_food\",\r\n                    \"producer\": \"pet\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 52,\r\n                            \"name\": \"chicken\",\r\n                            \"parentId\": 19\r\n                        },\r\n                        {\r\n                            \"id\": 54,\r\n                            \"name\": \"cat\",\r\n                            \"parentId\": 20\r\n                        },\r\n                        {\r\n                            \"id\": 56,\r\n                            \"name\": \"old\",\r\n                            \"parentId\": 21\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 2.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 20,\r\n            \"shopProduct\": {\r\n                \"id\": 62,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 2,\r\n                    \"name\": \"ozone\",\r\n                    \"internetPage\": \"ozon.ru\",\r\n                    \"phoneNumber\": \"+375294444444\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 31,\r\n                    \"name\": \"baby_mix\",\r\n                    \"producer\": \"baby\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 57,\r\n                            \"name\": \"milk\",\r\n                            \"parentId\": 22\r\n                        },\r\n                        {\r\n                            \"id\": 59,\r\n                            \"name\": \"instant\",\r\n                            \"parentId\": 23\r\n                        },\r\n                        {\r\n                            \"id\": 60,\r\n                            \"name\": \"not_instant\",\r\n                            \"parentId\": 23\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 6.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 24,\r\n            \"shopProduct\": {\r\n                \"id\": 73,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21 vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 37,\r\n                    \"name\": \"cookies\",\r\n                    \"producer\": \"volcov\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 57,\r\n                            \"name\": \"milk\",\r\n                            \"parentId\": 22\r\n                        },\r\n                        {\r\n                            \"id\": 59,\r\n                            \"name\": \"instant\",\r\n                            \"parentId\": 23\r\n                        },\r\n                        {\r\n                            \"id\": 61,\r\n                            \"name\": \"before_year\",\r\n                            \"parentId\": 24\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 5.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 28,\r\n            \"shopProduct\": {\r\n                \"id\": 91,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 46,\r\n                    \"name\": \"hot_dog\",\r\n                    \"producer\": \"mmk\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 64,\r\n                            \"name\": \"food_adult\",\r\n                            \"parentId\": 25\r\n                        },\r\n                        {\r\n                            \"id\": 66,\r\n                            \"name\": \"not_sport_food\",\r\n                            \"parentId\": 26\r\n                        },\r\n                        {\r\n                            \"id\": 68,\r\n                            \"name\": \"not_frozen\",\r\n                            \"parentId\": 27\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 2.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        }\r\n    ],\r\n    \"orderStatusEntity\": \"NOT_DELIVERED\",\r\n    \"days\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orders/v1/300000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"v1",
+								"300000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrder exc_valid_cust",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dateOfOrder\": \"2021-09-07\",\r\n    \"dateOfDelivery\": \"2021-09-08\",\r\n    \"priceOfPurchase\": 3768.0,\r\n    \"customer\": null,\r\n    \"orderItemList\": [\r\n        {\r\n            \"id\": 1,\r\n            \"shopProduct\": {\r\n                \"id\": 1,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21 vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"telephone\",\r\n                    \"producer\": \"lg\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 33,\r\n                            \"name\": \"sensor\",\r\n                            \"parentId\": 11\r\n                        },\r\n                        {\r\n                            \"id\": 35,\r\n                            \"name\": \"small\",\r\n                            \"parentId\": 12\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 250.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"shopProduct\": {\r\n                \"id\": 11,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 6,\r\n                    \"name\": \"refrigerator\",\r\n                    \"producer\": \"bosch\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 32,\r\n                            \"name\": \"free_standing\",\r\n                            \"parentId\": 10\r\n                        },\r\n                        {\r\n                            \"id\": 34,\r\n                            \"name\": \"button\",\r\n                            \"parentId\": 11\r\n                        },\r\n                        {\r\n                            \"id\": 36,\r\n                            \"name\": \"big\",\r\n                            \"parentId\": 12\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 1050.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"shopProduct\": {\r\n                \"id\": 22,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 2,\r\n                    \"name\": \"ozone\",\r\n                    \"internetPage\": \"ozon.ru\",\r\n                    \"phoneNumber\": \"+375294444444\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 11,\r\n                    \"name\": \"shirt\",\r\n                    \"producer\": \"collins\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 37,\r\n                            \"name\": \"children\",\r\n                            \"parentId\": 13\r\n                        },\r\n                        {\r\n                            \"id\": 40,\r\n                            \"name\": \"summer\",\r\n                            \"parentId\": 14\r\n                        },\r\n                        {\r\n                            \"id\": 43,\r\n                            \"name\": \"premium\",\r\n                            \"parentId\": 15\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 60.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 12,\r\n            \"shopProduct\": {\r\n                \"id\": 33,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21 vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 17,\r\n                    \"name\": \"cubes\",\r\n                    \"producer\": \"play\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 45,\r\n                            \"name\": \"children\",\r\n                            \"parentId\": 16\r\n                        },\r\n                        {\r\n                            \"id\": 47,\r\n                            \"name\": \"wood\",\r\n                            \"parentId\": 17\r\n                        },\r\n                        {\r\n                            \"id\": 49,\r\n                            \"name\": \"develop\",\r\n                            \"parentId\": 18\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 10.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 16,\r\n            \"shopProduct\": {\r\n                \"id\": 51,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 26,\r\n                    \"name\": \"canned_food\",\r\n                    \"producer\": \"pet\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 52,\r\n                            \"name\": \"chicken\",\r\n                            \"parentId\": 19\r\n                        },\r\n                        {\r\n                            \"id\": 54,\r\n                            \"name\": \"cat\",\r\n                            \"parentId\": 20\r\n                        },\r\n                        {\r\n                            \"id\": 56,\r\n                            \"name\": \"old\",\r\n                            \"parentId\": 21\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 2.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 20,\r\n            \"shopProduct\": {\r\n                \"id\": 62,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 2,\r\n                    \"name\": \"ozone\",\r\n                    \"internetPage\": \"ozon.ru\",\r\n                    \"phoneNumber\": \"+375294444444\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 31,\r\n                    \"name\": \"baby_mix\",\r\n                    \"producer\": \"baby\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 57,\r\n                            \"name\": \"milk\",\r\n                            \"parentId\": 22\r\n                        },\r\n                        {\r\n                            \"id\": 59,\r\n                            \"name\": \"instant\",\r\n                            \"parentId\": 23\r\n                        },\r\n                        {\r\n                            \"id\": 60,\r\n                            \"name\": \"not_instant\",\r\n                            \"parentId\": 23\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 6.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 24,\r\n            \"shopProduct\": {\r\n                \"id\": 73,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21 vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 37,\r\n                    \"name\": \"cookies\",\r\n                    \"producer\": \"volcov\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 57,\r\n                            \"name\": \"milk\",\r\n                            \"parentId\": 22\r\n                        },\r\n                        {\r\n                            \"id\": 59,\r\n                            \"name\": \"instant\",\r\n                            \"parentId\": 23\r\n                        },\r\n                        {\r\n                            \"id\": 61,\r\n                            \"name\": \"before_year\",\r\n                            \"parentId\": 24\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 5.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 28,\r\n            \"shopProduct\": {\r\n                \"id\": 91,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 46,\r\n                    \"name\": \"hot_dog\",\r\n                    \"producer\": \"mmk\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 64,\r\n                            \"name\": \"food_adult\",\r\n                            \"parentId\": 25\r\n                        },\r\n                        {\r\n                            \"id\": 66,\r\n                            \"name\": \"not_sport_food\",\r\n                            \"parentId\": 26\r\n                        },\r\n                        {\r\n                            \"id\": 68,\r\n                            \"name\": \"not_frozen\",\r\n                            \"parentId\": 27\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 2.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        }\r\n    ],\r\n    \"orderStatusEntity\": \"NOT_DELIVERED\",\r\n    \"days\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orders/v1/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"v1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addOrder",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\": {\r\n        \"id\": 1,\r\n        \"firstName\": \"Ivan\",\r\n        \"lastName\": \"Ivanov\",\r\n        \"address\": \"Suvorova 1 , 1\",\r\n        \"email\": \"ivanov@gmail.com\"\r\n    },\r\n    \"orderItemList\": [\r\n        {\r\n            \"id\": 1,\r\n            \"shopProduct\": {\r\n                \"id\": 1,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21 vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"telephone\",\r\n                    \"producer\": \"lg\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 33,\r\n                            \"name\": \"sensor\",\r\n                            \"parentId\": 11\r\n                        },\r\n                        {\r\n                            \"id\": 35,\r\n                            \"name\": \"small\",\r\n                            \"parentId\": 12\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 250.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"shopProduct\": {\r\n                \"id\": 11,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 6,\r\n                    \"name\": \"refrigerator\",\r\n                    \"producer\": \"bosch\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 32,\r\n                            \"name\": \"free_standing\",\r\n                            \"parentId\": 10\r\n                        },\r\n                        {\r\n                            \"id\": 34,\r\n                            \"name\": \"button\",\r\n                            \"parentId\": 11\r\n                        },\r\n                        {\r\n                            \"id\": 36,\r\n                            \"name\": \"big\",\r\n                            \"parentId\": 12\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 1050.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"shopProduct\": {\r\n                \"id\": 22,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 2,\r\n                    \"name\": \"ozone\",\r\n                    \"internetPage\": \"ozon.ru\",\r\n                    \"phoneNumber\": \"+375294444444\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 11,\r\n                    \"name\": \"shirt\",\r\n                    \"producer\": \"collins\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 37,\r\n                            \"name\": \"children\",\r\n                            \"parentId\": 13\r\n                        },\r\n                        {\r\n                            \"id\": 40,\r\n                            \"name\": \"summer\",\r\n                            \"parentId\": 14\r\n                        },\r\n                        {\r\n                            \"id\": 43,\r\n                            \"name\": \"premium\",\r\n                            \"parentId\": 15\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 60.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 12,\r\n            \"shopProduct\": {\r\n                \"id\": 33,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21 vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 17,\r\n                    \"name\": \"cubes\",\r\n                    \"producer\": \"play\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 45,\r\n                            \"name\": \"children\",\r\n                            \"parentId\": 16\r\n                        },\r\n                        {\r\n                            \"id\": 47,\r\n                            \"name\": \"wood\",\r\n                            \"parentId\": 17\r\n                        },\r\n                        {\r\n                            \"id\": 49,\r\n                            \"name\": \"develop\",\r\n                            \"parentId\": 18\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 10.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 16,\r\n            \"shopProduct\": {\r\n                \"id\": 51,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 26,\r\n                    \"name\": \"canned_food\",\r\n                    \"producer\": \"pet\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 52,\r\n                            \"name\": \"chicken\",\r\n                            \"parentId\": 19\r\n                        },\r\n                        {\r\n                            \"id\": 54,\r\n                            \"name\": \"cat\",\r\n                            \"parentId\": 20\r\n                        },\r\n                        {\r\n                            \"id\": 56,\r\n                            \"name\": \"old\",\r\n                            \"parentId\": 21\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 2.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 20,\r\n            \"shopProduct\": {\r\n                \"id\": 62,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 2,\r\n                    \"name\": \"ozone\",\r\n                    \"internetPage\": \"ozon.ru\",\r\n                    \"phoneNumber\": \"+375294444444\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 31,\r\n                    \"name\": \"baby_mix\",\r\n                    \"producer\": \"baby\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 57,\r\n                            \"name\": \"milk\",\r\n                            \"parentId\": 22\r\n                        },\r\n                        {\r\n                            \"id\": 59,\r\n                            \"name\": \"instant\",\r\n                            \"parentId\": 23\r\n                        },\r\n                        {\r\n                            \"id\": 60,\r\n                            \"name\": \"not_instant\",\r\n                            \"parentId\": 23\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 6.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 24,\r\n            \"shopProduct\": {\r\n                \"id\": 73,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21 vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 37,\r\n                    \"name\": \"cookies\",\r\n                    \"producer\": \"volcov\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 57,\r\n                            \"name\": \"milk\",\r\n                            \"parentId\": 22\r\n                        },\r\n                        {\r\n                            \"id\": 59,\r\n                            \"name\": \"instant\",\r\n                            \"parentId\": 23\r\n                        },\r\n                        {\r\n                            \"id\": 61,\r\n                            \"name\": \"before_year\",\r\n                            \"parentId\": 24\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 5.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 28,\r\n            \"shopProduct\": {\r\n                \"id\": 91,\r\n                \"quantity\": 5,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"product\": {\r\n                    \"id\": 46,\r\n                    \"name\": \"hot_dog\",\r\n                    \"producer\": \"mmk\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 64,\r\n                            \"name\": \"food_adult\",\r\n                            \"parentId\": 25\r\n                        },\r\n                        {\r\n                            \"id\": 66,\r\n                            \"name\": \"not_sport_food\",\r\n                            \"parentId\": 26\r\n                        },\r\n                        {\r\n                            \"id\": 68,\r\n                            \"name\": \"not_frozen\",\r\n                            \"parentId\": 27\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 2.0,\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        }\r\n    ],\r\n    \"days\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orders/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addOrder exc_valid_days",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \r\n    \"customer\": {\r\n        \"id\": 3,\r\n        \"firstName\": \"Sidor\",\r\n        \"lastName\": \"Sidrov\",\r\n        \"address\": \"Kupaly 3 , 3\",\r\n        \"email\": \"sidorov@gmail.com\"\r\n    },\r\n    \"orderItemList\": [\r\n        {\r\n            \"id\": 3,\r\n            \"shopProduct\": {\r\n                \"id\": 3,\r\n                \"product\": {\r\n                    \"id\": 2,\r\n                    \"name\": \"telephone\",\r\n                    \"producer\": \"apple\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 34,\r\n                            \"name\": \"button\",\r\n                            \"parentId\": 11,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 35,\r\n                            \"name\": \"small\",\r\n                            \"parentId\": 12,\r\n                            \"childList\": null\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 350,\r\n                \"quantity\": 2,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 2\r\n        },\r\n        {\r\n            \"id\": 6,\r\n            \"shopProduct\": {\r\n                \"id\": 13,\r\n                \"product\": {\r\n                    \"id\": 7,\r\n                    \"name\": \"dishwasher\",\r\n                    \"producer\": \"bosch\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 31,\r\n                            \"name\": \"build_in\",\r\n                            \"parentId\": 10,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 34,\r\n                            \"name\": \"button\",\r\n                            \"parentId\": 11,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 35,\r\n                            \"name\": \"small\",\r\n                            \"parentId\": 12,\r\n                            \"childList\": null\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 1000,\r\n                \"quantity\": 4,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 10,\r\n            \"shopProduct\": {\r\n                \"id\": 31,\r\n                \"product\": {\r\n                    \"id\": 16,\r\n                    \"name\": \"shorts\",\r\n                    \"producer\": \"hm\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 37,\r\n                            \"name\": \"children\",\r\n                            \"parentId\": 13,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 40,\r\n                            \"name\": \"summer\",\r\n                            \"parentId\": 14,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 44,\r\n                            \"name\": \"low_cost\",\r\n                            \"parentId\": 15,\r\n                            \"childList\": null\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 90,\r\n                \"quantity\": 4,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 14,\r\n            \"shopProduct\": {\r\n                \"id\": 42,\r\n                \"product\": {\r\n                    \"id\": 21,\r\n                    \"name\": \"constructor\",\r\n                    \"producer\": \"grai\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 45,\r\n                            \"name\": \"children\",\r\n                            \"parentId\": 16,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 47,\r\n                            \"name\": \"wood\",\r\n                            \"parentId\": 17,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 49,\r\n                            \"name\": \"develop\",\r\n                            \"parentId\": 18,\r\n                            \"childList\": null\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 200,\r\n                \"quantity\": 4,\r\n                \"store\": {\r\n                    \"id\": 2,\r\n                    \"name\": \"ozon\",\r\n                    \"internetPage\": \"ozon.ru\",\r\n                    \"phoneNumber\": \"+375294444444\"\r\n                },\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 18,\r\n            \"shopProduct\": {\r\n                \"id\": 53,\r\n                \"product\": {\r\n                    \"id\": 27,\r\n                    \"name\": \"dry_food\",\r\n                    \"producer\": \"vet\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 51,\r\n                            \"name\": \"pig\",\r\n                            \"parentId\": 19,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 53,\r\n                            \"name\": \"dog\",\r\n                            \"parentId\": 20,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 55,\r\n                            \"name\": \"young\",\r\n                            \"parentId\": 21,\r\n                            \"childList\": null\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 4,\r\n                \"quantity\": 0,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 0\r\n        },\r\n        {\r\n            \"id\": 22,\r\n            \"shopProduct\": {\r\n                \"id\": 71,\r\n                \"product\": {\r\n                    \"id\": 36,\r\n                    \"name\": \"puree\",\r\n                    \"producer\": \"baby\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 58,\r\n                            \"name\": \"not_milk\",\r\n                            \"parentId\": 22,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 60,\r\n                            \"name\": \"not_instant\",\r\n                            \"parentId\": 23,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 62,\r\n                            \"name\": \"after_year\",\r\n                            \"parentId\": 24,\r\n                            \"childList\": null\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 2,\r\n                \"quantity\": 4,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 26,\r\n            \"shopProduct\": {\r\n                \"id\": 82,\r\n                \"product\": {\r\n                    \"id\": 41,\r\n                    \"name\": \"crispbread\",\r\n                    \"producer\": \"mmk\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 63,\r\n                            \"name\": \"food_child\",\r\n                            \"parentId\": 25,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 65,\r\n                            \"name\": \"sport_food\",\r\n                            \"parentId\": 26,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 68,\r\n                            \"name\": \"not_frozen\",\r\n                            \"parentId\": 27,\r\n                            \"childList\": null\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 1,\r\n                \"quantity\": 1,\r\n                \"store\": {\r\n                    \"id\": 2,\r\n                    \"name\": \"ozon\",\r\n                    \"internetPage\": \"ozon.ru\",\r\n                    \"phoneNumber\": \"+375294444444\"\r\n                },\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 30,\r\n            \"shopProduct\": {\r\n                \"id\": 93,\r\n                \"product\": {\r\n                    \"id\": 47,\r\n                    \"name\": \"beer\",\r\n                    \"producer\": \"goot\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 69,\r\n                            \"name\": \"alcohol\",\r\n                            \"parentId\": 28,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 70,\r\n                            \"name\": \"alcohol_free\",\r\n                            \"parentId\": 28,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 74,\r\n                            \"name\": \"more_litre\",\r\n                            \"parentId\": 30,\r\n                            \"childList\": null\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 1,\r\n                \"quantity\": 0,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 0\r\n        }\r\n    ],\r\n    \"days\": -1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orders/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addOrder exc_valid_cust",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \r\n    \"customer\": null,\r\n    \"orderItemList\": [\r\n        {\r\n            \"id\": 3,\r\n            \"shopProduct\": {\r\n                \"id\": 3,\r\n                \"product\": {\r\n                    \"id\": 2,\r\n                    \"name\": \"telephone\",\r\n                    \"producer\": \"apple\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 34,\r\n                            \"name\": \"button\",\r\n                            \"parentId\": 11,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 35,\r\n                            \"name\": \"small\",\r\n                            \"parentId\": 12,\r\n                            \"childList\": null\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 350,\r\n                \"quantity\": 2,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 2\r\n        },\r\n        {\r\n            \"id\": 6,\r\n            \"shopProduct\": {\r\n                \"id\": 13,\r\n                \"product\": {\r\n                    \"id\": 7,\r\n                    \"name\": \"dishwasher\",\r\n                    \"producer\": \"bosch\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 31,\r\n                            \"name\": \"build_in\",\r\n                            \"parentId\": 10,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 34,\r\n                            \"name\": \"button\",\r\n                            \"parentId\": 11,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 35,\r\n                            \"name\": \"small\",\r\n                            \"parentId\": 12,\r\n                            \"childList\": null\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 1000,\r\n                \"quantity\": 4,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 10,\r\n            \"shopProduct\": {\r\n                \"id\": 31,\r\n                \"product\": {\r\n                    \"id\": 16,\r\n                    \"name\": \"shorts\",\r\n                    \"producer\": \"hm\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 37,\r\n                            \"name\": \"children\",\r\n                            \"parentId\": 13,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 40,\r\n                            \"name\": \"summer\",\r\n                            \"parentId\": 14,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 44,\r\n                            \"name\": \"low_cost\",\r\n                            \"parentId\": 15,\r\n                            \"childList\": null\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 90,\r\n                \"quantity\": 4,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 14,\r\n            \"shopProduct\": {\r\n                \"id\": 42,\r\n                \"product\": {\r\n                    \"id\": 21,\r\n                    \"name\": \"constructor\",\r\n                    \"producer\": \"grai\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 45,\r\n                            \"name\": \"children\",\r\n                            \"parentId\": 16,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 47,\r\n                            \"name\": \"wood\",\r\n                            \"parentId\": 17,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 49,\r\n                            \"name\": \"develop\",\r\n                            \"parentId\": 18,\r\n                            \"childList\": null\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 200,\r\n                \"quantity\": 4,\r\n                \"store\": {\r\n                    \"id\": 2,\r\n                    \"name\": \"ozon\",\r\n                    \"internetPage\": \"ozon.ru\",\r\n                    \"phoneNumber\": \"+375294444444\"\r\n                },\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 18,\r\n            \"shopProduct\": {\r\n                \"id\": 53,\r\n                \"product\": {\r\n                    \"id\": 27,\r\n                    \"name\": \"dry_food\",\r\n                    \"producer\": \"vet\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 51,\r\n                            \"name\": \"pig\",\r\n                            \"parentId\": 19,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 53,\r\n                            \"name\": \"dog\",\r\n                            \"parentId\": 20,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 55,\r\n                            \"name\": \"young\",\r\n                            \"parentId\": 21,\r\n                            \"childList\": null\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 4,\r\n                \"quantity\": 0,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 0\r\n        },\r\n        {\r\n            \"id\": 22,\r\n            \"shopProduct\": {\r\n                \"id\": 71,\r\n                \"product\": {\r\n                    \"id\": 36,\r\n                    \"name\": \"puree\",\r\n                    \"producer\": \"baby\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 58,\r\n                            \"name\": \"not_milk\",\r\n                            \"parentId\": 22,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 60,\r\n                            \"name\": \"not_instant\",\r\n                            \"parentId\": 23,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 62,\r\n                            \"name\": \"after_year\",\r\n                            \"parentId\": 24,\r\n                            \"childList\": null\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 2,\r\n                \"quantity\": 4,\r\n                \"store\": {\r\n                    \"id\": 3,\r\n                    \"name\": \"wildberries\",\r\n                    \"internetPage\": \"wildberries.ru\",\r\n                    \"phoneNumber\": \"+7777777\"\r\n                },\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 26,\r\n            \"shopProduct\": {\r\n                \"id\": 82,\r\n                \"product\": {\r\n                    \"id\": 41,\r\n                    \"name\": \"crispbread\",\r\n                    \"producer\": \"mmk\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 63,\r\n                            \"name\": \"food_child\",\r\n                            \"parentId\": 25,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 65,\r\n                            \"name\": \"sport_food\",\r\n                            \"parentId\": 26,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 68,\r\n                            \"name\": \"not_frozen\",\r\n                            \"parentId\": 27,\r\n                            \"childList\": null\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 1,\r\n                \"quantity\": 1,\r\n                \"store\": {\r\n                    \"id\": 2,\r\n                    \"name\": \"ozon\",\r\n                    \"internetPage\": \"ozon.ru\",\r\n                    \"phoneNumber\": \"+375294444444\"\r\n                },\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 30,\r\n            \"shopProduct\": {\r\n                \"id\": 93,\r\n                \"product\": {\r\n                    \"id\": 47,\r\n                    \"name\": \"beer\",\r\n                    \"producer\": \"goot\",\r\n                    \"categoryList\": [\r\n                        {\r\n                            \"id\": 69,\r\n                            \"name\": \"alcohol\",\r\n                            \"parentId\": 28,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 70,\r\n                            \"name\": \"alcohol_free\",\r\n                            \"parentId\": 28,\r\n                            \"childList\": null\r\n                        },\r\n                        {\r\n                            \"id\": 74,\r\n                            \"name\": \"more_litre\",\r\n                            \"parentId\": 30,\r\n                            \"childList\": null\r\n                        }\r\n                    ]\r\n                },\r\n                \"price\": 1,\r\n                \"quantity\": 0,\r\n                \"store\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"21vek\",\r\n                    \"internetPage\": \"21vek.by\",\r\n                    \"phoneNumber\": \"+375293333333\"\r\n                },\r\n                \"description\": \"none\"\r\n            },\r\n            \"quantity\": 0\r\n        }\r\n    ],\r\n    \"days\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orders/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addOrder exc_valid_orderItem",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \r\n    \"customer\": {\r\n        \"id\": 3,\r\n        \"firstName\": \"Sidor\",\r\n        \"lastName\": \"Sidrov\",\r\n        \"address\": \"Kupaly 3 , 3\",\r\n        \"email\": \"sidorov@gmail.com\"\r\n    },\r\n    \"orderItemList\": null,\r\n    \"days\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orders/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "savetoFileOrder",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orders/v1/file",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"v1",
+								"file"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOrderById exc_id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orders/v1/3000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"v1",
+								"3000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOrderById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orders/v1/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"v1",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OrderItem",
+			"item": [
+				{
+					"name": "getOrderItemById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orderItems/v1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orderItems",
+								"v1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrderItemById exc_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orderItems/v1/1000000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orderItems",
+								"v1",
+								"1000000000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllOrderItems",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orderItems/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orderItems",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addOrderItem",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shopProduct\": {\r\n        \"id\": 1,\r\n        \"product\": {\r\n            \"id\": 1,\r\n            \"name\": \"telephone\",\r\n            \"producer\": \"lg\",\r\n            \"categoryList\": [\r\n                {\r\n                    \"name\": \"less_litre\",\r\n                    \"parent\": null,\r\n                    \"childList\": null\r\n                },\r\n                {\r\n                    \"name\": \"less_litre\",\r\n                    \"parent\": null,\r\n                    \"childList\": null\r\n                }\r\n            ]\r\n        },\r\n        \"price\": 250,\r\n        \"quantity\": 4,\r\n        \"store\": {\r\n            \"id\": 1,\r\n            \"name\": \"21vek\",\r\n            \"internetPage\": \"21vek.by\",\r\n            \"phoneNumber\": \"+375293333333\"\r\n        },\r\n        \"description\": \"none\"\r\n    },\r\n    \"quantity\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orderItems/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orderItems",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addOrderItem exc_valid_prod",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shopProduct\": null,\r\n    \"quantity\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orderItems/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orderItems",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addOrderItem exc_valid_quant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shopProduct\": {\r\n        \"id\": 1,\r\n        \"product\": {\r\n            \"id\": 1,\r\n            \"name\": \"telephone\",\r\n            \"producer\": \"lg\",\r\n            \"categoryList\": [\r\n                {\r\n                    \"name\": \"less_litre\",\r\n                    \"parent\": null,\r\n                    \"childList\": null\r\n                },\r\n                {\r\n                    \"name\": \"less_litre\",\r\n                    \"parent\": null,\r\n                    \"childList\": null\r\n                }\r\n            ]\r\n        },\r\n        \"price\": 250,\r\n        \"quantity\": 4,\r\n        \"store\": {\r\n            \"id\": 1,\r\n            \"name\": \"21vek\",\r\n            \"internetPage\": \"21vek.by\",\r\n            \"phoneNumber\": \"+375293333333\"\r\n        },\r\n        \"description\": \"none\"\r\n    },\r\n    \"quantity\": 1.5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orderItems/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orderItems",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrderItem",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shopProduct\": {\r\n        \"id\": 1,\r\n        \"product\": {\r\n            \"id\": 1,\r\n            \"name\": \"telephone\",\r\n            \"producer\": \"lg\",\r\n            \"categoryList\": [\r\n                {\r\n                    \"id\": 33,\r\n                    \"name\": \"sensor\",\r\n                    \"parentId\": 11,\r\n                    \"childList\": null\r\n                },\r\n                {\r\n                    \"id\": 35,\r\n                    \"name\": \"small\",\r\n                    \"parentId\": 12,\r\n                    \"childList\": null\r\n                }\r\n            ]\r\n        },\r\n        \"price\": 250,\r\n        \"quantity\": 4,\r\n        \"store\": {\r\n            \"id\": 1,\r\n            \"name\": \"21vek\",\r\n            \"internetPage\": \"21vek.by\",\r\n            \"phoneNumber\": \"+375293333333\"\r\n        },\r\n        \"description\": \"none\"\r\n    },\r\n    \"quantity\": 111111\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orderItems/v1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orderItems",
+								"v1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrderItem exc_id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shopProduct\": {\r\n        \"id\": 1,\r\n        \"product\": {\r\n            \"id\": 1,\r\n            \"name\": \"telephone\",\r\n            \"producer\": \"lg\",\r\n            \"categoryList\": [\r\n                {\r\n                    \"id\": 33,\r\n                    \"name\": \"sensor\",\r\n                    \"parentId\": 11,\r\n                    \"childList\": null\r\n                },\r\n                {\r\n                    \"id\": 35,\r\n                    \"name\": \"small\",\r\n                    \"parentId\": 12,\r\n                    \"childList\": null\r\n                }\r\n            ]\r\n        },\r\n        \"price\": 250,\r\n        \"quantity\": 4,\r\n        \"store\": {\r\n            \"id\": 1,\r\n            \"name\": \"21vek\",\r\n            \"internetPage\": \"21vek.by\",\r\n            \"phoneNumber\": \"+375293333333\"\r\n        },\r\n        \"description\": \"none\"\r\n    },\r\n    \"quantity\": 111111\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orderItems/v1/3200000000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orderItems",
+								"v1",
+								"3200000000000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrderItem exc_valid_prod",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"shopProduct\": null,\r\n    \"quantity\": 111111\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orderItems/v1/32",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orderItems",
+								"v1",
+								"32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrderItem exc_valid_quant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shopProduct\": {\r\n        \"id\": 1,\r\n        \"product\": {\r\n            \"id\": 1,\r\n            \"name\": \"telephone\",\r\n            \"producer\": \"lg\",\r\n            \"categoryList\": [\r\n                {\r\n                    \"id\": 33,\r\n                    \"name\": \"sensor\",\r\n                    \"parentId\": 11,\r\n                    \"childList\": null\r\n                },\r\n                {\r\n                    \"id\": 35,\r\n                    \"name\": \"small\",\r\n                    \"parentId\": 12,\r\n                    \"childList\": null\r\n                }\r\n            ]\r\n        },\r\n        \"price\": 250,\r\n        \"quantity\": 4,\r\n        \"store\": {\r\n            \"id\": 1,\r\n            \"name\": \"21vek\",\r\n            \"internetPage\": \"21vek.by\",\r\n            \"phoneNumber\": \"+375293333333\"\r\n        },\r\n        \"description\": \"none\"\r\n    },\r\n    \"quantity\": -1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orderItems/v1/32",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orderItems",
+								"v1",
+								"32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveToFileOrderItem",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orderItems/v1/file",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orderItems",
+								"v1",
+								"file"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOrderItemById exc_id",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orderItems/v1/32000000000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orderItems",
+								"v1",
+								"32000000000000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOrderItemById",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orderItems/v1/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orderItems",
+								"v1",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "getCustomerById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/customers/v1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"v1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCustomerById exc_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/customers/v1/1000000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"v1",
+								"1000000000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCustomers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/customers/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCustomer",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Fedya\",\r\n    \"lastName\": \"Fedov\",\r\n    \"address\": \"Suvorova 3 , 3\",\r\n    \"email\": \"fed@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customers/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCustomer exc_valid_fname",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"\",\r\n    \"lastName\": \"Fedov\",\r\n    \"address\": \"Suvorova 3 , 3\",\r\n    \"email\": \"fed@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customers/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCustomer exc_valid_lname",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Fedya\",\r\n    \"lastName\": \"\",\r\n    \"address\": \"Suvorova 3 , 3\",\r\n    \"email\": \"fed@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customers/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCustomer exc_valid_address",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Fedya\",\r\n    \"lastName\": \"Fedov\",\r\n    \"address\": \"\",\r\n    \"email\": \"fed@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customers/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCustomer exc_valid_email",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Fedya\",\r\n    \"lastName\": \"Fedov\",\r\n    \"address\": \"Suvorova 3 , 3\",\r\n    \"email\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customers/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCustomer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"111\",\r\n    \"lastName\": \"Fedov\",\r\n    \"address\": \"Suvorova 3 , 3\",\r\n    \"email\": \"iluiufed@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customers/v1/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"v1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCustomer exc_id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"111\",\r\n    \"lastName\": \"Fedov\",\r\n    \"address\": \"Suvorova 3 , 3\",\r\n    \"email\": \"fed@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customers/v1/700000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"v1",
+								"700000000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCustomer exc_valid_fname",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"\",\r\n    \"lastName\": \"Fedov\",\r\n    \"address\": \"Suvorova 3 , 3\",\r\n    \"email\": \"fed@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customers/v1/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"v1",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCustomer exc_valid_lname",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"111\",\r\n    \"lastName\": \"\",\r\n    \"address\": \"Suvorova 3 , 3\",\r\n    \"email\": \"fed@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customers/v1/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"v1",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCustomer exc_valid_addres",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"111\",\r\n    \"lastName\": \"Fedov\",\r\n    \"address\": \"\",\r\n    \"email\": \"fed@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customers/v1/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"v1",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCustomer exc_valid_email",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"111\",\r\n    \"lastName\": \"Fedov\",\r\n    \"address\": \"Suvorova 3 , 3\",\r\n    \"email\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customers/v1/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"v1",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveToFileCustomer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/customers/v1/file",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"v1",
+								"file"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCustomerById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/customers/v1/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"v1",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCustomerById exc_id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/customers/v1/10000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"v1",
+								"10000000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Store",
+			"item": [
+				{
+					"name": "getStoreById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stores/v1/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stores",
+								"v1",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getStoreById exc_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stores/v1/1000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stores",
+								"v1",
+								"1000000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllStores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stores/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stores",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addStore",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"21vek\",\r\n    \"internetPage\": \"21vek.by\",\r\n    \"phoneNumber\": \"90191919908\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/stores/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stores",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addStore exc_valid_name",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"internetPage\": \"21vek.by\",\r\n    \"phoneNumber\": \"90191919908\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/stores/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stores",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addStore exc_valid_page",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"21vek\",\r\n    \"internetPage\": \"\",\r\n    \"phoneNumber\": \"90191919908\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/stores/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stores",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addStore exc_valid_phone",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"21vek\",\r\n    \"internetPage\": \"21vek.by\",\r\n    \"phoneNumber\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/stores/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stores",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateStore",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"1111\",\r\n    \"internetPage\": \"21vek.by\",\r\n    \"phoneNumber\": \"+375293333333\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/stores/v1/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stores",
+								"v1",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateStore exc_id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"1111\",\r\n    \"internetPage\": \"21vek.by\",\r\n    \"phoneNumber\": \"+375293333333\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/stores/v1/8000000000000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stores",
+								"v1",
+								"8000000000000000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateStore exc_valin_name",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"internetPage\": \"21vek.by\",\r\n    \"phoneNumber\": \"+375293333333\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/stores/v1/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stores",
+								"v1",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateStore exc_valin_page",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"1111\",\r\n    \"internetPage\": \"\",\r\n    \"phoneNumber\": \"+375293333333\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/stores/v1/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stores",
+								"v1",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateStore exc_valin_phone",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"1111\",\r\n    \"internetPage\": \"21vek.by\",\r\n    \"phoneNumber\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/stores/v1/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stores",
+								"v1",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveToFileStore",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stores/v1/file",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stores",
+								"v1",
+								"file"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteStoreById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stores/v1/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stores",
+								"v1",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteStoreById exc_id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stores/v1/8000000000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stores",
+								"v1",
+								"8000000000000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "getProductById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/v1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"v1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProductById exc_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/v1/54",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"v1",
+								"54"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllProducts",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addProduct",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"trousers\",\r\n    \"producer\": \"collins\",\r\n    \"categoryList\": [\r\n        {\r\n            \"id\": 38,\r\n            \"name\": \"adult\",\r\n            \"parentId\": 13,\r\n            \"childList\": null\r\n        },\r\n        {\r\n            \"id\": 42,\r\n            \"name\": \"demi\",\r\n            \"parentId\": 14,\r\n            \"childList\": null\r\n        },\r\n        {\r\n            \"id\": 43,\r\n            \"name\": \"premium\",\r\n            \"parentId\": 15,\r\n            \"childList\": null\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addProduct exc_valid_name",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"producer\": \"collins\",\r\n    \"categoryList\": [\r\n        {\r\n            \"id\": 38,\r\n            \"name\": \"adult\",\r\n            \"parentId\": 13,\r\n            \"childList\": null\r\n        },\r\n        {\r\n            \"id\": 42,\r\n            \"name\": \"demi\",\r\n            \"parentId\": 14,\r\n            \"childList\": null\r\n        },\r\n        {\r\n            \"id\": 43,\r\n            \"name\": \"premium\",\r\n            \"parentId\": 15,\r\n            \"childList\": null\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addProduct exc_valid_prod",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"trousers\",\r\n    \"producer\": \"\",\r\n    \"categoryList\": [\r\n        {\r\n            \"id\": 38,\r\n            \"name\": \"adult\",\r\n            \"parentId\": 13,\r\n            \"childList\": null\r\n        },\r\n        {\r\n            \"id\": 42,\r\n            \"name\": \"demi\",\r\n            \"parentId\": 14,\r\n            \"childList\": null\r\n        },\r\n        {\r\n            \"id\": 43,\r\n            \"name\": \"premium\",\r\n            \"parentId\": 15,\r\n            \"childList\": null\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addProduct exc_valid_categ",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"trousers\",\r\n    \"producer\": \"collins\",\r\n    \"categoryList\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProduct",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"1111\",\r\n    \"producer\": \"111\",\r\n    \"categoryList\": [\r\n        {\r\n            \"id\": 38,\r\n            \"name\": \"adult\",\r\n            \"parentId\": 13,\r\n            \"childList\": null\r\n        },\r\n        {\r\n            \"id\": 42,\r\n            \"name\": \"demi\",\r\n            \"parentId\": 14,\r\n            \"childList\": null\r\n        },\r\n        {\r\n            \"id\": 43,\r\n            \"name\": \"premium\",\r\n            \"parentId\": 15,\r\n            \"childList\": null\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/v1/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"v1",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProduct exc_id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"1111\",\r\n    \"producer\": \"111\",\r\n    \"categoryList\": [\r\n        {\r\n            \"id\": 38,\r\n            \"name\": \"adult\",\r\n            \"parentId\": 13,\r\n            \"childList\": null\r\n        },\r\n        {\r\n            \"id\": 42,\r\n            \"name\": \"demi\",\r\n            \"parentId\": 14,\r\n            \"childList\": null\r\n        },\r\n        {\r\n            \"id\": 43,\r\n            \"name\": \"premium\",\r\n            \"parentId\": 15,\r\n            \"childList\": null\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/v1/5800000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"v1",
+								"5800000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProduct exc_valid_name",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"producer\": \"111\",\r\n    \"categoryList\": [\r\n        {\r\n            \"id\": 38,\r\n            \"name\": \"adult\",\r\n            \"parentId\": 13,\r\n            \"childList\": null\r\n        },\r\n        {\r\n            \"id\": 42,\r\n            \"name\": \"demi\",\r\n            \"parentId\": 14,\r\n            \"childList\": null\r\n        },\r\n        {\r\n            \"id\": 43,\r\n            \"name\": \"premium\",\r\n            \"parentId\": 15,\r\n            \"childList\": null\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/v1/58",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"v1",
+								"58"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProduct exc_valid_prod",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"1111\",\r\n    \"producer\": \"\",\r\n    \"categoryList\": [\r\n        {\r\n            \"id\": 38,\r\n            \"name\": \"adult\",\r\n            \"parentId\": 13,\r\n            \"childList\": null\r\n        },\r\n        {\r\n            \"id\": 42,\r\n            \"name\": \"demi\",\r\n            \"parentId\": 14,\r\n            \"childList\": null\r\n        },\r\n        {\r\n            \"id\": 43,\r\n            \"name\": \"premium\",\r\n            \"parentId\": 15,\r\n            \"childList\": null\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/v1/58",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"v1",
+								"58"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProduct exc_valid_cat",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"trousers\",\r\n    \"producer\": \"collins\",\r\n    \"categoryList\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/v1/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"v1",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveToFileProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/v1/file",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"v1",
+								"file"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProductById exc_id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/v1/5800000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"v1",
+								"5800000000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProductById",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/v1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"v1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ShopProduct",
+			"item": [
+				{
+					"name": "getShopProductById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getShopProductById exc_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/1000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"1000000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllShopProductc",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addShopProduct",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": {\r\n        \"id\": 1,\r\n        \"name\": \"telephone111\",\r\n        \"producer\": \"lg\",\r\n        \"categoryList\": [\r\n            {\r\n                \"name\": \"less_litre\",\r\n                \"parent\": null,\r\n                \"childList\": null\r\n            },\r\n            {\r\n                \"name\": \"less_litre\",\r\n                \"parent\": null,\r\n                \"childList\": null\r\n            }\r\n        ]\r\n    },\r\n    \"price\": 250,\r\n    \"quantity\": 4,\r\n    \"store\": {\r\n        \"id\": 1,\r\n        \"name\": \"21vek\",\r\n        \"internetPage\": \"21vek.by\",\r\n        \"phoneNumber\": \"+375293333333\"\r\n    },\r\n    \"description\": \"222\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addShopProduct exc_valid_prod",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": null,\r\n    \"price\": 250,\r\n    \"quantity\": 4,\r\n    \"store\": {\r\n        \"id\": 1,\r\n        \"name\": \"21vek\",\r\n        \"internetPage\": \"21vek.by\",\r\n        \"phoneNumber\": \"+375293333333\"\r\n    },\r\n    \"description\": \"222\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addShopProduct exc_valid_store",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": {\r\n        \"id\": 1,\r\n        \"name\": \"telephone\",\r\n        \"producer\": \"lg\",\r\n        \"categoryList\": [\r\n            {\r\n                \"name\": \"less_litre\",\r\n                \"parent\": null,\r\n                \"childList\": null\r\n            },\r\n            {\r\n                \"name\": \"less_litre\",\r\n                \"parent\": null,\r\n                \"childList\": null\r\n            }\r\n        ]\r\n    },\r\n    \"price\": 250,\r\n    \"quantity\": 4,\r\n    \"store\": null,\r\n    \"description\": \"222\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addShopProduct exc_valid_descr",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": {\r\n        \"id\": 1,\r\n        \"name\": \"telephone\",\r\n        \"producer\": \"lg\",\r\n        \"categoryList\": [\r\n            {\r\n                \"name\": \"less_litre\",\r\n                \"parent\": null,\r\n                \"childList\": null\r\n            },\r\n            {\r\n                \"name\": \"less_litre\",\r\n                \"parent\": null,\r\n                \"childList\": null\r\n            }\r\n        ]\r\n    },\r\n    \"price\": 250,\r\n    \"quantity\": 4,\r\n    \"store\": {\r\n        \"id\": 1,\r\n        \"name\": \"21vek\",\r\n        \"internetPage\": \"21vek.by\",\r\n        \"phoneNumber\": \"+375293333333\"\r\n    },\r\n    \"description\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addShopProduct exc_valid_price",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": {\r\n        \"id\": 1,\r\n        \"name\": \"telephone\",\r\n        \"producer\": \"lg\",\r\n        \"categoryList\": [\r\n            {\r\n                \"name\": \"less_litre\",\r\n                \"parent\": null,\r\n                \"childList\": null\r\n            },\r\n            {\r\n                \"name\": \"less_litre\",\r\n                \"parent\": null,\r\n                \"childList\": null\r\n            }\r\n        ]\r\n    },\r\n    \"price\": -1,\r\n    \"quantity\": 4,\r\n    \"store\": {\r\n        \"id\": 1,\r\n        \"name\": \"21vek\",\r\n        \"internetPage\": \"21vek.by\",\r\n        \"phoneNumber\": \"+375293333333\"\r\n    },\r\n    \"description\": \"222\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addShopProduct exc_valid_quant",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": {\r\n        \"id\": 1,\r\n        \"name\": \"telephone\",\r\n        \"producer\": \"lg\",\r\n        \"categoryList\": [\r\n            {\r\n                \"name\": \"less_litre\",\r\n                \"parent\": null,\r\n                \"childList\": null\r\n            },\r\n            {\r\n                \"name\": \"less_litre\",\r\n                \"parent\": null,\r\n                \"childList\": null\r\n            }\r\n        ]\r\n    },\r\n    \"price\": 250,\r\n    \"quantity\": 4.5,\r\n    \"store\": {\r\n        \"id\": 1,\r\n        \"name\": \"21vek\",\r\n        \"internetPage\": \"21vek.by\",\r\n        \"phoneNumber\": \"+375293333333\"\r\n    },\r\n    \"description\": \"222\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateShopProduct",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": {\r\n        \"id\": 1,\r\n        \"name\": \"telephone\",\r\n        \"producer\": \"lg\",\r\n        \"categoryList\": [\r\n            {\r\n                \"id\": 33,\r\n                \"name\": \"sensor\",\r\n                \"parentId\": 11,\r\n                \"childList\": null\r\n            },\r\n            {\r\n                \"id\": 35,\r\n                \"name\": \"small\",\r\n                \"parentId\": 12,\r\n                \"childList\": null\r\n            }\r\n        ]\r\n    },\r\n    \"price\": 250,\r\n    \"quantity\": 4,\r\n    \"store\": {\r\n        \"id\": 1,\r\n        \"name\": \"21vek\",\r\n        \"internetPage\": \"21vek.by\",\r\n        \"phoneNumber\": \"+375293333333\"\r\n    },\r\n    \"description\": \"22222\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateShopProduct exc_id",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": {\r\n        \"id\": 1,\r\n        \"name\": \"telephone\",\r\n        \"producer\": \"lg\",\r\n        \"categoryList\": [\r\n            {\r\n                \"id\": 33,\r\n                \"name\": \"sensor\",\r\n                \"parentId\": 11,\r\n                \"childList\": null\r\n            },\r\n            {\r\n                \"id\": 35,\r\n                \"name\": \"small\",\r\n                \"parentId\": 12,\r\n                \"childList\": null\r\n            }\r\n        ]\r\n    },\r\n    \"price\": 250,\r\n    \"quantity\": 4,\r\n    \"store\": {\r\n        \"id\": 1,\r\n        \"name\": \"21vek\",\r\n        \"internetPage\": \"21vek.by\",\r\n        \"phoneNumber\": \"+375293333333\"\r\n    },\r\n    \"description\": \"22222\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/10000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"10000000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateShopProduct exc_valid_prod",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": null,\r\n    \"price\": 250,\r\n    \"quantity\": 4,\r\n    \"store\": {\r\n        \"id\": 1,\r\n        \"name\": \"21vek\",\r\n        \"internetPage\": \"21vek.by\",\r\n        \"phoneNumber\": \"+375293333333\"\r\n    },\r\n    \"description\": \"22222\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateShopProduct exc_valid_store",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": {\r\n        \"id\": 1,\r\n        \"name\": \"telephone\",\r\n        \"producer\": \"lg\",\r\n        \"categoryList\": [\r\n            {\r\n                \"id\": 33,\r\n                \"name\": \"sensor\",\r\n                \"parentId\": 11,\r\n                \"childList\": null\r\n            },\r\n            {\r\n                \"id\": 35,\r\n                \"name\": \"small\",\r\n                \"parentId\": 12,\r\n                \"childList\": null\r\n            }\r\n        ]\r\n    },\r\n    \"price\": 250,\r\n    \"quantity\": 4,\r\n    \"store\": null,\r\n    \"description\": \"22222\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateShopProduct exc_valid_descr",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": {\r\n        \"id\": 1,\r\n        \"name\": \"telephone\",\r\n        \"producer\": \"lg\",\r\n        \"categoryList\": [\r\n            {\r\n                \"id\": 33,\r\n                \"name\": \"sensor\",\r\n                \"parentId\": 11,\r\n                \"childList\": null\r\n            },\r\n            {\r\n                \"id\": 35,\r\n                \"name\": \"small\",\r\n                \"parentId\": 12,\r\n                \"childList\": null\r\n            }\r\n        ]\r\n    },\r\n    \"price\": 250,\r\n    \"quantity\": 4,\r\n    \"store\": {\r\n        \"id\": 1,\r\n        \"name\": \"21vek\",\r\n        \"internetPage\": \"21vek.by\",\r\n        \"phoneNumber\": \"+375293333333\"\r\n    },\r\n    \"description\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateShopProduct exc_valid_price",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": {\r\n        \"id\": 1,\r\n        \"name\": \"telephone\",\r\n        \"producer\": \"lg\",\r\n        \"categoryList\": [\r\n            {\r\n                \"id\": 33,\r\n                \"name\": \"sensor\",\r\n                \"parentId\": 11,\r\n                \"childList\": null\r\n            },\r\n            {\r\n                \"id\": 35,\r\n                \"name\": \"small\",\r\n                \"parentId\": 12,\r\n                \"childList\": null\r\n            }\r\n        ]\r\n    },\r\n    \"price\": -250,\r\n    \"quantity\": 4,\r\n    \"store\": {\r\n        \"id\": 1,\r\n        \"name\": \"21vek\",\r\n        \"internetPage\": \"21vek.by\",\r\n        \"phoneNumber\": \"+375293333333\"\r\n    },\r\n    \"description\": \"22222\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateShopProduct exc_valid_quant",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": {\r\n        \"id\": 1,\r\n        \"name\": \"telephone\",\r\n        \"producer\": \"lg\",\r\n        \"categoryList\": [\r\n            {\r\n                \"id\": 33,\r\n                \"name\": \"sensor\",\r\n                \"parentId\": 11,\r\n                \"childList\": null\r\n            },\r\n            {\r\n                \"id\": 35,\r\n                \"name\": \"small\",\r\n                \"parentId\": 12,\r\n                \"childList\": null\r\n            }\r\n        ]\r\n    },\r\n    \"price\": 250,\r\n    \"quantity\": -4.0,\r\n    \"store\": {\r\n        \"id\": 1,\r\n        \"name\": \"21vek\",\r\n        \"internetPage\": \"21vek.by\",\r\n        \"phoneNumber\": \"+375293333333\"\r\n    },\r\n    \"description\": \"22222\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sortByPriceShopProduct",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/price",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"price"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPriceQuantityOfProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/store?name=lamoda",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"store"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "lamoda"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPriceQuantityOfProducts exc_store",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/store?name1=lamoda",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"store"
+							],
+							"query": [
+								{
+									"key": "name1",
+									"value": "lamoda"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProductsFromCategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/category?name=adult",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"category"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "adult"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProductsFromCategory exc_categ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/category?name=drinks1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"category"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "drinks1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findShopProductsByOneAttribute",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/attribute/one?attribute=store&value=lamoda",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"attribute",
+								"one"
+							],
+							"query": [
+								{
+									"key": "attribute",
+									"value": "store"
+								},
+								{
+									"key": "value",
+									"value": "lamoda"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findShopProductsByOneAttribute exc_attr Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/attribute/one?attribute=store1&value=lamoda",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"attribute",
+								"one"
+							],
+							"query": [
+								{
+									"key": "attribute",
+									"value": "store1"
+								},
+								{
+									"key": "value",
+									"value": "lamoda"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findShopProductsByOneAttribute exc_val",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/attribute/one?attribute=store&value=lamoda11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"attribute",
+								"one"
+							],
+							"query": [
+								{
+									"key": "attribute",
+									"value": "store"
+								},
+								{
+									"key": "value",
+									"value": "lamoda11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findShopProductsByTwoAttribute",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/attribute/two?attribute1=store&value1=lamoda&attribute2=price&value2=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"attribute",
+								"two"
+							],
+							"query": [
+								{
+									"key": "attribute1",
+									"value": "store"
+								},
+								{
+									"key": "value1",
+									"value": "lamoda"
+								},
+								{
+									"key": "attribute2",
+									"value": "price"
+								},
+								{
+									"key": "value2",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findShopProductsByTwoAttribute exc value",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/attribute/two?attribute1=store&value1=lamoda0&attribute2=store&value2=lamoda0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"attribute",
+								"two"
+							],
+							"query": [
+								{
+									"key": "attribute1",
+									"value": "store"
+								},
+								{
+									"key": "value1",
+									"value": "lamoda0"
+								},
+								{
+									"key": "attribute2",
+									"value": "store"
+								},
+								{
+									"key": "value2",
+									"value": "lamoda0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findShopProductsByTwoAttribute exc_attr",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/attribute/two?attribute1=store&value1=lamoda&attribute2=store1&value2=lamoda1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"attribute",
+								"two"
+							],
+							"query": [
+								{
+									"key": "attribute1",
+									"value": "store"
+								},
+								{
+									"key": "value1",
+									"value": "lamoda"
+								},
+								{
+									"key": "attribute2",
+									"value": "store1"
+								},
+								{
+									"key": "value2",
+									"value": "lamoda1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveToFileShopProduct",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/file",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"file"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteShopProductById",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteShopProductById exc_id",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/shopProducts/v1/100000000000000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shopProducts",
+								"v1",
+								"100000000000000000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Addiition",
+			"item": [
+				{
+					"name": "swagger",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v2/api-docs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v2",
+								"api-docs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
