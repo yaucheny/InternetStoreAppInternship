@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.List;
+
 /**
  * Controller for {@link com.exposit.domain.model.db.ShopProductDb}'s pages.
  *

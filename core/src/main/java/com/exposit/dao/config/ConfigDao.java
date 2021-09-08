@@ -20,6 +20,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Special class that gives on opportunity for configuration dao implementation.
+ *
+ * @author Yauheni Markevich
+ * @version 1.0
+ */
 @RequiredArgsConstructor
 @Configuration
 public class ConfigDao {
@@ -37,73 +43,79 @@ public class ConfigDao {
      * Returns CategoryDao implementation.
      *
      * @return Factory returns chosen dao implementation
-     * @throws BeanFactoryException if needed implementation ca not be chosen
+     * @throws BeanFactoryException if needed implementation can not be chosen
      * @author Yauheni Markevich
      */
     @Bean
     public CategoryDao categoryDao() throws BeanFactoryException {
         return categoryDaoFactory.getObject();
     }
+
     /**
      * Returns CategoryDao implementation.
      *
      * @return Factory returns chosen dao implementation
-     * @throws BeanFactoryException if needed implementation ca not be chosen
+     * @throws BeanFactoryException if needed implementation can not be chosen
      * @author Yauheni Markevich
      */
     @Bean
     public ProductDao productDao() throws BeanFactoryException {
         return productDaoFactory.getObject();
     }
+
     /**
      * Returns ShopProductDao implementation.
      *
      * @return Factory returns chosen dao implementation
-     * @throws BeanFactoryException if needed implementation ca not be chosen
+     * @throws BeanFactoryException if needed implementation can not be chosen
      * @author Yauheni Markevich
      */
     @Bean
     public ShopProductDao shopProductDao() throws BeanFactoryException {
         return shopProductDaoFactory.getObject();
     }
+
     /**
      * Returns OrderDao implementation.
      *
      * @return Factory returns chosen dao implementation
-     * @throws BeanFactoryException if needed implementation ca not be chosen
+     * @throws BeanFactoryException if needed implementation can not be chosen
      * @author Yauheni Markevich
      */
     @Bean
     public OrderDao orderDao() throws BeanFactoryException {
         return orderDaoFactory.getObject();
     }
+
     /**
      * Returns OrderItemDao implementation.
      *
      * @return Factory returns chosen dao implementation
-     * @throws BeanFactoryException if needed implementation ca not be chosen
+     * @throws BeanFactoryException if needed implementation can not be chosen
      * @author Yauheni Markevich
      */
     @Bean
     public OrderItemDao orderItemDao() throws BeanFactoryException {
         return orderItemDaoFactory.getObject();
     }
+
     /**
      * Returns StoreDao implementation.
      *
      * @return Factory returns chosen dao implementation
-     * @throws BeanFactoryException if needed implementation ca not be chosen
+     * @throws BeanFactoryException if needed implementation can not be chosen
      * @author Yauheni Markevich
      */
     @Bean
     public StoreDao storeDao() throws BeanFactoryException {
         return storeDaoFactory.getObject();
     }
+
     /**
      * Returns CustomerDa implementation.
      *
      * @return Factory returns chosen dao implementation
-     * @throws BeanFactoryException if needed implementation ca not be chosen
+     * @throws BeanFactoryException if needed implementation can not be chosen
      * @author Yauheni Markevich
      */
     @Bean

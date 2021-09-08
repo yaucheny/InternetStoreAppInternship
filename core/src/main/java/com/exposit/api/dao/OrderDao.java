@@ -1,6 +1,7 @@
 package com.exposit.api.dao;
 
 import com.exposit.domain.model.db.OrderDb;
+
 /**
  * Dao interface for{@link com/exposit/domain/model/db/OrderDb.java}.
  *

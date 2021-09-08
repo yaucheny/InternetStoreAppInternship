@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
 /**
  * Implementation of {@link ShopProductDao} interface.
  * Implementation works with Jackson API and xml format files
@@ -21,7 +22,7 @@ public class ShopProductDaoXmlImpl extends AbstractDaoXmlImpl<ShopProductDb> imp
 
     private static final Logger LOG = LoggerFactory.getLogger(ShopProductDaoXmlImpl.class);
 
-       public ShopProductDaoXmlImpl() {
+    public ShopProductDaoXmlImpl() {
         List<ShopProductDb> shopProduct = MarshallingXml.deserializeXmlEntity(ShopProductDb.class);
         for (ShopProductDb entity : shopProduct) {
             this.autoLoad(entity);

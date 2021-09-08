@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.List;
+
 /**
  * Simple JavaBean object that represents a Order entity. This additional object is created
  * to work with hibernate and spring data JPA. This object is mapped from Vdb object

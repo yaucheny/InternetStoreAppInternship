@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Entry point of spring boot application.
+ * Class with entry point of spring boot application.
  *
  * @author Yauheni Markevich
  * @version 1.0

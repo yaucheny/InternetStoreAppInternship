@@ -11,7 +11,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
- * Dto object that represents a OrderItem.
+ * Dto object that represents an OrderItem.
  *
  * @author Yauheni Markevich
  * @version 1.0

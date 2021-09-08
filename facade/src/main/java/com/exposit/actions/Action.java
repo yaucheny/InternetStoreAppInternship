@@ -1,4 +1,5 @@
 package com.exposit.actions;
+
 /**
  * Interface responsible for invocation of method when poin of console menu is chosen.
  *

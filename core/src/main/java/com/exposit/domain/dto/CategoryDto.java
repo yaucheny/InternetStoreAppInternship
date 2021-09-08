@@ -24,7 +24,7 @@ import java.util.List;
 @Schema(description = "Entity category")
 public class CategoryDto {
 
-        @Schema(accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
     @NotEmpty

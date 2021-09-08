@@ -10,10 +10,11 @@ import com.exposit.domain.model.db.LogInfoDb;
  */
 public interface LogInfoDao {
     /**
-     * Saves List<T> entities to file.
+     * Saves entities created while perform update entities with info of csv files.
      *
      * @param logInfoDb entity with info about result of working of updateShopProductsFromCsv() method.
      * @author Yauheni Markevich
+     * @see com.exposit.api.service.ShopProductService#updateShopProductsFromCsv()
      */
     void save(LogInfoDb logInfoDb);
 }

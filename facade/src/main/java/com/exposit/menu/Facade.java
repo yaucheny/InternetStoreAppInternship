@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * Class implements pattern facade, it connect every method of service layer to the
+ * Class implements pattern facade, it connects every method of service layer to the
  * menu position .
  *
  * @author Yauheni Markevich

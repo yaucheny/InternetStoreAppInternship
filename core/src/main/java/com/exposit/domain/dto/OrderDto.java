@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Dto object that represents a order.
+ * Dto object that represents an Order.
  *
  * @author Yauheni Markevich
  * @version 1.0

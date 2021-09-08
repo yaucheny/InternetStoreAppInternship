@@ -15,7 +15,6 @@ import java.util.Objects;
 public class Navigator {
 
     private static final Logger LOG = LoggerFactory.getLogger(Navigator.class);
-    private MenuItem menuItem;
     private static Navigator instance;
     private Menu currentMenu;
 

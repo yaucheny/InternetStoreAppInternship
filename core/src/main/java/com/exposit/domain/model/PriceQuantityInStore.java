@@ -5,11 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
- * Simple JavaBean object that represents a object constructed to represent a special fields of ShopProduct.class
- * in method infoAboutPriceQuantityInStore() {@link com.exposit.domain.model.db.ShopProductDb} .
+ * Simple JavaBean object that represents a object constructed to represent a special fields of ShopProduct.class.
  *
  * @author Yauheni Markevich
  * @version 1.0
+ * @see com.exposit.api.service.ShopProductService#infoAboutPriceQuantityInStore(String)
  */
 @Data
 @AllArgsConstructor

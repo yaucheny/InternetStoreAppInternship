@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
 /**
  * Implementation of {@link Action} interface.
  *
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @RequiredArgsConstructor
-public class SaveToFileProductImpl extends AbstractAction        implements Action {
+public class SaveToFileProductImpl extends AbstractAction implements Action {
 
     private static final Logger LOG = LoggerFactory.getLogger(SaveToFileProductImpl.class);
     private final Facade facade;

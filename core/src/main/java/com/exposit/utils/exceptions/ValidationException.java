@@ -1,4 +1,5 @@
 package com.exposit.utils.exceptions;
+
 /**
  * Custom exception class represents ValidationException. Extends RuntimeException.
  *

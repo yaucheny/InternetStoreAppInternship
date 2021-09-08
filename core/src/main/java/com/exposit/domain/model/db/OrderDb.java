@@ -11,8 +11,9 @@ import lombok.EqualsAndHashCode;
 
 import java.time.LocalDate;
 import java.util.List;
+
 /**
- * Simple JavaBean object that represents a Order.
+ * Simple JavaBean object that represents an Order.
  *
  * @author Yauheni Markevich
  * @version 1.0

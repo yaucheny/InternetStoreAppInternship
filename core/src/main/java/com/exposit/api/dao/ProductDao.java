@@ -1,6 +1,7 @@
 package com.exposit.api.dao;
 
 import com.exposit.domain.model.db.ProductDb;
+
 /**
  * Dao interface for{@link com/exposit/domain/model/db/ProductDb.java}.
  *
@@ -9,4 +10,4 @@ import com.exposit.domain.model.db.ProductDb;
  */
 public interface ProductDao extends GenericDao<ProductDb> {
 
-   }
+}

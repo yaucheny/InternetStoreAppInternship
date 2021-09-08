@@ -4,8 +4,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.List;
+
 /**
- * Simple JavaBean object that represents a product.
+ * Simple JavaBean object that represents a Product.
  *
  * @author Yauheni Markevich
  * @version 1.0

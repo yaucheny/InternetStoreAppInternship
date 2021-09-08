@@ -20,6 +20,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.lang.reflect.Type;
 import java.util.List;
+
 /**
  * Implementation of {@link OrderDao} interface.
  * Implementation works with Hibernate framework and postgres database
@@ -78,7 +79,7 @@ public class OrderDaoHiberImpl implements OrderDao {
     @Override
     @Transactional
     public void update(Long id, OrderDb orderDb) {
-        if (orderDb.getId() != null) {
+        if (this.getById(id) != null) {
             OrderEntity orderEntity = mapper.map(orderDb, OrderEntity.class);
             this.entityManager.merge(orderEntity);
         }

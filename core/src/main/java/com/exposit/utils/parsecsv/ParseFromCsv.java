@@ -48,7 +48,7 @@ public final class ParseFromCsv {
     }
 
     /**
-     * Checks headers and matching pattern of file.
+     * Checks headers in csv file and matching pattern of file.
      * Files that match conditions are moved to parse directory and renamed.
      * Files that don't match conditions are moved to error directory and renamed.
      *

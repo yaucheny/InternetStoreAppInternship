@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Implementation of {@link GenericDao} interface.
- * Implementation works with Jackson API and xml format files
+ * Implementation works with Jackson API and json format files
  *
  * @param <T> Type of element stored in GenericDao
  * @author Yauheni Markevich

@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 /**
  * Simple JavaBean object that represents a OrderItem entity. This additional object is created
  * to work with hibernate and spring data JPA. This object is mapped from OrderItemdb object

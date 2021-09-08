@@ -30,7 +30,7 @@ public final class UtilParseCsv {
     }
 
     /**
-     * Search for files in folder which not match to pattern.
+     * Search for files in search folder where extension not match to pattern.
      *
      * @param pattern      Pattern of file extension
      * @param searchFolder Folder where search should take place
@@ -51,7 +51,7 @@ public final class UtilParseCsv {
     }
 
     /**
-     * Search for files in folder which match to pattern.
+     * Search for files in search folder which extension match to pattern.
      *
      * @param pattern      Pattern of file extension
      * @param searchFolder Folder where search should take place
@@ -72,7 +72,7 @@ public final class UtilParseCsv {
     }
 
     /**
-     * Renames file to nanotime.* name.
+     * Renames file to nanotime.*.
      *
      * @param path path to file to rename.
      * @return new path to file with nanotime.* file name,

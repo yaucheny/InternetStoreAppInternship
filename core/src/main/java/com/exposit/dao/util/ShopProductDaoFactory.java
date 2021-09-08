@@ -12,6 +12,7 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+
 /**
  * Implementation of {@link FactoryBean<ShopProductDao>} interface.
  * FactoryBean creates proper implementations of dao layer after receiving value

@@ -32,17 +32,19 @@ public class ConfigSchedule {
     private final ShopProductService shopProductService;
 
     /**
-     * Invokes methods clearCasheFile() to clean cache.txt file {@see application.src.main.resources.csv},
+     * Invokes methods clearCacheFile() to clean cache.txt file {@see application.src.main.resources.csv},
      * where info about process of parsing is saved.
      * Invokes method inspectParseDirForErrors(), which moves files from parse directory where files
      * can have errors from previous session.
      * Method is executed after dependency injection is done.
      *
      * @author Yauheni Markevich
+     * @see ParseFromCsv#inspectParseDirForErrors()
+     * @see CacheCsv#clearCacheFile()
      */
     @PostConstruct
     public void init() {
-        CacheCsv.clearCasheFile();
+        CacheCsv.clearCacheFile();
         ParseFromCsv.inspectParseDirForErrors();
     }
 
@@ -56,6 +58,8 @@ public class ConfigSchedule {
      * Invokes methods of service layer updateShopProductsFromCsv().
      *
      * @author Yauheni Markevich
+     * @see ParseFromCsv#moveSearchToParseDir()
+     * @see ParseFromCsv#moveSearchToErrorDir()
      */
     @Scheduled(fixedDelayString = "${searching.file.delay}", initialDelay = 100)
     public void inspectDirectoryScheduling() {

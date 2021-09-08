@@ -2,6 +2,7 @@ package com.exposit.menu;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Simple JavaBean object that represents a Menu.
  *

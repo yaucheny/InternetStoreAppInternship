@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Type;
 import java.util.List;
+
 /**
  * Implementation of {@link CustomerDao} interface.
  * Implementation works with spring data JPA and postgres database

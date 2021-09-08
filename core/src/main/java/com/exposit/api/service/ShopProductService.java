@@ -66,6 +66,7 @@ public interface ShopProductService {
 
     /**
      * Sorts products in shop by price.
+     *
      * @return Sorted List of ShopProduct
      * @author Yauheni Markevich
      */
@@ -81,7 +82,7 @@ public interface ShopProductService {
     List<ShopProductDto> getGoodsFromCategory(String category);
 
     /**
-     * Searches products by two attributes.
+     * Searches products and sorts by two attributes.
      *
      * @param value1     value of field one of product
      * @param attribute1 name of field one product
@@ -94,7 +95,7 @@ public interface ShopProductService {
                                             String value2, String attribute2);
 
     /**
-     * Searches products by one attribute.
+     * Searches products and sorts by one attribute.
      *
      * @param value     value of field of product
      * @param attribute name of field product
@@ -113,7 +114,8 @@ public interface ShopProductService {
     List<PriceQuantityInStoreDto> infoAboutPriceQuantityInStore(String storeName);
 
     /**
-     * Updates products in shop from csv file.
+     * Updates products in shop from csv file {@see application/src/main/resources/csv}.
+     * All exceptions are logged to entity {@link com/exposit/domain/model/db/LogInfoDb.java}.
      *
      * @author Yauheni Markevich
      */

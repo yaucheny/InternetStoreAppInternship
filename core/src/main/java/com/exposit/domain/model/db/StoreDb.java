@@ -2,6 +2,7 @@ package com.exposit.domain.model.db;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 /**
  * Simple JavaBean object that represents a Store.
  *

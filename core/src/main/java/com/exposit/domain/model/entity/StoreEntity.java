@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
 /**
  * Simple JavaBean object that represents a Store entity. This additional object is created
  * to work with hibernate and spring data JPA. This object is mapped from StoreDb object

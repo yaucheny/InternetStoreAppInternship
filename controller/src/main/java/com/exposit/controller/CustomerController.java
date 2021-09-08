@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
+
 /**
  * Controller for {@link com.exposit.domain.model.db.CustomerDb}'s pages.
  *

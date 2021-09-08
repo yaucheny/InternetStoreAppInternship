@@ -9,6 +9,7 @@ import lombok.ToString;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
 /**
  * Dto object that represents a Store.
  *
@@ -21,7 +22,7 @@ import javax.validation.constraints.Size;
 @Schema(description = "entity of store")
 public class StoreDto {
 
-        @Schema(accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
     @NotEmpty

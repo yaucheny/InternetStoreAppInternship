@@ -1,4 +1,5 @@
 package com.exposit.domain.model.entity;
+
 /**
  * Statuses of order that can be used.
  *

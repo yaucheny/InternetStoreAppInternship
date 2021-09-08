@@ -3,6 +3,7 @@ package com.exposit.domain.model.db;
 import com.opencsv.bean.CsvBindByName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 /**
  * Simple JavaBean object that represents a ShopProduct.
  *

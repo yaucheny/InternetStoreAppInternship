@@ -2,8 +2,9 @@ package com.exposit.domain.model.db;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 /**
- * Simple JavaBean object that represents a OrderItem.
+ * Simple JavaBean object that represents an OrderItem.
  *
  * @author Yauheni Markevich
  * @version 1.0

@@ -1,6 +1,7 @@
 package com.exposit.utils.idgenerators;
 
 import lombok.Setter;
+
 /**
  * Class for auto generation id fields in dao json and dao xml implementations.
  *

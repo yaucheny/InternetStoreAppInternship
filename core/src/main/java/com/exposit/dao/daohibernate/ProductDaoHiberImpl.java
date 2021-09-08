@@ -20,6 +20,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.lang.reflect.Type;
 import java.util.List;
+
 /**
  * Implementation of {@link ProductDao} interface.
  * Implementation works with Hibernate framework and postgres database

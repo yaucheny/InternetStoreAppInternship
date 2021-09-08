@@ -4,7 +4,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Class to configure folder for scan in spring boot.
+ * Class to configure component scan in spring boot.
  *
  * @author Yauheni Markevich
  * @version 1.0

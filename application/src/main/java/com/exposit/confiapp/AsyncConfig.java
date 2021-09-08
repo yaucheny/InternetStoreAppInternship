@@ -18,8 +18,8 @@ import java.util.concurrent.Executor;
 public class AsyncConfig {
     /**
      * Configures ThreadPoolTaskExecutor.
-     * @return The value executor.
      *
+     * @return The value executor.
      * @author Yauheni Markevich
      */
     @Bean(name = "taskExecutor")

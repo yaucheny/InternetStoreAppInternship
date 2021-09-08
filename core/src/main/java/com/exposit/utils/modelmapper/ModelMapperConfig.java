@@ -3,6 +3,7 @@ package com.exposit.utils.modelmapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 /**
  * Class is responsible for configuration of mapping objects.
  * Mapping is provided by ModelMapper library.

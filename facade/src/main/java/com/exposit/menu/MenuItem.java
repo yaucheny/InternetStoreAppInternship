@@ -1,6 +1,7 @@
 package com.exposit.menu;
 
 import com.exposit.actions.Action;
+
 /**
  * Simple JavaBean object that represents a MenuItem.
  *

@@ -105,7 +105,7 @@ public final class CacheCsv {
      * @throws com.exposit.utils.exceptions.FileNotFoundException if file is not found.
      * @author Yauheni Markevich
      */
-    public static void clearCasheFile() {
+    public static void clearCacheFile() {
         try (PrintWriter writer = new PrintWriter(FILE_CACHE)) {
             writer.print("");
         } catch (FileNotFoundException e) {

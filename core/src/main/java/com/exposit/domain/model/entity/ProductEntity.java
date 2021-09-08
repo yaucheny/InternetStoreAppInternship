@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.List;
+
 /**
  * Simple JavaBean object that represents a Product entity. This additional object is created
  * to work with hibernate and spring data JPA. This object is mapped from Productdb object
